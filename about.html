@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Multikernel Technologies, Inc.</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/lucide-static@0.269.0/dist/umd/lucide.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <nav>
+                <div class="logo-container">
+                    <img src="assets/images/multikernel-logo.png" alt="Multikernel Technologies Logo" class="logo">
+                </div>
+                <div class="nav-links">
+                    <a href="/">Home</a>
+                    <a href="/about.html" class="active">About</a>
+                    <a href="/#features">Features</a>
+                    <a href="/#benefits">Benefits</a>
+                    <a href="/#faq">FAQ</a>
+                    <a href="/#blog">Blog</a>
+                    <a href="/contact.html">Contact</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section class="hero">
+            <h1>About Multikernel Technologies</h1>
+            <p>Pioneering the future of cloud operating systems</p>
+            <div class="button-group">
+                <button>Learn More</button>
+                <a href="/contact.html"><button>Contact Us</button></a>
+            </div>
+        </section>
+
+        <section class="mission-vision">
+            <div class="container">
+                <div class="mission">
+                    <h2><i data-lucide="target"></i>Our Mission</h2>
+                    <p>To revolutionize cloud computing by delivering a next-generation operating system that maximizes performance, security, and efficiency for modern computing environments. We're committed to solving the fundamental challenges of cloud infrastructure, enabling organizations to achieve unprecedented levels of computational efficiency and security.</p>
+                </div>
+
+                <div class="vision">
+                    <h2><i data-lucide="eye"></i>Our Vision</h2>
+                    <p>We envision a future where cloud computing reaches its full potential, unencumbered by the limitations of traditional operating systems. A world where organizations can deploy applications with bare-metal performance, complete security isolation, and optimal resource utilization – all while maintaining the flexibility and ease of use that modern cloud platforms provide.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="founder">
+            <div class="container">
+                <h2>Leadership</h2>
+                <div class="founder-profile">
+                    <div class="founder-image">
+                        <img src="assets/images/cong-wang.png" alt="Cong Wang - Founder & CEO of Multikernel Technologies">
+                    </div>
+                    <div class="founder-info">
+                        <h3>Cong Wang</h3>
+                        <p class="founder-title">Founder & CEO</p>
+                        <p class="founder-bio">Cong Wang is a distinguished Linux kernel developer with 16 years of experience. He is also a Linux kernel maintainer of networking traffic control subsystem since 2017. He has contributed over 1000 commits to the Linux kernel project and has a deep understanding of cloud computing. Prior to founding Multikernel Technologies Inc., he led a software engineering team at ByteDance. His vision for a more efficient and secure cloud infrastructure led to the development of our revolutionary multikernel architecture. See his full resume <a href="https://www.linkedin.com/in/cong-wang-b96762b/">here</a>.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="values">
+            <div class="container">
+                <h2>Our Core Values</h2>
+                <div class="values-grid">
+                    <div class="value-item">
+                        <i data-lucide="lightbulb"></i>
+                        <h3>Innovation</h3>
+                        <p>Pushing the boundaries of what's possible in cloud computing</p>
+                    </div>
+                    <div class="value-item">
+                        <i data-lucide="shield"></i>
+                        <h3>Security</h3>
+                        <p>Unwavering commitment to protecting our customers' data and infrastructure</p>
+                    </div>
+                    <div class="value-item">
+                        <i data-lucide="award"></i>
+                        <h3>Excellence</h3>
+                        <p>Delivering exceptional quality in everything we do</p>
+                    </div>
+                    <div class="value-item">
+                        <i data-lucide="users"></i>
+                        <h3>Customer Focus</h3>
+                        <p>Building solutions that address real customer needs</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Multikernel Technologies, Inc. All rights reserved.</p>
+            <nav class="footer-nav">
+                <a href="/#docs">Documentation</a>
+                <a href="/#blog">Blog</a>
+                <a href="/#github">Github</a>
+                <a href="/contact.html">Contact</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                lucide.createIcons();
+            } catch (e) {
+                console.log("Could not load Lucide icons, using fallback text");
+                document.querySelectorAll('[data-lucide]').forEach(function(el) {
+                    el.textContent = '';
+                });
+            }
+        });
+    </script>
+</body>
+</html>

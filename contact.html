@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Multikernel Technologies, Inc.</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/lucide-static@0.269.0/dist/umd/lucide.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* Contact page specific styles */
+        .contact-form {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #6b00b6;
+            outline: none;
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #6b00b6, #1e90ff);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            font-size: 1rem;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(107, 0, 182, 0.2);
+        }
+        
+        .contact-info {
+            margin-top: 50px;
+            text-align: center;
+        }
+        
+        .contact-info h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .contact-info p {
+            margin-bottom: 10px;
+            font-size: 1.05rem;
+            color: #555;
+        }
+        
+        .contact-info i {
+            color: #6b00b6;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        
+        .contact-methods {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .contact-method {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            min-width: 250px;
+        }
+        
+        .contact-method i {
+            color: #6b00b6;
+            width: 40px;
+            height: 40px;
+            margin-bottom: 15px;
+        }
+        
+        .contact-method h4 {
+            margin: 0 0 10px;
+            font-size: 1.2rem;
+        }
+        
+        .contact-method p, .contact-method a {
+            margin: 0;
+            color: #555;
+            text-align: center;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .contact-method a:hover {
+            color: #6b00b6;
+        }
+        
+        @media (max-width: 768px) {
+            .contact-methods {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .contact-method {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <nav>
+                <div class="logo-container">
+                    <img src="assets/images/multikernel-logo.png" alt="Multikernel Technologies Logo" class="logo">
+                </div>
+                <div class="nav-links">
+                    <a href="/">Home</a>
+                    <a href="/about.html">About</a>
+                    <a href="/#features">Features</a>
+                    <a href="/#benefits">Benefits</a>
+                    <a href="/#faq">FAQ</a>
+                    <a href="/#blog">Blog</a>
+                    <a href="/contact.html" class="active">Contact</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section class="hero">
+            <h1>Contact Us</h1>
+            <p>We'd love to hear from you. Reach out with questions, feedback, or partnership inquiries.</p>
+        </section>
+
+        <section class="contact-section">
+            <div class="container">
+                <div class="contact-form">
+                    <h2>Send Us a Message</h2>
+                    <form id="contactForm" action="#" method="POST">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </form>
+                </div>
+
+                <div class="contact-info">
+                    <h3>Other Ways to Connect</h3>
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <i data-lucide="mail"></i>
+                            <h4>Email</h4>
+                            <a href="mailto:contact@multikernel.io">contact@multikernel.io</a>
+                        </div>
+                        <div class="contact-method">
+                            <i data-lucide="map-pin"></i>
+                            <h4>Address</h4>
+                            <p>99 S Almaden Blvd, Suite 600<br>
+                            San Jose, CA 95113
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Multikernel Technologies, Inc. All rights reserved.</p>
+            <nav class="footer-nav">
+                <a href="/#docs">Documentation</a>
+                <a href="/#blog">Blog</a>
+                <a href="/#github">Github</a>
+                <a href="/contact.html">Contact</a>
+            </nav>
+        </div>
+    </footer>
+
+    <!-- EmailJS SDK -->    
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                lucide.createIcons();
+            } catch (e) {
+                console.log("Could not load Lucide icons, using fallback text");
+                document.querySelectorAll('[data-lucide]').forEach(function(el) {
+                    el.textContent = '';
+                });
+            }
+            
+            // Initialize EmailJS with your public key
+            emailjs.init('NZr6o_XV6LUf2f2ht');
+            
+            // Form handling with EmailJS
+            const contactForm = document.getElementById('contactForm');
+            const submitBtn = document.querySelector('.submit-btn');
+            
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Disable the submit button during processing
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = 'Sending...';
+                    
+                    // Prepare template parameters
+                    const templateParams = {
+                        from_name: document.getElementById('name').value,
+                        from_email: document.getElementById('email').value,
+                        subject: document.getElementById('subject').value,
+                        message: document.getElementById('message').value,
+                        to_email: 'contact@multikernel.io'
+                    };
+                    
+                    // Send email using your service and template IDs
+                    emailjs.send('service_tcj7ad5', 'template_gb6e5gj', templateParams)
+                        .then(function(response) {
+                            console.log('SUCCESS!', response.status, response.text);
+                            alert('Thank you for your message! We will get back to you soon.');
+                            contactForm.reset();
+                        }, function(error) {
+                            console.log('FAILED...', error);
+                            alert('Sorry, there was an error sending your message. Please try again later or email us directly at contact@multikernel.io');
+                        })
+                        .finally(function() {
+                            // Re-enable the submit button
+                            submitBtn.disabled = false;
+                            submitBtn.textContent = 'Send Message';
+                        });
+                });
+            }
+        });
+    </script>
+</body>
+</html>

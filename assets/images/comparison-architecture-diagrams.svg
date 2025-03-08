@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600">
+  <!-- Background -->
+  <rect x="0" y="0" width="1000" height="600" fill="#f8f8f8" stroke="none"/>
+  
+  <!-- Containerized Architecture (Left) -->
+  <g transform="translate(100, 70)">
+    <!-- Box border without bottom extension -->
+    <path d="M 0,0 L 250,0 L 250,280 L 0,280 L 0,0" fill="white" stroke="#333" stroke-width="2" rx="5"/>
+    
+    <!-- Container architecture elements -->
+    <rect x="25" y="50" width="90" height="70" fill="#f0f0f0" stroke="#555" stroke-width="1.5"/>
+    <rect x="135" y="50" width="90" height="70" fill="#f0f0f0" stroke="#555" stroke-width="1.5"/>
+    
+    <!-- Split application boxes into Application/Container -->
+    <line x1="25" y1="85" x2="115" y2="85" stroke="#555" stroke-width="1.5"/>
+    <line x1="135" y1="85" x2="225" y2="85" stroke="#555" stroke-width="1.5"/>
+    
+    <rect x="0" y="140" width="250" height="40" fill="#e6e6e6" stroke="#555" stroke-width="1.5"/>
+    <rect x="0" y="180" width="250" height="40" fill="#d9d9d9" stroke="#555" stroke-width="1.5"/>
+    <rect x="0" y="220" width="250" height="60" fill="#cccccc" stroke="#555" stroke-width="1.5"/>
+    
+    <!-- Labels -->
+    <text x="70" y="70" font-family="Arial" font-size="12" text-anchor="middle">Application</text>
+    <text x="180" y="70" font-family="Arial" font-size="12" text-anchor="middle">Application</text>
+    <text x="70" y="105" font-family="Arial" font-size="12" text-anchor="middle">Container</text>
+    <text x="180" y="105" font-family="Arial" font-size="12" text-anchor="middle">Container</text>
+    <text x="125" y="165" font-family="Arial" font-size="14" text-anchor="middle">OS</text>
+    <text x="125" y="205" font-family="Arial" font-size="14" text-anchor="middle">Kernel</text>
+    <text x="125" y="255" font-family="Arial" font-size="14" text-anchor="middle">Hardware</text>
+    
+    <!-- Title -->
+    <text x="125" y="30" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle">Container Architecture</text>
+    
+    <!-- Description -->
+
+  </g>
+  
+  <!-- VM Architecture (Middle) -->
+  <g transform="translate(375, 70)">
+    <!-- Box border without bottom extension -->
+    <path d="M 0,0 L 250,0 L 250,280 L 0,280 L 0,0" fill="white" stroke="#333" stroke-width="2" rx="5"/>
+    
+    <!-- VM architecture elements -->
+    <rect x="25" y="50" width="90" height="120" fill="#f0f0f0" stroke="#555" stroke-width="1.5"/>
+    <rect x="135" y="50" width="90" height="120" fill="#f0f0f0" stroke="#555" stroke-width="1.5"/>
+    
+    <rect x="25" y="80" width="90" height="30" fill="#e6f2ff" stroke="#555" stroke-width="1"/>
+    <rect x="135" y="80" width="90" height="30" fill="#e6f2ff" stroke="#555" stroke-width="1"/>
+    
+    <rect x="25" y="110" width="90" height="60" fill="#d9e6ff" stroke="#555" stroke-width="1"/>
+    <rect x="135" y="110" width="90" height="60" fill="#d9e6ff" stroke="#555" stroke-width="1"/>
+    
+    <rect x="0" y="170" width="250" height="30" fill="#e6e6e6" stroke="#555" stroke-width="1.5"/>
+    <rect x="0" y="200" width="250" height="30" fill="#d9d9d9" stroke="#555" stroke-width="1.5"/>
+    <rect x="0" y="230" width="250" height="50" fill="#cccccc" stroke="#555" stroke-width="1.5"/>
+    
+    <!-- Dotted lines with arrows -->
+    <line x1="70" y1="230" x2="70" y2="140" stroke="#555" stroke-width="1.5" stroke-dasharray="4,2"/>
+    <line x1="180" y1="230" x2="180" y2="140" stroke="#555" stroke-width="1.5" stroke-dasharray="4,2"/>
+    
+    <!-- Arrow heads -->
+    <polygon points="70,140 65,150 75,150" fill="#555"/>
+    <polygon points="180,140 175,150 185,150" fill="#555"/>
+    
+    <!-- Labels -->
+    <text x="70" y="70" font-family="Arial" font-size="12" text-anchor="middle">Application</text>
+    <text x="180" y="70" font-family="Arial" font-size="12" text-anchor="middle">Application</text>
+    
+    <text x="70" y="95" font-family="Arial" font-size="12" text-anchor="middle">OS</text>
+    <text x="180" y="95" font-family="Arial" font-size="12" text-anchor="middle">OS</text>
+    
+    <text x="70" y="140" font-family="Arial" font-size="12" text-anchor="middle">Kernel</text>
+    <text x="180" y="140" font-family="Arial" font-size="12" text-anchor="middle">Kernel</text>
+    
+    <text x="125" y="187" font-family="Arial" font-size="14" text-anchor="middle">Hypervisor</text>
+    <text x="125" y="217" font-family="Arial" font-size="14" text-anchor="middle">Kernel</text>
+    <text x="125" y="257" font-family="Arial" font-size="14" text-anchor="middle">Hardware</text>
+    
+    <!-- Title -->
+    <text x="125" y="30" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle">VM Architecture</text>
+    
+    <!-- Description -->
+
+  </g>
+  
+  <!-- Multikernel Architecture (Right) -->
+  <g transform="translate(650, 70)">
+    <!-- Box border without bottom extension -->
+    <path d="M 0,0 L 250,0 L 250,280 L 0,280 L 0,0" fill="white" stroke="#333" stroke-width="2" rx="5"/>
+    
+    <!-- Multikernel architecture elements -->
+    <rect x="25" y="50" width="90" height="120" fill="#f0f0f0" stroke="#555" stroke-width="1.5"/>
+    <rect x="135" y="50" width="90" height="120" fill="#f0f0f0" stroke="#555" stroke-width="1.5"/>
+    
+    <rect x="25" y="80" width="90" height="30" fill="#e6f2ff" stroke="#555" stroke-width="1"/>
+    <rect x="135" y="80" width="90" height="30" fill="#e6f2ff" stroke="#555" stroke-width="1"/>
+    
+    <rect x="25" y="110" width="90" height="60" fill="#d9e6ff" stroke="#555" stroke-width="1"/>
+    <rect x="135" y="110" width="90" height="60" fill="#d9e6ff" stroke="#555" stroke-width="1"/>
+    
+    <rect x="0" y="170" width="250" height="30" fill="#d9d9d9" stroke="#555" stroke-width="1.5"/>
+    <rect x="0" y="200" width="250" height="80" fill="#cccccc" stroke="#555" stroke-width="1.5"/> <!-- Extended hardware box -->
+    
+    <!-- Curved arrows -->
+    <path d="M 70 200 C 70 180, 70 180, 70 170" fill="none" stroke="#555" stroke-width="1.5"/>
+    <path d="M 180 200 C 180 180, 180 180, 180 170" fill="none" stroke="#555" stroke-width="1.5"/>
+    
+    <!-- Arrow heads -->
+    <polygon points="70,170 65,180 75,180" fill="#555"/>
+    <polygon points="180,170 175,180 185,180" fill="#555"/>
+    
+    <!-- Labels -->
+    <text x="70" y="70" font-family="Arial" font-size="12" text-anchor="middle">Application</text>
+    <text x="180" y="70" font-family="Arial" font-size="12" text-anchor="middle">Application</text>
+    
+    <text x="70" y="95" font-family="Arial" font-size="12" text-anchor="middle">OS</text>
+    <text x="180" y="95" font-family="Arial" font-size="12" text-anchor="middle">OS</text>
+    
+    <text x="70" y="140" font-family="Arial" font-size="12" text-anchor="middle">Kernel</text>
+    <text x="180" y="140" font-family="Arial" font-size="12" text-anchor="middle">Kernel</text>
+    
+    <text x="125" y="187" font-family="Arial" font-size="14" text-anchor="middle">Kernel</text>
+    <text x="125" y="227" font-family="Arial" font-size="14" text-anchor="middle">Hardware</text>
+    <!-- Title -->
+    <text x="125" y="30" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle">Multikernel Architecture</text>
+    
+    <!-- Description -->
+
+  </g>
+  
+  <!-- Legend -->
+
+</svg>

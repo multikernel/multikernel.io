@@ -1,0 +1,21 @@
+title: Multikernel Technologies
+email: contact@multikernel.io
+description: >-
+  Advanced kernel-based security solutions.
+baseurl: ""
+url: "https://multikernel.io" # Set to your custom domain
+
+# Ensure GitHub Pages uses Jekyll
+theme: minima
+plugins:
+  - jekyll-feed
+
+# Custom domain
+github_pages:
+  cname: multikernel.io
+
+# Exclude unnecessary files
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
