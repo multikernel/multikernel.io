@@ -43,18 +43,63 @@
         <h2>Revolutionizing Cloud Infrastructure</h2>
         <p>Multikernel Technologies provides a groundbreaking approach to operating systems for cloud environments, overcoming the limitations of traditional OS architectures, virtual machines, and containers.</p>
         <ul class="feature-list">
-            <li><i data-lucide="zap"></i> Near bare-metal performance with dynamic resource allocation</li>
-            <li><i data-lucide="shield"></i> Enhanced security through hardware-enforced isolation</li>
-            <li><i data-lucide="refresh-cw"></i> Zero-downtime updates for continuous operation</li>
+            <li><i data-lucide="zap"></i> Near bare-metal performance with dynamic hardware resource allocation</li>
+            <li><i data-lucide="shield"></i> Enhanced security through OS-enforced isolation</li>
             <li><i data-lucide="settings"></i> Application-optimized kernel instances for maximum efficiency</li>
+            <li><i data-lucide="refresh-cw"></i> Zero-downtime updates for continuous operation</li>
         </ul>
     </section>
 
     <section id="features" class="how-it-works">
-        <h2>The Multikernel Advantage</h2>
-        <p>Our next-generation Cloud OS treats computing resources as a distributed system, enabling unprecedented flexibility, performance, and security for your applications.</p>
-        <div class="diagram-container">
+        <h2>Multikernel Advantages</h2>
+        <p class="architecture-intro">While virtual machines add a heavy hypervisor layer and containers share a single kernel, our multikernel approach creates independent, specialized kernels that directly access hardware resources with minimal overhead. This architecture eliminates the traditional tradeoff between isolation and performance.</p>
+        <div class="diagram-container" style="margin-bottom: -10px;">
             <img src="assets/images/comparison-architecture-diagrams.svg" alt="Multikernel Architecture Diagram" class="architecture-diagram" width="600" height="300">
+        </div>
+        <p class="approach-summary" style="margin-top: 0;">Our approach combines the security of VMs with the performance of containers and the flexibility of custom kernels.</p>
+        <div class="comparison-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>VM</th>
+                        <th>Container</th>
+                        <th>Multikernel</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Resource Elasticity</td>
+                        <td>Rigid</td>
+                        <td>Partial</td>
+                        <td>Complete</td>
+                    </tr>
+                    <tr>
+                        <td>Performance Isolation</td>
+                        <td>High</td>
+                        <td>Low</td>
+                        <td>High</td>
+                    </tr>
+                    <tr>
+                        <td>Performance Overhead</td>
+                        <td>High</td>
+                        <td>Low</td>
+                        <td>Minimal</td>
+                    </tr>
+                    <tr>
+                        <td>Attack Surface</td>
+                        <td>Medium</td>
+                        <td>Large</td>
+                        <td>Minimal</td>
+                    </tr>
+                    <tr>
+                        <td>Kernel Customization</td>
+                        <td>Limited</td>
+                        <td>None</td>
+                        <td>Complete</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </section>
 

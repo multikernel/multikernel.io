@@ -728,6 +728,113 @@ button:hover {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
+/* Architecture Section */
+.architecture-intro {
+    max-width: 800px;
+    margin: 15px auto 15px;
+    line-height: 1.6;
+    font-size: 1.05rem;
+    text-align: center;
+}
+
+.approach-summary {
+    max-width: 700px;
+    margin: 0 auto 15px;
+    font-size: 1.05rem;
+    text-align: center;
+    line-height: 1.5;
+}
+
+.how-it-works {
+    background: #f9f9fe;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    padding: 40px 5%;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    text-align: center;
+}
+
+.how-it-works h3 {
+    margin-top: 25px;
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    color: #333;
+    text-align: center;
+}
+
+/* Comparison Table */
+.comparison-table {
+    margin: 30px auto;
+    width: 100%;
+    max-width: 800px;
+    overflow-x: auto;
+}
+
+.comparison-table table {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    border-collapse: collapse;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.comparison-table th {
+    background: #f1f5fd;
+    color: #333;
+    font-weight: 600;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+    font-size: 0.95rem;
+}
+
+.comparison-table th:first-child {
+    text-align: left;
+    background: #e1e9f7;
+}
+
+.comparison-table td {
+    padding: 8px 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+    font-size: 0.95rem;
+}
+
+.comparison-table td:first-child {
+    text-align: left;
+    font-weight: 500;
+}
+
+.comparison-table tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+/* Highlight Multikernel advantages */
+.comparison-table th:last-child,
+.comparison-table td:last-child {
+    background: rgba(107, 0, 182, 0.08);
+    font-weight: 600;
+}
+
+/* Blockquote styling */
+blockquote {
+    border-left: 4px solid #6b00b6;
+    padding: 15px 20px;
+    margin: 20px 0;
+    background: rgba(107, 0, 182, 0.05);
+    font-style: italic;
+    color: #333;
+    max-width: 800px;
+}
+
+blockquote p {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    color: #3a3a3a;
+}
+
 /* Sections Alignment Fix */
 section {
     padding: 40px 5%;
@@ -769,18 +876,18 @@ section {
     width: 100%;
     max-width: 600px;
     margin: 20px auto;
-    text-align: left;
+    text-align: center;
 }
 
 .feature-list li {
     display: flex;
     align-items: center;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     font-size: 1.05rem;
 }
 
 .feature-list li i {
-    margin-right: 15px;
+    margin-right: 10px;
     color: #6b00b6;
     stroke-width: 2.5;
 }
@@ -788,9 +895,9 @@ section {
 /* Architecture diagram */
 .diagram-container {
     width: 100%;
-    max-width: 600px;
-    margin: 20px 0;
-    overflow: hidden;
+    max-width: 900px;
+    margin: 15px auto -5px;
+    text-align: center;
 }
 
 .architecture-diagram {
