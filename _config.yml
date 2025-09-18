@@ -5,10 +5,27 @@ description: >-
 baseurl: ""
 url: "https://multikernel.io" # Set to your custom domain
 
-# Ensure GitHub Pages uses Jekyll
-theme: minima
+# Jekyll configuration
+markdown: kramdown
+highlighter: rouge
+permalink: /:year/:month/:day/:title/
+
+# Collections and defaults
+collections:
+  posts:
+    output: true
+
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+
+# Plugins
 plugins:
   - jekyll-feed
+  - jekyll-sitemap
 
 # Custom domain
 github_pages:
@@ -19,3 +36,4 @@ exclude:
   - README.md
   - Gemfile
   - Gemfile.lock
+  - vendor/
