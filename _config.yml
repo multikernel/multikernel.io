@@ -9,6 +9,7 @@ url: "https://multikernel.io" # Set to your custom domain
 markdown: kramdown
 highlighter: rouge
 permalink: /:year/:month/:day/:title/
+future: true
 
 # Collections and defaults
 collections:

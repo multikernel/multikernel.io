@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Multikernel Goes Open Source: Community-First Linux Kernel Innovation"
-date: 2025-09-18
+date: 2025-09-18 10:00:00 -0700
 categories: [announcement, open-source, linux-kernel]
 author: Cong Wang, Founder and CEO
 excerpt: "We're excited to announce that Multikernel is officially open-sourcing our Linux kernel implementation, engaging with the Linux kernel community early in our process."
