@@ -22,10 +22,7 @@ defaults:
     values:
       layout: "post"
 
-# Plugins
-plugins:
-  - jekyll-feed
-  - jekyll-sitemap
+# Plugins will be handled by GitHub Pages
 
 # Custom domain
 github_pages:
