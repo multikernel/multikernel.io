@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <!-- Using a specific versioned CDN for Lucide icons -->
+    <script src="https://cdn.jsdelivr.net/npm/lucide-static@0.269.0/dist/umd/lucide.min.js"></script>
+    <!-- Add Google Fonts for Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <nav>
+                <div class="logo-container">
+                    <img src="/assets/images/multikernel-logo.png" alt="Multikernel Technologies Logo" class="logo">
+                </div>
+                <div class="nav-links">
+                    <a href="/" {% if page.url == "/" %}class="active"{% endif %}>Home</a>
+                    <a href="/about.html" {% if page.url == "/about.html" %}class="active"{% endif %}>About</a>
+                    <a href="/#features">Features</a>
+                    <a href="/#benefits">Benefits</a>
+                    <a href="/#faq">FAQ</a>
+                    <a href="/#blog">Blog</a>
+                    <a href="/contact.html" {% if page.url == "/contact.html" %}class="active"{% endif %}>Contact</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <main>
+        {{ content }}
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Multikernel Technologies, Inc. All rights reserved.</p>
+            <nav class="footer-nav">
+                <a href="#docs">Documentation</a>
+                <a href="/#blog">Blog</a>
+                <a href="#github">Github</a>
+                <a href="/contact.html">Contact</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script>
+        // Ensure icons render properly with fallback
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                lucide.createIcons();
+            } catch (e) {
+                console.log("Could not load Lucide icons, using fallback text");
+                document.querySelectorAll('[data-lucide]').forEach(function(el) {
+                    el.textContent = '•';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
