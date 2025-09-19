@@ -104,6 +104,14 @@ title: "Multikernel Technologies, Inc. - Redefining the Cloud OS"
             <p>Yes, our solution is designed to integrate with standard cloud and on-premises infrastructure, providing a seamless transition path from traditional virtualization or container environments.</p>
         </details>
         <details>
+            <summary><i data-lucide="check-circle"></i> Is Multikernel compatible with existing Linux applications?</summary>
+            <p>Absolutely. Multikernel maintains 100% compatibility with existing Linux applications and system interfaces. Our implementation introduces only minimal, non-intrusive kernel modifications that preserve full API and ABI compatibility, ensuring your applications run unchanged without any modifications or performance degradation.</p>
+        </details>
+        <details>
+            <summary><i data-lucide="zap"></i> Why not use unikernels instead?</summary>
+            <p>While unikernels eliminate syscall overhead, modern CPUs already provide highly optimized syscall performance, making this benefit marginal. Most unikernels still rely on virtualization layers, inheriting their performance penalties. Multikernel delivers superior isolation and performance without virtualization overhead or the complexity of rebuilding applications for specialized kernel environments.</p>
+        </details>
+        <details>
             <summary><i data-lucide="shield"></i> How does Multikernel enhance security?</summary>
             <p>Our architecture provides hardware-enforced isolation between workloads, minimizes attack surfaces through tailored kernels, and offers enhanced confidential computing capabilities for sensitive data processing.</p>
         </details>
