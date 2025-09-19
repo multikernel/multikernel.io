@@ -8,7 +8,7 @@ url: "https://multikernel.io" # Set to your custom domain
 # Build settings
 markdown: kramdown
 encoding: utf-8
-permalink: /:year-:month-:day-:title.html
+permalink: /:year/:month/:day/:title/
 
 # Custom domain
 github_pages:
