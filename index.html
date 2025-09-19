@@ -112,6 +112,10 @@ title: "Multikernel Technologies, Inc. - Redefining the Cloud OS"
             <p>While unikernels eliminate syscall overhead, modern CPUs already provide highly optimized syscall performance, making this benefit marginal. Most unikernels still rely on virtualization layers, inheriting their performance penalties. Multikernel delivers superior isolation and performance without virtualization overhead or the complexity of rebuilding applications for specialized kernel environments.</p>
         </details>
         <details>
+            <summary><i data-lucide="activity"></i> Does SR-IOV eliminate virtualization overhead?</summary>
+            <p>No. While SR-IOV and hardware acceleration significantly reduce virtualization overhead, they cannot eliminate it entirely. VM exits, IOMMU translations, and hypervisor intervention for privileged operations still introduce measurable latency and CPU cycles. Multikernel bypasses these virtualization layers intentionally and completely, achieving near bare-metal performance without hardware acceleration dependencies.</p>
+        </details>
+        <details>
             <summary><i data-lucide="shield"></i> How does Multikernel enhance security?</summary>
             <p>Our architecture provides hardware-enforced isolation between workloads, minimizes attack surfaces through tailored kernels, and offers enhanced confidential computing capabilities for sensitive data processing.</p>
         </details>
