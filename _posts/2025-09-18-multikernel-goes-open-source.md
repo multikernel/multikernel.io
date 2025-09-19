@@ -25,7 +25,7 @@ We're committed to complete transparency. All kernel modifications, architectura
 
 ## Technical Deep Dives
 
-Beyond open-sourcing our code, we're preparing a series of educational videos that will explain both our multikernel solution and the underlying Linux kexec infrastructure that makes it possible. Please subscribe to our YouTube channel: https://www.youtube.com/@multikernel-tech
+Beyond open-sourcing our code, we're preparing a series of educational videos that will explain both our multikernel solution and the underlying Linux kexec infrastructure that makes it possible. Please subscribe to our [YouTube channel](https://www.youtube.com/@multikernel-tech).
 
 ## Looking Forward
 
