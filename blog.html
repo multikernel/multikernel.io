@@ -1,0 +1,45 @@
+---
+layout: default
+title: Blog
+permalink: /blog/
+---
+
+<section class="blog-page">
+    <div class="container">
+        <h1>Latest Insights</h1>
+        <p class="blog-intro">Stay updated with the latest developments in multikernel technology, cloud computing, and operating system innovation.</p>
+        
+        <div class="blog-posts">
+            {% for post in site.posts %}
+            <article class="blog-post-card">
+                <div class="blog-post-header">
+                    <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+                    <div class="blog-post-meta">
+                        <span class="author">{{ post.author }}</span>
+                        <span class="date">{{ post.date | date: "%B %d, %Y" }}</span>
+                        {% if post.categories %}
+                        <div class="categories">
+                            {% for category in post.categories %}
+                            <span class="category">{{ category }}</span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="blog-post-excerpt">
+                    <p>{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
+                </div>
+                <div class="blog-post-footer">
+                    <a href="{{ post.url | relative_url }}" class="read-more">Read Full Article</a>
+                </div>
+            </article>
+            {% endfor %}
+            
+            {% if site.posts.size == 0 %}
+            <div class="no-posts">
+                <p>No blog posts available yet. Check back soon for updates!</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
