@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Multikernel Goes Open Source: Community-First Linux Kernel Innovation"
+title: "Multikernel Goes Open Source: Community-First Innovation"
 date: 2025-09-18 10:00:00 -0700
 categories: [announcement, open-source, linux-kernel]
 author: Cong Wang, Founder and CEO
@@ -19,7 +19,7 @@ Our multikernel architecture builds upon open research and existing Linux infras
 
 This reflects our commitment to standing on the shoulders of giants. Rather than reinventing fundamental mechanisms, we're extending existing infrastructure validated by the community, ensuring robustness and compatibility.
 
-## 100% Transparency and Education
+## 100% Transparency
 
 We're committed to complete transparency. All kernel modifications, architectural decisions, and implementation details are shared openly.
 
