@@ -21,7 +21,9 @@ This reflects our commitment to standing on the shoulders of giants. Rather than
 
 ## 100% Transparency
 
-We're committed to complete transparency. All kernel modifications, architectural decisions, and implementation details are shared openly.
+We're committed to complete transparency. All kernel modifications, architectural decisions, and implementation details are shared and discussed with the Linux kernel community openly.
+
+While we're proud to open-source our work, we recognize that innovation thrives through diverse perspectives and collaborative evolution. We remain receptive to alternative approaches and welcome superior solutions from the community. Our goal is not to establish a definitive answer, but to contribute meaningfully to the ongoing dialogue around kernel architecture and inspire creative exploration of new possibilities in operating system design.
 
 ## Technical Deep Dives
 
