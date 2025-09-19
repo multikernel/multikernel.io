@@ -17,6 +17,8 @@ At Multikernel, we believe the most impactful systems innovations emerge from co
 
 Our multikernel architecture builds upon open research and existing Linux infrastructure, particularly the proven kexec subsystem. By leveraging kexec's battle-tested kernel switching capabilities, we implement spawned kernel functionality using well-understood mechanisms that have been part of Linux for over two decades.
 
+Our kexec-based approach draws inspiration from pioneering work in replicated-kernel systems, notably [Popcorn Linux](https://popcornlinux.org/), which has demonstrated innovative approaches to multi-kernel architectures and cross-ISA execution environments.
+
 This reflects our commitment to standing on the shoulders of giants. Rather than reinventing fundamental mechanisms, we're extending existing infrastructure validated by the community, ensuring robustness and compatibility.
 
 ## 100% Transparency
@@ -35,7 +37,7 @@ This release begins what we hope will be ongoing collaboration with the Linux co
 
 ## Get Involved
 
-- Review our patches on [GitHub](https://github.com/multikernel/linux/commits/multikernel-part-1/)
+- Obtain our source code on [GitHub](https://github.com/multikernel/linux/commits/multikernel-part-1/)
 - Join the discussion on [LKML](https://lore.kernel.org/lkml/20250918222607.186488-1-xiyou.wangcong@gmail.com/)
 - Stay tuned for technical videos and documentation
 
