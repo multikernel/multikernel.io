@@ -91,6 +91,13 @@ permalink: /faq.html
     
     <div class="faq-item">
         <div class="faq-question">
+            <i data-lucide="minus-circle"></i> Why not Directvisor or de-virtualization?
+        </div>
+        <p class="faq-answer">These approaches still fundamentally rely on virtualization infrastructure. From our perspective, virtualization followed by de-virtualization equals no virtualization—making it more efficient to eliminate virtualization layers entirely from the start rather than adding complexity to remove them later.</p>
+    </div>
+    
+    <div class="faq-item">
+        <div class="faq-question">
             <i data-lucide="activity"></i> Does SR-IOV eliminate virtualization overhead?
         </div>
         <p class="faq-answer">No. While SR-IOV and hardware acceleration significantly reduce virtualization overhead, they cannot eliminate it entirely. VM exits, IOMMU translations, and hypervisor intervention for privileged operations still introduce measurable latency and CPU cycles. Multikernel bypasses these virtualization layers intentionally and completely, achieving near bare-metal performance without hardware acceleration dependencies.</p>
