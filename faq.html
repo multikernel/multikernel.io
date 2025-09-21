@@ -98,6 +98,13 @@ permalink: /faq.html
     
     <div class="faq-item">
         <div class="faq-question">
+            <i data-lucide="settings"></i> What's wrong with SR-IOV?
+        </div>
+        <p class="faq-answer">Nothing is inherently wrong with SR-IOV—it's actually quite fast, and IOMMU overhead can be minimal when properly configured. However, SR-IOV's limitation is the restricted number of Virtual Functions (VFs) available. Multikernel leverages hardware queues as sub-resources, providing significantly more granular hardware access than the limited VF count that SR-IOV offers.</p>
+    </div>
+    
+    <div class="faq-item">
+        <div class="faq-question">
             <i data-lucide="shield"></i> How does Multikernel enhance security?
         </div>
         <p class="faq-answer">Our architecture provides hardware-enforced isolation between workloads, minimizes attack surfaces through tailored kernels, and offers enhanced confidential computing capabilities for sensitive data processing.</p>
