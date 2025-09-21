@@ -7,7 +7,7 @@ author: Cong Wang, Founder and CEO
 excerpt: "We're excited to announce that Multikernel is officially open-sourcing our Linux kernel implementation, engaging with the Linux kernel community early in our process."
 ---
 
-We're excited to announce that Multikernel is officially open-sourcing our Linux kernel implementation. Our initial patches are now available on [GitHub](https://github.com/multikernel/linux/commits/multikernel-part-1/) and submitted for review on the [Linux Kernel Mailing List](https://lore.kernel.org/lkml/20250918222607.186488-1-xiyou.wangcong@gmail.com/).
+We're excited to announce that Multikernel is officially open-sourcing our Linux kernel implementation. Our initial patches are now available on [GitHub](https://github.com/multikernel/linux/commits/multikernel-part-1/){:target="_blank" rel="noopener noreferrer"} and submitted for review on the [Linux Kernel Mailing List](https://lore.kernel.org/lkml/20250918222607.186488-1-xiyou.wangcong@gmail.com/){:target="_blank" rel="noopener noreferrer"}.
 
 ## Community-First Development
 
@@ -15,7 +15,7 @@ At Multikernel, we believe the most impactful systems innovations emerge from co
 
 ## Building on Proven Foundations
 
-Our multikernel architecture stands on the shoulders of giants, drawing inspiration from pioneering research in replicated-kernel systems, particularly [Popcorn Linux](https://popcornlinux.org/), which has demonstrated innovative approaches to multi-kernel architectures and cross-ISA execution environments.
+Our multikernel architecture stands on the shoulders of giants, drawing inspiration from pioneering research in replicated-kernel systems, particularly [Popcorn Linux](https://popcornlinux.org/){:target="_blank" rel="noopener noreferrer"}, which has demonstrated innovative approaches to multi-kernel architectures and cross-ISA execution environments.
 
 Rather than reinventing fundamental mechanisms, we leverage existing Linux infrastructure, specifically the proven kexec subsystem. By building upon kexec's battle-tested kernel switching capabilities, we implement spawned kernel functionality using well-understood mechanisms that have been part of Linux for over two decades.
 
@@ -29,7 +29,7 @@ While we're proud to open-source our work, we recognize that innovation thrives 
 
 ## Technical Deep Dives
 
-Beyond open-sourcing our code, we're preparing a series of educational videos that will explain both our multikernel solution and the underlying Linux kexec infrastructure that makes it possible. Please subscribe to our [YouTube channel](https://www.youtube.com/@multikernel-tech).
+Beyond open-sourcing our code, we're preparing a series of educational videos that will explain both our multikernel solution and the underlying Linux kexec infrastructure that makes it possible. Please subscribe to our [YouTube channel](https://www.youtube.com/@multikernel-tech){:target="_blank" rel="noopener noreferrer"}.
 
 ## Looking Forward
 
@@ -37,8 +37,8 @@ This release begins what we hope will be ongoing collaboration with the Linux co
 
 ## Get Involved
 
-- Obtain our source code on [GitHub](https://github.com/multikernel/linux/commits/multikernel-part-1/)
-- Join the discussion on [LKML](https://lore.kernel.org/lkml/20250918222607.186488-1-xiyou.wangcong@gmail.com/)
+- Obtain our source code on [GitHub](https://github.com/multikernel/linux/commits/multikernel-part-1/){:target="_blank" rel="noopener noreferrer"}
+- Join the discussion on [LKML](https://lore.kernel.org/lkml/20250918222607.186488-1-xiyou.wangcong@gmail.com/){:target="_blank" rel="noopener noreferrer"}
 - Stay tuned for technical videos and documentation
 
 The future of kernel development is collaborative and transparent. We're proud to contribute to this tradition and give our best to the entire world. Please join our efforts!
