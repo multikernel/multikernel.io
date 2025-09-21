@@ -79,7 +79,7 @@ permalink: /faq.html
         <div class="faq-question">
             <i data-lucide="zap"></i> Why not use unikernels instead?
         </div>
-        <p class="faq-answer">While unikernels eliminate syscall overhead, modern CPUs already provide highly optimized syscall performance, making this benefit marginal. Most unikernels still rely on virtualization layers, inheriting their performance penalties. Multikernel delivers superior isolation and performance without virtualization overhead or the complexity of rebuilding applications for specialized kernel environments.</p>
+        <p class="faq-answer">While unikernels eliminate syscall overhead, modern CPUs already provide highly optimized syscall performance, making this benefit marginal. Most unikernels still rely on virtualization layers, inheriting their performance penalties. Like unikernels, Multikernel avoids a full OS by running applications and their necessary dependencies directly in initramfs, but delivers superior isolation and performance without virtualization overhead or the complexity of rebuilding applications for specialized kernel environments.</p>
     </div>
     
     <div class="faq-item">
