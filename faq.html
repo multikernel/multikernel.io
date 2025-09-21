@@ -8,80 +8,90 @@ excerpt: "Common questions about Multikernel technology, architecture, and imple
 ---
 
 <style>
-.faq-content details {
-    margin-bottom: 1.5rem;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    overflow: hidden;
+.faq-content .faq-item {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #e0e0e0;
 }
 
-.faq-content summary {
-    padding: 1rem 1.5rem;
-    background: #f8f9fa;
-    cursor: pointer;
+.faq-content .faq-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.faq-content .faq-question {
+    font-size: 1.25rem;
     font-weight: 600;
+    color: #333;
+    margin-bottom: 1rem;
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    transition: background-color 0.2s ease;
 }
 
-.faq-content summary:hover {
-    background: #e9ecef;
-}
-
-.faq-content details[open] summary {
-    background: #007bff;
-    color: white;
-}
-
-.faq-content details p {
-    padding: 1.5rem;
+.faq-content .faq-answer {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #555;
     margin: 0;
-    background: white;
-    border-top: 1px solid #e0e0e0;
 }
 
 .faq-content i {
     width: 20px;
     height: 20px;
     flex-shrink: 0;
+    color: #007bff;
 }
 </style>
 
 <div class="faq-content">
-    <details>
-        <summary><i data-lucide="help-circle"></i> How does Multikernel differ from containers and VMs?</summary>
-        <p>Unlike containers that share a kernel or VMs that add virtualization overhead, our multikernel architecture provides true kernel isolation with near bare-metal performance, dynamic resource allocation, and application-optimized environments.</p>
-    </details>
+    <div class="faq-item">
+        <div class="faq-question">
+            <i data-lucide="help-circle"></i> How does Multikernel differ from containers and VMs?
+        </div>
+        <p class="faq-answer">Unlike containers that share a kernel or VMs that add virtualization overhead, our multikernel architecture provides true kernel isolation with near bare-metal performance, dynamic resource allocation, and application-optimized environments.</p>
+    </div>
     
-    <details>
-        <summary><i data-lucide="cpu"></i> What types of workloads benefit most from Multikernel?</summary>
-        <p>High-performance computing, AI/ML frameworks, latency-sensitive services, and applications with strict security requirements gain the most advantage from our multikernel architecture.</p>
-    </details>
+    <div class="faq-item">
+        <div class="faq-question">
+            <i data-lucide="cpu"></i> What types of workloads benefit most from Multikernel?
+        </div>
+        <p class="faq-answer">High-performance computing, AI/ML frameworks, latency-sensitive services, and applications with strict security requirements gain the most advantage from our multikernel architecture.</p>
+    </div>
     
-    <details>
-        <summary><i data-lucide="layers"></i> Does Multikernel work with existing infrastructure?</summary>
-        <p>Yes, our solution is designed to integrate with standard cloud and on-premises infrastructure, providing a seamless transition path from traditional virtualization or container environments.</p>
-    </details>
+    <div class="faq-item">
+        <div class="faq-question">
+            <i data-lucide="layers"></i> Does Multikernel work with existing infrastructure?
+        </div>
+        <p class="faq-answer">Yes, our solution is designed to integrate with standard cloud and on-premises infrastructure, providing a seamless transition path from traditional virtualization or container environments.</p>
+    </div>
     
-    <details>
-        <summary><i data-lucide="check-circle"></i> Is Multikernel compatible with existing Linux applications?</summary>
-        <p>Absolutely. Multikernel maintains 100% compatibility with existing Linux applications and system interfaces. Our implementation introduces only minimal, non-intrusive kernel modifications that preserve full API and ABI compatibility, ensuring your applications run unchanged without any modifications or performance degradation.</p>
-    </details>
+    <div class="faq-item">
+        <div class="faq-question">
+            <i data-lucide="check-circle"></i> Is Multikernel compatible with existing Linux applications?
+        </div>
+        <p class="faq-answer">Absolutely. Multikernel maintains 100% compatibility with existing Linux applications and system interfaces. Our implementation introduces only minimal, non-intrusive kernel modifications that preserve full API and ABI compatibility, ensuring your applications run unchanged without any modifications or performance degradation.</p>
+    </div>
     
-    <details>
-        <summary><i data-lucide="zap"></i> Why not use unikernels instead?</summary>
-        <p>While unikernels eliminate syscall overhead, modern CPUs already provide highly optimized syscall performance, making this benefit marginal. Most unikernels still rely on virtualization layers, inheriting their performance penalties. Multikernel delivers superior isolation and performance without virtualization overhead or the complexity of rebuilding applications for specialized kernel environments.</p>
-    </details>
+    <div class="faq-item">
+        <div class="faq-question">
+            <i data-lucide="zap"></i> Why not use unikernels instead?
+        </div>
+        <p class="faq-answer">While unikernels eliminate syscall overhead, modern CPUs already provide highly optimized syscall performance, making this benefit marginal. Most unikernels still rely on virtualization layers, inheriting their performance penalties. Multikernel delivers superior isolation and performance without virtualization overhead or the complexity of rebuilding applications for specialized kernel environments.</p>
+    </div>
     
-    <details>
-        <summary><i data-lucide="activity"></i> Does SR-IOV eliminate virtualization overhead?</summary>
-        <p>No. While SR-IOV and hardware acceleration significantly reduce virtualization overhead, they cannot eliminate it entirely. VM exits, IOMMU translations, and hypervisor intervention for privileged operations still introduce measurable latency and CPU cycles. Multikernel bypasses these virtualization layers intentionally and completely, achieving near bare-metal performance without hardware acceleration dependencies.</p>
-    </details>
+    <div class="faq-item">
+        <div class="faq-question">
+            <i data-lucide="activity"></i> Does SR-IOV eliminate virtualization overhead?
+        </div>
+        <p class="faq-answer">No. While SR-IOV and hardware acceleration significantly reduce virtualization overhead, they cannot eliminate it entirely. VM exits, IOMMU translations, and hypervisor intervention for privileged operations still introduce measurable latency and CPU cycles. Multikernel bypasses these virtualization layers intentionally and completely, achieving near bare-metal performance without hardware acceleration dependencies.</p>
+    </div>
     
-    <details>
-        <summary><i data-lucide="shield"></i> How does Multikernel enhance security?</summary>
-        <p>Our architecture provides hardware-enforced isolation between workloads, minimizes attack surfaces through tailored kernels, and offers enhanced confidential computing capabilities for sensitive data processing.</p>
-    </details>
+    <div class="faq-item">
+        <div class="faq-question">
+            <i data-lucide="shield"></i> How does Multikernel enhance security?
+        </div>
+        <p class="faq-answer">Our architecture provides hardware-enforced isolation between workloads, minimizes attack surfaces through tailored kernels, and offers enhanced confidential computing capabilities for sensitive data processing.</p>
+    </div>
 </div>
