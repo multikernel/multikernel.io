@@ -84,6 +84,13 @@ permalink: /faq.html
     
     <div class="faq-item">
         <div class="faq-question">
+            <i data-lucide="git-branch"></i> What's the difference with Jailhouse?
+        </div>
+        <p class="faq-answer"><a href="https://github.com/siemens/jailhouse">Jailhouse</a> only supports static partitioning, while Multikernel provides dynamic resource allocation essential for modern cloud computing. Additionally, Jailhouse relies on traditional virtualization mechanisms like VMEXIT and SR-IOV. Multikernel avoids virtualization overhead entirely while maintaining compatibility with existing virtualization technologies when needed.</p>
+    </div>
+    
+    <div class="faq-item">
+        <div class="faq-question">
             <i data-lucide="activity"></i> Does SR-IOV eliminate virtualization overhead?
         </div>
         <p class="faq-answer">No. While SR-IOV and hardware acceleration significantly reduce virtualization overhead, they cannot eliminate it entirely. VM exits, IOMMU translations, and hypervisor intervention for privileged operations still introduce measurable latency and CPU cycles. Multikernel bypasses these virtualization layers intentionally and completely, achieving near bare-metal performance without hardware acceleration dependencies.</p>
