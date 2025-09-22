@@ -3,8 +3,8 @@ layout: post
 title: "Frequently Asked Questions"
 date: 2025-09-21 10:00:00 -0700
 categories: [faq, documentation]
-author: Multikernel Team
-excerpt: "Common questions about Multikernel technology, architecture, and implementation."
+author: Cong Wang, Founder and CEO
+excerpt: "Common questions about multikernel technology, architecture, and implementation."
 permalink: /faq.html
 ---
 
@@ -56,28 +56,28 @@ permalink: /faq.html
     
     <div class="faq-item">
         <div class="faq-question">
-            <i data-lucide="help-circle"></i> How does Multikernel differ from containers and VMs?
+            <i data-lucide="help-circle"></i> How does multikernel differ from containers and VMs?
         </div>
         <p class="faq-answer">Unlike containers that share a kernel or VMs that add virtualization overhead, our multikernel architecture provides true kernel isolation with near bare-metal performance, dynamic resource allocation, and application-optimized environments.</p>
     </div>
     
     <div class="faq-item">
         <div class="faq-question">
-            <i data-lucide="cpu"></i> What types of workloads benefit most from Multikernel?
+            <i data-lucide="cpu"></i> What types of workloads benefit most from multikernel?
         </div>
         <p class="faq-answer">High-performance computing, AI/ML frameworks, latency-sensitive services, and applications with strict security requirements gain the most advantage from our multikernel architecture.</p>
     </div>
     
     <div class="faq-item">
         <div class="faq-question">
-            <i data-lucide="layers"></i> Does Multikernel work with existing infrastructure?
+            <i data-lucide="layers"></i> Does multikernel work with existing infrastructure?
         </div>
         <p class="faq-answer">Yes, our solution is designed to integrate with standard cloud and on-premises infrastructure, providing a seamless transition path from traditional virtualization or container environments.</p>
     </div>
     
     <div class="faq-item">
         <div class="faq-question">
-            <i data-lucide="check-circle"></i> Is Multikernel compatible with existing Linux applications?
+            <i data-lucide="check-circle"></i> Is multikernel compatible with existing Linux applications?
         </div>
         <p class="faq-answer">Absolutely. Multikernel maintains 100% compatibility with existing Linux applications and system interfaces. Our implementation introduces only minimal, non-intrusive kernel modifications that preserve full API and ABI compatibility, ensuring your applications run unchanged without any modifications or performance degradation.</p>
     </div>
@@ -86,14 +86,14 @@ permalink: /faq.html
         <div class="faq-question">
             <i data-lucide="zap"></i> Why not use unikernels instead?
         </div>
-        <p class="faq-answer">While unikernels eliminate syscall overhead, modern CPUs already provide highly optimized syscall performance, making this benefit marginal. Most unikernels still rely on virtualization layers, inheriting their performance penalties. Like unikernels, Multikernel avoids a full OS by running applications and their necessary dependencies directly in initramfs, but delivers superior isolation and performance without virtualization overhead or the complexity of rebuilding applications for specialized kernel environments.</p>
+        <p class="faq-answer">While unikernels eliminate syscall overhead, modern CPUs already provide highly optimized syscall performance, making this benefit marginal. Most unikernels still rely on virtualization layers, inheriting their performance penalties. Like unikernels, multikernel avoids a full OS by running applications and their necessary dependencies directly in initramfs, but delivers superior isolation and performance without virtualization overhead or the complexity of rebuilding applications for specialized kernel environments.</p>
     </div>
     
     <div class="faq-item">
         <div class="faq-question">
             <i data-lucide="git-branch"></i> What's the difference with Jailhouse?
         </div>
-        <p class="faq-answer"><a href="https://github.com/siemens/jailhouse" target="_blank" rel="noopener noreferrer">Jailhouse</a> only supports static partitioning, while Multikernel provides dynamic resource allocation essential for modern cloud computing. Additionally, Jailhouse relies on traditional virtualization mechanisms like VMEXIT and SR-IOV. Multikernel avoids virtualization overhead entirely while maintaining compatibility with existing virtualization technologies when needed.</p>
+        <p class="faq-answer"><a href="https://github.com/siemens/jailhouse" target="_blank" rel="noopener noreferrer">Jailhouse</a> only supports static partitioning, while multikernel provides dynamic resource allocation essential for modern cloud computing. Additionally, Jailhouse relies on traditional virtualization mechanisms like VMEXIT and SR-IOV. Multikernel avoids virtualization overhead entirely while maintaining compatibility with existing virtualization technologies when needed.</p>
     </div>
     
     <div class="faq-item">
@@ -119,7 +119,7 @@ permalink: /faq.html
     
     <div class="faq-item">
         <div class="faq-question">
-            <i data-lucide="shield"></i> How does Multikernel enhance security?
+            <i data-lucide="shield"></i> How does multikernel enhance security?
         </div>
         <p class="faq-answer">Our architecture provides hardware-enforced isolation between workloads, minimizes attack surfaces through tailored kernels, and offers enhanced confidential computing capabilities for sensitive data processing. By avoiding a full OS and running applications directly in initramfs, we further reduce the attack surface compared to traditional operating systems.</p>
     </div>
