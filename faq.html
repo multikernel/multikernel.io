@@ -123,4 +123,11 @@ permalink: /faq.html
         </div>
         <p class="faq-answer">Our architecture provides hardware-enforced isolation between workloads, minimizes attack surfaces through tailored kernels, and offers enhanced confidential computing capabilities for sensitive data processing. By avoiding a full OS and running applications directly in initramfs, we further reduce the attack surface compared to traditional operating systems.</p>
     </div>
+    
+    <div class="faq-item">
+        <div class="faq-question">
+            <i data-lucide="lock"></i> What is the trust model of multikernel?
+        </div>
+        <p class="faq-answer">Multikernel relies on kernel-enforced isolation, making the kernel itself the trust boundary. While a malicious kernel could potentially disrupt other kernels on the same node, this risk can be mitigated through kernel signing via kexec and memory encryption using confidential computing technologies.</p>
+    </div>
 </div>
