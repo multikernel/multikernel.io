@@ -49,6 +49,13 @@ permalink: /faq.html
 <div class="faq-content">
     <div class="faq-item">
         <div class="faq-question">
+            <i data-lucide="info"></i> What is multikernel anyway?
+        </div>
+        <p class="faq-answer">Multikernel is an architecture that runs multiple kernels in parallel without relying on virtualization. Unlike the <a href="https://www.sigops.org/s/conferences/sosp/2009/papers/baumann-sosp09.pdf" target="_blank" rel="noopener noreferrer">original academic definition</a> which treats machines as distributed systems with message-passing cores, our implementation focuses on practical kernel isolation and performance optimization.</p>
+    </div>
+    
+    <div class="faq-item">
+        <div class="faq-question">
             <i data-lucide="help-circle"></i> How does Multikernel differ from containers and VMs?
         </div>
         <p class="faq-answer">Unlike containers that share a kernel or VMs that add virtualization overhead, our multikernel architecture provides true kernel isolation with near bare-metal performance, dynamic resource allocation, and application-optimized environments.</p>
