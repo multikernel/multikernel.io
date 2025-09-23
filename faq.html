@@ -98,6 +98,13 @@ permalink: /faq.html
     
     <div class="faq-item">
         <div class="faq-question">
+            <i data-lucide="shuffle"></i> Why not static partitioning?
+        </div>
+        <p class="faq-answer">Dynamic resource allocation is essential for modern cloud computing. Static partitioning can be achieved as a special case of dynamic allocation when resources remain unchanged, but the reverse is not possible.</p>
+    </div>
+    
+    <div class="faq-item">
+        <div class="faq-question">
             <i data-lucide="minus-circle"></i> Why not Directvisor or de-virtualization?
         </div>
         <p class="faq-answer"><a href="https://dl.acm.org/doi/10.1145/3381052.3381317" target="_blank" rel="noopener noreferrer">Directvisor</a> and similar de-virtualization approaches still fundamentally rely on virtualization infrastructure. From our perspective, virtualization followed by de-virtualization equals no virtualization—making it more efficient to eliminate virtualization layers entirely from the start rather than adding complexity to remove them later.</p>
@@ -115,6 +122,13 @@ permalink: /faq.html
             <i data-lucide="settings"></i> What's wrong with SR-IOV?
         </div>
         <p class="faq-answer">Nothing is inherently wrong with SR-IOV—it's actually quite fast, and IOMMU overhead can be minimal when properly configured. However, SR-IOV's limitation is the restricted number of Virtual Functions (VFs) available. Multikernel leverages hardware queues as sub-resources, providing significantly more granular hardware access than the limited VF count that SR-IOV offers.</p>
+    </div>
+    
+    <div class="faq-item">
+        <div class="faq-question">
+            <i data-lucide="hard-drive"></i> Do multikernels share hardware resources?
+        </div>
+        <p class="faq-answer">No. Multikernels receive dedicated physical CPU cores without kernel context switching, leveraging the abundance of cores in modern servers (typically 256+ cores). For I/O hardware, we utilize hardware queues instead of SR-IOV, with modern NICs providing 64+ queues for exclusive per-kernel allocation.</p>
     </div>
     
     <div class="faq-item">
