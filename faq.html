@@ -121,14 +121,14 @@ permalink: /faq.html
         <div class="faq-question">
             <i data-lucide="settings"></i> What's wrong with SR-IOV?
         </div>
-        <p class="faq-answer">Nothing is inherently wrong with SR-IOV—it's actually quite fast, and IOMMU overhead can be minimal when properly configured. However, SR-IOV's limitation is the restricted number of Virtual Functions (VFs) available. Multikernel leverages hardware queues as sub-resources, providing significantly more granular hardware access than the limited VF count that SR-IOV offers.</p>
+        <p class="faq-answer">Nothing is inherently wrong with SR-IOV—it's actually quite fast, and IOMMU overhead can be minimal when properly configured. However, VFs provide coarse-grained isolation mechanisms. Multikernel leverages hardware queues as more flexible and elastic resources, offering finer granularity and dynamic resource allocation compared to the static nature of VFs.</p>
     </div>
     
     <div class="faq-item">
         <div class="faq-question">
             <i data-lucide="hard-drive"></i> Do multikernels share hardware resources?
         </div>
-        <p class="faq-answer">No. Multikernels receive dedicated physical CPU cores without kernel context switching, leveraging the abundance of cores in modern servers (typically 256+ cores). For I/O hardware, we utilize hardware queues instead of SR-IOV, with modern NICs providing 64+ queues for exclusive per-kernel allocation.</p>
+        <p class="faq-answer">No. Multikernels receive dedicated physical CPU cores without kernel context switching, leveraging the abundance of cores in modern servers (typically 256+ cores). For I/O hardware, we utilize hardware queues as more flexible and elastic resources for exclusive per-kernel allocation.</p>
     </div>
     
     <div class="faq-item">
