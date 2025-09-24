@@ -29,8 +29,8 @@ permalink: /roadmap.html
     font-size: 2rem;
     font-weight: 600;
     color: #007bff;
-    margin-top: 3rem;
-    margin-bottom: 1.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.25rem;
     display: flex;
     align-items: center;
     gap: 0.75rem;
@@ -40,8 +40,8 @@ permalink: /roadmap.html
     font-size: 1.5rem;
     font-weight: 600;
     color: #333;
-    margin-top: 2.5rem;
-    margin-bottom: 1rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -56,7 +56,7 @@ permalink: /roadmap.html
 }
 
 .roadmap-content .summary {
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    background: #fff;
     padding: 2rem;
     border-radius: 12px;
     margin: 2rem 0;
@@ -64,11 +64,12 @@ permalink: /roadmap.html
     font-size: 1.1rem;
     color: #555;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border: 1px solid #e9ecef;
 }
 
 .roadmap-content .section {
-    margin-bottom: 3rem;
-    padding: 2rem;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
     background: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
@@ -76,25 +77,27 @@ permalink: /roadmap.html
 }
 
 .roadmap-content .subsection {
-    margin-bottom: 2rem;
+    margin-bottom: 1.25rem;
     padding-left: 1.5rem;
     border-left: 3px solid #e9ecef;
 }
 
 .roadmap-content .use-case {
-    background: #f8f9fa;
-    padding: 1.5rem;
+    background: #fff;
+    padding: 1.25rem;
     border-radius: 8px;
-    margin: 1.5rem 0;
+    margin: 1rem 0;
     border-left: 4px solid #28a745;
+    border: 1px solid #e9ecef;
 }
 
 .roadmap-content .implementation-phase {
-    background: #fff3cd;
-    padding: 1.5rem;
+    background: #fff;
+    padding: 1.25rem;
     border-radius: 8px;
-    margin: 1.5rem 0;
+    margin: 1rem 0;
     border-left: 4px solid #ffc107;
+    border: 1px solid #e9ecef;
 }
 
 .roadmap-content .status {
@@ -109,11 +112,12 @@ permalink: /roadmap.html
 }
 
 .roadmap-content .objectives {
-    background: #d1ecf1;
+    background: #fff;
     padding: 1rem;
     border-radius: 6px;
     margin-top: 1rem;
     border-left: 3px solid #17a2b8;
+    border: 1px solid #e9ecef;
 }
 
 .roadmap-content .objectives h5 {
@@ -147,19 +151,21 @@ permalink: /roadmap.html
 }
 
 .conclusion {
-    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+    background: #fff;
     padding: 2rem;
     border-radius: 12px;
     margin: 3rem 0;
     border-left: 5px solid #28a745;
     font-size: 1.1rem;
-    color: #155724;
+    color: #555;
+    border: 1px solid #e9ecef;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 </style>
 
 <div class="roadmap-content">
     <div class="summary">
-        <strong>Summary:</strong> The Multikernel project introduces a novel operating system architecture that treats multicore systems as distributed environments, where each core or core group runs dedicated kernel instances. This approach addresses scalability limitations in traditional monolithic and microkernel designs while providing superior performance isolation, elastic resource allocation, and zero-downtime upgrades.
+        <strong>Summary:</strong> The Multikernel project introduces a novel Linux operating system architecture that runs multiple Linux kernel instances without relying on virtualization, each core or core group runs dedicated kernel instances independently. This approach addresses scalability limitations in traditional monolithic and microkernel designs while providing superior performance isolation, elastic resource allocation, and zero-downtime upgrades.
     </div>
 
     <div class="section">
