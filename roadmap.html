@@ -5,21 +5,49 @@ permalink: /roadmap.html
 ---
 
 <style>
-/* Clean, simple styling for all content */
+/* Clean styling for summary */
+.roadmap-content .summary {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    border-left: 4px solid #007bff;
+}
+
+.roadmap-content .summary strong {
+    color: #007bff;
+    font-weight: 600;
+}
+
+/* Clean, simple styling for all sections */
+.roadmap-content .section {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.roadmap-content .section:last-child {
+    border-bottom: none;
+}
+
 .roadmap-content h2 {
     font-size: 1.25rem;
     font-weight: 600;
     color: #333;
-    margin: 2rem 0 1rem 0;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
 }
 
 .roadmap-content h3 {
     font-size: 1.1rem;
     font-weight: 600;
     color: #333;
-    margin: 1.5rem 0 0.5rem 0;
+    margin: 1.5rem 0 0.75rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .roadmap-content p {
@@ -40,14 +68,30 @@ permalink: /roadmap.html
     line-height: 1.6;
 }
 
-.roadmap-content .section {
-    margin-bottom: 2.5rem;
-}
-
 .roadmap-content .subsection,
 .roadmap-content .use-case,
 .roadmap-content .implementation-phase {
     margin-bottom: 1.5rem;
+    padding-left: 1rem;
+}
+
+.roadmap-content .status {
+    font-style: italic;
+    color: #666;
+    margin-bottom: 0.75rem;
+}
+
+.roadmap-content .objectives h5 {
+    font-weight: 600;
+    color: #333;
+    margin: 0.75rem 0 0.5rem 0;
+}
+
+.roadmap-content i {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    color: #007bff;
 }
 </style>
 
@@ -60,11 +104,8 @@ permalink: /roadmap.html
     <section class="info">
         <div class="container">
             <div class="roadmap-content">
-    <div class="roadmap-item">
-        <div class="roadmap-section">
-            <i data-lucide="info"></i> Summary
-        </div>
-        <p class="roadmap-text">The Multikernel project introduces a novel Linux operating system architecture that runs multiple Linux kernel instances without relying on virtualization, each core or core group runs dedicated kernel instances independently. This approach addresses scalability limitations in traditional monolithic and microkernel designs while providing superior performance isolation, elastic resource allocation, and zero-downtime upgrades.</p>
+    <div class="summary">
+        <strong>Summary:</strong> The Multikernel project introduces a novel Linux operating system architecture that runs multiple Linux kernel instances without relying on virtualization, each core or core group runs dedicated kernel instances independently. This approach addresses scalability limitations in traditional monolithic and microkernel designs while providing superior performance isolation, elastic resource allocation, and zero-downtime upgrades.
     </div>
 
     <div class="section">
