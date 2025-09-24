@@ -9,6 +9,8 @@ url: "https://multikernel.io" # Set to your custom domain
 markdown: kramdown
 encoding: utf-8
 permalink: /:year/:month/:day/:title/
+plugins:
+  - jekyll-feed
 
 # Custom domain
 github_pages:
