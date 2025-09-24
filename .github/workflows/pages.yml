@@ -1,4 +1,4 @@
-name: Deploy Jekyll site to Pages
+name: Deploy Jekyll with GitHub Pages dependencies preinstalled
 
 on:
   push:
@@ -20,13 +20,24 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-      - name: Build with Jekyll
-        uses: actions/jekyll-build-pages@v1
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
         with:
-          source: ./
-          destination: ./_site
+          ruby-version: '3.1'
+          bundler-cache: false
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v5
+      - name: Install dependencies
+        run: |
+          gem install jekyll bundler
+          bundle init
+          bundle add jekyll
+          bundle add webrick
+      - name: Build with Jekyll
+        run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
+        env:
+          JEKYLL_ENV: production
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
 
