@@ -1,11 +1,6 @@
 ---
-layout: post
-title: "Frequently Asked Questions"
-date: 2025-09-21 10:00:00 -0700
-categories: [faq, documentation]
-author: Cong Wang, Founder and CEO
-excerpt: "Common questions about multikernel technology, architecture, and implementation."
-permalink: /faq.html
+layout: default
+title: "Frequently Asked Questions - Multikernel Technologies"
 ---
 
 <style>
@@ -46,7 +41,15 @@ permalink: /faq.html
 }
 </style>
 
-<div class="faq-content">
+<main style="margin-top: 0; padding-top: 0;">
+    <section class="hero">
+        <h1>Frequently Asked Questions</h1>
+        <p>Common questions about multikernel technology, architecture, and implementation.</p>
+    </section>
+
+    <section class="info">
+        <div class="container">
+            <div class="faq-content">
     <div class="faq-item">
         <div class="faq-question">
             <i data-lucide="info"></i> What is multikernel anyway?
@@ -143,5 +146,7 @@ permalink: /faq.html
             <i data-lucide="lock"></i> What is the trust model of multikernel?
         </div>
         <p class="faq-answer">Multikernel relies on kernel-enforced isolation, making the kernel itself the trust boundary. While a malicious kernel could potentially disrupt other kernels on the same node, this risk can be mitigated through kernel signing via kexec, kernel lockdown, and memory encryption using confidential computing technologies.</p>
-    </div>
-</div>
+            </div>
+        </div>
+    </section>
+</main>
