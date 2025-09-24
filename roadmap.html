@@ -5,42 +5,49 @@ permalink: /roadmap.html
 ---
 
 <style>
-.roadmap-content .roadmap-item {
-    margin-bottom: 2.5rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid #e0e0e0;
-}
-
-.roadmap-content .roadmap-item:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-    padding-bottom: 0;
-}
-
-.roadmap-content .roadmap-section {
+/* Clean, simple styling for all content */
+.roadmap-content h2 {
     font-size: 1.25rem;
     font-weight: 600;
     color: #333;
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
+    margin: 2rem 0 1rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #e0e0e0;
 }
 
-.roadmap-content .roadmap-text {
+.roadmap-content h3 {
     font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+    margin: 1.5rem 0 0.5rem 0;
+}
+
+.roadmap-content p {
+    font-size: 1rem;
     line-height: 1.7;
     color: #555;
-    margin: 0 0 1rem 0;
-    text-align: left;
-    max-width: 100%;
+    margin-bottom: 1rem;
 }
 
-.roadmap-content i {
-    width: 20px;
-    height: 20px;
-    flex-shrink: 0;
-    color: #007bff;
+.roadmap-content ul {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+}
+
+.roadmap-content li {
+    margin-bottom: 0.5rem;
+    color: #555;
+    line-height: 1.6;
+}
+
+.roadmap-content .section {
+    margin-bottom: 2.5rem;
+}
+
+.roadmap-content .subsection,
+.roadmap-content .use-case,
+.roadmap-content .implementation-phase {
+    margin-bottom: 1.5rem;
 }
 </style>
 
@@ -60,42 +67,141 @@ permalink: /roadmap.html
         <p class="roadmap-text">The Multikernel project introduces a novel Linux operating system architecture that runs multiple Linux kernel instances without relying on virtualization, each core or core group runs dedicated kernel instances independently. This approach addresses scalability limitations in traditional monolithic and microkernel designs while providing superior performance isolation, elastic resource allocation, and zero-downtime upgrades.</p>
     </div>
 
-    <div class="roadmap-item">
-        <div class="roadmap-section">
-            <i data-lucide="compass"></i> 1. Design Philosophy
+    <div class="section">
+        <h2><i data-lucide="compass"></i>1. Design Philosophy</h2>
+        
+        <div class="subsection">
+            <h3><i data-lucide="settings"></i>1.1 Flexibility-First</h3>
+            <p>The design aims to maximize the flexibility through programmable interfaces, leveraging eBPF extensively for dynamic behavior modification without kernel recompilation.</p>
         </div>
-        <p class="roadmap-text"><strong>Flexibility-First:</strong> The design aims to maximize the flexibility through programmable interfaces, leveraging eBPF extensively for dynamic behavior modification without kernel recompilation.</p>
-        <p class="roadmap-text"><strong>Freedom of Choice:</strong> The design must preserve and respect users' choice, including enabling and disabling this feature, using this feature with all reasonable existing competitive solutions, like using SR-IOV or general virtualization on top.</p>
-        <p class="roadmap-text"><strong>Simplicity and Minimalism:</strong> The design maintains architectural simplicity by avoiding complex abstraction layers that plague current virtualization stacks.</p>
-        <p class="roadmap-text"><strong>Infrastructure Reuse:</strong> The design should leverage existing kernel subsystems wherever possible, including kexec for kernel loading, CPU/memory hotplug for resource management, existing driver frameworks for I/O, and standard eBPF infrastructure for programmability.</p>
+
+        <div class="subsection">
+            <h3><i data-lucide="users"></i>1.2 Freedom of Choice</h3>
+            <p>The design must preserve and respect users' choice, including enabling and disabling this feature, using this feature with all reasonable existing competitive solutions, like using SR-IOV or general virtualization on top.</p>
+        </div>
+
+        <div class="subsection">
+            <h3><i data-lucide="minimize"></i>1.3 Simplicity and Minimalism</h3>
+            <p>The design maintains architectural simplicity by avoiding complex abstraction layers that plague current virtualization stacks.</p>
+        </div>
+
+        <div class="subsection">
+            <h3><i data-lucide="recycle"></i>1.4 Infrastructure Reuse</h3>
+            <p>The design should leverage existing kernel subsystems wherever possible, including kexec for kernel loading, CPU/memory hotplug for resource management, existing driver frameworks for I/O, and standard eBPF infrastructure for programmability.</p>
+        </div>
     </div>
 
-    <div class="roadmap-item">
-        <div class="roadmap-section">
-            <i data-lucide="target"></i> 2. Target Use Cases
+    <div class="section">
+        <h2><i data-lucide="target"></i>2. Target Use Cases</h2>
+
+        <div class="use-case">
+            <h3><i data-lucide="zap"></i>2.1 High-Performance Workload Isolation</h3>
+            <p>Provides an alternative to containers and virtual machines with superior performance characteristics. Each application receives dedicated kernel instances with customized configurations, eliminating noisy neighbor effects while maintaining near-bare-metal performance. Elastic resource allocation enables dynamic scaling based on workload demands without traditional virtualization overhead.</p>
         </div>
-        <p class="roadmap-text"><strong>High-Performance Workload Isolation:</strong> Provides an alternative to containers and virtual machines with superior performance characteristics. Each application receives dedicated kernel instances with customized configurations, eliminating noisy neighbor effects while maintaining near-bare-metal performance.</p>
-        <p class="roadmap-text"><strong>Kernel Customization and Specialization:</strong> Enables users to deploy application-specific kernel configurations through multiple mechanisms: eBPF programs for runtime behavior modification, specialized kernel modules for hardware optimization, and machine learning-driven parameter tuning for workload adaptation.</p>
-        <p class="roadmap-text"><strong>Kernel-Level Fault Tolerance:</strong> Implements fault isolation where kernel instances can fail independently without affecting other instances or the host system. Failed instances can be transparently restarted or replaced while maintaining application availability.</p>
-        <p class="roadmap-text"><strong>Zero-Downtime Kernel Upgrades:</strong> Supports seamless kernel updates by spawning new kernel instances with updated versions while gradually migrating workloads from old instances. This enables continuous system operation during security patches, feature updates, or configuration changes.</p>
+
+        <div class="use-case">
+            <h3><i data-lucide="wrench"></i>2.2 Kernel Customization and Specialization</h3>
+            <p>Enables users to deploy application-specific kernel configurations through multiple mechanisms: eBPF programs for runtime behavior modification, specialized kernel modules for hardware optimization, and machine learning-driven parameter tuning for workload adaptation.</p>
+            <p>This targets scenarios from high-frequency trading requiring microsecond latencies to scientific computing needing specialized memory management.</p>
+        </div>
+
+        <div class="use-case">
+            <h3><i data-lucide="shield-check"></i>2.3 Kernel-Level Fault Tolerance</h3>
+            <p>Implements fault isolation where kernel instances can fail independently without affecting other instances or the host system. Failed instances can be transparently restarted or replaced while maintaining application availability. This provides significantly improved reliability compared to monolithic kernel architectures where kernel faults affect the entire system, such as the hypervisor kernel used for VM's.</p>
+        </div>
+
+        <div class="use-case">
+            <h3><i data-lucide="refresh-cw"></i>2.4 Zero-Downtime Kernel Upgrades</h3>
+            <p>Supports seamless kernel updates by spawning new kernel instances with updated versions while gradually migrating workloads from old instances. This enables continuous system operation during security patches, feature updates, or configuration changes, addressing critical uptime requirements in production environments.</p>
+        </div>
     </div>
 
-    <div class="roadmap-item">
-        <div class="roadmap-section">
-            <i data-lucide="map"></i> 3. Implementation Roadmap
+    <div class="section">
+        <h2><i data-lucide="map"></i>3. Implementation Roadmap</h2>
+
+        <div class="implementation-phase">
+            <h3><i data-lucide="upload"></i>3.1 Kernel Loading Infrastructure Enhancement</h3>
+            <div class="status">Current Status: Basic kernel loading implemented using kexec.</div>
+            <div class="objectives">
+                <h5>Objectives:</h5>
+                <ul>
+                    <li>Migrate to C-based trampoline implementation for improved maintainability and portability</li>
+                    <li>Implement kexec--unload-based shutdown mechanism for clean kernel instance termination</li>
+                    <li>Add support for kernel image verification and secure boot integration via kexec_file_load()</li>
+                </ul>
+            </div>
         </div>
-        <p class="roadmap-text"><strong>Kernel Loading Infrastructure Enhancement:</strong> Current Status: Basic kernel loading implemented using kexec. Objectives include migrating to C-based trampoline implementation, implementing kexec-unload-based shutdown mechanism, and adding support for kernel image verification and secure boot integration.</p>
-        <p class="roadmap-text"><strong>Inter-Kernel Communication Infrastructure:</strong> Current Status: Basic IPI communication established with preliminary shared memory support. Objectives include developing comprehensive messaging protocol, establishing security boundaries, and creating foundation for resource management and upgrade protocols.</p>
-        <p class="roadmap-text"><strong>Dynamic Hardware Resource Management:</strong> Current Status: Not implemented; depends on communication infrastructure completion. Objectives include CPU management with hotplug integration, memory management with RAM hotplug-based allocation, I/O resource management for dynamic device assignment, and comprehensive resource monitoring.</p>
+
+        <div class="implementation-phase">
+            <h3><i data-lucide="network"></i>3.2 Inter-Kernel Communication Infrastructure</h3>
+            <div class="status">Current Status: Basic IPI (Inter-Processor Interrupt) communication established with preliminary shared memory support.</div>
+            <div class="objectives">
+                <h5>Objectives:</h5>
+                <ul>
+                    <li>Develop comprehensive and flexible messaging protocol over IPI and shared memory primitives</li>
+                    <li>Establish security boundaries and access control for inter-kernel communication</li>
+                    <li>This infrastructure serves as the foundation for resource management and upgrade protocols</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="implementation-phase">
+            <h3><i data-lucide="cpu"></i>3.3 Dynamic Hardware Resource Management</h3>
+            <div class="status">Current Status: Not implemented; depends on communication infrastructure completion.</div>
+            <div class="objectives">
+                <h5>Objectives:</h5>
+                <ul>
+                    <li><strong>CPU Management:</strong> Integrate with CPU hotplug subsystem for dynamic core allocation and migration</li>
+                    <li><strong>Memory Management:</strong> Leverage CMA (Contiguous Memory Allocator) and memory hotplug for elastic memory allocation</li>
+                    <li><strong>Interrupt Delivery:</strong> Implement a high-performance doorbell mechanism for efficient hardware interrupt handling</li>
+                    <li><strong>I/O Resource Allocation:</strong> Utilize hardware queue management instead of SR-IOV for fine-grained I/O resource partitioning
+                        <ul>
+                            <li>Network I/O</li>
+                            <li>Storage I/O</li>
+                            <li>GPU</li>
+                        </ul>
+                    </li>
+                    <li><strong>eBPF Integration:</strong> Enable programmable resource allocation policies through eBPF programs for adaptive resource management</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="implementation-phase">
+            <h3><i data-lucide="arrow-up-circle"></i>3.4 Zero-Downtime Kernel Upgrade Implementation</h3>
+            <div class="status">Current Status: Not implemented; requires completion of all preceding infrastructure components.</div>
+            <div class="objectives">
+                <h5>Objectives:</h5>
+                <ul>
+                    <li>Design and implement a protocol on top of Kernel Hand Over (KHO) for coordinated state transfer between kernel instances</li>
+                    <li>Develop state migration mechanisms for preserving application context during kernel transitions</li>
+                    <li>Create orchestration logic for managing upgrade sequences across multiple kernel instances</li>
+                    <li>Implement rollback capabilities for failed upgrade scenarios</li>
+                    <li>Integrate with existing update mechanisms and package management systems like NixOS</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="implementation-phase">
+            <h3><i data-lucide="box"></i>3.5 Integration with Kubernetes</h3>
+            <div class="status">Current Status: Not implemented; requires completion of all preceding infrastructure components.</div>
+            <div class="objectives">
+                <h5>Objectives:</h5>
+                <ul>
+                    <li>Develop a comprehensive Kubernetes Container Runtime Interface (CRI) plugin to enable seamless orchestration of multikernel instances</li>
+                    <li>Implement custom resource definitions (CRDs) for multikernel-specific configurations and policies</li>
+                    <li>Create a multikernel scheduler extension to optimize pod placement based on kernel instance capabilities and resource requirements</li>
+                    <li>Design integration with Kubernetes networking (CNI) and storage (CSI) interfaces for multikernel environments</li>
+                    <li>Establish monitoring and observability integration with Kubernetes metrics and logging systems</li>
+                    <li>Implement lifecycle management hooks for kernel instance creation, scaling, and termination within Kubernetes workflows</li>
+                </ul>
+            </div>
+        </div>
     </div>
+
+    <div class="conclusion">
+        <h2><i data-lucide="check-circle"></i>Conclusion</h2>
+        <p>The Multikernel project represents a fundamental shift toward distributed kernel architectures that address the scalability and flexibility limitations of current systems. Success depends on careful implementation of the five-phase roadmap, with each phase building essential capabilities for the subsequent components. The emphasis on flexibility, choice, simplicity, and infrastructure reuse ensures the resulting system will provide practical benefits while maintaining compatibility with existing cloud computing ecosystems.</p>
             </div>
         </div>
     </section>
 </main>
-
-<script>
-    // Initialize Lucide icons
-    if (typeof lucide !== 'undefined') {
-        lucide.createIcons();
-    }
-</script>
