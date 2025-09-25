@@ -863,7 +863,7 @@ section {
     margin: 20px auto;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     text-align: left;
     width: 90%;
     box-sizing: border-box; /* Ensures consistent width calculations */
@@ -880,7 +880,7 @@ section {
     border-left: 6px solid #6b00b6;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     box-sizing: border-box; /* Ensures consistent width calculations */
     margin-bottom: 20px; /* Consistent spacing between sections */
 }
@@ -902,7 +902,7 @@ section {
 
 .feature-list li {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     margin-bottom: 10px;
     font-size: 1.05rem;
 }
