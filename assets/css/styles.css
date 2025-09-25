@@ -755,14 +755,14 @@ button:hover {
     margin: 15px auto 15px;
     line-height: 1.6;
     font-size: 1.05rem;
-    text-align: center;
+    text-align: left;
 }
 
 .approach-summary {
     max-width: 700px;
     margin: 0 auto 15px;
     font-size: 1.05rem;
-    text-align: center;
+    text-align: left;
     line-height: 1.5;
 }
 
@@ -773,7 +773,7 @@ button:hover {
     width: 100%;
     max-width: 100%;
     margin: 0;
-    text-align: center;
+    text-align: left;
 }
 
 .how-it-works h3 {
@@ -781,7 +781,7 @@ button:hover {
     margin-bottom: 15px;
     font-size: 1.5rem;
     color: #333;
-    text-align: center;
+    text-align: left;
 }
 
 /* Comparison Table */
@@ -864,7 +864,7 @@ section {
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
+    text-align: left;
     width: 90%;
     box-sizing: border-box; /* Ensures consistent width calculations */
 }
@@ -897,7 +897,7 @@ section {
     width: 100%;
     max-width: 600px;
     margin: 20px auto;
-    text-align: center;
+    text-align: left;
 }
 
 .feature-list li {
@@ -1179,7 +1179,7 @@ details p {
 
 /* Section headings */
 h2 {
-    text-align: center;
+    text-align: left;
     margin: 0 0 3rem;
     font-size: 2rem;
     color: #333;
