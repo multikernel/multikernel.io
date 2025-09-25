@@ -892,25 +892,28 @@ section {
 
 /* Feature list styling */
 .feature-list {
-    list-style: none;
-    padding: 0;
-    width: 100%;
-    max-width: 600px;
-    margin: 20px 0;
-    text-align: left;
+    list-style: none !important;
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: 600px !important;
+    margin: 20px 0 !important;
+    text-align: left !important;
 }
 
 .feature-list li {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 10px;
-    font-size: 1.05rem;
+    display: flex !important;
+    align-items: flex-start !important;
+    margin-bottom: 10px !important;
+    font-size: 1.05rem !important;
+    padding-left: 0 !important;
+    margin-left: 0 !important;
 }
 
 .feature-list li i {
-    margin-right: 2px;
-    color: #6b00b6;
-    stroke-width: 2.5;
+    margin-right: 8px !important;
+    margin-left: 0 !important;
+    color: #6b00b6 !important;
+    stroke-width: 2.5 !important;
 }
 
 /* Architecture diagram */
@@ -1179,11 +1182,19 @@ details p {
 
 /* Section headings */
 h2 {
-    text-align: center;
+    text-align: center !important;
     margin: 0 0 3rem;
     font-size: 2rem;
     color: #333;
     font-weight: 700;
+}
+
+/* Ensure section titles are centered */
+section h2,
+.info h2,
+.how-it-works h2,
+.blog h2 {
+    text-align: center !important;
 }
 
 h2::before {
