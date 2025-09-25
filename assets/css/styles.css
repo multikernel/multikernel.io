@@ -864,9 +864,16 @@ section {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    text-align: left;
     width: 90%;
     box-sizing: border-box; /* Ensures consistent width calculations */
+}
+
+/* Left-align only the content, not titles */
+section p,
+section ul,
+section ol,
+section .feature-list {
+    text-align: left;
 }
 
 .info, .how-it-works, .faq, .blog {
