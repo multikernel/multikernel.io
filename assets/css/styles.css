@@ -896,7 +896,7 @@ section {
     padding: 0;
     width: 100%;
     max-width: 600px;
-    margin: 20px auto;
+    margin: 20px 0;
     text-align: left;
 }
 
@@ -1179,7 +1179,7 @@ details p {
 
 /* Section headings */
 h2 {
-    text-align: left;
+    text-align: center;
     margin: 0 0 3rem;
     font-size: 2rem;
     color: #333;
