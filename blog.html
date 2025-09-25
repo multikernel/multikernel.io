@@ -4,12 +4,15 @@ title: Blog
 permalink: /blog/
 ---
 
-<section class="blog-page">
-    <div class="container">
+<main style="margin-top: 0; padding-top: 0;">
+    <section class="hero">
         <h1>Latest Insights</h1>
-        <p class="blog-intro">Stay updated with the latest developments in multikernel technology, cloud computing, and operating system innovation.</p>
-        
-        <div class="blog-posts">
+        <p>Stay updated with the latest developments in multikernel technology, cloud computing, and operating system innovation.</p>
+    </section>
+
+    <section class="blog-page">
+        <div class="container">
+            <div class="blog-posts">
             {% for post in site.posts %}
             <article class="blog-post-card">
                 <div class="blog-post-header">
@@ -40,6 +43,7 @@ permalink: /blog/
                 <p>No blog posts available yet. Check back soon for updates!</p>
             </div>
             {% endif %}
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+</main>
