@@ -13,18 +13,26 @@
 <body>
     <header>
         <div class="header-container">
+            <div class="logo-container">
+                <img src="/assets/images/multikernel-logo.png" alt="Multikernel Technologies Logo" class="logo">
+                <a href="/" class="company-name">Multikernel Technologies</a>
+            </div>
+            
             <nav>
-                <div class="logo-container">
-                    <img src="/assets/images/multikernel-logo.png" alt="Multikernel Technologies Logo" class="logo">
-                </div>
                 <div class="nav-links">
                     <a href="/" {% if page.url == "/" %}class="active"{% endif %}>Home</a>
                     <a href="/about.html" {% if page.url == "/about.html" %}class="active"{% endif %}>About</a>
                     <a href="/roadmap.html" {% if page.url == "/roadmap.html" %}class="active"{% endif %}>Roadmap</a>
-                    <a href="https://github.com/multikernel" target="_blank">Github</a>
                     <a href="/faq.html" {% if page.url == "/faq.html" %}class="active"{% endif %}>FAQ</a>
                     <a href="/blog/" {% if page.url == "/blog/" %}class="active"{% endif %}>Blog</a>
-                    <a href="/contact.html" {% if page.url == "/contact.html" %}class="active"{% endif %}>Contact</a>
+                    <a href="https://github.com/multikernel" target="_blank">
+                        <i data-lucide="github"></i>
+                        GitHub
+                    </a>
+                    <a href="/contact.html" {% if page.url == "/contact.html" %}class="active"{% endif %}>
+                        <i data-lucide="mail"></i>
+                        Contact
+                    </a>
                 </div>
             </nav>
         </div>
@@ -36,13 +44,59 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Multikernel Technologies, Inc. All rights reserved.</p>
-            <nav class="footer-nav">
-                <a href="#docs">Documentation</a>
-                <a href="/blog/">Blog</a>
-                <a href="https://github.com/multikernel" target="_blank">Github</a>
-                <a href="/contact.html">Contact</a>
-            </nav>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="/about.html">About Us</a></li>
+                        <li><a href="/roadmap.html">Roadmap</a></li>
+                        <li><a href="/blog/">Blog</a></li>
+                        <li><a href="/contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Technology</h3>
+                    <ul>
+                        <li><a href="/faq.html">FAQ</a></li>
+                        <li><a href="https://github.com/multikernel" target="_blank">GitHub</a></li>
+                        <li><a href="#docs">Documentation</a></li>
+                        <li><a href="#api">API Reference</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Solutions</h3>
+                    <ul>
+                        <li><a href="#enterprise">Enterprise</a></li>
+                        <li><a href="#cloud">Cloud Providers</a></li>
+                        <li><a href="#hpc">High Performance Computing</a></li>
+                        <li><a href="#ai">AI & Machine Learning</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p>99 S Almaden Blvd, Suite 600<br>
+                    San Jose, CA 95113</p>
+                    <p><a href="mailto:contact@multikernel.io">contact@multikernel.io</a></p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Multikernel Technologies, Inc. All rights reserved.</p>
+                <div class="footer-social">
+                    <a href="https://github.com/multikernel" target="_blank" aria-label="GitHub">
+                        <i data-lucide="github"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/company/multikernel/" target="_blank" aria-label="LinkedIn">
+                        <i data-lucide="linkedin"></i>
+                    </a>
+                    <a href="https://www.youtube.com/@multikernel-tech" target="_blank" aria-label="YouTube">
+                        <i data-lucide="youtube"></i>
+                    </a>
+                </div>
+            </div>
         </div>
     </footer>
 

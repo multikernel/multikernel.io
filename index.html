@@ -3,35 +3,100 @@ layout: default
 title: "Multikernel Technologies, Inc. - Redefining the Cloud OS"
 ---
 
-<main style="margin-top: 0; padding-top: 0;">
-        <section class="hero">
+<main>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
             <h1>Redefining the Cloud OS</h1>
-            <p>Multikernel Technologies delivers the next generation of cloud operating systems with unprecedented performance, security, and resource efficiency for modern computing environments.</p>
-            <div class="button-group">
-                <button>Get Started</button>
-                <button>Request Demo</button>
+            <p class="subtitle">Multikernel Technologies delivers the next generation of cloud operating systems with unprecedented performance, security, and resource efficiency for modern computing environments.</p>
+            
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <span class="hero-stat-number">40%</span>
+                    <span class="hero-stat-label">Better Resource Utilization</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-number">99.9%</span>
+                    <span class="hero-stat-label">Uptime Guarantee</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-number">Zero</span>
+                    <span class="hero-stat-label">Downtime Updates</span>
+                </div>
             </div>
-        </section>
-
-    <section id="about" class="info">
-        <h2>Revolutionizing Cloud Infrastructure</h2>
-        <p>Multikernel Technologies provides a groundbreaking approach to operating systems for cloud environments, overcoming the limitations of traditional OS architectures, virtual machines, and containers.</p>
-        <ul class="feature-list">
-            <li><i data-lucide="zap"></i> Near bare-metal performance with dynamic hardware resource allocation</li>
-            <li><i data-lucide="shield"></i> Enhanced security through OS-enforced isolation</li>
-            <li><i data-lucide="settings"></i> Application-optimized kernel instances for maximum efficiency</li>
-            <li><i data-lucide="refresh-cw"></i> Zero-downtime updates for continuous operation</li>
-        </ul>
+            
+            <div class="button-group">
+                <a href="/contact.html" class="btn btn-primary">
+                    <i data-lucide="rocket"></i>
+                    Get Started
+                </a>
+                <a href="/contact.html" class="btn btn-secondary">
+                    <i data-lucide="calendar"></i>
+                    Request Demo
+                </a>
+            </div>
+        </div>
     </section>
 
-    <section id="features" class="how-it-works">
-        <h2>Multikernel Advantages</h2>
-        <p class="architecture-intro">While virtual machines add a heavy hypervisor layer and containers share a single kernel, our multikernel approach creates independent, specialized kernels that directly access hardware resources with minimal overhead. This architecture eliminates the traditional tradeoff between isolation and performance.</p>
-        <div class="diagram-container" style="margin-bottom: -10px;">
-            <img src="assets/images/comparison-architecture-diagrams.svg" alt="Multikernel Architecture Diagram" class="architecture-diagram" width="600" height="300">
+    <!-- About Section -->
+    <section id="about">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">Revolutionizing Cloud Infrastructure</h2>
+                <p class="section-subtitle">Multikernel Technologies provides a groundbreaking approach to operating systems for cloud environments, overcoming the limitations of traditional OS architectures, virtual machines, and containers.</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="zap"></i>
+                    </div>
+                    <h3 class="feature-title">High Performance</h3>
+                    <p class="feature-description">Near bare-metal performance with dynamic hardware resource allocation that adapts to your workload demands.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="shield"></i>
+                    </div>
+                    <h3 class="feature-title">Enhanced Security</h3>
+                    <p class="feature-description">OS-enforced isolation provides superior security boundaries compared to traditional virtualization approaches.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="settings"></i>
+                    </div>
+                    <h3 class="feature-title">Optimized Kernels</h3>
+                    <p class="feature-description">Application-optimized kernel instances deliver maximum efficiency for your specific use cases.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="refresh-cw"></i>
+                    </div>
+                    <h3 class="feature-title">Zero Downtime</h3>
+                    <p class="feature-description">Seamless updates and maintenance operations ensure continuous operation of critical systems.</p>
+                </div>
+            </div>
         </div>
-        <p class="approach-summary" style="margin-top: 0;">Our approach combines the security of VMs with the performance of containers and the flexibility of custom kernels.</p>
-        <div class="comparison-table">
+    </section>
+
+    <!-- Architecture Section -->
+    <section id="features" class="how-it-works">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">Multikernel Advantages</h2>
+                <p class="section-subtitle">While virtual machines add a heavy hypervisor layer and containers share a single kernel, our multikernel approach creates independent, specialized kernels that directly access hardware resources with minimal overhead.</p>
+            </div>
+            
+            <div class="diagram-container">
+                <img src="assets/images/comparison-architecture-diagrams.svg" alt="Multikernel Architecture Diagram" class="architecture-diagram">
+            </div>
+            
+            <p class="approach-summary">Our approach combines the security of VMs with the performance of containers and the flexibility of custom kernels.</p>
+            
+            <div class="comparison-table">
             <table>
                 <thead>
                     <tr>
@@ -74,24 +139,81 @@ title: "Multikernel Technologies, Inc. - Redefining the Cloud OS"
                     </tr>
                 </tbody>
             </table>
+            </div>
         </div>
     </section>
 
-    <section id="benefits" class="info">
-        <h2>Key Business Benefits</h2>
-        <p>Multikernel Technologies delivers transformative advantages for enterprise and cloud infrastructure.</p>
-        <ul class="feature-list">
-            <li><i data-lucide="trending-up"></i> Up to 40% improved resource utilization through elastic resource allocation</li>
-            <li><i data-lucide="clock"></i> Near-zero downtime for critical applications with seamless kernel updates</li>
-            <li><i data-lucide="shield-check"></i> Enhanced confidential computing capabilities for sensitive workloads</li>
-            <li><i data-lucide="bar-chart"></i> Predictable application performance without "noisy neighbor" issues</li>
-            <li><i data-lucide="package"></i> Optimized deployment for AI, HPC, and enterprise workloads</li>
-        </ul>
+    <!-- Benefits Section -->
+    <section id="benefits">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">Key Business Benefits</h2>
+                <p class="section-subtitle">Multikernel Technologies delivers transformative advantages for enterprise and cloud infrastructure.</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="trending-up"></i>
+                    </div>
+                    <h3 class="feature-title">Resource Efficiency</h3>
+                    <p class="feature-description">Up to 40% improved resource utilization through elastic resource allocation that adapts to real-time demands.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="clock"></i>
+                    </div>
+                    <h3 class="feature-title">Maximum Uptime</h3>
+                    <p class="feature-description">Near-zero downtime for critical applications with seamless kernel updates and maintenance operations.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="shield-check"></i>
+                    </div>
+                    <h3 class="feature-title">Confidential Computing</h3>
+                    <p class="feature-description">Enhanced confidential computing capabilities provide superior protection for sensitive workloads and data.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="bar-chart"></i>
+                    </div>
+                    <h3 class="feature-title">Predictable Performance</h3>
+                    <p class="feature-description">Eliminate "noisy neighbor" issues with guaranteed performance isolation and dedicated resources.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="package"></i>
+                    </div>
+                    <h3 class="feature-title">Optimized Workloads</h3>
+                    <p class="feature-description">Purpose-built optimization for AI, HPC, and enterprise workloads with specialized kernel configurations.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="dollar-sign"></i>
+                    </div>
+                    <h3 class="feature-title">Cost Reduction</h3>
+                    <p class="feature-description">Reduce infrastructure costs through improved efficiency and elimination of virtualization overhead.</p>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section id="blog" class="blog">
-        <h2>Latest Insights</h2>
-        <div class="blog-preview">
+
+
+    <!-- Blog Section -->
+    <section id="blog">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">Latest Insights</h2>
+                <p class="section-subtitle">Stay updated with the latest developments in multikernel technology and cloud computing innovation.</p>
+            </div>
+            
+            <div class="blog-preview">
             {% if site.posts.size > 0 %}
                 {% assign recent_posts = site.posts | limit: 3 %}
                 {% for post in recent_posts %}
@@ -120,8 +242,9 @@ title: "Multikernel Technologies, Inc. - Redefining the Cloud OS"
                 </div>
             {% endif %}
         </div>
-        <div class="blog-cta">
-            <a href="/blog/" class="view-all-posts">View All Posts</a>
+            <div class="blog-cta">
+                <a href="/blog/" class="view-all-posts">View All Posts</a>
+            </div>
         </div>
     </section>
-    </main>
+</main>

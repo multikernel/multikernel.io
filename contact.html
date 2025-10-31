@@ -7,40 +7,42 @@ permalink: /contact.html
 <style>
 /* Contact page specific styles */
 .contact-form {
-    background: white;
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
+    background: var(--background-primary);
+    padding: var(--spacing-2xl);
+    border-radius: var(--border-radius-xl);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border-color);
 }
 
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: var(--spacing-lg);
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: var(--spacing-sm);
     font-weight: 600;
-    color: #333;
+    color: var(--text-primary);
+    font-size: 0.95rem;
 }
 
 .form-group input,
 .form-group textarea {
     width: 100%;
-    padding: 12px;
-    border: 2px solid #e0e0e0;
-    border-radius: 8px;
-    font-size: 16px;
-    transition: border-color 0.3s ease;
+    padding: var(--spacing-md);
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    font-size: 1rem;
+    font-family: inherit;
+    transition: all 0.2s ease;
+    background: var(--background-primary);
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: #007bff;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(107, 0, 182, 0.1);
 }
 
 .form-group textarea {
@@ -49,29 +51,31 @@ permalink: /contact.html
 }
 
 .submit-btn {
-    background: #007bff;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     color: white;
-    padding: 12px 30px;
+    padding: var(--spacing-md) var(--spacing-xl);
     border: none;
-    border-radius: 8px;
-    font-size: 16px;
+    border-radius: var(--border-radius-lg);
+    font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow-md);
 }
 
 .submit-btn:hover {
-    background: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
 }
 
 .submit-btn:disabled {
-    background: #6c757d;
+    background: var(--text-muted);
     cursor: not-allowed;
+    transform: none;
 }
 
 .contact-section {
-    padding: 60px 0;
-    background: #f8f9fa;
+    background: var(--background-accent);
 }
 
 .contact-info {
@@ -141,16 +145,37 @@ permalink: /contact.html
 }
 </style>
 
-<main style="margin-top: 0; padding-top: 0;">
+<main>
+    <!-- Hero Section -->
     <section class="hero">
-        <h1>Contact Us</h1>
-        <p>We'd love to hear from you. Reach out with questions, feedback, or partnership inquiries.</p>
+        <div class="hero-container">
+            <h1>Contact Us</h1>
+            <p class="subtitle">We'd love to hear from you. Reach out with questions, feedback, or partnership inquiries about multikernel technology.</p>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <span class="hero-stat-number">24/7</span>
+                    <span class="hero-stat-label">Support Available</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-number">&lt; 1hr</span>
+                    <span class="hero-stat-label">Response Time</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-number">Global</span>
+                    <span class="hero-stat-label">Reach</span>
+                </div>
+            </div>
+        </div>
     </section>
 
+    <!-- Contact Section -->
     <section class="contact-section">
-        <div class="container">
+        <div class="section-container">
             <div class="contact-form">
-                <h2>Send Us a Message</h2>
+                <div class="section-header">
+                    <h2 class="section-title">Send Us a Message</h2>
+                    <p class="section-subtitle">Get in touch with our team to discuss your multikernel needs.</p>
+                </div>
                 <form id="contactForm" action="#" method="POST">
                     <div class="form-group">
                         <label for="name">Name</label>
@@ -168,23 +193,48 @@ permalink: /contact.html
                         <label for="message">Message</label>
                         <textarea id="message" name="message" required></textarea>
                     </div>
-                    <button type="submit" class="submit-btn">Send Message</button>
+                    <button type="submit" class="submit-btn">
+                        <i data-lucide="send"></i>
+                        Send Message
+                    </button>
                 </form>
             </div>
 
             <div class="contact-info">
-                <h3>Other Ways to Connect</h3>
-                <div class="contact-methods">
-                    <div class="contact-method">
-                        <i data-lucide="mail"></i>
-                        <h4>Email</h4>
-                        <a href="mailto:contact@multikernel.io">contact@multikernel.io</a>
+                <div class="section-header">
+                    <h3 class="section-title">Other Ways to Connect</h3>
+                    <p class="section-subtitle">Choose the method that works best for you.</p>
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i data-lucide="mail"></i>
+                        </div>
+                        <h3 class="feature-title">Email</h3>
+                        <p class="feature-description">
+                            <a href="mailto:contact@multikernel.io">contact@multikernel.io</a>
+                        </p>
                     </div>
-                    <div class="contact-method">
-                        <i data-lucide="map-pin"></i>
-                        <h4>Address</h4>
-                        <p>99 S Almaden Blvd, Suite 600<br>
-                        San Jose, CA 95113
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i data-lucide="map-pin"></i>
+                        </div>
+                        <h3 class="feature-title">Office</h3>
+                        <p class="feature-description">
+                            99 S Almaden Blvd, Suite 600<br>
+                            San Jose, CA 95113
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i data-lucide="github"></i>
+                        </div>
+                        <h3 class="feature-title">Open Source</h3>
+                        <p class="feature-description">
+                            <a href="https://github.com/multikernel" target="_blank">GitHub Repository</a>
                         </p>
                     </div>
                 </div>
