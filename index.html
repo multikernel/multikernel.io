@@ -445,47 +445,4 @@ description: "Leading provider of highly-customized and well-tuned Linux kernel 
     </section>
 
 
-
-    <!-- Blog Section -->
-    <section id="blog">
-        <div class="section-container">
-            <div class="section-header">
-                <h2 class="section-title">Latest Insights</h2>
-                <p class="section-subtitle">Stay updated with the latest developments in multikernel technology and cloud computing innovation.</p>
-            </div>
-            
-            <div class="blog-preview">
-            {% if site.posts.size > 0 %}
-                {% assign recent_posts = site.posts | limit: 3 %}
-                {% for post in recent_posts %}
-                <article>
-                    <div class="blog-thumbnail">
-                        {% if post.categories contains 'open-source' or post.categories contains 'announcement' %}
-                            <i data-lucide="github" class="blog-icon"></i>
-                        {% elsif post.categories contains 'performance' %}
-                            <i data-lucide="trending-up" class="blog-icon"></i>
-                        {% elsif post.categories contains 'security' %}
-                            <i data-lucide="shield-lock" class="blog-icon"></i>
-                        {% elsif post.categories contains 'linux-kernel' %}
-                            <i data-lucide="terminal" class="blog-icon"></i>
-                        {% else %}
-                            <i data-lucide="cpu" class="blog-icon"></i>
-                        {% endif %}
-                    </div>
-                    <h3>{{ post.title }}</h3>
-                    <p>{{ post.excerpt | strip_html | truncatewords: 25 }}</p>
-                    <a href="{{ post.url | relative_url }}" class="read-more">Read More</a>
-                </article>
-                {% endfor %}
-            {% else %}
-                <div class="no-posts-preview">
-                    <p>Blog posts coming soon! We're working on exciting content about multikernel technology, performance optimization, and cloud computing innovations.</p>
-                </div>
-            {% endif %}
-        </div>
-            <div class="blog-cta">
-                <a href="/blog/" class="view-all-posts">View All Posts</a>
-            </div>
-        </div>
-    </section>
 </main>
