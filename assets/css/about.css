@@ -1,0 +1,126 @@
+/* ===== ABOUT PAGE STYLES ===== */
+
+.mission-vision, .values, .founder, .technology-overview, .architecture, .performance {
+    padding: var(--space-20) 0;
+    background: white;
+}
+
+.mission-vision h2, .values h2, .founder h2, .technology-overview h2, .architecture h2, .performance h2 {
+    font-size: var(--text-5xl);
+    font-weight: 800;
+    line-height: var(--leading-tight);
+    color: var(--gray-900);
+    margin-bottom: var(--space-6);
+    text-align: center;
+}
+
+.mission-vision p, .values p, .founder p, .technology-overview p, .architecture p, .performance p {
+    font-size: var(--text-lg);
+    line-height: var(--leading-relaxed);
+    color: var(--gray-600);
+    margin-bottom: var(--space-6);
+}
+
+.value-card, .tech-card {
+    background: white;
+    border-radius: var(--radius-2xl);
+    padding: var(--space-8);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--gray-200);
+    transition: all var(--transition-base);
+    position: relative;
+}
+
+.value-card:hover, .tech-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-xl);
+}
+
+.founder-profile {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.founder-content {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: var(--space-8);
+    align-items: start;
+}
+
+.founder-image img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-base);
+}
+
+.founder-info h3 {
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    color: var(--gray-900);
+    margin-bottom: var(--space-2);
+}
+
+.founder-title {
+    font-size: var(--text-base);
+    color: var(--primary-600);
+    font-weight: 600;
+    margin-bottom: var(--space-4);
+}
+
+.founder-bio {
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
+    color: var(--gray-600);
+    margin-bottom: var(--space-6);
+}
+
+/* Contact Form Styles */
+.contact-form {
+    background: white;
+    border-radius: var(--radius-2xl);
+    padding: var(--space-10);
+    box-shadow: var(--shadow-base);
+    border: 1px solid var(--gray-200);
+}
+
+.form-group {
+    margin-bottom: var(--space-6);
+}
+
+.form-group label {
+    display: block;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--gray-700);
+    margin-bottom: var(--space-2);
+}
+
+.form-group input, .form-group textarea, .form-group select {
+    width: 100%;
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid var(--gray-300);
+    border-radius: var(--radius-lg);
+    font-size: var(--text-base);
+    transition: border-color var(--transition-fast);
+}
+
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+    outline: none;
+    border-color: var(--primary-600);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .founder-content {
+        grid-template-columns: 1fr;
+        gap: var(--space-6);
+        text-align: center;
+    }
+    
+    .mission-vision h2, .values h2, .founder h2, .technology-overview h2, .architecture h2, .performance h2 {
+        font-size: var(--text-4xl);
+    }
+}

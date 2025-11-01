@@ -1,0 +1,143 @@
+/* ===== SHARED CONTENT PAGE STYLES (Blog, Roadmap, etc.) ===== */
+
+.content-page {
+    padding: 80px 0;
+    background: var(--gray-50);
+}
+
+.content-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+}
+
+.content-card {
+    background: white;
+    border-radius: var(--radius-2xl);
+    padding: var(--space-10);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--gray-200);
+    transition: all var(--transition-base);
+    position: relative;
+}
+
+.content-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
+}
+
+.content-card h2 {
+    font-size: var(--text-3xl);
+    font-weight: 700;
+    color: var(--gray-900);
+    margin-bottom: var(--space-6);
+    line-height: var(--leading-tight);
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.content-card h3 {
+    font-size: var(--text-xl);
+    font-weight: 600;
+    color: var(--gray-900);
+    margin: var(--space-6) 0 var(--space-3) 0;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.content-card p {
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
+    color: var(--gray-700);
+    margin-bottom: var(--space-4);
+}
+
+.content-card ul {
+    margin: var(--space-4) 0;
+    padding-left: var(--space-6);
+}
+
+.content-card li {
+    margin-bottom: var(--space-2);
+    color: var(--gray-700);
+    line-height: var(--leading-relaxed);
+}
+
+.content-card i {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    color: var(--primary-600);
+}
+
+/* Roadmap-specific content styles */
+.content-card .summary {
+    background: var(--gray-50);
+    padding: var(--space-6);
+    border-radius: var(--radius-xl);
+    margin-bottom: var(--space-6);
+    border-left: 4px solid var(--primary-600);
+}
+
+.content-card .summary strong {
+    color: var(--primary-600);
+    font-weight: 600;
+}
+
+.content-card .subsection,
+.content-card .use-case,
+.content-card .implementation-phase {
+    margin-bottom: var(--space-6);
+    padding-left: var(--space-4);
+}
+
+.content-card .status {
+    font-style: italic;
+    color: var(--gray-600);
+    margin-bottom: var(--space-3);
+    background: var(--gray-50);
+    padding: var(--space-3);
+    border-radius: var(--radius-lg);
+    border-left: 3px solid var(--amber-500);
+}
+
+.content-card .objectives h5 {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--gray-900);
+    margin: var(--space-3) 0 var(--space-2) 0;
+}
+
+.content-card .section-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+    background: var(--primary-50);
+    color: var(--primary-600);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    border-radius: var(--radius-full);
+    margin-bottom: var(--space-4);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .content-container {
+        padding: 0 var(--space-4);
+        gap: var(--space-6);
+    }
+    
+    .content-card {
+        padding: var(--space-6);
+    }
+    
+    .content-card h2 {
+        font-size: var(--text-2xl);
+    }
+}
