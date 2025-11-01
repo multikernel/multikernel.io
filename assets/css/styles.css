@@ -1214,6 +1214,184 @@ body {
     margin: var(--space-3) 0 var(--space-2) 0;
 }
 
+/* Technology Page Styles */
+.technologies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-8);
+    margin-top: var(--space-12);
+}
+
+.technology-card {
+    background: white;
+    border-radius: var(--radius-2xl);
+    padding: var(--space-8);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--gray-200);
+    transition: all var(--transition-base);
+    position: relative;
+}
+
+.technology-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
+}
+
+.technology-card.primary {
+    border: 2px solid var(--primary-600);
+    background: linear-gradient(135deg, var(--primary-50) 0%, white 100%);
+}
+
+.tech-icon {
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(135deg, var(--primary-600) 0%, var(--primary-700) 100%);
+    border-radius: var(--radius-xl);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--space-6);
+    color: white;
+    font-size: 24px;
+}
+
+.tech-title {
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    color: var(--gray-900);
+    margin-bottom: var(--space-4);
+    line-height: var(--leading-tight);
+}
+
+.tech-description {
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
+    color: var(--gray-700);
+    margin-bottom: var(--space-6);
+}
+
+.tech-specs {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.spec-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-3);
+    background: var(--gray-50);
+    border-radius: var(--radius-lg);
+    border-left: 3px solid var(--primary-600);
+}
+
+.spec-label {
+    font-weight: 600;
+    color: var(--gray-700);
+    font-size: var(--text-sm);
+}
+
+.spec-value {
+    font-weight: 700;
+    color: var(--primary-600);
+    font-size: var(--text-sm);
+}
+
+/* Comparison Table Styles */
+.comparison-table {
+    margin: var(--space-12) 0;
+    overflow-x: auto;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-sm);
+}
+
+.comparison-table table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+}
+
+.comparison-table th {
+    background: linear-gradient(135deg, var(--primary-600) 0%, var(--primary-700) 100%);
+    color: white;
+    font-weight: 700;
+    font-size: var(--text-base);
+    padding: var(--space-4) var(--space-6);
+    text-align: left;
+    border-bottom: 2px solid var(--primary-700);
+}
+
+.comparison-table th:first-child {
+    width: 25%;
+}
+
+.comparison-table th:not(:first-child) {
+    text-align: center;
+    width: 25%;
+}
+
+.comparison-table td {
+    padding: var(--space-4) var(--space-6);
+    border-bottom: 1px solid var(--gray-200);
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
+}
+
+.comparison-table td:first-child {
+    font-weight: 600;
+    color: var(--gray-900);
+    background: var(--gray-50);
+}
+
+.comparison-table td:not(:first-child) {
+    text-align: center;
+    color: var(--gray-700);
+}
+
+.comparison-table tbody tr:hover {
+    background: var(--gray-25);
+}
+
+.comparison-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Highlight Multikernel column */
+.comparison-table th:last-child {
+    background: linear-gradient(135deg, var(--primary-700) 0%, var(--primary-800) 100%);
+    position: relative;
+}
+
+.comparison-table th:last-child::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+}
+
+.comparison-table td:last-child {
+    background: var(--primary-25);
+    font-weight: 700;
+    color: var(--primary-700);
+}
+
+/* Approach Summary Styling */
+.approach-summary {
+    font-size: var(--text-lg);
+    line-height: var(--leading-relaxed);
+    color: var(--gray-700);
+    text-align: center;
+    margin: var(--space-8) auto var(--space-12) auto;
+    max-width: 800px;
+    font-weight: 500;
+}
+
 /* Blog Page Styles */
 .blog-page {
     padding: 80px 0;
@@ -1945,6 +2123,30 @@ body {
     
     .content-card h2 {
         font-size: var(--text-2xl);
+    }
+    
+    .technologies-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-6);
+        margin-top: var(--space-8);
+    }
+    
+    .technology-card {
+        padding: var(--space-6);
+    }
+    
+    .tech-title {
+        font-size: var(--text-xl);
+    }
+    
+    .comparison-table {
+        margin: var(--space-8) 0;
+    }
+    
+    .comparison-table th,
+    .comparison-table td {
+        padding: var(--space-3) var(--space-4);
+        font-size: var(--text-sm);
     }
     
     .blog-posts {
