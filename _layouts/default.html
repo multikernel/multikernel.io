@@ -5,37 +5,1012 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% if page.title and page.url != "/" %}{{ page.title }} - {{ site.title }}{% elsif page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
     <link rel="stylesheet" href="/assets/css/styles.css">
+    <style>
+        /* COMPREHENSIVE LAYOUT FIX */
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+            line-height: 1.6 !important;
+            color: #1f2937 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            padding-top: 70px !important;
+        }
+        
+        /* SECTIONS */
+        .section, .value-section, section {
+            padding: 80px 0 !important;
+            position: relative !important;
+        }
+        
+        .section-container {
+            max-width: 1200px !important;
+            margin: 0 auto !important;
+            padding: 0 24px !important;
+        }
+        
+        .section-header {
+            text-align: center !important;
+            margin-bottom: 60px !important;
+        }
+        
+        .section-badge {
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+            padding: 8px 16px !important;
+            background: #eff6ff !important;
+            color: #2563eb !important;
+            font-size: 14px !important;
+            font-weight: 600 !important;
+            border-radius: 50px !important;
+            margin-bottom: 24px !important;
+        }
+        
+        .section-title {
+            font-size: 48px !important;
+            font-weight: 800 !important;
+            line-height: 1.2 !important;
+            color: #1f2937 !important;
+            margin-bottom: 24px !important;
+            letter-spacing: -0.025em !important;
+        }
+        
+        .section-subtitle {
+            font-size: 20px !important;
+            line-height: 1.6 !important;
+            color: #6b7280 !important;
+            max-width: 700px !important;
+            margin: 0 auto !important;
+        }
+        
+        /* GRIDS */
+        .capabilities-grid, .cards-grid, .features-grid, .products-grid {
+            display: grid !important;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)) !important;
+            gap: 32px !important;
+            margin-top: 60px !important;
+        }
+        
+        /* CARDS */
+        .capability-card, .card, .feature-card, .product-card {
+            background: white !important;
+            border-radius: 16px !important;
+            padding: 32px !important;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06) !important;
+            border: 1px solid #e5e7eb !important;
+            transition: all 0.3s ease !important;
+            position: relative !important;
+        }
+        
+        .capability-card:hover, .card:hover, .feature-card:hover, .product-card:hover {
+            transform: translateY(-8px) !important;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+        }
+        
+        .capability-icon, .feature-icon, .card-icon, .product-icon {
+            width: 64px !important;
+            height: 64px !important;
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%) !important;
+            border-radius: 12px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            margin-bottom: 24px !important;
+            color: white !important;
+            font-size: 24px !important;
+        }
+        
+        .capability-title, .feature-title, .card-title, .product-title {
+            font-size: 20px !important;
+            font-weight: 700 !important;
+            color: #1f2937 !important;
+            margin-bottom: 16px !important;
+        }
+        
+        .capability-description, .feature-description, .card-description, .product-description {
+            color: #6b7280 !important;
+            line-height: 1.6 !important;
+            margin-bottom: 24px !important;
+        }
+        
+        /* VALUE SECTION */
+        .value-content {
+            display: grid !important;
+            grid-template-columns: 1fr 1fr !important;
+            gap: 60px !important;
+            align-items: center !important;
+        }
+        
+        .value-metrics {
+            display: grid !important;
+            grid-template-columns: repeat(3, 1fr) !important;
+            gap: 24px !important;
+            margin: 32px 0 !important;
+        }
+        
+        .metric {
+            text-align: center !important;
+            padding: 24px !important;
+            background: #f8fafc !important;
+            border-radius: 12px !important;
+        }
+        
+        .metric-number {
+            font-size: 32px !important;
+            font-weight: 900 !important;
+            color: #2563eb !important;
+            display: block !important;
+            margin-bottom: 8px !important;
+        }
+        
+        .metric-label {
+            font-size: 14px !important;
+            color: #6b7280 !important;
+            font-weight: 500 !important;
+        }
+        
+        /* BUTTONS */
+        .btn, .btn-primary, .btn-secondary {
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+            padding: 16px 32px !important;
+            font-size: 16px !important;
+            font-weight: 600 !important;
+            text-decoration: none !important;
+            border-radius: 12px !important;
+            transition: all 0.2s ease !important;
+            border: 2px solid transparent !important;
+        }
+        
+        .btn-primary {
+            background: rgba(255, 255, 255, 0.9) !important;
+            color: #2563eb !important;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
+        }
+        
+        .btn-primary:hover {
+            background: white !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1) !important;
+        }
+        
+        .btn-secondary {
+            background: transparent !important;
+            color: white !important;
+            border-color: rgba(255, 255, 255, 0.3) !important;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1) !important;
+            border-color: rgba(255, 255, 255, 0.5) !important;
+            transform: translateY(-2px) !important;
+        }
+        
+        .button-group {
+            display: flex !important;
+            flex-wrap: wrap !important;
+            gap: 16px !important;
+            justify-content: center !important;
+            margin: 48px 0 !important;
+        }
+        
+        /* FOOTER STYLES */
+        .enterprise-footer {
+            background: #1f2937 !important;
+            color: #9ca3af !important;
+            padding: 80px 0 32px !important;
+            position: relative !important;
+        }
+        
+        .enterprise-footer::before {
+            content: '' !important;
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            height: 1px !important;
+            background: linear-gradient(90deg, transparent, #374151, transparent) !important;
+        }
+        
+        .footer-container {
+            max-width: 1200px !important;
+            margin: 0 auto !important;
+            padding: 0 24px !important;
+        }
+        
+        .footer-main {
+            display: grid !important;
+            grid-template-columns: 2fr 2fr !important;
+            gap: 48px !important;
+            margin-bottom: 64px !important;
+        }
+        
+        .footer-links {
+            display: grid !important;
+            grid-template-columns: repeat(3, 1fr) !important;
+            gap: 32px !important;
+        }
+        
+        .footer-brand {
+            max-width: 400px !important;
+        }
+        
+        .footer-logo {
+            display: flex !important;
+            align-items: center !important;
+            gap: 12px !important;
+            margin-bottom: 24px !important;
+        }
+        
+        .footer-logo-img {
+            height: 40px !important;
+            width: auto !important;
+        }
+        
+        .footer-brand-info h3 {
+            font-size: 20px !important;
+            font-weight: 700 !important;
+            color: white !important;
+            margin-bottom: 4px !important;
+        }
+        
+        .footer-brand-info p {
+            color: #9ca3af !important;
+            font-size: 14px !important;
+        }
+        
+        .footer-description {
+            line-height: 1.6 !important;
+            margin-bottom: 32px !important;
+            color: #9ca3af !important;
+        }
+        
+        .footer-contact-info {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 16px !important;
+        }
+        
+        .contact-item {
+            display: flex !important;
+            align-items: flex-start !important;
+            gap: 12px !important;
+            color: #9ca3af !important;
+            font-size: 14px !important;
+        }
+        
+        .contact-item i {
+            width: 20px !important;
+            height: 20px !important;
+            color: #3b82f6 !important;
+            margin-top: 2px !important;
+            flex-shrink: 0 !important;
+        }
+        
+        .contact-item a {
+            color: #d1d5db !important;
+            text-decoration: none !important;
+            transition: color 0.2s ease !important;
+        }
+        
+        .contact-item a:hover {
+            color: white !important;
+        }
+        
+        .footer-column h4 {
+            font-size: 18px !important;
+            font-weight: 600 !important;
+            color: white !important;
+            margin-bottom: 24px !important;
+        }
+        
+        .footer-column ul {
+            list-style: none !important;
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 12px !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+        
+        .footer-column a {
+            color: #9ca3af !important;
+            text-decoration: none !important;
+            transition: all 0.2s ease !important;
+            font-size: 14px !important;
+        }
+        
+        .footer-column a:hover {
+            color: white !important;
+            transform: translateX(4px) !important;
+        }
+        
+        .footer-bottom {
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+            padding-top: 32px !important;
+            border-top: 1px solid #374151 !important;
+            flex-wrap: wrap !important;
+            gap: 16px !important;
+        }
+        
+        .footer-bottom-left {
+            display: flex !important;
+            align-items: center !important;
+            flex-wrap: wrap !important;
+        }
+        
+        .footer-bottom-left p {
+            color: #9ca3af !important;
+            font-size: 14px !important;
+            margin: 0 !important;
+        }
+        
+        .footer-bottom-right {
+            display: flex !important;
+            align-items: center !important;
+        }
+        
+        .footer-social {
+            display: flex !important;
+            gap: 12px !important;
+        }
+        
+        .social-link {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 40px !important;
+            height: 40px !important;
+            background: #374151 !important;
+            color: #9ca3af !important;
+            border-radius: 8px !important;
+            text-decoration: none !important;
+            transition: all 0.2s ease !important;
+            border: 1px solid #4b5563 !important;
+        }
+        
+        .social-link:hover {
+            background: #2563eb !important;
+            color: white !important;
+            transform: translateY(-2px) !important;
+        }
+        
+        .social-link svg {
+            width: 20px !important;
+            height: 20px !important;
+            fill: currentColor !important;
+        }
+        
+        /* BLOG PAGE STYLES */
+        .blog-page {
+            padding: 80px 0 !important;
+            background: #f8fafc !important;
+        }
+        
+        .blog-posts {
+            max-width: 900px !important;
+            margin: 0 auto !important;
+            padding: 0 24px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 32px !important;
+        }
+        
+        .blog-post-card {
+            background: white !important;
+            border-radius: 16px !important;
+            padding: 40px !important;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06) !important;
+            border: 1px solid #e5e7eb !important;
+            transition: all 0.3s ease !important;
+            position: relative !important;
+        }
+        
+        .blog-post-card:hover {
+            transform: translateY(-4px) !important;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+        }
+        
+        .blog-post-header h2 {
+            font-size: 28px !important;
+            font-weight: 700 !important;
+            color: #1f2937 !important;
+            margin-bottom: 16px !important;
+            line-height: 1.3 !important;
+        }
+        
+        .blog-post-header h2 a {
+            color: #1f2937 !important;
+            text-decoration: none !important;
+            transition: color 0.2s ease !important;
+        }
+        
+        .blog-post-header h2 a:hover {
+            color: #2563eb !important;
+        }
+        
+        .blog-post-meta {
+            display: flex !important;
+            flex-wrap: wrap !important;
+            gap: 16px !important;
+            align-items: center !important;
+            margin-bottom: 24px !important;
+            padding-bottom: 24px !important;
+            border-bottom: 1px solid #e5e7eb !important;
+        }
+        
+        .blog-post-meta .author {
+            font-weight: 600 !important;
+            color: #2563eb !important;
+            font-size: 14px !important;
+        }
+        
+        .blog-post-meta .date {
+            color: #6b7280 !important;
+            font-size: 14px !important;
+        }
+        
+        .categories {
+            display: flex !important;
+            gap: 8px !important;
+            flex-wrap: wrap !important;
+        }
+        
+        .category {
+            background: #eff6ff !important;
+            color: #2563eb !important;
+            font-size: 12px !important;
+            font-weight: 500 !important;
+            padding: 4px 12px !important;
+            border-radius: 20px !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.05em !important;
+        }
+        
+        .blog-post-excerpt p {
+            font-size: 16px !important;
+            line-height: 1.6 !important;
+            color: #6b7280 !important;
+            margin-bottom: 24px !important;
+        }
+        
+        .blog-post-footer {
+            display: flex !important;
+            justify-content: flex-start !important;
+        }
+        
+        .read-more {
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+            padding: 12px 24px !important;
+            background: #2563eb !important;
+            color: white !important;
+            font-size: 14px !important;
+            font-weight: 600 !important;
+            text-decoration: none !important;
+            border-radius: 8px !important;
+            transition: all 0.2s ease !important;
+        }
+        
+        .read-more:hover {
+            background: #1d4ed8 !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3) !important;
+        }
+        
+        .no-posts {
+            text-align: center !important;
+            padding: 80px 24px !important;
+            background: white !important;
+            border-radius: 16px !important;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+        }
+        
+        .no-posts p {
+            font-size: 18px !important;
+            color: #6b7280 !important;
+            margin: 0 !important;
+        }
+
+        /* FAQ PAGE STYLES */
+        .faq-content {
+            max-width: 900px !important;
+            margin: 0 auto !important;
+            padding: 0 24px !important;
+        }
+        
+        .faq-item {
+            margin-bottom: 40px !important;
+            padding-bottom: 32px !important;
+            border-bottom: 1px solid #e5e7eb !important;
+            background: white !important;
+            border-radius: 12px !important;
+            padding: 32px !important;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+            border: 1px solid #e5e7eb !important;
+        }
+        
+        .faq-item:last-child {
+            border-bottom: none !important;
+            margin-bottom: 0 !important;
+        }
+        
+        .faq-question {
+            font-size: 20px !important;
+            font-weight: 700 !important;
+            color: #1f2937 !important;
+            margin-bottom: 16px !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 12px !important;
+            line-height: 1.3 !important;
+        }
+        
+        .faq-answer {
+            font-size: 16px !important;
+            line-height: 1.6 !important;
+            color: #6b7280 !important;
+            margin: 0 !important;
+        }
+        
+        .faq-answer p {
+            margin-bottom: 16px !important;
+            color: #6b7280 !important;
+            line-height: 1.6 !important;
+        }
+        
+        .faq-answer p:last-child {
+            margin-bottom: 0 !important;
+        }
+        
+        .faq-answer a {
+            color: #2563eb !important;
+            text-decoration: underline !important;
+        }
+        
+        .faq-answer a:hover {
+            color: #1d4ed8 !important;
+        }
+        
+        .faq-content i {
+            width: 20px !important;
+            height: 20px !important;
+            flex-shrink: 0 !important;
+            color: #2563eb !important;
+        }
+        
+        /* HERO SECTIONS - ALL PAGES */
+        .hero {
+            position: relative !important;
+            min-height: 60vh !important;
+            display: block !important;
+            background: linear-gradient(135deg, 
+                var(--primary-600) 0%, 
+                var(--secondary-600) 25%, 
+                var(--primary-700) 50%,
+                var(--secondary-700) 75%,
+                var(--primary-800) 100%) !important;
+            color: white !important;
+            overflow: hidden !important;
+            padding: 80px 24px !important;
+            text-align: center !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+            align-items: center !important;
+        }
+        
+        .hero * {
+            box-sizing: border-box !important;
+        }
+        
+        .hero-container {
+            position: relative !important;
+            max-width: 1200px !important;
+            margin: 0 auto !important;
+            padding: 0 24px !important;
+            z-index: 2 !important;
+            text-align: center !important;
+            width: 100% !important;
+        }
+        
+        .hero h1 {
+            font-family: 'Inter', sans-serif !important;
+            font-size: clamp(36px, 5vw, 72px) !important;
+            font-weight: 900 !important;
+            line-height: 1.1 !important;
+            letter-spacing: -0.02em !important;
+            margin: 0 auto 24px auto !important;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.8) 100%) !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            background-clip: text !important;
+            display: block !important;
+            width: 100% !important;
+            max-width: 1200px !important;
+            text-align: center !important;
+            clear: both !important;
+            float: none !important;
+        }
+        
+        .hero p {
+            font-size: 20px !important;
+            line-height: 1.6 !important;
+            color: rgba(255, 255, 255, 0.85) !important;
+            max-width: 800px !important;
+            margin: 0 auto 48px auto !important;
+            font-weight: 400 !important;
+            display: block !important;
+            width: 100% !important;
+            text-align: center !important;
+            clear: both !important;
+            float: none !important;
+        }
+        
+        /* HERO STATS */
+        .hero-stat {
+            text-align: center !important;
+            padding: 24px !important;
+            background: rgba(255, 255, 255, 0.05) !important;
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            border-radius: 16px !important;
+            transition: all 0.3s ease !important;
+        }
+        
+        .hero-stat:hover {
+            background: rgba(255, 255, 255, 0.1) !important;
+            transform: translateY(-4px) !important;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1) !important;
+        }
+        
+        .hero-stat-number {
+            display: block !important;
+            font-size: 36px !important;
+            font-weight: 900 !important;
+            color: white !important;
+            margin-bottom: 8px !important;
+        }
+        
+        .hero-stat-label {
+            display: block !important;
+            font-size: 18px !important;
+            font-weight: 600 !important;
+            color: rgba(255, 255, 255, 0.9) !important;
+            margin-bottom: 4px !important;
+        }
+        
+        .hero-stat-detail {
+            font-size: 14px !important;
+            color: rgba(255, 255, 255, 0.7) !important;
+        }
+        
+        /* HERO BADGE */
+        .hero-badge {
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+            padding: 12px 24px !important;
+            background: rgba(255, 255, 255, 0.1) !important;
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            border-radius: 50px !important;
+            font-size: 14px !important;
+            font-weight: 500 !important;
+            color: rgba(255, 255, 255, 0.9) !important;
+            margin-bottom: 32px !important;
+            transition: all 0.3s ease !important;
+        }
+        
+        .hero-badge:hover {
+            background: rgba(255, 255, 255, 0.15) !important;
+            transform: translateY(-2px) !important;
+        }
+        
+        /* TRUST FEATURES */
+        .trust-features {
+            display: flex !important;
+            flex-wrap: wrap !important;
+            justify-content: center !important;
+            gap: 24px !important;
+        }
+        
+        .trust-feature {
+            display: flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+            font-size: 14px !important;
+            color: rgba(255, 255, 255, 0.8) !important;
+        }
+        
+        .trust-feature i {
+            width: 16px !important;
+            height: 16px !important;
+            color: #4ade80 !important;
+        }
+        
+        /* PAGE-SPECIFIC CONTENT */
+        .mission-vision, .values, .founder, .technology-overview, .architecture, .performance {
+            padding: 80px 0 !important;
+            background: white !important;
+        }
+        
+        .mission-vision h2, .values h2, .founder h2, .technology-overview h2, .architecture h2, .performance h2 {
+            font-size: 48px !important;
+            font-weight: 800 !important;
+            line-height: 1.2 !important;
+            color: #1f2937 !important;
+            margin-bottom: 24px !important;
+            text-align: center !important;
+        }
+        
+        .mission-vision p, .values p, .founder p, .technology-overview p, .architecture p, .performance p {
+            font-size: 18px !important;
+            line-height: 1.6 !important;
+            color: #6b7280 !important;
+            margin-bottom: 24px !important;
+        }
+        
+        /* FEATURE CARDS */
+        .feature-card, .value-card, .tech-card {
+            background: white !important;
+            border-radius: 16px !important;
+            padding: 32px !important;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06) !important;
+            border: 1px solid #e5e7eb !important;
+            transition: all 0.3s ease !important;
+            position: relative !important;
+        }
+        
+        .feature-card:hover, .value-card:hover, .tech-card:hover {
+            transform: translateY(-8px) !important;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+        }
+        
+        /* FOUNDER PROFILE */
+        .founder-profile {
+            max-width: 800px !important;
+            margin: 0 auto !important;
+        }
+        
+        .founder-content {
+            display: grid !important;
+            grid-template-columns: 200px 1fr !important;
+            gap: 32px !important;
+            align-items: start !important;
+        }
+        
+        .founder-image img {
+            width: 100% !important;
+            height: auto !important;
+            border-radius: 12px !important;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+        }
+        
+        .founder-info h3 {
+            font-size: 24px !important;
+            font-weight: 700 !important;
+            color: #1f2937 !important;
+            margin-bottom: 8px !important;
+        }
+        
+        .founder-title {
+            font-size: 16px !important;
+            color: #2563eb !important;
+            font-weight: 600 !important;
+            margin-bottom: 16px !important;
+        }
+        
+        .founder-bio {
+            font-size: 16px !important;
+            line-height: 1.6 !important;
+            color: #6b7280 !important;
+            margin-bottom: 24px !important;
+        }
+        
+        /* CONTACT FORMS */
+        .contact-form {
+            background: white !important;
+            border-radius: 16px !important;
+            padding: 40px !important;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+            border: 1px solid #e5e7eb !important;
+        }
+        
+        .form-group {
+            margin-bottom: 24px !important;
+        }
+        
+        .form-group label {
+            display: block !important;
+            font-size: 14px !important;
+            font-weight: 600 !important;
+            color: #374151 !important;
+            margin-bottom: 8px !important;
+        }
+        
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100% !important;
+            padding: 12px 16px !important;
+            border: 1px solid #d1d5db !important;
+            border-radius: 8px !important;
+            font-size: 16px !important;
+            transition: border-color 0.2s ease !important;
+        }
+        
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            outline: none !important;
+            border-color: #2563eb !important;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1) !important;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 36px !important;
+            }
+            
+            .value-content {
+                grid-template-columns: 1fr !important;
+                gap: 40px !important;
+            }
+            
+            .value-metrics {
+                grid-template-columns: 1fr !important;
+            }
+            
+            .capabilities-grid, .cards-grid, .features-grid, .products-grid {
+                grid-template-columns: 1fr !important;
+                gap: 24px !important;
+            }
+            
+            .button-group {
+                flex-direction: column !important;
+                align-items: center !important;
+            }
+            
+            .btn {
+                width: 100% !important;
+                max-width: 300px !important;
+                justify-content: center !important;
+            }
+            
+            .footer-main {
+                grid-template-columns: 1fr !important;
+                gap: 32px !important;
+            }
+            
+            .footer-links {
+                grid-template-columns: 1fr !important;
+                gap: 24px !important;
+            }
+            
+            .footer-bottom {
+                flex-direction: column !important;
+                text-align: center !important;
+                gap: 24px !important;
+            }
+            
+            .footer-bottom-left {
+                justify-content: center !important;
+            }
+            
+            .faq-content {
+                padding: 0 16px !important;
+            }
+            
+            .faq-item {
+                padding: 24px !important;
+                margin-bottom: 24px !important;
+            }
+            
+            .faq-question {
+                font-size: 18px !important;
+            }
+            
+            .blog-posts {
+                padding: 0 16px !important;
+                gap: 24px !important;
+            }
+            
+            .blog-post-card {
+                padding: 24px !important;
+            }
+            
+            .blog-post-header h2 {
+                font-size: 24px !important;
+            }
+            
+            .blog-post-meta {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 12px !important;
+            }
+            
+            .read-more {
+                width: 100% !important;
+                justify-content: center !important;
+            }
+            
+            .hero h1 {
+                font-size: clamp(28px, 8vw, 48px) !important;
+                margin-bottom: 16px !important;
+            }
+            
+            .hero > h1 {
+                padding: 0 16px !important;
+            }
+            
+            .hero p, .hero .subtitle {
+                font-size: 18px !important;
+                margin-bottom: 32px !important;
+            }
+            
+            .hero > p {
+                padding: 0 16px !important;
+            }
+            
+            .trust-features {
+                flex-direction: column !important;
+                align-items: center !important;
+            }
+            
+            .founder-content {
+                grid-template-columns: 1fr !important;
+                gap: 24px !important;
+                text-align: center !important;
+            }
+            
+            .mission-vision h2, .values h2, .founder h2, .technology-overview h2, .architecture h2, .performance h2 {
+                font-size: 32px !important;
+            }
+        }
+    </style>
     <!-- Using a specific versioned CDN for Lucide icons -->
     <script src="https://cdn.jsdelivr.net/npm/lucide-static@0.269.0/dist/umd/lucide.min.js"></script>
-    <!-- Add Google Fonts for Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <!-- Add Google Fonts for Inter and JetBrains Mono -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Favicon and meta tags -->
+    <link rel="icon" type="image/png" href="/assets/images/multikernel-logo.png">
+    <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}Enterprise Linux Kernel Solutions - Multikernel Technologies delivers highly-customized and well-tuned Linux kernels for different business services.{% endif %}">
+    <meta name="keywords" content="Linux kernel, enterprise solutions, cloud computing, performance optimization, multikernel technology">
+    <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
+    <meta property="og:description" content="{% if page.description %}{{ page.description }}{% else %}Enterprise Linux Kernel Solutions for optimal performance and reliability.{% endif %}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+    <meta property="og:image" content="{{ site.url }}/assets/images/multikernel-logo.png">
 </head>
 <body>
-    <header>
-        <div class="header-container">
-            <div class="logo-container">
-                <img src="/assets/images/multikernel-logo.png" alt="Multikernel Technologies Logo" class="logo">
-                <a href="/" class="company-name">Multikernel Technologies</a>
+    <!-- WORKING HEADER -->
+    <header style="position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; width: 100% !important; height: 70px !important; background: white !important; border-bottom: 2px solid #2563eb !important; box-shadow: 0 4px 6px rgba(0,0,0,0.1) !important; z-index: 999999 !important; display: block !important;">
+        <div style="max-width: 1200px !important; margin: 0 auto !important; padding: 0 24px !important; height: 70px !important; display: flex !important; align-items: center !important; justify-content: space-between !important;">
+            <div style="display: flex !important; align-items: center !important; gap: 12px !important;">
+                <img src="/assets/images/multikernel-logo.png" alt="Multikernel Technologies Logo" style="height: 40px !important; width: auto !important;">
+                <a href="/" style="font-size: 20px !important; font-weight: 700 !important; color: #1e293b !important; text-decoration: none !important;">Multikernel Technologies</a>
             </div>
             
-            <nav>
-                <div class="nav-links">
-                    <a href="/" {% if page.url == "/" %}class="active"{% endif %}>Home</a>
-                    <a href="/about.html" {% if page.url == "/about.html" %}class="active"{% endif %}>About</a>
-                    <a href="/technology.html" {% if page.url == "/technology.html" %}class="active"{% endif %}>Technology</a>
-                    <a href="/roadmap.html" {% if page.url == "/roadmap.html" %}class="active"{% endif %}>Roadmap</a>
-                    <a href="/faq.html" {% if page.url == "/faq.html" %}class="active"{% endif %}>FAQ</a>
-                    <a href="/blog/" {% if page.url == "/blog/" %}class="active"{% endif %}>Blog</a>
-                    <a href="https://github.com/multikernel" target="_blank">
-                        <i data-lucide="github"></i>
-                        GitHub
-                    </a>
-                    <a href="/contact.html" {% if page.url == "/contact.html" %}class="active"{% endif %}>
-                        <i data-lucide="mail"></i>
-                        Contact
-                    </a>
-                </div>
+            <nav style="display: flex !important; align-items: center !important; gap: 8px !important;">
+                <a href="/" style="padding: 10px 16px !important; font-size: 14px !important; font-weight: 500 !important; color: {% if page.url == '/' %}#2563eb{% else %}#64748b{% endif %} !important; text-decoration: none !important; border-radius: 8px !important; {% if page.url == '/' %}background: #eff6ff !important;{% endif %}">Home</a>
+                <a href="/about.html" style="padding: 10px 16px !important; font-size: 14px !important; font-weight: 500 !important; color: {% if page.url == '/about.html' %}#2563eb{% else %}#64748b{% endif %} !important; text-decoration: none !important; border-radius: 8px !important; {% if page.url == '/about.html' %}background: #eff6ff !important;{% endif %}">About</a>
+                <a href="/technology.html" style="padding: 10px 16px !important; font-size: 14px !important; font-weight: 500 !important; color: {% if page.url == '/technology.html' %}#2563eb{% else %}#64748b{% endif %} !important; text-decoration: none !important; border-radius: 8px !important; {% if page.url == '/technology.html' %}background: #eff6ff !important;{% endif %}">Technology</a>
+                <a href="/roadmap.html" style="padding: 10px 16px !important; font-size: 14px !important; font-weight: 500 !important; color: {% if page.url == '/roadmap.html' %}#2563eb{% else %}#64748b{% endif %} !important; text-decoration: none !important; border-radius: 8px !important; {% if page.url == '/roadmap.html' %}background: #eff6ff !important;{% endif %}">Roadmap</a>
+                <a href="/faq.html" style="padding: 10px 16px !important; font-size: 14px !important; font-weight: 500 !important; color: {% if page.url == '/faq.html' %}#2563eb{% else %}#64748b{% endif %} !important; text-decoration: none !important; border-radius: 8px !important; {% if page.url == '/faq.html' %}background: #eff6ff !important;{% endif %}">FAQ</a>
+                <a href="/blog/" style="padding: 10px 16px !important; font-size: 14px !important; font-weight: 500 !important; color: {% if page.url == '/blog/' %}#2563eb{% else %}#64748b{% endif %} !important; text-decoration: none !important; border-radius: 8px !important; {% if page.url == '/blog/' %}background: #eff6ff !important;{% endif %}">Blog</a>
+                <a href="https://github.com/multikernel" target="_blank" style="padding: 10px 16px !important; font-size: 14px !important; font-weight: 500 !important; color: #64748b !important; text-decoration: none !important; border-radius: 8px !important;">GitHub</a>
+                <a href="/contact.html" style="background: #2563eb !important; color: white !important; font-weight: 600 !important; padding: 10px 20px !important; border-radius: 8px !important; text-decoration: none !important; font-size: 14px !important;">Contact</a>
             </nav>
+
+            <!-- Mobile menu button -->
+            <button class="mobile-menu-toggle" aria-label="Toggle mobile menu" style="display: none !important;">
+                <span style="width: 20px; height: 2px; background: #64748b; margin: 2px 0; display: block;"></span>
+                <span style="width: 20px; height: 2px; background: #64748b; margin: 2px 0; display: block;"></span>
+                <span style="width: 20px; height: 2px; background: #64748b; margin: 2px 0; display: block;"></span>
+            </button>
         </div>
     </header>
     
@@ -43,67 +1018,103 @@
         {{ content }}
     </main>
 
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Company</h3>
-                    <ul>
-                        <li><a href="/about.html">About Us</a></li>
-                        <li><a href="/roadmap.html">Roadmap</a></li>
-                        <li><a href="/blog/">Blog</a></li>
-                        <li><a href="/contact.html">Contact</a></li>
-                    </ul>
+    <!-- Enterprise-grade footer -->
+    <footer class="enterprise-footer">
+        <div class="footer-container">
+            <!-- Main footer content -->
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <img src="/assets/images/multikernel-logo.png" alt="Multikernel Technologies" class="footer-logo-img">
+                        <div class="footer-brand-info">
+                            <h3>Multikernel Technologies</h3>
+                            <p>Enterprise Linux Solutions</p>
+                        </div>
+                    </div>
+                    <p class="footer-description">
+                        Leading provider of highly-customized and well-tuned Linux kernel solutions for enterprise environments. Delivering optimal performance, security, and operational efficiency.
+                    </p>
+                    <div class="footer-contact-info">
+                        <div class="contact-item">
+                            <i data-lucide="map-pin"></i>
+                            <span>99 S Almaden Blvd, Suite 600<br>San Jose, CA 95113</span>
+                        </div>
+                        <div class="contact-item">
+                            <i data-lucide="mail"></i>
+                            <a href="mailto:contact@multikernel.io">contact@multikernel.io</a>
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="footer-section">
-                    <h3>Technology</h3>
-                    <ul>
-                        <li><a href="/technology.html">Technology Overview</a></li>
-                        <li><a href="/faq.html">FAQ</a></li>
-                        <li><a href="https://github.com/multikernel" target="_blank">GitHub</a></li>
-                        <li><a href="#docs">Documentation</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Solutions</h3>
-                    <ul>
-                        <li><a href="/#products">KernelForge Enterprise</a></li>
-                        <li><a href="/#products">KernelOptimize Cloud</a></li>
-                        <li><a href="/contact.html">Custom Solutions</a></li>
-                        <li><a href="/contact.html">Consulting Services</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Contact Info</h3>
-                    <p>99 S Almaden Blvd, Suite 600<br>
-                    San Jose, CA 95113</p>
-                    <p><a href="mailto:contact@multikernel.io">contact@multikernel.io</a></p>
+
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="/about.html">About Us</a></li>
+                            <li><a href="/roadmap.html">Roadmap</a></li>
+                            <li><a href="/blog/">Blog</a></li>
+                            <li><a href="/contact.html">Contact</a></li>
+                            <li><a href="/contact.html">Careers</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Solutions</h4>
+                        <ul>
+                            <li><a href="/#products">KernelForge Enterprise</a></li>
+                            <li><a href="/#products">KernelOptimize Cloud</a></li>
+                            <li><a href="/contact.html">Custom Solutions</a></li>
+                            <li><a href="/contact.html">Consulting Services</a></li>
+                            <li><a href="/technology.html">Technology Overview</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="/faq.html">FAQ</a></li>
+                            <li><a href="#docs">Documentation</a></li>
+                            <li><a href="https://github.com/multikernel" target="_blank">GitHub</a></li>
+                            <li><a href="/blog/">Technical Blog</a></li>
+                            <li><a href="/contact.html">Support</a></li>
+                        </ul>
+                    </div>
+
                 </div>
             </div>
             
+            <!-- Footer bottom -->
             <div class="footer-bottom">
-                <p>&copy; 2025 Multikernel Technologies, Inc. All rights reserved.</p>
-                <div class="footer-social">
-                    <a href="https://github.com/multikernel" target="_blank" aria-label="GitHub">
-                        <i data-lucide="github"></i>
-                    </a>
-                    <a href="https://www.linkedin.com/company/multikernel/" target="_blank" aria-label="LinkedIn">
-                        <i data-lucide="linkedin"></i>
-                    </a>
-                    <a href="https://www.youtube.com/@multikernel-tech" target="_blank" aria-label="YouTube">
-                        <i data-lucide="youtube"></i>
-                    </a>
+                <div class="footer-bottom-left">
+                    <p>&copy; 2025 Multikernel Technologies, Inc. All rights reserved.</p>
+                </div>
+                <div class="footer-bottom-right">
+                    <div class="footer-social">
+                        <a href="https://github.com/multikernel" target="_blank" aria-label="GitHub" class="social-link">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.linkedin.com/company/multikernel/" target="_blank" aria-label="LinkedIn" class="social-link">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.youtube.com/@multikernel-tech" target="_blank" aria-label="YouTube" class="social-link">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                            </svg>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </footer>
 
     <script>
-        // Ensure icons render properly with fallback
+        // Enhanced JavaScript for enterprise features
         document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Lucide icons
             try {
                 lucide.createIcons();
             } catch (e) {
@@ -112,6 +1123,59 @@
                     el.textContent = '•';
                 });
             }
+
+            // Mobile menu functionality
+            const mobileToggle = document.querySelector('.mobile-menu-toggle');
+            const mobileNav = document.querySelector('.mobile-nav');
+            const body = document.body;
+
+            if (mobileToggle && mobileNav) {
+                mobileToggle.addEventListener('click', function() {
+                    mobileNav.classList.toggle('active');
+                    mobileToggle.classList.toggle('active');
+                    body.classList.toggle('mobile-nav-open');
+                });
+
+                // Close mobile nav when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!mobileNav.contains(e.target) && !mobileToggle.contains(e.target)) {
+                        mobileNav.classList.remove('active');
+                        mobileToggle.classList.remove('active');
+                        body.classList.remove('mobile-nav-open');
+                    }
+                });
+            }
+
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Header scroll effect
+            let lastScrollTop = 0;
+            const header = document.querySelector('.header');
+            
+            window.addEventListener('scroll', function() {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                if (scrollTop > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+                
+                lastScrollTop = scrollTop;
+            });
         });
     </script>
 </body>
