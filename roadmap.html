@@ -4,113 +4,6 @@ title: "Multikernel System Design And Roadmap - Multikernel Technologies"
 permalink: /roadmap.html
 ---
 
-<style>
-/* Force left alignment for entire roadmap content */
-.roadmap-content {
-    text-align: left !important;
-}
-
-.roadmap-content * {
-    text-align: left !important;
-}
-
-/* Clean styling for summary */
-.roadmap-content .summary {
-    background: #f8f9fa;
-    padding: 1.5rem;
-    border-radius: 8px;
-    margin-bottom: 2rem;
-    border-left: 4px solid #007bff;
-    text-align: left !important;
-}
-
-.roadmap-content .summary strong {
-    color: #007bff;
-    font-weight: 600;
-}
-
-/* Clean, simple styling for all sections */
-.roadmap-content .section {
-    margin-bottom: 2.5rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid #e0e0e0;
-}
-
-.roadmap-content .section:last-child {
-    border-bottom: none;
-}
-
-.roadmap-content h2 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    text-align: left !important;
-}
-
-.roadmap-content h3 {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #333;
-    margin: 1.5rem 0 0.75rem 0;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    text-align: left !important;
-}
-
-.roadmap-content p {
-    font-size: 1rem;
-    line-height: 1.7;
-    color: #555;
-    margin-bottom: 1rem;
-    text-align: left !important;
-}
-
-.roadmap-content ul {
-    margin: 1rem 0;
-    padding-left: 1.5rem;
-}
-
-.roadmap-content li {
-    margin-bottom: 0.5rem;
-    color: #555;
-    line-height: 1.6;
-    text-align: left !important;
-}
-
-.roadmap-content .subsection,
-.roadmap-content .use-case,
-.roadmap-content .implementation-phase {
-    margin-bottom: 1.5rem;
-    padding-left: 1rem;
-}
-
-.roadmap-content .status {
-    font-style: italic;
-    color: #666;
-    margin-bottom: 0.75rem;
-    text-align: left !important;
-}
-
-.roadmap-content .objectives h5 {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #333;
-    margin: 0.75rem 0 0.5rem 0;
-    text-align: left !important;
-}
-
-.roadmap-content i {
-    width: 20px;
-    height: 20px;
-    flex-shrink: 0;
-    color: #007bff;
-}
-</style>
 
 <main style="margin-top: 0; padding-top: 0;">
     <section class="hero">
@@ -118,14 +11,15 @@ permalink: /roadmap.html
         <p>Our comprehensive plan for revolutionizing cloud operating systems through multikernel architecture.</p>
     </section>
 
-    <section class="info">
-        <div class="container">
-            <div class="roadmap-content">
-    <div class="summary">
-        <strong>Summary:</strong> The Multikernel project introduces a novel Linux operating system architecture that runs multiple Linux kernel instances without relying on virtualization, each core or core group runs dedicated kernel instances independently. This approach addresses scalability limitations in traditional monolithic and microkernel designs while providing superior performance isolation, elastic resource allocation, and zero-downtime upgrades.
-    </div>
+    <section class="content-page">
+        <div class="content-container">
+            <div class="content-card">
+                <div class="summary">
+                    <strong>Summary:</strong> The Multikernel project introduces a novel Linux operating system architecture that runs multiple Linux kernel instances without relying on virtualization, each core or core group runs dedicated kernel instances independently. This approach addresses scalability limitations in traditional monolithic and microkernel designs while providing superior performance isolation, elastic resource allocation, and zero-downtime upgrades.
+                </div>
+            </div>
 
-    <div class="section">
+            <div class="content-card">
         <h2><i data-lucide="compass"></i>1. Design Philosophy</h2>
         
         <div class="subsection">
@@ -147,9 +41,9 @@ permalink: /roadmap.html
             <h3><i data-lucide="recycle"></i>1.4 Infrastructure Reuse</h3>
             <p>The design should leverage existing kernel subsystems wherever possible, including kexec for kernel loading, CPU/memory hotplug for resource management, existing driver frameworks for I/O, and standard eBPF infrastructure for programmability.</p>
         </div>
-    </div>
+            </div>
 
-    <div class="section">
+            <div class="content-card">
         <h2><i data-lucide="target"></i>2. Target Use Cases</h2>
 
         <div class="use-case">
@@ -172,9 +66,9 @@ permalink: /roadmap.html
             <h3><i data-lucide="refresh-cw"></i>2.4 Zero-Downtime Kernel Upgrades</h3>
             <p>Supports seamless kernel updates by spawning new kernel instances with updated versions while gradually migrating workloads from old instances. This enables continuous system operation during security patches, feature updates, or configuration changes, addressing critical uptime requirements in production environments.</p>
         </div>
-    </div>
+            </div>
 
-    <div class="section">
+            <div class="content-card">
         <h2><i data-lucide="map"></i>3. Implementation Roadmap</h2>
 
         <div class="implementation-phase">
@@ -254,9 +148,9 @@ permalink: /roadmap.html
                 </ul>
             </div>
         </div>
-    </div>
+            </div>
 
-    <div class="conclusion">
+            <div class="content-card">
         <h2><i data-lucide="check-circle"></i>Conclusion</h2>
         <p>The Multikernel project represents a fundamental shift toward distributed kernel architectures that address the scalability and flexibility limitations of current systems. Success depends on careful implementation of the five-phase roadmap, with each phase building essential capabilities for the subsequent components. The emphasis on flexibility, choice, simplicity, and infrastructure reuse ensures the resulting system will provide practical benefits while maintaining compatibility with existing cloud computing ecosystems.</p>
             </div>
