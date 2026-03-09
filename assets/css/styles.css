@@ -650,7 +650,7 @@ body {
 
 /* ===== VALUE SECTION ===== */
 .value-section {
-    padding: var(--space-24) 0;
+    padding: var(--space-20) 0;
     background: var(--gray-50);
 }
 
