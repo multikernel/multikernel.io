@@ -60,6 +60,105 @@ layout: default
     text-decoration: underline;
 }
 
+/* Code blocks */
+.blog-content .highlighter-rouge {
+    margin: 1.5rem 0;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    border: 1px solid var(--gray-200);
+}
+
+.blog-content pre.highlight {
+    background: var(--gray-50);
+    color: #334155;
+    padding: 1.25rem 1.5rem;
+    overflow-x: auto;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    margin: 0;
+    border-radius: var(--radius-xl);
+}
+
+.blog-content pre.highlight code {
+    background: none;
+    color: inherit;
+    padding: 0;
+    font-size: inherit;
+    border: none;
+}
+
+.blog-content code {
+    background: var(--gray-50);
+    color: var(--primary-700);
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.9em;
+    border: 1px solid var(--gray-200);
+}
+
+/* Rouge syntax highlighting (light theme) */
+.highlight .c, .highlight .c1, .highlight .cm { color: #6b7280; font-style: italic; } /* comments */
+.highlight .k, .highlight .kd, .highlight .kn { color: #7c3aed; } /* keywords */
+.highlight .s, .highlight .s1, .highlight .s2 { color: #16a34a; } /* strings */
+.highlight .nb { color: #2563eb; } /* builtins */
+.highlight .nt { color: #2563eb; } /* tags/flags */
+.highlight .nv, .highlight .nf { color: #b45309; } /* variables, functions */
+.highlight .o { color: #64748b; } /* operators */
+.highlight .m, .highlight .mi, .highlight .mf { color: #d97706; } /* numbers */
+
+/* Tables */
+.blog-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    background: white;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+.blog-content thead th {
+    background: linear-gradient(135deg, var(--primary-600) 0%, var(--primary-700) 100%);
+    color: white;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 0.75rem 1.25rem;
+    text-align: left;
+    border-bottom: 2px solid var(--primary-700);
+}
+
+.blog-content tbody td {
+    padding: 0.75rem 1.25rem;
+    border-bottom: 1px solid var(--gray-200);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.blog-content tbody td:first-child {
+    font-weight: 600;
+    color: #1e293b;
+    background: var(--gray-50);
+}
+
+.blog-content tbody tr:hover {
+    background: #f8fafc;
+}
+
+.blog-content tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Highlight the last column (Lazy CMA) */
+.blog-content thead th:last-child {
+    background: linear-gradient(135deg, var(--primary-700) 0%, #1e40af 100%);
+}
+
+.blog-content tbody td:last-child {
+    background: #eff6ff;
+    font-weight: 600;
+    color: var(--primary-700);
+}
+
 @media (max-width: 768px) {
     .blog-container {
         margin: 1rem;
@@ -68,6 +167,20 @@ layout: default
     
     .blog-title {
         font-size: 2rem;
+    }
+
+    .blog-content table {
+        font-size: 0.85rem;
+    }
+
+    .blog-content thead th,
+    .blog-content tbody td {
+        padding: 0.5rem 0.75rem;
+    }
+
+    .blog-content pre.highlight {
+        font-size: 0.8rem;
+        padding: 1rem;
     }
 }
 </style>
