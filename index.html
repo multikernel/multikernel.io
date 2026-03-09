@@ -13,8 +13,8 @@ description: "The Multikernel split-kernel architecture offloads device drivers 
                 <span>Split-Kernel Architecture</span>
             </div>
 
-            <h1>The Foundation for Isolated, High-Performance Linux</h1>
-            <p class="subtitle">The Multikernel system offloads all device drivers and I/O processing to a dedicated kernel, enabling applications to run in isolated kernels on dedicated cores with performance indistinguishable from bare metal.</p>
+            <h1>One Machine. Many Kernels. Zero Compromise.</h1>
+            <p class="subtitle">The Multikernel system gives every application its own Linux kernel with dedicated cores and native hardware performance. Device drivers and I/O are offloaded to a separate kernel. No hypervisor. No virtualization overhead. No shared kernel attack surface.</p>
 
             <div class="button-group">
                 <a href="https://calendar.app.google/nc1upkqQoUeoukdD9" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
@@ -72,23 +72,43 @@ description: "The Multikernel split-kernel architecture offloads device drivers 
                 </div>
 
                 <div class="value-visual">
-                    <div class="performance-chart">
-                        <div class="chart-title">Traditional: One Kernel, All Contexts</div>
-                        <div class="chart-bars">
-                            <div class="chart-bar">
-                                <div class="bar-fill" style="height: 40%"></div>
-                                <div class="bar-label">App</div>
-                            </div>
-                            <div class="chart-bar">
-                                <div class="bar-fill" style="height: 30%"></div>
-                                <div class="bar-label">Syscall</div>
-                            </div>
-                            <div class="chart-bar">
-                                <div class="bar-fill multikernel" style="height: 30%"></div>
-                                <div class="bar-label">IRQ/softirq</div>
+                    <div class="split-diagram">
+                        <div class="diagram-side diagram-traditional">
+                            <div class="diagram-label">Traditional</div>
+                            <div class="diagram-box diagram-box-shared">
+                                <span class="diagram-tag">Single Kernel</span>
+                                <div class="diagram-items">
+                                    <span class="diagram-item item-app">App</span>
+                                    <span class="diagram-item item-driver">Drivers</span>
+                                    <span class="diagram-item item-driver">IRQs</span>
+                                </div>
+                                <div class="diagram-caption">All compete for the same cores</div>
                             </div>
                         </div>
-                        <div class="chart-improvement">Interrupts steal app CPU cycles</div>
+                        <div class="diagram-arrow">
+                            <i data-lucide="arrow-right"></i>
+                        </div>
+                        <div class="diagram-side diagram-multikernel">
+                            <div class="diagram-label">Split-Kernel</div>
+                            <div class="diagram-box diagram-box-app">
+                                <span class="diagram-tag">App-Kernel</span>
+                                <div class="diagram-items">
+                                    <span class="diagram-item item-app">App</span>
+                                    <span class="diagram-item item-app">App</span>
+                                    <span class="diagram-item item-app">App</span>
+                                </div>
+                                <div class="diagram-caption">Zero interrupts</div>
+                            </div>
+                            <div class="diagram-box diagram-box-device">
+                                <span class="diagram-tag">Device-Kernel</span>
+                                <div class="diagram-items">
+                                    <span class="diagram-item item-driver">Drivers</span>
+                                    <span class="diagram-item item-driver">IRQs</span>
+                                    <span class="diagram-item item-driver">I/O</span>
+                                </div>
+                                <div class="diagram-caption">Dedicated cores</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
