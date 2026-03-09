@@ -1,344 +1,290 @@
 ---
 layout: default
-title: "Multikernel Technology - Technical Deep Dive"
-description: "Deep dive into the technical architecture that powers the next generation of cloud operating systems with unprecedented performance, security, and resource efficiency."
+title: "Technology - Multikernel Technologies"
+description: "Technical overview of the multikernel architecture: multiple Linux kernels running simultaneously on bare metal, with dedicated resources and hardware-level isolation."
 permalink: /technology.html
 ---
 
 <main>
-    <!-- Technology Hero Section -->
+    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-container">
             <div class="hero-badge">
                 <i data-lucide="cpu"></i>
-                <span>Advanced Technology</span>
+                <span>Technology Overview</span>
             </div>
-            
-            <h1>Revolutionary Multikernel Architecture</h1>
-            <p class="subtitle">Discover the technical innovation that powers the next generation of enterprise cloud operating systems. Our multikernel architecture delivers unprecedented performance, security, and resource efficiency through scientifically-engineered kernel optimization.</p>
-            
-            <div class="hero-stats">
-                <div class="hero-stat">
-                    <span class="hero-stat-number">40%</span>
-                    <span class="hero-stat-label">Better Resource Utilization</span>
-                    <span class="hero-stat-detail">Compared to traditional VMs</span>
-                </div>
-                <div class="hero-stat">
-                    <span class="hero-stat-number">99.99%</span>
-                    <span class="hero-stat-label">Uptime Guarantee</span>
-                    <span class="hero-stat-detail">Enterprise SLA</span>
-                </div>
-                <div class="hero-stat">
-                    <span class="hero-stat-number">Zero</span>
-                    <span class="hero-stat-label">Downtime Updates</span>
-                    <span class="hero-stat-detail">Live kernel patching</span>
-                </div>
-            </div>
-            
+
+            <h1>Multiple Linux Kernels, One Machine</h1>
+            <p class="subtitle">Run independent Linux kernel instances simultaneously on bare metal. Each kernel gets dedicated CPUs, memory, and devices with native performance and no hypervisor overhead.</p>
+
             <div class="button-group">
-                <a href="/contact.html" class="btn btn-primary">
+                <a href="/getting-started.html" class="btn btn-primary">
                     <i data-lucide="rocket"></i>
-                    Start Technical Evaluation
+                    Get Started
                 </a>
-                <a href="/contact.html" class="btn btn-secondary">
-                    <i data-lucide="calendar"></i>
-                    Request Architecture Review
+                <a href="https://github.com/multikernel" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                    <i data-lucide="github"></i>
+                    View Source
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Technical Innovation Section -->
-    <section id="innovation" class="value-section">
+    <!-- Core Concept -->
+    <section id="concept" class="value-section">
         <div class="section-container">
             <div class="value-content">
                 <div class="value-text">
                     <div class="section-badge">
-                        <i data-lucide="lightbulb"></i>
-                        <span>Technical Innovation</span>
+                        <i data-lucide="layers"></i>
+                        <span>Core Concept</span>
                     </div>
-                    <h2 class="section-title">Revolutionizing Cloud Infrastructure Through Kernel Science</h2>
-                    <p class="section-subtitle">Our multikernel approach provides a groundbreaking solution to operating systems for cloud environments, systematically overcoming the fundamental limitations of traditional OS architectures, virtual machines, and containers.</p>
-                    
+                    <h2 class="section-title">Kernel-Level Isolation Without Virtualization</h2>
+                    <p class="section-subtitle">Traditional approaches force a choice: containers share a single kernel (weak isolation), or VMs add a hypervisor layer (performance overhead). Multikernel eliminates this tradeoff by running multiple Linux kernels directly on hardware.</p>
+
                     <div class="innovation-highlights">
-                        <div class="highlight-item">
-                            <div class="highlight-icon">
-                                <i data-lucide="trending-up"></i>
-                            </div>
-                            <div class="highlight-content">
-                                <h4>Performance Engineering</h4>
-                                <p>Scientifically-tuned kernel parameters deliver measurable performance improvements across diverse workloads.</p>
-                            </div>
-                        </div>
                         <div class="highlight-item">
                             <div class="highlight-icon">
                                 <i data-lucide="shield-check"></i>
                             </div>
                             <div class="highlight-content">
-                                <h4>Security Architecture</h4>
-                                <p>OS-level isolation and hardened kernel configurations provide enterprise-grade security boundaries.</p>
+                                <h4>Separate Kernels, Not Shared</h4>
+                                <p>Each workload runs in its own kernel instance. A kernel vulnerability in one instance cannot affect the others.</p>
                             </div>
                         </div>
                         <div class="highlight-item">
                             <div class="highlight-icon">
-                                <i data-lucide="cpu"></i>
+                                <i data-lucide="zap"></i>
                             </div>
                             <div class="highlight-content">
-                                <h4>Resource Optimization</h4>
-                                <p>Dynamic resource allocation and intelligent scheduling maximize hardware utilization efficiency.</p>
+                                <h4>Native Hardware Access</h4>
+                                <p>No hypervisor, no emulation layer. Kernels access CPUs, memory, NICs, and GPUs directly with zero virtualization overhead.</p>
+                            </div>
+                        </div>
+                        <div class="highlight-item">
+                            <div class="highlight-icon">
+                                <i data-lucide="settings"></i>
+                            </div>
+                            <div class="highlight-content">
+                                <h4>Per-Workload Kernel Configuration</h4>
+                                <p>Each kernel instance can be configured and tuned independently. A database gets an I/O-optimized kernel; a web server gets a network-optimized one.</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="value-visual">
                     <div class="architecture-preview">
-                        <div class="preview-title">Multikernel Architecture</div>
+                        <div class="preview-title">Architecture</div>
                         <div class="architecture-layers">
                             <div class="layer multikernel-layer">
-                                <div class="layer-label">Multikernel Layer</div>
+                                <div class="layer-label">Application Kernels</div>
                                 <div class="layer-features">
-                                    <span>Optimized Kernels</span>
-                                    <span>Dynamic Allocation</span>
-                                    <span>Zero Downtime</span>
+                                    <span>Web (Kernel 1)</span>
+                                    <span>DB (Kernel 2)</span>
+                                    <span>ML (Kernel 3)</span>
                                 </div>
                             </div>
                             <div class="layer hardware-layer">
-                                <div class="layer-label">Hardware Layer</div>
+                                <div class="layer-label">Bare Metal Hardware</div>
                                 <div class="layer-features">
-                                    <span>Direct Access</span>
-                                    <span>No Hypervisor</span>
-                                    <span>Native Performance</span>
+                                    <span>CPUs</span>
+                                    <span>Memory</span>
+                                    <span>NIC / GPU / NVMe</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="preview-benefit">Direct hardware access with intelligent optimization</div>
+                        <div class="preview-benefit">Each kernel owns its hardware resources directly</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Core Technologies Section -->
-    <section id="technologies">
+    <!-- How It Works -->
+    <section id="how-it-works">
         <div class="section-container">
             <div class="section-header">
                 <div class="section-badge">
-                    <i data-lucide="settings"></i>
-                    <span>Core Technologies</span>
+                    <i data-lucide="cog"></i>
+                    <span>Under the Hood</span>
                 </div>
-                <h2 class="section-title">Advanced Kernel Technologies</h2>
-                <p class="section-subtitle">Comprehensive suite of kernel optimization technologies designed to meet the demanding requirements of modern enterprise infrastructure.</p>
+                <h2 class="section-title">How It Works</h2>
+                <p class="section-subtitle">Built entirely on existing Linux infrastructure. No new OS, no custom hypervisor, no compatibility gaps.</p>
             </div>
-            
+
             <div class="technologies-grid">
                 <div class="technology-card primary">
                     <div class="tech-icon">
-                        <i data-lucide="zap"></i>
+                        <i data-lucide="play-circle"></i>
                     </div>
-                    <h3 class="tech-title">High Performance Computing</h3>
-                    <p class="tech-description">Near bare-metal performance with dynamic hardware resource allocation that adapts to your workload demands in real-time.</p>
-                    <div class="tech-specs">
-                        <div class="spec-item">
-                            <span class="spec-label">Latency Reduction:</span>
-                            <span class="spec-value">Up to 60%</span>
-                        </div>
-                        <div class="spec-item">
-                            <span class="spec-label">Throughput Increase:</span>
-                            <span class="spec-value">Up to 40%</span>
-                        </div>
-                        <div class="spec-item">
-                            <span class="spec-label">CPU Efficiency:</span>
-                            <span class="spec-value">99.5%</span>
-                        </div>
-                    </div>
+                    <h3 class="tech-title">Kernel Spawning via Kexec</h3>
+                    <p class="tech-description">New kernel instances are launched using Linux's kexec mechanism, extended to boot alongside the running kernel rather than replacing it. The spawned kernel starts on its assigned CPUs and memory, fully independent of the primary kernel.</p>
                 </div>
-                
+
                 <div class="technology-card">
                     <div class="tech-icon">
-                        <i data-lucide="shield"></i>
+                        <i data-lucide="sliders"></i>
                     </div>
-                    <h3 class="tech-title">Enhanced Security</h3>
-                    <p class="tech-description">OS-enforced isolation provides superior security boundaries compared to traditional virtualization approaches.</p>
-                    <div class="tech-specs">
-                        <div class="spec-item">
-                            <span class="spec-label">Isolation Level:</span>
-                            <span class="spec-value">Hardware-enforced</span>
-                        </div>
-                        <div class="spec-item">
-                            <span class="spec-label">Attack Surface:</span>
-                            <span class="spec-value">Minimized</span>
-                        </div>
-                        <div class="spec-item">
-                            <span class="spec-label">Compliance:</span>
-                            <span class="spec-value">SOC 2, ISO 27001</span>
-                        </div>
-                    </div>
+                    <h3 class="tech-title">Dynamic Resource Partitioning</h3>
+                    <p class="tech-description">CPUs, memory, and devices are assigned to kernel instances using Linux's standard hotplug interfaces. Resources can be rebalanced between kernels at runtime without rebooting or restarting applications.</p>
                 </div>
-                
+
                 <div class="technology-card">
                     <div class="tech-icon">
-                        <i data-lucide="settings"></i>
+                        <i data-lucide="hard-drive"></i>
                     </div>
-                    <h3 class="tech-title">Optimized Kernels</h3>
-                    <p class="tech-description">Application-optimized kernel instances deliver maximum efficiency for your specific use cases and workload patterns.</p>
-                    <div class="tech-specs">
-                        <div class="spec-item">
-                            <span class="spec-label">Customization:</span>
-                            <span class="spec-value">Workload-specific</span>
-                        </div>
-                        <div class="spec-item">
-                            <span class="spec-label">Optimization:</span>
-                            <span class="spec-value">AI-driven</span>
-                        </div>
-                        <div class="spec-item">
-                            <span class="spec-label">Updates:</span>
-                            <span class="spec-value">Live patching</span>
-                        </div>
-                    </div>
+                    <h3 class="tech-title">Hardware Queue Sharing</h3>
+                    <p class="tech-description">Modern NICs and SSDs expose multiple hardware queues. Each kernel instance gets exclusive access to specific queues, providing true hardware-level I/O isolation without SR-IOV or software bridges.</p>
                 </div>
-                
+
                 <div class="technology-card">
                     <div class="tech-icon">
-                        <i data-lucide="refresh-cw"></i>
+                        <i data-lucide="message-square"></i>
                     </div>
-                    <h3 class="tech-title">Zero Downtime Operations</h3>
-                    <p class="tech-description">Seamless updates and maintenance operations ensure continuous operation of mission-critical systems.</p>
-                    <div class="tech-specs">
-                        <div class="spec-item">
-                            <span class="spec-label">Uptime SLA:</span>
-                            <span class="spec-value">99.99%</span>
-                        </div>
-                        <div class="spec-item">
-                            <span class="spec-label">Update Method:</span>
-                            <span class="spec-value">Hot-swapping</span>
-                        </div>
-                        <div class="spec-item">
-                            <span class="spec-label">Recovery Time:</span>
-                            <span class="spec-value">&lt; 1 second</span>
-                        </div>
-                    </div>
+                    <h3 class="tech-title">Inter-Kernel Communication</h3>
+                    <p class="tech-description">Kernel instances communicate over shared memory using vsock, a standard Linux socket type. Applications use familiar socket APIs with no code changes required.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Architecture Section -->
-    <section id="features" class="how-it-works">
+    <!-- Comparison -->
+    <section id="comparison" class="how-it-works">
         <div class="section-container">
             <div class="section-header">
-                <h2 class="section-title">Multikernel Advantages</h2>
-                <p class="section-subtitle">While virtual machines add a heavy hypervisor layer and containers share a single kernel, our multikernel approach creates independent, specialized kernels that directly access hardware resources with minimal overhead.</p>
+                <h2 class="section-title">Multikernel vs. Alternatives</h2>
+                <p class="section-subtitle">Multikernel combines the isolation of VMs with the performance of bare metal and the flexibility of per-workload kernel customization.</p>
             </div>
-            
+
             <div class="diagram-container">
-                <img src="assets/images/comparison-architecture-diagrams.svg" alt="Multikernel Architecture Diagram" class="architecture-diagram">
+                <img src="assets/images/comparison-architecture-diagrams.svg" alt="Comparison of VM, Container, and Multikernel architectures" class="architecture-diagram">
             </div>
-            
-            <p class="approach-summary">Our approach combines the security of VMs with the performance of containers and the flexibility of custom kernels.</p>
-            
+
             <div class="comparison-table">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Feature</th>
-                        <th>VM</th>
-                        <th>Container</th>
-                        <th>Multikernel</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Resource Elasticity</td>
-                        <td>Rigid</td>
-                        <td>Partial</td>
-                        <td>Complete</td>
-                    </tr>
-                    <tr>
-                        <td>Performance Isolation</td>
-                        <td>High</td>
-                        <td>Low</td>
-                        <td>High</td>
-                    </tr>
-                    <tr>
-                        <td>Performance Overhead</td>
-                        <td>High</td>
-                        <td>Low</td>
-                        <td>Minimal</td>
-                    </tr>
-                    <tr>
-                        <td>Attack Surface</td>
-                        <td>Medium</td>
-                        <td>Large</td>
-                        <td>Minimal</td>
-                    </tr>
-                    <tr>
-                        <td>Kernel Customization</td>
-                        <td>Limited</td>
-                        <td>None</td>
-                        <td>Complete</td>
-                    </tr>
-                </tbody>
-            </table>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Capability</th>
+                            <th>Containers</th>
+                            <th>VMs</th>
+                            <th>Multikernel</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Isolation</td>
+                            <td>Shared kernel</td>
+                            <td>Full (hypervisor)</td>
+                            <td>Separate kernels</td>
+                        </tr>
+                        <tr>
+                            <td>Performance overhead</td>
+                            <td>Minimal</td>
+                            <td>5-20%</td>
+                            <td>None</td>
+                        </tr>
+                        <tr>
+                            <td>Kernel customization</td>
+                            <td>No</td>
+                            <td>Yes</td>
+                            <td>Yes, per workload</td>
+                        </tr>
+                        <tr>
+                            <td>Dynamic resource allocation</td>
+                            <td>Yes</td>
+                            <td>Limited</td>
+                            <td>Yes (CPU/memory hotplug)</td>
+                        </tr>
+                        <tr>
+                            <td>Zero-downtime kernel updates</td>
+                            <td>No</td>
+                            <td>With orchestration</td>
+                            <td>Yes (kernel live update)</td>
+                        </tr>
+                        <tr>
+                            <td>Attack surface per workload</td>
+                            <td>Full kernel</td>
+                            <td>Reduced</td>
+                            <td>Minimal (stripped kernel)</td>
+                        </tr>
+                        <tr>
+                            <td>Noisy neighbor effect</td>
+                            <td>Yes</td>
+                            <td>Reduced</td>
+                            <td>Eliminated</td>
+                        </tr>
+                        <tr>
+                            <td>Works inside cloud VMs</td>
+                            <td>Yes</td>
+                            <td>Requires nested virt</td>
+                            <td>Yes</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </section>
 
-    <!-- Technical Benefits Section -->
-    <section id="benefits">
+    <!-- Use Cases -->
+    <section id="use-cases">
         <div class="section-container">
             <div class="section-header">
-                <h2 class="section-title">Technical Benefits</h2>
-                <p class="section-subtitle">Multikernel Technologies delivers transformative technical advantages for enterprise and cloud infrastructure.</p>
+                <div class="section-badge">
+                    <i data-lucide="target"></i>
+                    <span>Applications</span>
+                </div>
+                <h2 class="section-title">Use Cases</h2>
+                <p class="section-subtitle">Multikernel is designed for workloads that need strong isolation, dedicated resources, and native hardware access.</p>
             </div>
-            
+
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <i data-lucide="trending-up"></i>
+                        <i data-lucide="server"></i>
                     </div>
-                    <h3 class="feature-title">Resource Efficiency</h3>
-                    <p class="feature-description">Up to 40% improved resource utilization through elastic resource allocation that adapts to real-time demands.</p>
+                    <h3 class="feature-title">Workload Isolation</h3>
+                    <p class="feature-description">Run mixed workloads on the same machine with kernel-level isolation. Each workload gets its own kernel, scheduler, and resources. No noisy neighbor effects.</p>
                 </div>
-                
+
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <i data-lucide="clock"></i>
+                        <i data-lucide="refresh-cw"></i>
                     </div>
-                    <h3 class="feature-title">Maximum Uptime</h3>
-                    <p class="feature-description">Near-zero downtime for critical applications with seamless kernel updates and maintenance operations.</p>
+                    <h3 class="feature-title">Zero-Downtime Kernel Updates</h3>
+                    <p class="feature-description">Boot a new kernel alongside the running one, migrate workloads over, then retire the old kernel. Roll back at any point if something goes wrong.</p>
                 </div>
-                
+
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <i data-lucide="shield-check"></i>
+                        <i data-lucide="brain"></i>
                     </div>
-                    <h3 class="feature-title">Confidential Computing</h3>
-                    <p class="feature-description">Enhanced confidential computing capabilities provide superior protection for sensitive workloads and data.</p>
+                    <h3 class="feature-title">AI Agent Sandboxing</h3>
+                    <p class="feature-description">Give each AI agent its own kernel with full GPU access and strong isolation. No virtualization layer between the agent and hardware. Works inside cloud VMs.</p>
                 </div>
-                
+
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <i data-lucide="bar-chart"></i>
+                        <i data-lucide="activity"></i>
                     </div>
-                    <h3 class="feature-title">Predictable Performance</h3>
-                    <p class="feature-description">Eliminate "noisy neighbor" issues with guaranteed performance isolation and dedicated resources.</p>
+                    <h3 class="feature-title">Kernel Fault Tolerance</h3>
+                    <p class="feature-description">Run a standby kernel that monitors the primary via heartbeat. If the primary crashes, the standby takes over its devices and resumes service in sub-second time.</p>
                 </div>
-                
+
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <i data-lucide="package"></i>
+                        <i data-lucide="box"></i>
                     </div>
-                    <h3 class="feature-title">Optimized Workloads</h3>
-                    <p class="feature-description">Purpose-built optimization for AI, HPC, and enterprise workloads with specialized kernel configurations.</p>
+                    <h3 class="feature-title">Docker Integration</h3>
+                    <p class="feature-description">Boot directly into Docker images with DAXFS sharing the container rootfs across kernel instances. No full OS per instance, just the kernel and your application.</p>
                 </div>
-                
+
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <i data-lucide="dollar-sign"></i>
+                        <i data-lucide="database"></i>
                     </div>
-                    <h3 class="feature-title">Cost Reduction</h3>
-                    <p class="feature-description">Reduce infrastructure costs through improved efficiency and elimination of virtualization overhead.</p>
+                    <h3 class="feature-title">CXL Memory Sharing</h3>
+                    <p class="feature-description">Share data across kernel instances or CXL-connected hosts through DAXFS, with lock-free concurrent access and a shared page cache in DAX memory.</p>
                 </div>
             </div>
         </div>
