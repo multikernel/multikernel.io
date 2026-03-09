@@ -4,154 +4,134 @@ title: "Frequently Asked Questions - Multikernel Technologies"
 permalink: /faq.html
 ---
 
-<style>
-.faq-content .faq-item {
-    margin-bottom: 2.5rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid #e0e0e0;
-}
-
-.faq-content .faq-item:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-    padding-bottom: 0;
-}
-
-.faq-content .faq-question {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-}
-
-.faq-content .faq-answer {
-    font-size: 1.1rem;
-    line-height: 1.7;
-    color: #555;
-    margin: 0;
-    text-align: left;
-    max-width: 100%;
-}
-
-.faq-content i {
-    width: 20px;
-    height: 20px;
-    flex-shrink: 0;
-    color: #007bff;
-}
-</style>
-
-<main style="margin-top: 0; padding-top: 0;">
+<main>
     <section class="hero">
         <div class="hero-container">
             <h1>Frequently Asked Questions</h1>
-            <p>Common questions about multikernel technology, architecture, and implementation.</p>
+            <p class="subtitle">Common questions about multikernel technology, architecture, and implementation.</p>
         </div>
     </section>
 
-    <section class="info">
-        <div class="container">
-            <div class="faq-content">
-    <div class="faq-item">
-        <div class="faq-question">
-            <i data-lucide="info"></i> What is multikernel anyway?
-        </div>
-        <p class="faq-answer">Multikernel is an architecture that runs multiple kernels in parallel without relying on virtualization. Unlike the <a href="https://www.sigops.org/s/conferences/sosp/2009/papers/baumann-sosp09.pdf" target="_blank" rel="noopener noreferrer">original academic definition</a> which treats machines as distributed systems with message-passing cores, our implementation focuses on practical kernel isolation and performance optimization.</p>
-    </div>
-    
-    <div class="faq-item">
-        <div class="faq-question">
-            <i data-lucide="help-circle"></i> How does multikernel differ from containers and VMs?
-        </div>
-        <p class="faq-answer">Unlike containers that share a kernel or VMs that add virtualization overhead, our multikernel architecture provides true kernel isolation with near bare-metal performance, dynamic resource allocation, and application-optimized environments.</p>
-    </div>
-    
-    <div class="faq-item">
-        <div class="faq-question">
-            <i data-lucide="cpu"></i> What types of workloads benefit most from multikernel?
-        </div>
-        <p class="faq-answer">High-performance computing, AI/ML frameworks, latency-sensitive services, and applications with strict security requirements gain the most advantage from our multikernel architecture.</p>
-    </div>
-    
-    <div class="faq-item">
-        <div class="faq-question">
-            <i data-lucide="layers"></i> Does multikernel work with existing infrastructure?
-        </div>
-        <p class="faq-answer">Yes, our solution is designed to integrate with standard cloud and on-premises infrastructure, providing a seamless transition path from traditional virtualization or container environments.</p>
-    </div>
-    
-    <div class="faq-item">
-        <div class="faq-question">
-            <i data-lucide="check-circle"></i> Is multikernel compatible with existing Linux applications?
-        </div>
-        <p class="faq-answer">Absolutely. Multikernel maintains 100% compatibility with existing Linux applications and system interfaces. Our implementation introduces only minimal, non-intrusive kernel modifications that preserve full API and ABI compatibility, ensuring your applications run unchanged without any modifications or performance degradation.</p>
-    </div>
-    
-    <div class="faq-item">
-        <div class="faq-question">
-            <i data-lucide="zap"></i> Why not use unikernels instead?
-        </div>
-        <p class="faq-answer">While unikernels eliminate syscall overhead, modern CPUs already provide highly optimized syscall performance, making this benefit marginal. Most unikernels still rely on virtualization layers, inheriting their performance penalties. Like unikernels, multikernel avoids a full OS by running applications and their necessary dependencies directly in initramfs, but delivers superior isolation and performance without virtualization overhead or the complexity of rebuilding applications for specialized kernel environments.</p>
-    </div>
-    
-    <div class="faq-item">
-        <div class="faq-question">
-            <i data-lucide="git-branch"></i> What's the difference with Jailhouse?
-        </div>
-        <p class="faq-answer"><a href="https://github.com/siemens/jailhouse" target="_blank" rel="noopener noreferrer">Jailhouse</a> only supports static partitioning, while multikernel provides dynamic resource allocation essential for modern cloud computing. Additionally, Jailhouse relies on traditional virtualization mechanisms like VMEXIT and SR-IOV. Multikernel avoids virtualization overhead entirely while maintaining compatibility with existing virtualization technologies when needed.</p>
-    </div>
-    
-    <div class="faq-item">
-        <div class="faq-question">
-            <i data-lucide="shuffle"></i> Why not static partitioning?
-        </div>
-        <p class="faq-answer">Dynamic resource allocation is essential for modern cloud computing. Static partitioning can be achieved as a special case of dynamic allocation when resources remain unchanged, but the reverse is not possible.</p>
-    </div>
-    
-    <div class="faq-item">
-        <div class="faq-question">
-            <i data-lucide="minus-circle"></i> Why not Directvisor or de-virtualization?
-        </div>
-        <p class="faq-answer"><a href="https://dl.acm.org/doi/10.1145/3381052.3381317" target="_blank" rel="noopener noreferrer">Directvisor</a> and similar de-virtualization approaches still fundamentally rely on virtualization infrastructure. From our perspective, virtualization followed by de-virtualization equals no virtualization—making it more efficient to eliminate virtualization layers entirely from the start rather than adding complexity to remove them later.</p>
-    </div>
-    
-    <div class="faq-item">
-        <div class="faq-question">
-            <i data-lucide="activity"></i> Does SR-IOV eliminate virtualization overhead?
-        </div>
-        <p class="faq-answer">No. While SR-IOV and hardware acceleration significantly reduce virtualization overhead, they cannot eliminate it entirely. VM exits, IOMMU translations, and hypervisor intervention for privileged operations still introduce measurable latency and CPU cycles. Multikernel bypasses these virtualization layers intentionally and completely, achieving near bare-metal performance without hardware acceleration dependencies.</p>
-    </div>
-    
-    <div class="faq-item">
-        <div class="faq-question">
-            <i data-lucide="settings"></i> What's wrong with SR-IOV?
-        </div>
-        <p class="faq-answer">Nothing is inherently wrong with SR-IOV—it's actually quite fast, and IOMMU overhead can be minimal when properly configured. However, VFs provide coarse-grained isolation mechanisms. Multikernel leverages hardware queues as more flexible and elastic resources, offering finer granularity and dynamic resource allocation compared to the static nature of VFs.</p>
-    </div>
-    
-    <div class="faq-item">
-        <div class="faq-question">
-            <i data-lucide="hard-drive"></i> Do multikernels share hardware resources?
-        </div>
-        <p class="faq-answer">No. Multikernels receive dedicated physical CPU cores without kernel context switching, leveraging the abundance of cores in modern servers (typically 256+ cores). For I/O hardware, we utilize hardware queues as more flexible and elastic resources for exclusive per-kernel allocation.</p>
-    </div>
-    
-    <div class="faq-item">
-        <div class="faq-question">
-            <i data-lucide="shield"></i> How does multikernel enhance security?
-        </div>
-        <p class="faq-answer">Our architecture provides hardware-enforced isolation between workloads, minimizes attack surfaces through tailored kernels, and offers enhanced confidential computing capabilities for sensitive data processing. By avoiding a full OS and running applications directly in initramfs, we further reduce the attack surface compared to traditional operating systems.</p>
-    </div>
-    
-    <div class="faq-item">
-        <div class="faq-question">
-            <i data-lucide="lock"></i> What is the trust model of multikernel?
-        </div>
-        <p class="faq-answer">Multikernel relies on kernel-enforced isolation, making the kernel itself the trust boundary. While a malicious kernel could potentially disrupt other kernels on the same node, this risk can be mitigated through kernel signing via kexec, kernel lockdown, and memory encryption using confidential computing technologies.</p>
+    <section class="content-page">
+        <div class="faq-content">
+
+            <!-- Overview -->
+            <h2 class="faq-category">Overview</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i data-lucide="info"></i> What is multikernel?
+                </div>
+                <p class="faq-answer">Multikernel is an architecture that runs multiple kernels in parallel without relying on virtualization. Unlike the <a href="https://www.sigops.org/s/conferences/sosp/2009/papers/baumann-sosp09.pdf" target="_blank" rel="noopener noreferrer">original academic definition</a> which treats machines as distributed systems with message-passing cores, our implementation focuses on practical kernel isolation and performance optimization.</p>
             </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i data-lucide="help-circle"></i> How does multikernel differ from containers and VMs?
+                </div>
+                <p class="faq-answer">Containers share a single kernel, which limits isolation. VMs provide isolation but add virtualization overhead. Multikernel provides true kernel-level isolation with near bare-metal performance and dynamic resource allocation, without the overhead of a hypervisor.</p>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i data-lucide="cpu"></i> What types of workloads benefit most?
+                </div>
+                <p class="faq-answer">High-performance computing, AI/ML training and inference, latency-sensitive services, and workloads with strict security or isolation requirements gain the most from multikernel architecture.</p>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i data-lucide="check-circle"></i> Is multikernel compatible with existing Linux applications?
+                </div>
+                <p class="faq-answer">Yes. Multikernel maintains full compatibility with existing Linux applications and system interfaces. Our implementation introduces only minimal, non-intrusive kernel modifications that preserve complete API and ABI compatibility. Your applications run unchanged.</p>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i data-lucide="layers"></i> Does multikernel work with existing infrastructure?
+                </div>
+                <p class="faq-answer">Yes. Multikernel integrates with standard cloud and on-premises infrastructure, providing a practical migration path from traditional virtualization or container environments.</p>
+            </div>
+
+            <!-- Architecture & Design -->
+            <h2 class="faq-category">Architecture & Design</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i data-lucide="hard-drive"></i> How does the split-kernel architecture handle hardware resources?
+                </div>
+                <p class="faq-answer">In our split-kernel architecture, the host kernel manages hardware and device processing, while application kernels run workloads with dedicated CPU cores and no kernel context switching. Hardware resources like I/O queues are allocated exclusively to each application kernel by the host kernel, providing both strong isolation and near bare-metal performance. Modern servers with 256+ cores make this dedicated allocation practical at scale.</p>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i data-lucide="shuffle"></i> Why dynamic resource allocation instead of static partitioning?
+                </div>
+                <p class="faq-answer">Modern cloud workloads require elasticity. Static partitioning can be achieved as a special case of dynamic allocation when resources remain unchanged, but the reverse is not possible. Dynamic allocation is essential for efficient resource utilization at scale.</p>
+            </div>
+
+            <!-- Comparisons -->
+            <h2 class="faq-category">How We Compare</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i data-lucide="zap"></i> Why not use unikernels?
+                </div>
+                <p class="faq-answer">Unikernels eliminate syscall overhead, but modern CPUs already provide highly optimized syscall performance, making this benefit marginal. Most unikernels still rely on virtualization layers, inheriting their performance penalties. Multikernel delivers superior isolation and performance without virtualization overhead or the need to rebuild applications for specialized kernel environments.</p>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i data-lucide="git-branch"></i> What is the difference from Jailhouse?
+                </div>
+                <p class="faq-answer"><a href="https://github.com/siemens/jailhouse" target="_blank" rel="noopener noreferrer">Jailhouse</a> only supports static partitioning and relies on traditional virtualization mechanisms like VMEXIT and SR-IOV. Multikernel provides dynamic resource allocation and avoids virtualization overhead entirely while maintaining compatibility with existing virtualization technologies when needed.</p>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i data-lucide="minus-circle"></i> Why not Directvisor or de-virtualization?
+                </div>
+                <p class="faq-answer"><a href="https://dl.acm.org/doi/10.1145/3381052.3381317" target="_blank" rel="noopener noreferrer">Directvisor</a> and similar de-virtualization approaches still fundamentally rely on virtualization infrastructure. Virtualization followed by de-virtualization equals no virtualization, making it more efficient to eliminate virtualization layers entirely from the start.</p>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i data-lucide="box"></i> Is nested virtualization a real problem?
+                </div>
+                <p class="faq-answer">Yes, and it is more common than many realize. Cloud providers run VMs for tenants, and those tenants often run their own VMs or containers with hypervisor-based isolation inside. Kubernetes nodes on cloud instances, CI/CD pipelines spinning up VMs, and security sandboxes all create nested virtualization in practice. Each layer multiplies overhead: additional VM exits, shadow page tables, and emulated I/O compound latency significantly. Multikernel eliminates this problem entirely by providing kernel-level isolation without any hypervisor, removing the need to nest virtualization layers in the first place.</p>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i data-lucide="activity"></i> Does SR-IOV eliminate virtualization overhead?
+                </div>
+                <p class="faq-answer">No. While SR-IOV and hardware acceleration significantly reduce virtualization overhead, they cannot eliminate it entirely. VM exits, IOMMU translations, and hypervisor intervention for privileged operations still introduce measurable latency. Multikernel bypasses these virtualization layers completely, achieving near bare-metal performance without hardware acceleration dependencies.</p>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i data-lucide="settings"></i> What about SR-IOV for I/O?
+                </div>
+                <p class="faq-answer">SR-IOV is fast and IOMMU overhead can be minimal when properly configured. However, VFs provide coarse-grained isolation mechanisms. Multikernel leverages hardware queues as more flexible and elastic resources, offering finer granularity and dynamic resource allocation compared to the static nature of VFs.</p>
+            </div>
+
+            <!-- Security -->
+            <h2 class="faq-category">Security & Trust</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i data-lucide="shield"></i> How does multikernel enhance security?
+                </div>
+                <p class="faq-answer">Our architecture provides hardware-enforced isolation between workloads, minimizes attack surfaces through tailored kernels, and supports confidential computing for sensitive data processing. By running applications directly in initramfs without a full OS, we further reduce the attack surface compared to traditional environments.</p>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i data-lucide="lock"></i> What is the trust model?
+                </div>
+                <p class="faq-answer">The kernel itself is the trust boundary. While a compromised kernel could potentially affect other kernels on the same node, this risk is mitigated through kernel signing via kexec, kernel lockdown, and memory encryption using confidential computing technologies.</p>
+            </div>
+
         </div>
     </section>
 </main>

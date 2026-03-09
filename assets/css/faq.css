@@ -55,13 +55,26 @@
 .faq-answer a {
     color: var(--gray-900);
     text-decoration: underline;
-    text-decoration-color: var(--primary-200);
+    text-decoration-color: var(--gray-300);
     text-underline-offset: 2px;
 }
 
 .faq-answer a:hover {
     color: var(--gray-700);
-    text-decoration-color: var(--primary-400);
+    text-decoration-color: var(--gray-500);
+}
+
+.faq-category {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--gray-900);
+    margin: var(--space-10) 0 var(--space-5) 0;
+    letter-spacing: -0.01em;
+}
+
+.faq-category:first-of-type {
+    margin-top: 0;
 }
 
 .faq-content i {
