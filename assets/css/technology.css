@@ -33,7 +33,7 @@
 .tech-icon {
     width: 48px;
     height: 48px;
-    background: var(--primary-700);
+    background: var(--gray-900);
     border-radius: var(--radius-lg);
     display: flex;
     align-items: center;
@@ -76,7 +76,7 @@
     padding: var(--space-3);
     background: var(--gray-50);
     border-radius: var(--radius-md);
-    border-left: 3px solid var(--primary-600);
+    border-left: 3px solid var(--gray-900);
 }
 
 .spec-label {
@@ -87,7 +87,7 @@
 
 .spec-value {
     font-weight: 700;
-    color: var(--primary-700);
+    color: var(--gray-900);
     font-size: var(--text-sm);
 }
 
@@ -152,13 +152,13 @@
 
 /* Highlight Multikernel column */
 .comparison-table th:last-child {
-    background: var(--primary-700);
+    background: var(--gray-800);
 }
 
 .comparison-table td:last-child {
-    background: var(--primary-25);
+    background: var(--gray-50);
     font-weight: 600;
-    color: var(--primary-700);
+    color: var(--gray-900);
 }
 
 /* Approach Summary */

@@ -265,8 +265,8 @@ body {
 }
 
 .nav-link.active {
-    color: var(--primary-700);
-    background: var(--primary-50);
+    color: var(--gray-900);
+    background: var(--gray-100);
     font-weight: 600;
 }
 
@@ -615,8 +615,8 @@ body {
     align-items: center;
     gap: var(--space-2);
     padding: var(--space-2) var(--space-4);
-    background: var(--primary-50);
-    color: var(--primary-700);
+    background: var(--gray-100);
+    color: var(--gray-700);
     font-size: var(--text-xs);
     font-weight: 600;
     border-radius: var(--radius-full);
@@ -710,7 +710,7 @@ body {
     display: inline-flex;
     align-items: center;
     gap: var(--space-2);
-    color: var(--primary-700);
+    color: var(--gray-900);
     text-decoration: none;
     font-weight: 600;
     font-size: var(--text-sm);
@@ -718,7 +718,7 @@ body {
 }
 
 .btn-link:hover {
-    color: var(--primary-800);
+    color: var(--gray-600);
 }
 
 .btn-link i {
@@ -825,7 +825,7 @@ body {
 .capability-icon {
     width: 48px;
     height: 48px;
-    background: var(--primary-700);
+    background: var(--gray-900);
     border-radius: var(--radius-lg);
     display: flex;
     align-items: center;
@@ -881,7 +881,7 @@ body {
 .feature-item i {
     width: 16px;
     height: 16px;
-    color: var(--primary-600);
+    color: var(--gray-900);
     flex-shrink: 0;
 }
 
@@ -957,7 +957,7 @@ body {
 .card-icon {
     width: 48px;
     height: 48px;
-    background: var(--primary-700);
+    background: var(--gray-900);
     border-radius: var(--radius-lg);
     display: flex;
     align-items: center;
@@ -985,7 +985,7 @@ body {
     display: inline-flex;
     align-items: center;
     gap: var(--space-2);
-    color: var(--primary-700);
+    color: var(--gray-900);
     font-weight: 600;
     font-size: var(--text-sm);
     text-decoration: none;
@@ -993,7 +993,7 @@ body {
 }
 
 .card-link:hover {
-    color: var(--primary-800);
+    color: var(--gray-600);
 }
 
 /* ===== FOOTER ===== */

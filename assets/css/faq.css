@@ -53,14 +53,14 @@
 }
 
 .faq-answer a {
-    color: var(--primary-700);
+    color: var(--gray-900);
     text-decoration: underline;
     text-decoration-color: var(--primary-200);
     text-underline-offset: 2px;
 }
 
 .faq-answer a:hover {
-    color: var(--primary-800);
+    color: var(--gray-700);
     text-decoration-color: var(--primary-400);
 }
 
@@ -68,7 +68,7 @@
     width: 18px;
     height: 18px;
     flex-shrink: 0;
-    color: var(--primary-600);
+    color: var(--gray-900);
 }
 
 /* Responsive */

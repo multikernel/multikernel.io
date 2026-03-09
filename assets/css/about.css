@@ -74,7 +74,7 @@
 
 .founder-title {
     font-size: var(--text-sm);
-    color: var(--primary-700);
+    color: var(--gray-900);
     font-weight: 600;
     margin-bottom: var(--space-4);
 }
@@ -121,7 +121,7 @@
 
 .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
     outline: none;
-    border-color: var(--primary-600);
+    border-color: var(--gray-900);
     box-shadow: 0 0 0 3px rgba(59, 91, 219, 0.08);
 }
 
