@@ -1,4 +1,4 @@
-/* ===== SHARED CONTENT PAGE STYLES (Blog, Roadmap, etc.) ===== */
+/* ===== SHARED CONTENT PAGE STYLES ===== */
 
 .content-page {
     padding: 80px 0;
@@ -6,54 +6,53 @@
 }
 
 .content-container {
-    max-width: 900px;
+    max-width: 860px;
     margin: 0 auto;
     padding: 0 var(--space-6);
     display: flex;
     flex-direction: column;
-    gap: var(--space-8);
+    gap: var(--space-6);
 }
 
 .content-card {
     background: white;
-    border-radius: var(--radius-2xl);
+    border-radius: var(--radius-xl);
     padding: var(--space-10);
-    box-shadow: var(--shadow-sm);
     border: 1px solid var(--gray-200);
-    transition: all var(--transition-base);
-    position: relative;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .content-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-xl);
+    border-color: var(--gray-300);
+    box-shadow: var(--shadow-sm);
 }
 
 .content-card h2 {
-    font-size: var(--text-3xl);
+    font-size: var(--text-2xl);
     font-weight: 700;
     color: var(--gray-900);
-    margin-bottom: var(--space-6);
+    margin-bottom: var(--space-5);
     line-height: var(--leading-tight);
     display: flex;
     align-items: center;
     gap: var(--space-3);
+    letter-spacing: -0.02em;
 }
 
 .content-card h3 {
-    font-size: var(--text-xl);
+    font-size: var(--text-lg);
     font-weight: 600;
     color: var(--gray-900);
-    margin: var(--space-6) 0 var(--space-3) 0;
+    margin: var(--space-5) 0 var(--space-3) 0;
     display: flex;
     align-items: center;
     gap: var(--space-2);
 }
 
 .content-card p {
-    font-size: var(--text-base);
+    font-size: var(--text-sm);
     line-height: var(--leading-relaxed);
-    color: var(--gray-700);
+    color: var(--gray-600);
     margin-bottom: var(--space-4);
 }
 
@@ -64,35 +63,36 @@
 
 .content-card li {
     margin-bottom: var(--space-2);
-    color: var(--gray-700);
+    color: var(--gray-600);
     line-height: var(--leading-relaxed);
+    font-size: var(--text-sm);
 }
 
 .content-card i {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     flex-shrink: 0;
     color: var(--primary-600);
 }
 
-/* Roadmap-specific content styles */
+/* Roadmap-specific styles */
 .content-card .summary {
     background: var(--gray-50);
-    padding: var(--space-6);
-    border-radius: var(--radius-xl);
-    margin-bottom: var(--space-6);
-    border-left: 4px solid var(--primary-600);
+    padding: var(--space-5);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--space-5);
+    border-left: 3px solid var(--primary-700);
 }
 
 .content-card .summary strong {
-    color: var(--primary-600);
+    color: var(--primary-700);
     font-weight: 600;
 }
 
 .content-card .subsection,
 .content-card .use-case,
 .content-card .implementation-phase {
-    margin-bottom: var(--space-6);
+    margin-bottom: var(--space-5);
     padding-left: var(--space-4);
 }
 
@@ -102,12 +102,13 @@
     margin-bottom: var(--space-3);
     background: var(--gray-50);
     padding: var(--space-3);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-md);
     border-left: 3px solid var(--amber-500);
+    font-size: var(--text-sm);
 }
 
 .content-card .objectives h5 {
-    font-size: var(--text-lg);
+    font-size: var(--text-base);
     font-weight: 600;
     color: var(--gray-900);
     margin: var(--space-3) 0 var(--space-2) 0;
@@ -119,25 +120,27 @@
     gap: var(--space-2);
     padding: var(--space-2) var(--space-4);
     background: var(--primary-50);
-    color: var(--primary-600);
-    font-size: var(--text-sm);
+    color: var(--primary-700);
+    font-size: var(--text-xs);
     font-weight: 600;
     border-radius: var(--radius-full);
     margin-bottom: var(--space-4);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
 }
 
-/* Responsive Design */
+/* Responsive */
 @media (max-width: 768px) {
     .content-container {
         padding: 0 var(--space-4);
-        gap: var(--space-6);
+        gap: var(--space-4);
     }
-    
+
     .content-card {
         padding: var(--space-6);
     }
-    
+
     .content-card h2 {
-        font-size: var(--text-2xl);
+        font-size: var(--text-xl);
     }
 }

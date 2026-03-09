@@ -10,36 +10,37 @@ permalink: /getting-started.html
 .gs-overview-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-6);
-    margin-bottom: var(--space-8);
+    gap: var(--space-4);
+    margin-bottom: var(--space-6);
 }
 .gs-overview-card {
     text-align: center;
-    padding: var(--space-6);
+    padding: var(--space-5);
     background: var(--gray-50);
-    border-radius: var(--radius-xl);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--gray-200);
 }
 .gs-overview-card .step-num {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
-    background: var(--primary-50);
-    color: var(--primary-600);
+    background: var(--gray-900);
+    color: white;
     font-weight: 700;
-    font-size: var(--text-sm);
+    font-size: var(--text-xs);
     margin-bottom: var(--space-3);
 }
 .gs-overview-card h3 {
-    font-size: var(--text-base);
-    font-weight: 600;
+    font-size: var(--text-sm);
+    font-weight: 700;
     color: var(--gray-900);
     margin-bottom: var(--space-1);
 }
 .gs-overview-card p {
-    font-size: var(--text-sm);
+    font-size: var(--text-xs);
     color: var(--gray-500);
     line-height: var(--leading-relaxed);
     margin: 0;
@@ -50,49 +51,50 @@ permalink: /getting-started.html
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 28px;
-    height: 28px;
+    width: 26px;
+    height: 26px;
     border-radius: 50%;
-    background: var(--primary-600);
+    background: var(--gray-900);
     color: white;
     font-weight: 700;
-    font-size: var(--text-sm);
+    font-size: var(--text-xs);
     flex-shrink: 0;
 }
 
 /* Code blocks */
 .content-card pre {
-    background: var(--gray-50);
-    border: 1px solid var(--gray-200);
-    border-radius: var(--radius-xl);
+    background: var(--gray-900);
+    border: none;
+    border-radius: var(--radius-lg);
     padding: var(--space-5) var(--space-6);
     overflow-x: auto;
     font-size: var(--text-sm);
     line-height: 1.7;
-    color: var(--gray-700);
+    color: var(--gray-300);
     margin: var(--space-4) 0;
 }
 .content-card pre code {
     font-family: 'JetBrains Mono', monospace;
+    color: var(--gray-300);
 }
 .content-card p code,
 .content-card li code {
-    background: var(--gray-50);
+    background: var(--gray-100);
     padding: 2px 6px;
-    border-radius: 4px;
+    border-radius: var(--radius-base);
     border: 1px solid var(--gray-200);
-    color: var(--primary-700);
+    color: var(--gray-800);
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.9em;
+    font-size: 0.88em;
 }
 
 /* Diagram */
 .gs-diagram {
     background: var(--gray-50);
     border: 1px solid var(--gray-200);
-    border-radius: var(--radius-xl);
-    padding: var(--space-6);
-    margin: var(--space-6) 0;
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+    margin: var(--space-5) 0;
     overflow-x: auto;
 }
 .gs-diagram pre {
@@ -103,35 +105,36 @@ permalink: /getting-started.html
     text-align: center;
     font-size: var(--text-sm);
     line-height: 1.5;
-    color: var(--gray-700);
+    color: var(--gray-600);
 }
 
 /* Comparison table */
 .gs-comparison {
     overflow-x: auto;
-    margin: var(--space-6) 0;
-    border-radius: var(--radius-xl);
-    box-shadow: var(--shadow-sm);
+    margin: var(--space-5) 0;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--gray-200);
 }
 .gs-comparison table {
     width: 100%;
     border-collapse: collapse;
-    font-size: var(--text-base);
+    font-size: var(--text-sm);
 }
 .gs-comparison thead th {
-    background: linear-gradient(135deg, var(--primary-600) 0%, var(--primary-700) 100%);
+    background: var(--gray-900);
     color: white;
     font-weight: 600;
     padding: var(--space-3) var(--space-4);
     text-align: left;
+    font-size: var(--text-sm);
 }
 .gs-comparison thead th:last-child {
-    background: linear-gradient(135deg, var(--primary-700) 0%, #1e40af 100%);
+    background: var(--primary-700);
 }
 .gs-comparison tbody td {
     padding: var(--space-3) var(--space-4);
     border-bottom: 1px solid var(--gray-200);
-    color: var(--gray-700);
+    color: var(--gray-600);
 }
 .gs-comparison tbody td:first-child {
     font-weight: 600;
@@ -152,7 +155,7 @@ permalink: /getting-started.html
 
 /* CTA card */
 .gs-cta {
-    background: linear-gradient(135deg, var(--primary-50) 0%, var(--gray-50) 100%);
+    background: var(--gray-50);
     text-align: center;
 }
 .gs-cta .button-group {
@@ -160,14 +163,15 @@ permalink: /getting-started.html
     gap: var(--space-3);
     justify-content: center;
     flex-wrap: wrap;
-    margin-top: var(--space-6);
+    margin-top: var(--space-5);
 }
 .gs-cta .btn-primary {
-    background: var(--primary-600);
+    background: var(--gray-900);
     color: white;
+    border-color: var(--gray-900);
 }
 .gs-cta .btn-primary:hover {
-    background: var(--primary-700);
+    background: var(--gray-800);
     color: white;
 }
 .gs-cta .btn-secondary {
