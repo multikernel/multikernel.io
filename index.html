@@ -1,226 +1,197 @@
 ---
 layout: default
-title: "Multikernel Technologies - Enterprise Linux Kernel Solutions"
-description: "Leading provider of highly-customized and well-tuned Linux kernel solutions for enterprise environments. Delivering optimal performance, security, and operational efficiency."
+title: "Multikernel Technologies - Split-Kernel Architecture for Linux"
+description: "Split-kernel architecture that separates application logic from device processing into independent Linux kernels. Zero interrupts on app cores, by design."
 ---
 
 <main>
-    <!-- Enterprise Hero Section -->
+    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-container">
             <div class="hero-badge">
-                <i data-lucide="award"></i>
-                <span>Enterprise Linux Solutions</span>
+                <i data-lucide="cpu"></i>
+                <span>Split-Kernel Architecture</span>
             </div>
-            
-            <h1>Enterprise Linux Kernel Solutions That Drive Performance</h1>
-            <p class="subtitle">Transform your infrastructure with highly-customized and scientifically-tuned Linux kernels. Multikernel Technologies delivers measurable performance improvements, enhanced security, and operational excellence for mission-critical enterprise environments.</p>
-            
-            <div class="hero-stats">
-                <div class="hero-stat">
-                    <span class="hero-stat-number">40%</span>
-                    <span class="hero-stat-label">Performance Improvement</span>
-                    <span class="hero-stat-detail">Average across deployments</span>
-                </div>
-                <div class="hero-stat">
-                    <span class="hero-stat-number">99.99%</span>
-                    <span class="hero-stat-label">Service Reliability</span>
-                    <span class="hero-stat-detail">SLA guarantee</span>
-                </div>
-                <div class="hero-stat">
-                    <span class="hero-stat-number">24/7</span>
-                    <span class="hero-stat-label">Expert Support</span>
-                    <span class="hero-stat-detail">Global coverage</span>
-                </div>
-            </div>
-            
+
+            <h1>The Separation Linux Always Wanted</h1>
+            <p class="subtitle">Give each application its own kernel on dedicated cores, with zero interrupts by design. A shared device-kernel handles all drivers and I/O on separate cores. No tuning, no isolcpus, no NAPI hacks. Multiple kernels doing what one kernel has been struggling to do alone.</p>
+
             <div class="button-group">
-                <a href="/contact.html" class="btn btn-primary">
+                <a href="/getting-started.html" class="btn btn-primary">
                     <i data-lucide="rocket"></i>
-                    Start Free Assessment
+                    Get Started
                 </a>
-                <a href="/contact.html" class="btn btn-secondary">
-                    <i data-lucide="calendar"></i>
-                    Schedule Demo
+                <a href="/technology.html" class="btn btn-secondary">
+                    <i data-lucide="cpu"></i>
+                    How It Works
                 </a>
             </div>
-            
+
             <div class="hero-trust">
-                <p class="trust-text">Built for enterprise-grade performance and reliability</p>
+                <p class="trust-text">100% open source, built on upstream Linux</p>
                 <div class="trust-features">
                     <div class="trust-feature">
+                        <i data-lucide="github"></i>
+                        <span>Open Source</span>
+                    </div>
+                    <div class="trust-feature">
                         <i data-lucide="shield-check"></i>
-                        <span>Enterprise Security</span>
+                        <span>Kernel-Level Isolation</span>
                     </div>
                     <div class="trust-feature">
-                        <i data-lucide="clock"></i>
-                        <span>99.99% Uptime</span>
+                        <i data-lucide="zap"></i>
+                        <span>Native Performance</span>
                     </div>
                     <div class="trust-feature">
-                        <i data-lucide="headphones"></i>
-                        <span>24/7 Support</span>
-                    </div>
-                    <div class="trust-feature">
-                        <i data-lucide="award"></i>
-                        <span>SOC 2 Compliant</span>
+                        <i data-lucide="refresh-cw"></i>
+                        <span>Zero-Downtime Updates</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Value Proposition Section -->
+    <!-- The Problem -->
     <section id="value-proposition" class="value-section">
         <div class="section-container">
             <div class="value-content">
                 <div class="value-text">
                     <div class="section-badge">
-                        <i data-lucide="target"></i>
-                        <span>Our Mission</span>
+                        <i data-lucide="alert-triangle"></i>
+                        <span>The Problem</span>
                     </div>
-                    <h2 class="section-title">Transforming Enterprise Infrastructure Through Kernel Innovation</h2>
-                    <p class="section-subtitle">We specialize in delivering highly-customized and scientifically-tuned Linux kernel solutions that optimize performance for specific business services and workloads, enabling enterprises to achieve unprecedented efficiency and reliability.</p>
-                    
-                    <div class="value-metrics">
-                        <div class="metric">
-                            <div class="metric-number">40%</div>
-                            <div class="metric-label">Performance Improvement</div>
-                        </div>
-                        <div class="metric">
-                            <div class="metric-number">99.99%</div>
-                            <div class="metric-label">Uptime Target</div>
-                        </div>
-                        <div class="metric">
-                            <div class="metric-number">24/7</div>
-                            <div class="metric-label">Technical Support</div>
-                        </div>
-                    </div>
-                    
+                    <h2 class="section-title">Your Application Is Sharing a CPU with Interrupt Handlers</h2>
+                    <p class="section-subtitle">In a traditional Linux kernel, application code, TCP stack processing, NIC driver interrupts, and NVMe completions all compete for the same cores. Softirqs steal cycles from your application under load. The Linux community has spent years building workarounds: isolcpus, irqaffinity, RPS/RFS, SO_BUSY_POLL, NAPI threaded mode. All are imperfect because within one kernel, bottom-half work can always sneak onto app cores.</p>
+
                     <div class="value-cta">
-                        <a href="/about.html" class="btn-link">
-                            Learn More About Our Approach
+                        <a href="/technology.html" class="btn-link">
+                            See the Split-Kernel Solution
                             <i data-lucide="arrow-right"></i>
                         </a>
                     </div>
                 </div>
-                
+
                 <div class="value-visual">
                     <div class="performance-chart">
-                        <div class="chart-title">Performance Improvement</div>
+                        <div class="chart-title">Traditional: One Kernel, All Contexts</div>
                         <div class="chart-bars">
                             <div class="chart-bar">
-                                <div class="bar-fill" style="height: 60%"></div>
-                                <div class="bar-label">Standard</div>
+                                <div class="bar-fill" style="height: 40%"></div>
+                                <div class="bar-label">App</div>
                             </div>
                             <div class="chart-bar">
-                                <div class="bar-fill multikernel" style="height: 100%"></div>
-                                <div class="bar-label">Multikernel</div>
+                                <div class="bar-fill" style="height: 30%"></div>
+                                <div class="bar-label">Syscall</div>
+                            </div>
+                            <div class="chart-bar">
+                                <div class="bar-fill multikernel" style="height: 30%"></div>
+                                <div class="bar-label">IRQ/softirq</div>
                             </div>
                         </div>
-                        <div class="chart-improvement">+40% Performance Gain</div>
+                        <div class="chart-improvement">Interrupts steal app CPU cycles</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Core Capabilities Section -->
+    <!-- Core Architecture -->
     <section id="capabilities">
         <div class="section-container">
             <div class="section-header">
                 <div class="section-badge">
-                    <i data-lucide="settings"></i>
-                    <span>Core Capabilities</span>
+                    <i data-lucide="layers"></i>
+                    <span>Split-Kernel Architecture</span>
                 </div>
-                <h2 class="section-title">Enterprise-Grade Linux Kernel Solutions</h2>
-                <p class="section-subtitle">Comprehensive kernel optimization services designed to meet the demanding requirements of modern enterprise infrastructure.</p>
+                <h2 class="section-title">Many App-Kernels, One Device-Kernel</h2>
+                <p class="section-subtitle">Each application gets its own app-kernel with dedicated cores and zero interrupts. A shared device-kernel handles all drivers, interrupts, and network stack on separate cores. Connected through shared memory.</p>
             </div>
-            
+
             <div class="cards-grid">
                 <div class="capability-card primary">
                     <div class="capability-icon">
-                        <i data-lucide="building-2"></i>
+                        <i data-lucide="monitor"></i>
                     </div>
-                    <h3 class="capability-title">Enterprise Architecture</h3>
-                    <p class="capability-description">Custom kernel configurations tailored to your specific business requirements, ensuring optimal performance and reliability for mission-critical applications.</p>
+                    <h3 class="capability-title">App-Kernels</h3>
+                    <p class="capability-description">Each application gets its own kernel running syscalls and VFS on dedicated cores. Zero interrupts, zero softirqs. Run as many as your workloads need.</p>
                     <div class="capability-features">
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>Custom kernel development</span>
+                            <span>Application userspace</span>
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>Performance optimization</span>
+                            <span>Syscall path and VFS</span>
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>Security hardening</span>
+                            <span>No interrupts, ever</span>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="capability-card">
                     <div class="capability-icon">
-                        <i data-lucide="cloud"></i>
+                        <i data-lucide="hard-drive"></i>
                     </div>
-                    <h3 class="capability-title">Cloud-Native Optimization</h3>
-                    <p class="capability-description">Automated kernel optimization services designed for modern cloud environments, delivering consistent performance at scale.</p>
+                    <h3 class="capability-title">Device-Kernel</h3>
+                    <p class="capability-description">A shared kernel that runs the TCP stack, NIC drivers, NVMe block layer, and all interrupt handlers. Serves every app-kernel through shared memory.</p>
                     <div class="capability-features">
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>Auto-scaling optimization</span>
+                            <span>TCP/IP stack and NAPI</span>
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>Container integration</span>
+                            <span>NIC and NVMe drivers</span>
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>Multi-cloud support</span>
+                            <span>All IRQs and softirqs</span>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="capability-card">
                     <div class="capability-icon">
-                        <i data-lucide="shield-check"></i>
+                        <i data-lucide="database"></i>
                     </div>
-                    <h3 class="capability-title">Security & Compliance</h3>
-                    <p class="capability-description">Advanced security features and compliance frameworks to protect your critical infrastructure and sensitive data.</p>
+                    <h3 class="capability-title">Shared Memory</h3>
+                    <p class="capability-description">Kernels communicate through DAXFS, a shared-memory filesystem with zero-copy data transfer. No network round trips, no serialization overhead.</p>
                     <div class="capability-features">
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>Zero-trust architecture</span>
+                            <span>Shared DRAM rings</span>
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>Compliance automation</span>
+                            <span>Lock-free coordination</span>
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>Threat detection</span>
+                            <span>Shared page cache</span>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="capability-card">
                     <div class="capability-icon">
-                        <i data-lucide="headphones"></i>
+                        <i data-lucide="refresh-cw"></i>
                     </div>
-                    <h3 class="capability-title">Expert Support</h3>
-                    <p class="capability-description">Comprehensive technical support and consulting services from our team of Linux kernel experts and system architects.</p>
+                    <h3 class="capability-title">Independent Lifecycle</h3>
+                    <p class="capability-description">Update the device-kernel without touching the app-kernel. Roll back a bad driver update without restarting your application.</p>
                     <div class="capability-features">
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>24/7 technical support</span>
+                            <span>Independent kernel updates</span>
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>Dedicated engineers</span>
+                            <span>Per-kernel fault isolation</span>
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>Training programs</span>
+                            <span>Rollback at any point</span>
                         </div>
                     </div>
                 </div>
@@ -228,220 +199,63 @@ description: "Leading provider of highly-customized and well-tuned Linux kernel 
         </div>
     </section>
 
-    <!-- Enterprise Solutions Section -->
-    <section id="products" class="products-section">
-        <div class="section-container">
-            <div class="section-header">
-                <div class="section-badge">
-                    <i data-lucide="package"></i>
-                    <span>Enterprise Solutions</span>
-                </div>
-                <h2 class="section-title">Tailored Linux Kernel Solutions for Every Enterprise Need</h2>
-                <p class="section-subtitle">From comprehensive enterprise deployments to cloud-native optimization, we deliver the right solution for your infrastructure requirements.</p>
-            </div>
-            
-            <div class="products-grid">
-                <!-- Enterprise Solution -->
-                <div class="product-card enterprise">
-                    <div class="product-header">
-                        <div class="product-icon">
-                            <i data-lucide="shield-check"></i>
-                        </div>
-                        <h3 class="product-title">KernelForge Enterprise</h3>
-                        <p class="product-subtitle">Complete enterprise kernel solution</p>
-                    </div>
-                    
-                    <div class="product-description">
-                        <p>Comprehensive enterprise solution offering fully customized Linux kernels, dedicated engineering support, and ongoing optimization services for large-scale deployments.</p>
-                    </div>
-                    
-                    <div class="product-features">
-                        <h4>Enterprise Features:</h4>
-                        <div class="feature-list">
-                            <div class="feature-item">
-                                <i data-lucide="check"></i>
-                                <span>Custom kernel development & tuning</span>
-                            </div>
-                            <div class="feature-item">
-                                <i data-lucide="check"></i>
-                                <span>24/7 dedicated technical support</span>
-                            </div>
-                            <div class="feature-item">
-                                <i data-lucide="check"></i>
-                                <span>Performance SLA guarantees</span>
-                            </div>
-                            <div class="feature-item">
-                                <i data-lucide="check"></i>
-                                <span>Dedicated engineering team</span>
-                            </div>
-                            <div class="feature-item">
-                                <i data-lucide="check"></i>
-                                <span>On-site consulting & training</span>
-                            </div>
-                            <div class="feature-item">
-                                <i data-lucide="check"></i>
-                                <span>Enterprise security compliance</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="product-pricing">
-                        <div class="price-label">Pricing</div>
-                        <div class="price-value">Contact Sales</div>
-                        <div class="price-detail">Custom enterprise pricing</div>
-                    </div>
-                    
-                    <div class="product-actions">
-                        <a href="/contact.html" class="btn btn-primary product-btn">
-                            <i data-lucide="calendar"></i>
-                            Schedule Consultation
-                        </a>
-                        <a href="/technology.html" class="btn-link">
-                            Learn More
-                            <i data-lucide="arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Cloud Solution -->
-                <div class="product-card cloud">
-                    <div class="product-header">
-                        <div class="product-icon">
-                            <i data-lucide="zap"></i>
-                        </div>
-                        <h3 class="product-title">KernelOptimize Cloud</h3>
-                        <p class="product-subtitle">Automated cloud optimization</p>
-                    </div>
-                    
-                    <div class="product-description">
-                        <p>Automated kernel optimization as a service, providing intelligent performance tuning and continuous optimization for cloud-native applications and infrastructure.</p>
-                    </div>
-                    
-                    <div class="product-features">
-                        <h4>Cloud Features:</h4>
-                        <div class="feature-list">
-                            <div class="feature-item">
-                                <i data-lucide="check"></i>
-                                <span>Automated optimization algorithms</span>
-                            </div>
-                            <div class="feature-item">
-                                <i data-lucide="check"></i>
-                                <span>Real-time performance monitoring</span>
-                            </div>
-                            <div class="feature-item">
-                                <i data-lucide="check"></i>
-                                <span>Multi-cloud platform support</span>
-                            </div>
-                            <div class="feature-item">
-                                <i data-lucide="check"></i>
-                                <span>Container & Kubernetes integration</span>
-                            </div>
-                            <div class="feature-item">
-                                <i data-lucide="check"></i>
-                                <span>API-driven configuration</span>
-                            </div>
-                            <div class="feature-item">
-                                <i data-lucide="check"></i>
-                                <span>Usage-based pricing model</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="product-pricing">
-                        <div class="price-label">Pricing</div>
-                        <div class="price-value">Contact Sales</div>
-                        <div class="price-detail">Usage-based pricing available</div>
-                    </div>
-                    
-                    <div class="product-actions">
-                        <a href="/contact.html" class="btn btn-primary product-btn">
-                            <i data-lucide="play"></i>
-                            Start Free Trial
-                        </a>
-                        <a href="/technology.html" class="btn-link">
-                            View Pricing
-                            <i data-lucide="arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="products-footer">
-                <div class="enterprise-cta">
-                    <div class="cta-content">
-                        <h3>Need a Custom Solution?</h3>
-                        <p>Our engineering team can develop tailored kernel solutions for your unique infrastructure requirements.</p>
-                    </div>
-                    <div class="cta-action">
-                        <a href="/contact.html" class="btn btn-secondary">
-                            <i data-lucide="users"></i>
-                            Contact Enterprise Sales
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Business Benefits Section -->
+    <!-- Why This Works -->
     <section id="benefits">
         <div class="section-container">
             <div class="section-header">
-                <h2 class="section-title">Business Impact</h2>
-                <p class="section-subtitle">Deliver measurable improvements to your organization's performance, security, and operational efficiency.</p>
+                <h2 class="section-title">Why This Works</h2>
+                <p class="section-subtitle">Linux already treats application code and interrupt processing as separate contexts. We make that separation physical, giving each application its own kernel on its own cores.</p>
             </div>
-            
+
             <div class="cards-grid">
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <i data-lucide="dollar-sign"></i>
+                        <i data-lucide="zap"></i>
                     </div>
-                    <h3 class="feature-title">Reduced Infrastructure Costs</h3>
-                    <p class="feature-description">Optimize resource utilization and reduce hardware requirements through intelligent kernel tuning, delivering significant cost savings.</p>
+                    <h3 class="feature-title">Predictable Latency</h3>
+                    <p class="feature-description">No interrupt can fire on an app core. No softirq can steal cycles. Your application gets deterministic CPU time without any kernel tuning.</p>
                 </div>
-                
+
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <i data-lucide="clock"></i>
+                        <i data-lucide="shield-check"></i>
                     </div>
-                    <h3 class="feature-title">Improved Service Reliability</h3>
-                    <p class="feature-description">Enhance system stability and uptime with purpose-built kernels designed for your specific workload requirements.</p>
+                    <h3 class="feature-title">Fault Isolation</h3>
+                    <p class="feature-description">A NIC driver crash takes down the device-kernel, not your application. The app-kernel keeps running while you recover or replace the device-kernel.</p>
                 </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i data-lucide="shield"></i>
-                    </div>
-                    <h3 class="feature-title">Enhanced Security Posture</h3>
-                    <p class="feature-description">Strengthen your security framework with hardened kernel configurations and reduced attack surfaces.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i data-lucide="gauge"></i>
-                    </div>
-                    <h3 class="feature-title">Superior Performance</h3>
-                    <p class="feature-description">Achieve optimal application performance through scientifically-tuned kernel parameters and configurations.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i data-lucide="users"></i>
-                    </div>
-                    <h3 class="feature-title">Expert Partnership</h3>
-                    <p class="feature-description">Leverage our deep Linux kernel expertise to accelerate your digital transformation initiatives.</p>
-                </div>
-                
+
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i data-lucide="settings"></i>
                     </div>
-                    <h3 class="feature-title">Operational Excellence</h3>
-                    <p class="feature-description">Streamline operations with automated optimization and comprehensive monitoring capabilities.</p>
+                    <h3 class="feature-title">No Configuration Required</h3>
+                    <p class="feature-description">No isolcpus, no irqaffinity, no RPS/RFS tuning. The bottom half cannot run on app cores because it is in a different kernel.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="box"></i>
+                    </div>
+                    <h3 class="feature-title">Docker Compatible</h3>
+                    <p class="feature-description">Boot directly into Docker images. DAXFS shares the container rootfs across kernel instances. Use your existing images and workflow.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="server"></i>
+                    </div>
+                    <h3 class="feature-title">Works in Cloud VMs</h3>
+                    <p class="feature-description">No hypervisor needed. No nested virtualization. Multikernel runs on bare metal or inside any cloud VM on AWS, GCP, or Azure.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="github"></i>
+                    </div>
+                    <h3 class="feature-title">100% Open Source</h3>
+                    <p class="feature-description">Built on upstream Linux. All kernel patches, DAXFS, and management tools are open source under GPL-2.0. No proprietary components.</p>
                 </div>
             </div>
         </div>
     </section>
-
-
 </main>

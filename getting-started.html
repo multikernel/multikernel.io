@@ -192,7 +192,7 @@ permalink: /getting-started.html
     <section class="hero">
         <div class="hero-container">
             <h1>Getting Started with Multikernel</h1>
-            <p class="subtitle">Run multiple Linux kernels simultaneously on the same machine. No hypervisor, no virtualization overhead, full hardware access.</p>
+            <p class="subtitle">Split your Linux kernel into independent instances for your application and device processing. No hypervisor, no virtualization overhead, full hardware access.</p>
             <div class="button-group">
                 <a href="https://github.com/multikernel/linux" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
                     <i data-lucide="github"></i>
@@ -233,7 +233,7 @@ permalink: /getting-started.html
             <!-- What is Multikernel -->
             <div class="content-card">
                 <h2><i data-lucide="layers"></i>What is Multikernel Linux?</h2>
-                <p>Multikernel runs multiple Linux kernels simultaneously on the same physical machine. Each kernel gets dedicated CPUs, memory, and devices. There is no hypervisor in the middle. Every kernel runs directly on hardware with native performance.</p>
+                <p>Multikernel splits the Linux kernel into independent instances running simultaneously on the same physical machine. Your application gets its own kernel with dedicated CPUs, memory, and zero interrupt interference. Device drivers and I/O processing run in a separate kernel on separate cores. No hypervisor, native performance.</p>
 
                 <div class="gs-diagram"><pre>
 ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐
@@ -246,7 +246,7 @@ permalink: /getting-started.html
 └─────────────────┘  └─────────────────┘  └─────────────────┘
                 </pre></div>
 
-                <p>Each workload runs inside its own kernel with a tailored configuration. A kernel exploit in one instance cannot affect the others. Resources can be rebalanced between kernels at runtime using standard Linux hotplug.</p>
+                <p>Each workload runs inside its own kernel with a tailored configuration, fully isolated from other instances. A driver crash or kernel exploit in one instance cannot affect the others. Resources can be rebalanced between kernels at runtime using standard Linux hotplug.</p>
 
                 <div class="gs-comparison">
                     <table>

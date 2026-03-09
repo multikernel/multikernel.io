@@ -1,7 +1,7 @@
 ---
 layout: default
-title: "Technology - Multikernel Technologies"
-description: "Technical overview of the multikernel architecture: multiple Linux kernels running simultaneously on bare metal, with dedicated resources and hardware-level isolation."
+title: "Technology - Split-Kernel Architecture"
+description: "Split-kernel architecture separates application logic from device processing into independent Linux kernels on dedicated cores. Zero interrupts on app cores, by design."
 permalink: /technology.html
 ---
 
@@ -14,8 +14,8 @@ permalink: /technology.html
                 <span>Technology Overview</span>
             </div>
 
-            <h1>Multiple Linux Kernels, One Machine</h1>
-            <p class="subtitle">Run independent Linux kernel instances simultaneously on bare metal. Each kernel gets dedicated CPUs, memory, and devices with native performance and no hypervisor overhead.</p>
+            <h1>Split-Kernel Architecture</h1>
+            <p class="subtitle">Separate application logic from device processing into independent Linux kernels. The app-kernel runs your code with zero interrupts. The device-kernel handles all I/O. Connected through shared memory.</p>
 
             <div class="button-group">
                 <a href="/getting-started.html" class="btn btn-primary">
@@ -36,38 +36,38 @@ permalink: /technology.html
             <div class="value-content">
                 <div class="value-text">
                     <div class="section-badge">
-                        <i data-lucide="layers"></i>
-                        <span>Core Concept</span>
+                        <i data-lucide="alert-triangle"></i>
+                        <span>The Problem</span>
                     </div>
-                    <h2 class="section-title">Kernel-Level Isolation Without Virtualization</h2>
-                    <p class="section-subtitle">Traditional approaches force a choice: containers share a single kernel (weak isolation), or VMs add a hypervisor layer (performance overhead). Multikernel eliminates this tradeoff by running multiple Linux kernels directly on hardware.</p>
+                    <h2 class="section-title">Interrupts Are Stealing Your Application's CPU</h2>
+                    <p class="section-subtitle">In a traditional Linux kernel, your application shares cores with the TCP stack, NIC drivers, NVMe completions, and every softirq handler. Under load, interrupt processing steals cycles from your application. The kernel community has spent years building workarounds.</p>
 
                     <div class="innovation-highlights">
                         <div class="highlight-item">
                             <div class="highlight-icon">
-                                <i data-lucide="shield-check"></i>
+                                <i data-lucide="x-circle"></i>
                             </div>
                             <div class="highlight-content">
-                                <h4>Separate Kernels, Not Shared</h4>
-                                <p>Each workload runs in its own kernel instance. A kernel vulnerability in one instance cannot affect the others.</p>
+                                <h4>isolcpus and irqaffinity</h4>
+                                <p>Pin interrupts to specific cores. But softirqs can still sneak onto app cores under load, and configuration is fragile.</p>
                             </div>
                         </div>
                         <div class="highlight-item">
                             <div class="highlight-icon">
-                                <i data-lucide="zap"></i>
+                                <i data-lucide="x-circle"></i>
                             </div>
                             <div class="highlight-content">
-                                <h4>Native Hardware Access</h4>
-                                <p>No hypervisor, no emulation layer. Kernels access CPUs, memory, NICs, and GPUs directly with zero virtualization overhead.</p>
+                                <h4>NAPI threaded mode and SO_BUSY_POLL</h4>
+                                <p>Move poll processing to threads or busy-wait in the application. Trading CPU for latency, still within the same kernel.</p>
                             </div>
                         </div>
                         <div class="highlight-item">
                             <div class="highlight-icon">
-                                <i data-lucide="settings"></i>
+                                <i data-lucide="x-circle"></i>
                             </div>
                             <div class="highlight-content">
-                                <h4>Per-Workload Kernel Configuration</h4>
-                                <p>Each kernel instance can be configured and tuned independently. A database gets an I/O-optimized kernel; a web server gets a network-optimized one.</p>
+                                <h4>RPS/RFS and XPS</h4>
+                                <p>Steer packets to specific cores. Helps with locality but cannot prevent interrupt coalescing or softirq bursts on the wrong core.</p>
                             </div>
                         </div>
                     </div>
@@ -75,27 +75,57 @@ permalink: /technology.html
 
                 <div class="value-visual">
                     <div class="architecture-preview">
-                        <div class="preview-title">Architecture</div>
+                        <div class="preview-title">Traditional: One Kernel</div>
                         <div class="architecture-layers">
                             <div class="layer multikernel-layer">
-                                <div class="layer-label">Application Kernels</div>
+                                <div class="layer-label">App (userspace)</div>
                                 <div class="layer-features">
-                                    <span>Web (Kernel 1)</span>
-                                    <span>DB (Kernel 2)</span>
-                                    <span>ML (Kernel 3)</span>
+                                    <span>syscall / VFS</span>
                                 </div>
                             </div>
                             <div class="layer hardware-layer">
-                                <div class="layer-label">Bare Metal Hardware</div>
+                                <div class="layer-label">Bottom Half (steals app CPU)</div>
                                 <div class="layer-features">
-                                    <span>CPUs</span>
-                                    <span>Memory</span>
-                                    <span>NIC / GPU / NVMe</span>
+                                    <span>TCP softirq</span>
+                                    <span>NIC hardirq</span>
+                                    <span>NVMe hardirq</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="preview-benefit">Each kernel owns its hardware resources directly</div>
+                        <div class="preview-benefit">All contexts compete for the same cores</div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Solution -->
+    <section id="solution">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i data-lucide="check-circle"></i>
+                    <span>The Solution</span>
+                </div>
+                <h2 class="section-title">Split the Kernel at the Interrupt Boundary</h2>
+                <p class="section-subtitle">Instead of tuning one kernel to keep interrupts away from your app, split them apart. Each application gets its own app-kernel with zero interrupts. A shared device-kernel handles all drivers and I/O processing on dedicated cores.</p>
+            </div>
+
+            <div class="technologies-grid">
+                <div class="technology-card primary">
+                    <div class="tech-icon">
+                        <i data-lucide="monitor"></i>
+                    </div>
+                    <h3 class="tech-title">App-Kernels</h3>
+                    <p class="tech-description">Each application gets its own kernel running syscalls and VFS on dedicated cores. Zero interrupts, ever. Run as many app-kernels as your workloads need.</p>
+                </div>
+
+                <div class="technology-card primary">
+                    <div class="tech-icon">
+                        <i data-lucide="hard-drive"></i>
+                    </div>
+                    <h3 class="tech-title">Device-Kernel</h3>
+                    <p class="tech-description">A shared kernel that runs the TCP stack, NIC driver, NVMe block layer, and all interrupt handlers. All I/O processing is contained here, serving every app-kernel through shared memory.</p>
                 </div>
             </div>
         </div>
@@ -140,10 +170,10 @@ permalink: /technology.html
 
                 <div class="technology-card">
                     <div class="tech-icon">
-                        <i data-lucide="message-square"></i>
+                        <i data-lucide="database"></i>
                     </div>
-                    <h3 class="tech-title">Inter-Kernel Communication</h3>
-                    <p class="tech-description">Kernel instances communicate over shared memory using vsock, a standard Linux socket type. Applications use familiar socket APIs with no code changes required.</p>
+                    <h3 class="tech-title">DAXFS Shared Memory</h3>
+                    <p class="tech-description">The app-kernel and device-kernel communicate through DAXFS, a filesystem built on shared DRAM with lock-free coordination. Zero-copy, no serialization, no network round trips.</p>
                 </div>
             </div>
         </div>
@@ -153,8 +183,8 @@ permalink: /technology.html
     <section id="comparison" class="how-it-works">
         <div class="section-container">
             <div class="section-header">
-                <h2 class="section-title">Multikernel vs. Alternatives</h2>
-                <p class="section-subtitle">Multikernel combines the isolation of VMs with the performance of bare metal and the flexibility of per-workload kernel customization.</p>
+                <h2 class="section-title">Split-Kernel vs. Existing Approaches</h2>
+                <p class="section-subtitle">What isolcpus, DPDK, and VMs are all trying to achieve, split-kernel does cleanly by design.</p>
             </div>
 
             <div class="diagram-container">
@@ -235,7 +265,7 @@ permalink: /technology.html
                     <span>Applications</span>
                 </div>
                 <h2 class="section-title">Use Cases</h2>
-                <p class="section-subtitle">Multikernel is designed for workloads that need strong isolation, dedicated resources, and native hardware access.</p>
+                <p class="section-subtitle">Split-kernel architecture is designed for workloads where interrupt jitter, I/O isolation, or independent kernel lifecycle matters.</p>
             </div>
 
             <div class="features-grid">
@@ -243,8 +273,8 @@ permalink: /technology.html
                     <div class="feature-icon">
                         <i data-lucide="server"></i>
                     </div>
-                    <h3 class="feature-title">Workload Isolation</h3>
-                    <p class="feature-description">Run mixed workloads on the same machine with kernel-level isolation. Each workload gets its own kernel, scheduler, and resources. No noisy neighbor effects.</p>
+                    <h3 class="feature-title">Latency-Sensitive Workloads</h3>
+                    <p class="feature-description">Trading systems, real-time analytics, and game servers where interrupt jitter is unacceptable. App cores never see an interrupt.</p>
                 </div>
 
                 <div class="feature-card">
