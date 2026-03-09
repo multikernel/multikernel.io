@@ -1,0 +1,397 @@
+---
+layout: default
+title: "Getting Started - Multikernel Technologies"
+description: "Get up and running with Multikernel Linux. Learn how to build, configure, and launch your first multikernel instance."
+permalink: /getting-started.html
+---
+
+<style>
+/* Overview step cards */
+.gs-overview-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+    margin-bottom: var(--space-8);
+}
+.gs-overview-card {
+    text-align: center;
+    padding: var(--space-6);
+    background: var(--gray-50);
+    border-radius: var(--radius-xl);
+}
+.gs-overview-card .step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--primary-50);
+    color: var(--primary-600);
+    font-weight: 700;
+    font-size: var(--text-sm);
+    margin-bottom: var(--space-3);
+}
+.gs-overview-card h3 {
+    font-size: var(--text-base);
+    font-weight: 600;
+    color: var(--gray-900);
+    margin-bottom: var(--space-1);
+}
+.gs-overview-card p {
+    font-size: var(--text-sm);
+    color: var(--gray-500);
+    line-height: var(--leading-relaxed);
+    margin: 0;
+}
+
+/* Step badge */
+.step-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--primary-600);
+    color: white;
+    font-weight: 700;
+    font-size: var(--text-sm);
+    flex-shrink: 0;
+}
+
+/* Code blocks */
+.content-card pre {
+    background: var(--gray-50);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-xl);
+    padding: var(--space-5) var(--space-6);
+    overflow-x: auto;
+    font-size: var(--text-sm);
+    line-height: 1.7;
+    color: var(--gray-700);
+    margin: var(--space-4) 0;
+}
+.content-card pre code {
+    font-family: 'JetBrains Mono', monospace;
+}
+.content-card p code,
+.content-card li code {
+    background: var(--gray-50);
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid var(--gray-200);
+    color: var(--primary-700);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9em;
+}
+
+/* Diagram */
+.gs-diagram {
+    background: var(--gray-50);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-xl);
+    padding: var(--space-6);
+    margin: var(--space-6) 0;
+    overflow-x: auto;
+}
+.gs-diagram pre {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    font-size: var(--text-sm);
+    line-height: 1.5;
+    color: var(--gray-700);
+}
+
+/* Comparison table */
+.gs-comparison {
+    overflow-x: auto;
+    margin: var(--space-6) 0;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-sm);
+}
+.gs-comparison table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--text-base);
+}
+.gs-comparison thead th {
+    background: linear-gradient(135deg, var(--primary-600) 0%, var(--primary-700) 100%);
+    color: white;
+    font-weight: 600;
+    padding: var(--space-3) var(--space-4);
+    text-align: left;
+}
+.gs-comparison thead th:last-child {
+    background: linear-gradient(135deg, var(--primary-700) 0%, #1e40af 100%);
+}
+.gs-comparison tbody td {
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 1px solid var(--gray-200);
+    color: var(--gray-700);
+}
+.gs-comparison tbody td:first-child {
+    font-weight: 600;
+    color: var(--gray-900);
+    background: var(--gray-50);
+}
+.gs-comparison tbody td:last-child {
+    color: var(--primary-700);
+    font-weight: 600;
+    background: var(--primary-25);
+}
+.gs-comparison tbody tr:last-child td {
+    border-bottom: none;
+}
+.gs-comparison tbody tr:hover {
+    background: var(--gray-25);
+}
+
+/* CTA card */
+.gs-cta {
+    background: linear-gradient(135deg, var(--primary-50) 0%, var(--gray-50) 100%);
+    text-align: center;
+}
+.gs-cta .button-group {
+    display: flex;
+    gap: var(--space-3);
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: var(--space-6);
+}
+.gs-cta .btn-primary {
+    background: var(--primary-600);
+    color: white;
+}
+.gs-cta .btn-primary:hover {
+    background: var(--primary-700);
+    color: white;
+}
+.gs-cta .btn-secondary {
+    background: white;
+    color: var(--gray-700);
+    border-color: var(--gray-200);
+}
+.gs-cta .btn-secondary:hover {
+    background: var(--gray-50);
+    color: var(--gray-900);
+    border-color: var(--gray-300);
+}
+
+@media (max-width: 768px) {
+    .gs-overview-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+<main style="margin-top: 0; padding-top: 0;">
+    <section class="hero">
+        <div class="hero-container">
+            <h1>Getting Started with Multikernel</h1>
+            <p class="subtitle">Run multiple Linux kernels simultaneously on the same machine. No hypervisor, no virtualization overhead, full hardware access.</p>
+            <div class="button-group">
+                <a href="https://github.com/multikernel/linux" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                    <i data-lucide="github"></i>
+                    View on GitHub
+                </a>
+                <a href="/technology.html" class="btn btn-secondary">
+                    <i data-lucide="cpu"></i>
+                    Learn the Architecture
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-page">
+        <div class="content-container">
+
+            <!-- Overview -->
+            <div class="content-card">
+                <div class="gs-overview-grid">
+                    <div class="gs-overview-card">
+                        <div class="step-num">1</div>
+                        <h3>Build the Kernel</h3>
+                        <p>Clone and compile the multikernel-enabled Linux kernel</p>
+                    </div>
+                    <div class="gs-overview-card">
+                        <div class="step-num">2</div>
+                        <h3>Configure Boot</h3>
+                        <p>Reserve a memory pool for spawned kernel instances</p>
+                    </div>
+                    <div class="gs-overview-card">
+                        <div class="step-num">3</div>
+                        <h3>Launch Instances</h3>
+                        <p>Use kerf to create, configure, and run kernel instances</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- What is Multikernel -->
+            <div class="content-card">
+                <h2><i data-lucide="layers"></i>What is Multikernel Linux?</h2>
+                <p>Multikernel runs multiple Linux kernels simultaneously on the same physical machine. Each kernel gets dedicated CPUs, memory, and devices. There is no hypervisor in the middle. Every kernel runs directly on hardware with native performance.</p>
+
+                <div class="gs-diagram"><pre>
+┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐
+│   Web Server    │  │    Database     │  │   ML Training   │
+├─────────────────┤  ├─────────────────┤  ├─────────────────┤
+│  Linux Kernel   │  │  Linux Kernel   │  │  Linux Kernel   │
+│  (Web-tuned)    │  │  (I/O-optimized)│  │  (GPU-optimized)│
+├─────────────────┤  ├─────────────────┤  ├─────────────────┤
+│   CPU + NIC     │  │   CPU + NVMe    │  │   CPU + GPU     │
+└─────────────────┘  └─────────────────┘  └─────────────────┘
+                </pre></div>
+
+                <p>Each workload runs inside its own kernel with a tailored configuration. A kernel exploit in one instance cannot affect the others. Resources can be rebalanced between kernels at runtime using standard Linux hotplug.</p>
+
+                <div class="gs-comparison">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Containers</th>
+                                <th>VMs</th>
+                                <th>Multikernel</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Isolation</td>
+                                <td>Shared kernel</td>
+                                <td>Full (hypervisor)</td>
+                                <td>Separate kernels</td>
+                            </tr>
+                            <tr>
+                                <td>Performance</td>
+                                <td>Near-native</td>
+                                <td>5-20% overhead</td>
+                                <td>Native</td>
+                            </tr>
+                            <tr>
+                                <td>Kernel customization</td>
+                                <td>No</td>
+                                <td>Yes</td>
+                                <td>Yes</td>
+                            </tr>
+                            <tr>
+                                <td>Dynamic resources</td>
+                                <td>Yes</td>
+                                <td>Limited</td>
+                                <td>Yes (hotplug)</td>
+                            </tr>
+                            <tr>
+                                <td>Zero-downtime updates</td>
+                                <td>App only</td>
+                                <td>With orchestration</td>
+                                <td>Kernel + app</td>
+                            </tr>
+                            <tr>
+                                <td>Attack surface</td>
+                                <td>Full kernel</td>
+                                <td>Reduced</td>
+                                <td>Minimal per instance</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Step 1: Build -->
+            <div class="content-card">
+                <h2><i data-lucide="hammer"></i><span class="step-badge">1</span> Build the Multikernel Kernel</h2>
+                <p>Clone the multikernel-enabled Linux kernel and build it with multikernel support enabled.</p>
+                <pre><code>git clone https://github.com/multikernel/linux.git
+cd linux
+make menuconfig  # Enable CONFIG_MULTIKERNEL
+make -j$(nproc)
+sudo make install</code></pre>
+                <p>This produces a standard Linux kernel with multikernel extensions. It runs as your normal kernel and can additionally spawn new kernel instances.</p>
+            </div>
+
+            <!-- Step 2: Configure -->
+            <div class="content-card">
+                <h2><i data-lucide="settings"></i><span class="step-badge">2</span> Reserve a Memory Pool</h2>
+                <p>Spawned kernels need a contiguous memory region. Add the following kernel boot parameter to your bootloader (GRUB, systemd-boot, etc.):</p>
+                <pre><code>mkkernel_pool=1023M@0x40000000</code></pre>
+                <p>This reserves 1023 MB starting at physical address 0x40000000 for multikernel use. The primary kernel will not use this memory, and it becomes available for spawned instances.</p>
+                <p>Alternatively, you can use <a href="https://github.com/multikernel/lazy_cma" target="_blank" rel="noopener noreferrer">Lazy CMA</a> to allocate this memory at runtime without any boot parameter.</p>
+            </div>
+
+            <!-- Step 3: Install kerf -->
+            <div class="content-card">
+                <h2><i data-lucide="terminal"></i><span class="step-badge">3</span> Install the Kerf Management Tool</h2>
+                <p>Kerf is the command-line tool for creating, configuring, and managing multikernel instances. It handles resource allocation, kernel loading, and instance lifecycle.</p>
+                <pre><code>git clone https://github.com/multikernel/kerf.git
+cd kerf
+pip install -e .</code></pre>
+            </div>
+
+            <!-- Step 4: Launch -->
+            <div class="content-card">
+                <h2><i data-lucide="rocket"></i><span class="step-badge">4</span> Launch Your First Instance</h2>
+                <p>Initialize a resource pool, create an instance, and launch it:</p>
+                <pre><code># Initialize: make CPUs 4-31 available for spawned kernels
+kerf init --cpus=4-31
+
+# Create an instance with 4 CPUs and 2 GB of memory
+kerf create web-server --cpus=4-7 --memory=2GB
+
+# Load a kernel and initrd into the instance
+kerf load web-server --kernel=/boot/vmlinuz --initrd=/boot/initrd.img
+
+# Boot the instance
+kerf exec web-server</code></pre>
+                <p>The spawned kernel boots on the assigned CPUs and memory, running directly on hardware. It has its own scheduler, its own network stack, and its own view of the devices assigned to it.</p>
+            </div>
+
+            <!-- Key Components -->
+            <div class="content-card">
+                <h2><i data-lucide="box"></i>Key Components</h2>
+                <p>The multikernel stack is composed of several open-source projects:</p>
+                <ul>
+                    <li><strong><a href="https://github.com/multikernel/linux" target="_blank" rel="noopener noreferrer">Multikernel Linux</a></strong> - Kernel patches that enable spawning and managing additional kernel instances using the kexec subsystem</li>
+                    <li><strong><a href="https://github.com/multikernel/kerf" target="_blank" rel="noopener noreferrer">Kerf</a></strong> - Orchestration tool for managing kernel instances, resources, and lifecycle</li>
+                    <li><strong><a href="https://github.com/multikernel/daxfs" target="_blank" rel="noopener noreferrer">DAXFS</a></strong> - Shared filesystem across kernel instances using direct memory access, enabling shared container rootfs and zero-copy data sharing</li>
+                    <li><strong><a href="https://github.com/multikernel/lazy_cma" target="_blank" rel="noopener noreferrer">Lazy CMA</a></strong> - Runtime contiguous memory allocator, provides memory pools for spawned kernels without boot-time reservation</li>
+                </ul>
+            </div>
+
+            <!-- How it works -->
+            <div class="content-card">
+                <h2><i data-lucide="cog"></i>How It Works Under the Hood</h2>
+                <ul>
+                    <li><strong>Kernel spawning via kexec</strong> - New kernels are launched using Linux's existing kexec mechanism, extended to run alongside the primary kernel rather than replacing it</li>
+                    <li><strong>Resource partitioning</strong> - CPUs, memory, and devices are split between kernels using standard hotplug interfaces</li>
+                    <li><strong>Hardware queue sharing</strong> - Modern NICs and SSDs have multiple hardware queues; each kernel gets exclusive access to specific queues for true hardware-level isolation</li>
+                    <li><strong>Inter-kernel communication</strong> - Kernels communicate over shared memory using vsock, a standard Linux socket type that applications can use without modification</li>
+                    <li><strong>Docker integration</strong> - Spawned kernels can boot directly into Docker images using DAXFS to share the container rootfs, with no OS init layer</li>
+                </ul>
+            </div>
+
+            <!-- CTA -->
+            <div class="content-card gs-cta">
+                <h2><i data-lucide="check-circle"></i>Ready to Try It?</h2>
+                <p>All multikernel components are open source. Explore the code, file issues, or reach out for a technical evaluation.</p>
+                <div class="button-group">
+                    <a href="https://github.com/multikernel" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                        <i data-lucide="github"></i>
+                        GitHub
+                    </a>
+                    <a href="/contact.html" class="btn btn-secondary">
+                        <i data-lucide="mail"></i>
+                        Contact Us
+                    </a>
+                    <a href="https://www.youtube.com/@multikernel-tech" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                        <i data-lucide="play-circle"></i>
+                        Watch Demos
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</main>

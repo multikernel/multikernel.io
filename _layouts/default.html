@@ -10,6 +10,8 @@
     {% if page.url contains '/blog' %}
         <link rel="stylesheet" href="/assets/css/content-pages.css">
         <link rel="stylesheet" href="/assets/css/blog.css">
+    {% elsif page.url contains '/getting-started' %}
+        <link rel="stylesheet" href="/assets/css/content-pages.css">
     {% elsif page.url contains '/roadmap' %}
         <link rel="stylesheet" href="/assets/css/content-pages.css">
     {% elsif page.url contains '/technology' %}
@@ -267,6 +269,7 @@
                     </div>
                 </div>
 
+                <a href="/getting-started.html" class="site-nav-link {% if page.url == '/getting-started.html' %}active{% endif %}">Getting Started</a>
                 <a href="/blog/" class="site-nav-link {% if page.url contains '/blog' or page.layout == 'post' %}active{% endif %}">Blog</a>
                 <a href="/about.html" class="site-nav-link {% if page.url == '/about.html' %}active{% endif %}">About</a>
 
