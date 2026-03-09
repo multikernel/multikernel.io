@@ -37,30 +37,252 @@
     <meta property="og:image" content="{{ site.url }}/assets/images/multikernel-logo.png">
 </head>
 <body>
-    <!-- WORKING HEADER -->
-    <header style="position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; width: 100% !important; height: 70px !important; background: white !important; border-bottom: 2px solid #2563eb !important; box-shadow: 0 4px 6px rgba(0,0,0,0.1) !important; z-index: 999999 !important; display: block !important;">
-        <div style="max-width: 1200px !important; margin: 0 auto !important; padding: 0 24px !important; height: 70px !important; display: flex !important; align-items: center !important; justify-content: space-between !important;">
-            <div style="display: flex !important; align-items: center !important; gap: 12px !important;">
-                <img src="/assets/images/multikernel-logo.png" alt="Multikernel Technologies Logo" style="height: 40px !important; width: auto !important;">
-                <a href="/" style="font-size: 20px !important; font-weight: 700 !important; color: #1e293b !important; text-decoration: none !important;">Multikernel Technologies</a>
-            </div>
-            
-            <nav style="display: flex !important; align-items: center !important; gap: 8px !important;">
-                <a href="/" style="padding: 10px 16px !important; font-size: 14px !important; font-weight: 500 !important; color: {% if page.url == '/' %}#2563eb{% else %}#64748b{% endif %} !important; text-decoration: none !important; border-radius: 8px !important; {% if page.url == '/' %}background: #eff6ff !important;{% endif %}">Home</a>
-                <a href="/technology.html" style="padding: 10px 16px !important; font-size: 14px !important; font-weight: 500 !important; color: {% if page.url == '/technology.html' %}#2563eb{% else %}#64748b{% endif %} !important; text-decoration: none !important; border-radius: 8px !important; {% if page.url == '/technology.html' %}background: #eff6ff !important;{% endif %}">Technology</a>
-                <a href="/blog/" style="padding: 10px 16px !important; font-size: 14px !important; font-weight: 500 !important; color: {% if page.url == '/blog/' %}#2563eb{% else %}#64748b{% endif %} !important; text-decoration: none !important; border-radius: 8px !important; {% if page.url == '/blog/' %}background: #eff6ff !important;{% endif %}">Blog</a>
-                <a href="/roadmap.html" style="padding: 10px 16px !important; font-size: 14px !important; font-weight: 500 !important; color: {% if page.url == '/roadmap.html' %}#2563eb{% else %}#64748b{% endif %} !important; text-decoration: none !important; border-radius: 8px !important; {% if page.url == '/roadmap.html' %}background: #eff6ff !important;{% endif %}">Roadmap</a>
-                <a href="/faq.html" style="padding: 10px 16px !important; font-size: 14px !important; font-weight: 500 !important; color: {% if page.url == '/faq.html' %}#2563eb{% else %}#64748b{% endif %} !important; text-decoration: none !important; border-radius: 8px !important; {% if page.url == '/faq.html' %}background: #eff6ff !important;{% endif %}">FAQ</a>
-                <a href="https://github.com/multikernel" target="_blank" style="padding: 10px 16px !important; font-size: 14px !important; font-weight: 500 !important; color: #64748b !important; text-decoration: none !important; border-radius: 8px !important;">GitHub</a>
-                <a href="/about.html" style="padding: 10px 16px !important; font-size: 14px !important; font-weight: 500 !important; color: {% if page.url == '/about.html' %}#2563eb{% else %}#64748b{% endif %} !important; text-decoration: none !important; border-radius: 8px !important; {% if page.url == '/about.html' %}background: #eff6ff !important;{% endif %}">About</a>
-                <a href="/contact.html" style="background: #2563eb !important; color: white !important; font-weight: 600 !important; padding: 10px 20px !important; border-radius: 8px !important; text-decoration: none !important; font-size: 14px !important;">Contact</a>
+    <style>
+    .site-header {
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        width: 100%;
+        height: 64px;
+        background: white;
+        border-bottom: 1px solid #e2e8f0;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+        z-index: 999999;
+    }
+    .site-header-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 24px;
+        height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .site-logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+    }
+    .site-logo img {
+        height: 36px;
+        width: auto;
+    }
+    .site-logo span {
+        font-size: 18px;
+        font-weight: 700;
+        color: #1e293b;
+    }
+    .site-nav {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+    }
+    .site-nav-link {
+        padding: 8px 16px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #475569;
+        text-decoration: none;
+        border-radius: 6px;
+        transition: color 0.15s, background 0.15s;
+    }
+    .site-nav-link:hover {
+        color: #1e293b;
+        background: #f1f5f9;
+    }
+    .site-nav-link.active {
+        color: #2563eb;
+        background: #eff6ff;
+    }
+    /* Dropdown */
+    .site-nav-dropdown {
+        position: relative;
+    }
+    .site-nav-dropdown-trigger {
+        padding: 8px 16px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #475569;
+        text-decoration: none;
+        border-radius: 6px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        border: none;
+        background: none;
+        font-family: inherit;
+        transition: color 0.15s, background 0.15s;
+    }
+    .site-nav-dropdown-trigger:hover,
+    .site-nav-dropdown:hover .site-nav-dropdown-trigger {
+        color: #1e293b;
+        background: #f1f5f9;
+    }
+    .site-nav-dropdown-trigger.active {
+        color: #2563eb;
+        background: #eff6ff;
+    }
+    .site-nav-dropdown-trigger svg {
+        width: 12px;
+        height: 12px;
+        transition: transform 0.2s;
+    }
+    .site-nav-dropdown:hover .site-nav-dropdown-trigger svg {
+        transform: rotate(180deg);
+    }
+    .site-nav-dropdown-menu {
+        display: none;
+        position: absolute;
+        top: calc(100% + 4px);
+        left: 0;
+        min-width: 200px;
+        background: white;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        padding: 4px;
+        z-index: 1000;
+    }
+    .site-nav-dropdown:hover .site-nav-dropdown-menu {
+        display: block;
+    }
+    .site-nav-dropdown-item {
+        display: block;
+        padding: 10px 14px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #475569;
+        text-decoration: none;
+        border-radius: 6px;
+        transition: color 0.15s, background 0.15s;
+    }
+    .site-nav-dropdown-item:hover {
+        color: #1e293b;
+        background: #f1f5f9;
+    }
+    .site-nav-dropdown-item.active {
+        color: #2563eb;
+        background: #eff6ff;
+    }
+    .site-nav-dropdown-item small {
+        display: block;
+        font-size: 12px;
+        font-weight: 400;
+        color: #94a3b8;
+        margin-top: 2px;
+    }
+    /* GitHub icon link */
+    .site-nav-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+        color: #475569;
+        text-decoration: none;
+        border-radius: 6px;
+        transition: color 0.15s, background 0.15s;
+    }
+    .site-nav-icon:hover {
+        color: #1e293b;
+        background: #f1f5f9;
+    }
+    .site-nav-icon svg {
+        width: 20px;
+        height: 20px;
+    }
+    /* CTA button */
+    .site-nav-cta {
+        padding: 8px 20px;
+        font-size: 14px;
+        font-weight: 600;
+        color: white;
+        background: #2563eb;
+        text-decoration: none;
+        border-radius: 6px;
+        margin-left: 8px;
+        transition: background 0.15s;
+    }
+    .site-nav-cta:hover {
+        background: #1d4ed8;
+    }
+    /* Divider between nav items and actions */
+    .site-nav-divider {
+        width: 1px;
+        height: 24px;
+        background: #e2e8f0;
+        margin: 0 8px;
+    }
+    /* Mobile menu */
+    .site-mobile-toggle {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        padding: 8px;
+        border: none;
+        background: none;
+        cursor: pointer;
+    }
+    .site-mobile-toggle span {
+        width: 20px;
+        height: 2px;
+        background: #475569;
+        display: block;
+        border-radius: 1px;
+    }
+    @media (max-width: 768px) {
+        .site-nav { display: none; }
+        .site-mobile-toggle { display: flex; }
+    }
+    </style>
+
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a href="/" class="site-logo">
+                <img src="/assets/images/multikernel-logo.png" alt="Multikernel Technologies">
+                <span>Multikernel</span>
+            </a>
+
+            <nav class="site-nav">
+                <a href="/" class="site-nav-link {% if page.url == '/' %}active{% endif %}">Home</a>
+
+                <div class="site-nav-dropdown">
+                    <button class="site-nav-dropdown-trigger {% if page.url == '/technology.html' or page.url == '/roadmap.html' or page.url == '/faq.html' %}active{% endif %}">
+                        Technology
+                        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 4.5L6 7.5L9 4.5"/></svg>
+                    </button>
+                    <div class="site-nav-dropdown-menu">
+                        <a href="/technology.html" class="site-nav-dropdown-item {% if page.url == '/technology.html' %}active{% endif %}">
+                            Overview
+                            <small>Architecture and approach</small>
+                        </a>
+                        <a href="/roadmap.html" class="site-nav-dropdown-item {% if page.url == '/roadmap.html' %}active{% endif %}">
+                            Roadmap
+                            <small>What we are building next</small>
+                        </a>
+                        <a href="/faq.html" class="site-nav-dropdown-item {% if page.url == '/faq.html' %}active{% endif %}">
+                            FAQ
+                            <small>Common questions answered</small>
+                        </a>
+                    </div>
+                </div>
+
+                <a href="/blog/" class="site-nav-link {% if page.url contains '/blog' or page.layout == 'post' %}active{% endif %}">Blog</a>
+                <a href="/about.html" class="site-nav-link {% if page.url == '/about.html' %}active{% endif %}">About</a>
+
+                <div class="site-nav-divider"></div>
+
+                <a href="https://github.com/multikernel" target="_blank" class="site-nav-icon" aria-label="GitHub">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                </a>
+
+                <a href="/contact.html" class="site-nav-cta">Contact Us</a>
             </nav>
 
-            <!-- Mobile menu button -->
-            <button class="mobile-menu-toggle" aria-label="Toggle mobile menu" style="display: none !important;">
-                <span style="width: 20px; height: 2px; background: #64748b; margin: 2px 0; display: block;"></span>
-                <span style="width: 20px; height: 2px; background: #64748b; margin: 2px 0; display: block;"></span>
-                <span style="width: 20px; height: 2px; background: #64748b; margin: 2px 0; display: block;"></span>
+            <button class="site-mobile-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
             </button>
         </div>
     </header>
