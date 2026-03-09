@@ -40,8 +40,8 @@ permalink: /technology.html
                         <span>Background</span>
                     </div>
                     <h2 class="section-title">Why Split-Kernel</h2>
-                    <p class="section-subtitle">A traditional Linux kernel runs application code, device drivers, and interrupt handlers on the same cores. Under load, interrupt processing steals CPU cycles from applications. Years of kernel workarounds -- isolcpus, irqaffinity, NAPI threaded mode, RPS/RFS -- reduce the problem but cannot eliminate it. Within a single kernel, bottom-half work can always reach application cores.</p>
-                    <p class="section-subtitle">The split-kernel architecture removes this contention at the design level. Device processing is offloaded to a dedicated kernel on dedicated cores. Applications run in their own kernels where interrupts are structurally absent. And because Multikernel runs directly on hardware with no hypervisor, it works inside any standard cloud VM -- providing kernel-level isolation without the performance penalty of nested virtualization.</p>
+                    <p class="section-subtitle">A traditional Linux kernel runs application code, device drivers, and interrupt handlers on the same cores. Under load, interrupt processing steals CPU cycles from applications. Kernel workarounds like isolcpus, irqaffinity, NAPI threaded mode, and RPS/RFS reduce the problem but cannot eliminate it. Within a single kernel, bottom-half work can always reach application cores.</p>
+                    <p class="section-subtitle">The split-kernel architecture removes this contention at the design level. Device processing is offloaded to a dedicated kernel on dedicated cores. Applications run in their own kernels where interrupts are structurally absent. Because Multikernel runs directly on hardware with no hypervisor, it works inside any standard cloud VM, providing kernel-level isolation without the performance penalty of nested virtualization.</p>
                 </div>
 
                 <div class="value-visual">
@@ -71,7 +71,7 @@ permalink: /technology.html
     </section>
 
     <!-- Key Components -->
-    <section id="solution">
+    <section id="solution" class="value-section">
         <div class="section-container">
             <div class="section-header">
                 <div class="section-badge">
@@ -79,7 +79,7 @@ permalink: /technology.html
                     <span>Key Components</span>
                 </div>
                 <h2 class="section-title">The Multikernel System</h2>
-                <p class="section-subtitle">The split-kernel architecture is composed of three components: isolated app-kernels for applications, a shared device-kernel for all I/O, and a lock-free shared memory layer that connects them.</p>
+                <p class="section-subtitle">Three components working together: isolated app-kernels for applications, a shared device-kernel for all I/O, and a lock-free shared memory layer connecting them.</p>
             </div>
 
             <div class="technologies-grid">
@@ -88,7 +88,7 @@ permalink: /technology.html
                         <i data-lucide="monitor"></i>
                     </div>
                     <h3 class="tech-title">App-Kernels</h3>
-                    <p class="tech-description">Each application runs in its own Linux kernel on dedicated cores. These kernels contain no device drivers, no interrupt handlers, and no network stack. Practically all compute and memory resources are delivered to the application.</p>
+                    <p class="tech-description">Each application runs in its own Linux kernel on dedicated cores. These kernels contain no device drivers, no interrupt handlers, and no network stack. Practically all compute and memory resources go directly to the application.</p>
                 </div>
 
                 <div class="technology-card primary">
@@ -96,7 +96,7 @@ permalink: /technology.html
                         <i data-lucide="hard-drive"></i>
                     </div>
                     <h3 class="tech-title">Device-Kernel</h3>
-                    <p class="tech-description">All device drivers, interrupt handlers, TCP/IP stack, and I/O processing are offloaded to a dedicated device-kernel on its own cores. This kernel serves every app-kernel and has its own independent update and failure domain.</p>
+                    <p class="tech-description">All device drivers, interrupt handlers, TCP/IP stack, and I/O processing run in a dedicated device-kernel on its own cores. This kernel serves every app-kernel and has its own independent update and failure domain.</p>
                 </div>
 
                 <div class="technology-card primary">
@@ -128,7 +128,7 @@ permalink: /technology.html
                         <i data-lucide="play-circle"></i>
                     </div>
                     <h3 class="tech-title">Kernel Spawning via Kexec</h3>
-                    <p class="tech-description">New kernel instances are launched using Linux's kexec mechanism, extended to boot alongside the running kernel rather than replacing it. Each spawned kernel starts on its assigned CPUs and memory, fully independent.</p>
+                    <p class="tech-description">New kernel instances launch using Linux's kexec mechanism, extended to boot alongside the running kernel rather than replacing it. Each spawned kernel starts on its assigned CPUs and memory, fully independent.</p>
                 </div>
 
                 <div class="technology-card">
@@ -159,7 +159,7 @@ permalink: /technology.html
     </section>
 
     <!-- Comparison -->
-    <section id="comparison">
+    <section id="comparison" class="value-section">
         <div class="section-container">
             <div class="section-header">
                 <h2 class="section-title">Split-Kernel vs. Existing Approaches</h2>
