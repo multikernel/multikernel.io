@@ -46,90 +46,90 @@
         position: fixed;
         top: 0; left: 0; right: 0;
         width: 100%;
-        height: 64px;
-        background: white;
-        border-bottom: 1px solid #e2e5f0;
+        height: 72px;
+        background: rgba(255,255,255,0.97);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(0,0,0,0.06);
         z-index: 999999;
     }
     .site-header-inner {
-        max-width: 1200px;
+        max-width: 1280px;
         margin: 0 auto;
-        padding: 0 24px;
-        height: 64px;
+        padding: 0 40px;
+        height: 72px;
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        gap: 40px;
     }
     .site-logo {
         display: flex;
         align-items: center;
-        gap: 10px;
         text-decoration: none;
+        flex-shrink: 0;
     }
     .site-logo img {
-        height: 32px;
+        height: 40px;
         width: auto;
-    }
-    .site-logo span {
-        font-size: 17px;
-        font-weight: 700;
-        color: #111827;
-        letter-spacing: -0.02em;
     }
     .site-nav {
         display: flex;
         align-items: center;
-        gap: 1px;
+        gap: 2px;
+        flex: 1;
     }
     .site-nav-link {
-        padding: 7px 14px;
+        padding: 8px 16px;
         font-size: 14px;
         font-weight: 500;
-        color: #64708b;
+        color: #374151;
         text-decoration: none;
         border-radius: 6px;
         transition: color 0.15s, background 0.15s;
+        white-space: nowrap;
     }
     .site-nav-link:hover {
         color: #111827;
-        background: #f1f3f9;
+        background: #f3f4f6;
     }
     .site-nav-link.active {
-        color: #3b5bdb;
-        background: #eef2ff;
+        color: #111827;
+        font-weight: 600;
     }
     /* Dropdown */
     .site-nav-dropdown {
         position: relative;
     }
     .site-nav-dropdown-trigger {
-        padding: 7px 14px;
+        padding: 8px 16px;
         font-size: 14px;
         font-weight: 500;
-        color: #64708b;
+        color: #374151;
         text-decoration: none;
         border-radius: 6px;
         cursor: pointer;
         display: flex;
         align-items: center;
-        gap: 4px;
+        gap: 5px;
         border: none;
         background: none;
         font-family: inherit;
         transition: color 0.15s, background 0.15s;
+        white-space: nowrap;
     }
     .site-nav-dropdown-trigger:hover,
     .site-nav-dropdown:hover .site-nav-dropdown-trigger {
         color: #111827;
-        background: #f1f3f9;
+        background: #f3f4f6;
     }
     .site-nav-dropdown-trigger.active {
-        color: #3b5bdb;
-        background: #eef2ff;
+        color: #111827;
+        font-weight: 600;
     }
     .site-nav-dropdown-trigger svg {
-        width: 12px;
-        height: 12px;
+        width: 10px;
+        height: 10px;
+        opacity: 0.5;
         transition: transform 0.15s;
     }
     .site-nav-dropdown:hover .site-nav-dropdown-trigger svg {
@@ -138,14 +138,14 @@
     .site-nav-dropdown-menu {
         display: none;
         position: absolute;
-        top: calc(100% + 4px);
+        top: calc(100% + 8px);
         left: 0;
-        min-width: 220px;
+        min-width: 240px;
         background: white;
-        border: 1px solid #e2e5f0;
-        border-radius: 8px;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04);
-        padding: 4px;
+        border: 1px solid rgba(0,0,0,0.08);
+        border-radius: 10px;
+        box-shadow: 0 12px 40px rgba(0,0,0,0.1), 0 2px 6px rgba(0,0,0,0.04);
+        padding: 6px;
         z-index: 1000;
     }
     .site-nav-dropdown:hover .site-nav-dropdown-menu {
@@ -156,87 +156,101 @@
         padding: 10px 14px;
         font-size: 13px;
         font-weight: 500;
-        color: #4a5468;
+        color: #374151;
         text-decoration: none;
-        border-radius: 6px;
+        border-radius: 7px;
         transition: color 0.15s, background 0.15s;
+        line-height: 1.3;
     }
     .site-nav-dropdown-item:hover {
         color: #111827;
-        background: #f1f3f9;
+        background: #f3f4f6;
     }
     .site-nav-dropdown-item.active {
-        color: #3b5bdb;
-        background: #eef2ff;
+        color: #111827;
+        background: #f3f4f6;
+        font-weight: 600;
     }
     .site-nav-dropdown-item small {
         display: block;
-        font-size: 11px;
+        font-size: 12px;
         font-weight: 400;
-        color: #8b95a9;
-        margin-top: 2px;
+        color: #9ca3af;
+        margin-top: 3px;
     }
-    /* GitHub icon link */
+    /* GitHub icon */
     .site-nav-icon {
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 7px;
-        color: #64708b;
+        width: 36px;
+        height: 36px;
+        color: #6b7280;
         text-decoration: none;
-        border-radius: 6px;
+        border-radius: 8px;
         transition: color 0.15s, background 0.15s;
     }
     .site-nav-icon:hover {
         color: #111827;
-        background: #f1f3f9;
+        background: #f3f4f6;
     }
     .site-nav-icon svg {
-        width: 18px;
-        height: 18px;
+        width: 20px;
+        height: 20px;
     }
-    /* CTA button */
+    /* CTA */
     .site-nav-cta {
-        padding: 7px 18px;
+        display: inline-flex;
+        align-items: center;
+        padding: 9px 20px;
         font-size: 13px;
         font-weight: 600;
         color: white;
         background: #111827;
         text-decoration: none;
-        border-radius: 6px;
-        margin-left: 8px;
+        border-radius: 8px;
+        margin-left: 4px;
         transition: background 0.15s;
-        letter-spacing: 0.01em;
+        white-space: nowrap;
     }
     .site-nav-cta:hover {
-        background: #1f2937;
+        background: #374151;
     }
     /* Divider */
     .site-nav-divider {
         width: 1px;
-        height: 20px;
-        background: #e2e5f0;
-        margin: 0 8px;
+        height: 24px;
+        background: #e5e7eb;
+        margin: 0 12px;
+        margin-left: auto;
+        flex-shrink: 0;
     }
-    /* Mobile menu */
+    /* Mobile */
     .site-mobile-toggle {
         display: none;
         flex-direction: column;
         gap: 5px;
-        padding: 8px;
+        padding: 10px;
         border: none;
         background: none;
         cursor: pointer;
+        border-radius: 8px;
+        margin-left: auto;
+    }
+    .site-mobile-toggle:hover {
+        background: #f3f4f6;
     }
     .site-mobile-toggle span {
-        width: 18px;
-        height: 1.5px;
-        background: #4a5468;
+        width: 20px;
+        height: 2px;
+        background: #374151;
         display: block;
+        border-radius: 1px;
     }
-    @media (max-width: 768px) {
+    @media (max-width: 900px) {
         .site-nav { display: none; }
         .site-mobile-toggle { display: flex; }
+        .site-header-inner { padding: 0 20px; }
     }
     </style>
 
@@ -244,7 +258,6 @@
         <div class="site-header-inner">
             <a href="/" class="site-logo">
                 <img src="/assets/images/multikernel-logo.png" alt="Multikernel Technologies">
-                <span>Multikernel</span>
             </a>
 
             <nav class="site-nav">
