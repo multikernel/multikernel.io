@@ -1,0 +1,135 @@
+---
+layout: default
+title: "Multikernel Resilience - Zero-Downtime Upgrades and Auto-Healing"
+description: "Zero-downtime kernel upgrades with instant rollback and sub-second automatic failover. Keep your applications running through planned and unplanned kernel events."
+permalink: /products/resilience.html
+---
+
+<main>
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-badge">
+                <i data-lucide="heart-pulse"></i>
+                <span>Multikernel Resilience</span>
+            </div>
+
+            <h1>Your Kernel Never Goes Down</h1>
+            <p class="subtitle">Zero-downtime kernel upgrades with instant rollback. Sub-second automatic failover when a kernel crashes. Keep your applications running through both planned and unplanned kernel events.</p>
+
+            <div class="button-group">
+                <a href="/getting-started.html" class="btn btn-primary">
+                    <i data-lucide="rocket"></i>
+                    Get Started
+                </a>
+                <a href="/contact.html" class="btn btn-secondary">
+                    <i data-lucide="mail"></i>
+                    Contact Sales
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="planned">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">Zero-Downtime Kernel Upgrades</h2>
+                <p class="section-subtitle">Kernel upgrades are one of the most painful operations in production Linux. Teams delay security patches for weeks because they require reboots. Multikernel Resilience removes that tradeoff.</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="capability-card primary">
+                    <div class="capability-icon">
+                        <i data-lucide="play-circle"></i>
+                    </div>
+                    <h3 class="capability-title">Boot New Alongside Old</h3>
+                    <p class="capability-description">Launch the new kernel alongside the running one. Both kernels operate simultaneously on separate cores. No downtime window to schedule.</p>
+                </div>
+
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <i data-lucide="arrow-right-left"></i>
+                    </div>
+                    <h3 class="capability-title">Migrate Workloads</h3>
+                    <p class="capability-description">Move applications from the old kernel to the new one gradually. Validate each migration before proceeding. Keep full control over the transition.</p>
+                </div>
+
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <i data-lucide="undo"></i>
+                    </div>
+                    <h3 class="capability-title">Instant Rollback</h3>
+                    <p class="capability-description">If something goes wrong, roll back instantly. The old kernel is still running. No reboot, no recovery procedure, no data loss.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="unplanned" class="how-it-works">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">Automatic Kernel Failover</h2>
+                <p class="section-subtitle">When a kernel crashes today, the answer is reboot and hope. Multikernel Resilience turns a minutes-long outage into a sub-second failover.</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="capability-card primary">
+                    <div class="capability-icon">
+                        <i data-lucide="activity"></i>
+                    </div>
+                    <h3 class="capability-title">Continuous Monitoring</h3>
+                    <p class="capability-description">A standby kernel runs alongside your primary kernel, monitoring it via heartbeat. Always ready to take over.</p>
+                </div>
+
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <i data-lucide="zap"></i>
+                    </div>
+                    <h3 class="capability-title">Sub-Second Failover</h3>
+                    <p class="capability-description">When the primary kernel crashes, the standby takes over its devices and resumes service. No full reboot. No kdump. Applications continue running.</p>
+                </div>
+
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <i data-lucide="refresh-cw"></i>
+                    </div>
+                    <h3 class="capability-title">Automatic Recovery</h3>
+                    <p class="capability-description">After failover, the system automatically reclaims resources from the failed kernel and prepares a new standby. Self-healing without operator intervention.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="benefits">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">Benefits</h2>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="clock"></i>
+                    </div>
+                    <h3 class="feature-title">Ship Security Patches Faster</h3>
+                    <p class="feature-description">No more delaying kernel updates because of reboot windows. Apply patches immediately with zero application downtime.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="shield-check"></i>
+                    </div>
+                    <h3 class="feature-title">Improve SLA</h3>
+                    <p class="feature-description">Sub-second failover means kernel crashes no longer translate to minutes of downtime. Directly measurable improvement in service reliability.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="users"></i>
+                    </div>
+                    <h3 class="feature-title">Reduce Operator Burden</h3>
+                    <p class="feature-description">No more scheduling maintenance windows. No more manual crash recovery. The system handles both planned and unplanned events automatically.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

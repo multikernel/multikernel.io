@@ -95,148 +95,101 @@ description: "The Multikernel split-kernel architecture offloads device drivers 
         </div>
     </section>
 
-    <!-- Key Components -->
-    <section id="capabilities">
+    <!-- Products -->
+    <section id="products">
         <div class="section-container">
             <div class="section-header">
                 <div class="section-badge">
-                    <i data-lucide="cpu"></i>
-                    <span>Key Components</span>
+                    <i data-lucide="package"></i>
+                    <span>Products</span>
                 </div>
-                <h2 class="section-title">The Multikernel System</h2>
-                <p class="section-subtitle">A combination of dedicated app-kernels, a shared device-kernel, and high-speed shared memory that enables stronger isolation, faster innovation, and enhanced security.</p>
+                <h2 class="section-title">Built on Split-Kernel Architecture</h2>
+                <p class="section-subtitle">Three products that deliver the benefits of split-kernel architecture for different use cases: enterprise infrastructure, AI agent isolation, and kernel resilience.</p>
             </div>
 
             <div class="cards-grid">
                 <div class="capability-card primary">
                     <div class="capability-icon">
-                        <i data-lucide="monitor"></i>
+                        <i data-lucide="layers"></i>
                     </div>
-                    <h3 class="capability-title">App-Kernels</h3>
-                    <p class="capability-description">Each application runs in its own Linux kernel on dedicated cores. Interrupts and device drivers are absent from these kernels entirely. Practically all compute resources are delivered to the application.</p>
+                    <h3 class="capability-title">Multikernel Platform</h3>
+                    <p class="capability-description">The enterprise split-kernel distribution. Validated kernel builds, Kerf orchestration, and production tooling for deploying and managing split-kernel environments at scale.</p>
                     <div class="capability-features">
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>Dedicated cores per workload</span>
+                            <span>Kernel-level workload isolation</span>
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>Zero interrupt overhead</span>
+                            <span>Native performance, no hypervisor</span>
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>Minimal attack surface</span>
+                            <span>Runs inside any cloud VM</span>
                         </div>
+                    </div>
+                    <div class="value-cta" style="margin-top: var(--space-4);">
+                        <a href="/products/platform.html" class="btn-link">
+                            Learn more
+                            <i data-lucide="arrow-right"></i>
+                        </a>
                     </div>
                 </div>
 
                 <div class="capability-card">
                     <div class="capability-icon">
-                        <i data-lucide="hard-drive"></i>
+                        <i data-lucide="brain"></i>
                     </div>
-                    <h3 class="capability-title">Device-Kernel</h3>
-                    <p class="capability-description">All device drivers and I/O processing are offloaded to a dedicated device-kernel running on its own cores. This kernel serves every app-kernel and can be updated or replaced independently.</p>
+                    <h3 class="capability-title">Multikernel Enclaves</h3>
+                    <p class="capability-description">Kernel-level isolation for AI agents. Each agent gets its own kernel with full GPU access and strong sandboxing. No nested virtualization required.</p>
                     <div class="capability-features">
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>All drivers and interrupts contained</span>
+                            <span>Full GPU access per agent</span>
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>Independent update lifecycle</span>
+                            <span>Strong agent sandboxing</span>
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>Driver fault isolation</span>
+                            <span>Fast checkpoint/restore</span>
                         </div>
+                    </div>
+                    <div class="value-cta" style="margin-top: var(--space-4);">
+                        <a href="/products/enclaves.html" class="btn-link">
+                            Learn more
+                            <i data-lucide="arrow-right"></i>
+                        </a>
                     </div>
                 </div>
 
                 <div class="capability-card">
                     <div class="capability-icon">
-                        <i data-lucide="database"></i>
+                        <i data-lucide="heart-pulse"></i>
                     </div>
-                    <h3 class="capability-title">DAXFS Shared Memory</h3>
-                    <p class="capability-description">Kernels communicate through DAXFS, a shared-memory filesystem with zero-copy data transfer. No network round trips, no serialization overhead.</p>
+                    <h3 class="capability-title">Multikernel Resilience</h3>
+                    <p class="capability-description">Zero-downtime kernel upgrades with instant rollback, plus sub-second automatic failover when a kernel crashes. Your kernel never goes down.</p>
                     <div class="capability-features">
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>Zero-copy data path</span>
+                            <span>Zero-downtime kernel upgrades</span>
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>Lock-free coordination</span>
-                        </div>
-                        <div class="feature-item">
-                            <i data-lucide="check"></i>
-                            <span>Shared page cache</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="capability-card">
-                    <div class="capability-icon">
-                        <i data-lucide="refresh-cw"></i>
-                    </div>
-                    <h3 class="capability-title">Independent Lifecycle</h3>
-                    <p class="capability-description">Each kernel instance has its own update path, its own failure domain, and its own rollback capability. Update the device-kernel without restarting a single application.</p>
-                    <div class="capability-features">
-                        <div class="feature-item">
-                            <i data-lucide="check"></i>
-                            <span>Zero-downtime kernel updates</span>
-                        </div>
-                        <div class="feature-item">
-                            <i data-lucide="check"></i>
-                            <span>Per-kernel fault domains</span>
+                            <span>Sub-second crash failover</span>
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>
                             <span>Instant rollback</span>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Benefits -->
-    <section id="benefits">
-        <div class="section-container">
-            <div class="section-header">
-                <h2 class="section-title">Benefits</h2>
-            </div>
-
-            <div class="cards-grid">
-                <div class="capability-card primary">
-                    <div class="capability-icon">
-                        <i data-lucide="shield-check"></i>
+                    <div class="value-cta" style="margin-top: var(--space-4);">
+                        <a href="/products/resilience.html" class="btn-link">
+                            Learn more
+                            <i data-lucide="arrow-right"></i>
+                        </a>
                     </div>
-                    <h3 class="capability-title">Enhanced Security</h3>
-                    <p class="capability-description">By offloading device drivers to a dedicated kernel, the attack surface of each app-kernel is minimized. A driver vulnerability in the device-kernel cannot access app-kernel memory. Device code is structurally absent from app-kernels, eliminating an entire class of attack vectors.</p>
-                </div>
-
-                <div class="capability-card">
-                    <div class="capability-icon">
-                        <i data-lucide="zap"></i>
-                    </div>
-                    <h3 class="capability-title">Better Performance and Efficiency</h3>
-                    <p class="capability-description">The Multikernel system delivers practically all compute and memory resources of the host to your application. App-kernels have no interrupt overhead and no resource contention with drivers. Performance is indistinguishable from a dedicated machine.</p>
-                </div>
-
-                <div class="capability-card">
-                    <div class="capability-icon">
-                        <i data-lucide="refresh-cw"></i>
-                    </div>
-                    <h3 class="capability-title">Faster Innovation</h3>
-                    <p class="capability-description">Update the device-kernel without restarting a single application. Roll back a bad driver update instantly. Each kernel has its own lifecycle, enabling teams to ship infrastructure and application changes on their own schedules.</p>
-                </div>
-
-                <div class="capability-card">
-                    <div class="capability-icon">
-                        <i data-lucide="cloud"></i>
-                    </div>
-                    <h3 class="capability-title">No Nested Virtualization</h3>
-                    <p class="capability-description">The Multikernel system provides kernel-level isolation inside any standard cloud VM without nested virtualization. No special instance types, no hypervisor overhead. Deploy on AWS, GCP, or Azure with the isolation of separate kernels and the performance of bare metal.</p>
                 </div>
             </div>
         </div>

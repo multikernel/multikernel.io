@@ -16,6 +16,8 @@
         <link rel="stylesheet" href="/assets/css/content-pages.css">
     {% elsif page.url contains '/technology' %}
         <link rel="stylesheet" href="/assets/css/technology.css">
+    {% elsif page.url contains '/products/' %}
+        <link rel="stylesheet" href="/assets/css/technology.css">
     {% elsif page.url contains '/faq' %}
         <link rel="stylesheet" href="/assets/css/faq.css">
     {% elsif page.url contains '/about' %}
@@ -249,6 +251,27 @@
                 <a href="/" class="site-nav-link {% if page.url == '/' %}active{% endif %}">Home</a>
 
                 <div class="site-nav-dropdown">
+                    <button class="site-nav-dropdown-trigger {% if page.url contains '/products/' %}active{% endif %}">
+                        Products
+                        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 4.5L6 7.5L9 4.5"/></svg>
+                    </button>
+                    <div class="site-nav-dropdown-menu">
+                        <a href="/products/platform.html" class="site-nav-dropdown-item {% if page.url == '/products/platform.html' %}active{% endif %}">
+                            Multikernel Platform
+                            <small>Enterprise split-kernel distribution</small>
+                        </a>
+                        <a href="/products/enclaves.html" class="site-nav-dropdown-item {% if page.url == '/products/enclaves.html' %}active{% endif %}">
+                            Multikernel Enclaves
+                            <small>AI agent isolation</small>
+                        </a>
+                        <a href="/products/resilience.html" class="site-nav-dropdown-item {% if page.url == '/products/resilience.html' %}active{% endif %}">
+                            Multikernel Resilience
+                            <small>Zero-downtime upgrades and auto-healing</small>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="site-nav-dropdown">
                     <button class="site-nav-dropdown-trigger {% if page.url == '/technology.html' or page.url == '/roadmap.html' or page.url == '/faq.html' %}active{% endif %}">
                         Technology
                         <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 4.5L6 7.5L9 4.5"/></svg>
@@ -331,12 +354,11 @@
                     </div>
                     
                     <div class="footer-column">
-                        <h4>Solutions</h4>
+                        <h4>Products</h4>
                         <ul>
-                            <li><a href="/#products">KernelForge Enterprise</a></li>
-                            <li><a href="/#products">KernelOptimize Cloud</a></li>
-                            <li><a href="/contact.html">Custom Solutions</a></li>
-                            <li><a href="/contact.html">Consulting Services</a></li>
+                            <li><a href="/products/platform.html">Multikernel Platform</a></li>
+                            <li><a href="/products/enclaves.html">Multikernel Enclaves</a></li>
+                            <li><a href="/products/resilience.html">Multikernel Resilience</a></li>
                             <li><a href="/technology.html">Technology Overview</a></li>
                         </ul>
                     </div>

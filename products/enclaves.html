@@ -1,0 +1,124 @@
+---
+layout: default
+title: "Multikernel Enclaves - AI Agent Isolation"
+description: "Kernel-level isolation for AI agents. Full GPU access, strong sandboxing, and fast checkpoint/restore without virtualization overhead."
+permalink: /products/enclaves.html
+---
+
+<main>
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-badge">
+                <i data-lucide="brain"></i>
+                <span>Multikernel Enclaves</span>
+            </div>
+
+            <h1>Kernel-Level Isolation for AI Agents</h1>
+            <p class="subtitle">Give each AI agent its own Linux kernel with full GPU access and strong sandboxing. No virtualization layer between the agent and hardware. No nested virtualization required. Works inside any standard cloud VM.</p>
+
+            <div class="button-group">
+                <a href="/getting-started.html" class="btn btn-primary">
+                    <i data-lucide="rocket"></i>
+                    Get Started
+                </a>
+                <a href="/contact.html" class="btn btn-secondary">
+                    <i data-lucide="mail"></i>
+                    Contact Sales
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="problem">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">The Problem</h2>
+                <p class="section-subtitle">AI agents need isolation, GPU access, and fast lifecycle management. Today's options force a tradeoff.</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <i data-lucide="box"></i>
+                    </div>
+                    <h3 class="capability-title">Containers</h3>
+                    <p class="capability-description">Fast to start but share a kernel. A rogue agent can escape. GPU passthrough works but isolation is weak. Not sufficient for untrusted code execution.</p>
+                </div>
+
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <i data-lucide="server"></i>
+                    </div>
+                    <h3 class="capability-title">Virtual Machines</h3>
+                    <p class="capability-description">Strong isolation but heavyweight. GPU passthrough requires SR-IOV or vGPU. Nested virtualization in cloud VMs adds significant performance overhead.</p>
+                </div>
+
+                <div class="capability-card primary">
+                    <div class="capability-icon">
+                        <i data-lucide="brain"></i>
+                    </div>
+                    <h3 class="capability-title">Multikernel Enclaves</h3>
+                    <p class="capability-description">Each agent gets its own kernel with direct GPU access. Kernel-level isolation without virtualization. Native performance inside any cloud VM.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="capabilities" class="how-it-works">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">Built for AI Workloads</h2>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="cpu"></i>
+                    </div>
+                    <h3 class="feature-title">Full GPU Access</h3>
+                    <p class="feature-description">No virtualization layer between the agent and GPU hardware. Direct access to CUDA, ROCm, and other GPU frameworks at native performance.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="shield-check"></i>
+                    </div>
+                    <h3 class="feature-title">Strong Sandboxing</h3>
+                    <p class="feature-description">Each agent runs in its own kernel. A compromised agent cannot access other agents' memory, devices, or kernel state.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="camera"></i>
+                    </div>
+                    <h3 class="feature-title">Fast Checkpoint/Restore</h3>
+                    <p class="feature-description">Lightweight kernel state enables rapid snapshots. Save, restore, and clone agent environments in milliseconds.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="cloud"></i>
+                    </div>
+                    <h3 class="feature-title">No Nested Virtualization</h3>
+                    <p class="feature-description">Runs inside any standard cloud VM on AWS, GCP, or Azure. No special instance types. No hypervisor overhead.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="database"></i>
+                    </div>
+                    <h3 class="feature-title">Shared Model Weights</h3>
+                    <p class="feature-description">DAXFS enables zero-copy sharing of model weights across agent enclaves. One copy in memory serves all agents.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="box"></i>
+                    </div>
+                    <h3 class="feature-title">Docker Compatible</h3>
+                    <p class="feature-description">Deploy agents using your existing Docker images and workflows. No new packaging format, no new APIs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
