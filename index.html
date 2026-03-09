@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Multikernel Technologies - Split-Kernel Architecture for Linux"
-description: "Split-kernel architecture that separates application logic from device processing into independent Linux kernels. Zero interrupts on app cores, by design."
+description: "The Multikernel split-kernel architecture offloads device drivers and interrupt processing to a dedicated kernel, delivering isolation and native performance without a hypervisor."
 ---
 
 <main>
@@ -13,27 +13,23 @@ description: "Split-kernel architecture that separates application logic from de
                 <span>Split-Kernel Architecture</span>
             </div>
 
-            <h1>The Separation Linux Always Wanted</h1>
-            <p class="subtitle">Give each application its own kernel on dedicated cores, with zero interrupts by design. A shared device-kernel handles all drivers and I/O on separate cores. No tuning, no isolcpus, no NAPI hacks. Multiple kernels doing what one kernel has been struggling to do alone.</p>
+            <h1>The Foundation for Isolated, High-Performance Linux</h1>
+            <p class="subtitle">The Multikernel system offloads all device drivers and I/O processing to a dedicated kernel, enabling applications to run in isolated kernels on dedicated cores with performance indistinguishable from bare metal.</p>
 
             <div class="button-group">
-                <a href="/getting-started.html" class="btn btn-primary">
-                    <i data-lucide="rocket"></i>
-                    Get Started
-                </a>
-                <a href="/technology.html" class="btn btn-secondary">
+                <a href="/technology.html" class="btn btn-primary">
                     <i data-lucide="cpu"></i>
                     How It Works
+                </a>
+                <a href="/getting-started.html" class="btn btn-secondary">
+                    <i data-lucide="rocket"></i>
+                    Get Started
                 </a>
             </div>
 
             <div class="hero-trust">
-                <p class="trust-text">100% open source, built on upstream Linux</p>
+                <p class="trust-text">Built on upstream Linux, 100% open source</p>
                 <div class="trust-features">
-                    <div class="trust-feature">
-                        <i data-lucide="github"></i>
-                        <span>Open Source</span>
-                    </div>
                     <div class="trust-feature">
                         <i data-lucide="shield-check"></i>
                         <span>Kernel-Level Isolation</span>
@@ -46,26 +42,30 @@ description: "Split-kernel architecture that separates application logic from de
                         <i data-lucide="refresh-cw"></i>
                         <span>Zero-Downtime Updates</span>
                     </div>
+                    <div class="trust-feature">
+                        <i data-lucide="github"></i>
+                        <span>Open Source</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- The Problem -->
+    <!-- Why Split-Kernel -->
     <section id="value-proposition" class="value-section">
         <div class="section-container">
             <div class="value-content">
                 <div class="value-text">
                     <div class="section-badge">
-                        <i data-lucide="alert-triangle"></i>
-                        <span>The Problem</span>
+                        <i data-lucide="layers"></i>
+                        <span>Why Split-Kernel</span>
                     </div>
-                    <h2 class="section-title">Your Application Is Sharing a CPU with Interrupt Handlers</h2>
-                    <p class="section-subtitle">In a traditional Linux kernel, application code, TCP stack processing, NIC driver interrupts, and NVMe completions all compete for the same cores. Softirqs steal cycles from your application under load. The Linux community has spent years building workarounds: isolcpus, irqaffinity, RPS/RFS, SO_BUSY_POLL, NAPI threaded mode. All are imperfect because within one kernel, bottom-half work can always sneak onto app cores.</p>
+                    <h2 class="section-title">Isolation Built into the Architecture</h2>
+                    <p class="section-subtitle">In a traditional Linux kernel, application code and device processing compete for the same CPU cores. The split-kernel architecture removes this contention by offloading all device processing to a dedicated kernel on dedicated cores. Applications see zero interrupts, not because of tuning, but because interrupts physically cannot reach them.</p>
 
                     <div class="value-cta">
                         <a href="/technology.html" class="btn-link">
-                            See the Split-Kernel Solution
+                            Learn more about the architecture
                             <i data-lucide="arrow-right"></i>
                         </a>
                     </div>
@@ -95,16 +95,16 @@ description: "Split-kernel architecture that separates application logic from de
         </div>
     </section>
 
-    <!-- Core Architecture -->
+    <!-- Key Components -->
     <section id="capabilities">
         <div class="section-container">
             <div class="section-header">
                 <div class="section-badge">
-                    <i data-lucide="layers"></i>
-                    <span>Split-Kernel Architecture</span>
+                    <i data-lucide="cpu"></i>
+                    <span>Key Components</span>
                 </div>
-                <h2 class="section-title">Many App-Kernels, One Device-Kernel</h2>
-                <p class="section-subtitle">Each application gets its own app-kernel with dedicated cores and zero interrupts. A shared device-kernel handles all drivers, interrupts, and network stack on separate cores. Connected through shared memory.</p>
+                <h2 class="section-title">The Multikernel System</h2>
+                <p class="section-subtitle">A combination of dedicated app-kernels, a shared device-kernel, and high-speed shared memory that enables stronger isolation, faster innovation, and enhanced security.</p>
             </div>
 
             <div class="cards-grid">
@@ -113,19 +113,19 @@ description: "Split-kernel architecture that separates application logic from de
                         <i data-lucide="monitor"></i>
                     </div>
                     <h3 class="capability-title">App-Kernels</h3>
-                    <p class="capability-description">Each application gets its own kernel running syscalls and VFS on dedicated cores. Zero interrupts, zero softirqs. Run as many as your workloads need.</p>
+                    <p class="capability-description">Each application runs in its own Linux kernel on dedicated cores. Interrupts and device drivers are absent from these kernels entirely. Practically all compute resources are delivered to the application.</p>
                     <div class="capability-features">
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>Application userspace</span>
+                            <span>Dedicated cores per workload</span>
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>Syscall path and VFS</span>
+                            <span>Zero interrupt overhead</span>
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>No interrupts, ever</span>
+                            <span>Minimal attack surface</span>
                         </div>
                     </div>
                 </div>
@@ -135,19 +135,19 @@ description: "Split-kernel architecture that separates application logic from de
                         <i data-lucide="hard-drive"></i>
                     </div>
                     <h3 class="capability-title">Device-Kernel</h3>
-                    <p class="capability-description">A shared kernel that runs the TCP stack, NIC drivers, NVMe block layer, and all interrupt handlers. Serves every app-kernel through shared memory.</p>
+                    <p class="capability-description">All device drivers and I/O processing are offloaded to a dedicated device-kernel running on its own cores. This kernel serves every app-kernel and can be updated or replaced independently.</p>
                     <div class="capability-features">
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>TCP/IP stack and NAPI</span>
+                            <span>All drivers and interrupts contained</span>
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>NIC and NVMe drivers</span>
+                            <span>Independent update lifecycle</span>
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>All IRQs and softirqs</span>
+                            <span>Driver fault isolation</span>
                         </div>
                     </div>
                 </div>
@@ -156,12 +156,12 @@ description: "Split-kernel architecture that separates application logic from de
                     <div class="capability-icon">
                         <i data-lucide="database"></i>
                     </div>
-                    <h3 class="capability-title">Shared Memory</h3>
+                    <h3 class="capability-title">DAXFS Shared Memory</h3>
                     <p class="capability-description">Kernels communicate through DAXFS, a shared-memory filesystem with zero-copy data transfer. No network round trips, no serialization overhead.</p>
                     <div class="capability-features">
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>Shared DRAM rings</span>
+                            <span>Zero-copy data path</span>
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>
@@ -179,19 +179,19 @@ description: "Split-kernel architecture that separates application logic from de
                         <i data-lucide="refresh-cw"></i>
                     </div>
                     <h3 class="capability-title">Independent Lifecycle</h3>
-                    <p class="capability-description">Update the device-kernel without touching the app-kernel. Roll back a bad driver update without restarting your application.</p>
+                    <p class="capability-description">Each kernel instance has its own update path, its own failure domain, and its own rollback capability. Update the device-kernel without restarting a single application.</p>
                     <div class="capability-features">
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>Independent kernel updates</span>
+                            <span>Zero-downtime kernel updates</span>
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>Per-kernel fault isolation</span>
+                            <span>Per-kernel fault domains</span>
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>Rollback at any point</span>
+                            <span>Instant rollback</span>
                         </div>
                     </div>
                 </div>
@@ -199,61 +199,44 @@ description: "Split-kernel architecture that separates application logic from de
         </div>
     </section>
 
-    <!-- Why This Works -->
+    <!-- Benefits -->
     <section id="benefits">
         <div class="section-container">
             <div class="section-header">
-                <h2 class="section-title">Why This Works</h2>
-                <p class="section-subtitle">Linux already treats application code and interrupt processing as separate contexts. We make that separation physical, giving each application its own kernel on its own cores.</p>
+                <h2 class="section-title">Benefits</h2>
             </div>
 
             <div class="cards-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i data-lucide="zap"></i>
-                    </div>
-                    <h3 class="feature-title">Predictable Latency</h3>
-                    <p class="feature-description">No interrupt can fire on an app core. No softirq can steal cycles. Your application gets deterministic CPU time without any kernel tuning.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">
+                <div class="capability-card primary">
+                    <div class="capability-icon">
                         <i data-lucide="shield-check"></i>
                     </div>
-                    <h3 class="feature-title">Fault Isolation</h3>
-                    <p class="feature-description">A NIC driver crash takes down the device-kernel, not your application. The app-kernel keeps running while you recover or replace the device-kernel.</p>
+                    <h3 class="capability-title">Enhanced Security</h3>
+                    <p class="capability-description">By offloading device drivers to a dedicated kernel, the attack surface of each app-kernel is minimized. A driver vulnerability in the device-kernel cannot access app-kernel memory. Device code is structurally absent from app-kernels, eliminating an entire class of attack vectors.</p>
                 </div>
 
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i data-lucide="settings"></i>
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <i data-lucide="zap"></i>
                     </div>
-                    <h3 class="feature-title">No Configuration Required</h3>
-                    <p class="feature-description">No isolcpus, no irqaffinity, no RPS/RFS tuning. The bottom half cannot run on app cores because it is in a different kernel.</p>
+                    <h3 class="capability-title">Better Performance and Efficiency</h3>
+                    <p class="capability-description">The Multikernel system delivers practically all compute and memory resources of the host to your application. App-kernels have no interrupt overhead and no resource contention with drivers. Performance is indistinguishable from a dedicated machine.</p>
                 </div>
 
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i data-lucide="box"></i>
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <i data-lucide="refresh-cw"></i>
                     </div>
-                    <h3 class="feature-title">Docker Compatible</h3>
-                    <p class="feature-description">Boot directly into Docker images. DAXFS shares the container rootfs across kernel instances. Use your existing images and workflow.</p>
+                    <h3 class="capability-title">Faster Innovation</h3>
+                    <p class="capability-description">Update the device-kernel without restarting a single application. Roll back a bad driver update instantly. Each kernel has its own lifecycle, enabling teams to ship infrastructure and application changes on their own schedules.</p>
                 </div>
 
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i data-lucide="server"></i>
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <i data-lucide="cloud"></i>
                     </div>
-                    <h3 class="feature-title">Works in Cloud VMs</h3>
-                    <p class="feature-description">No hypervisor needed. No nested virtualization. Multikernel runs on bare metal or inside any cloud VM on AWS, GCP, or Azure.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i data-lucide="github"></i>
-                    </div>
-                    <h3 class="feature-title">100% Open Source</h3>
-                    <p class="feature-description">Built on upstream Linux. All kernel patches, DAXFS, and management tools are open source under GPL-2.0. No proprietary components.</p>
+                    <h3 class="capability-title">No Nested Virtualization</h3>
+                    <p class="capability-description">The Multikernel system provides kernel-level isolation inside any standard cloud VM without nested virtualization. No special instance types, no hypervisor overhead. Deploy on AWS, GCP, or Azure with the isolation of separate kernels and the performance of bare metal.</p>
                 </div>
             </div>
         </div>

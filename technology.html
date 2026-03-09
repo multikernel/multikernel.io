@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Technology - Split-Kernel Architecture"
-description: "Split-kernel architecture separates application logic from device processing into independent Linux kernels on dedicated cores. Zero interrupts on app cores, by design."
+description: "The Multikernel system offloads device drivers and interrupt processing to a dedicated kernel, enabling stronger isolation, native performance, and independent kernel lifecycle management."
 permalink: /technology.html
 ---
 
@@ -15,7 +15,7 @@ permalink: /technology.html
             </div>
 
             <h1>Split-Kernel Architecture</h1>
-            <p class="subtitle">Separate application logic from device processing into independent Linux kernels. The app-kernel runs your code with zero interrupts. The device-kernel handles all I/O. Connected through shared memory.</p>
+            <p class="subtitle">The Multikernel system offloads all device drivers and interrupt processing to a dedicated device-kernel. Applications run in isolated app-kernels with dedicated resources and native hardware performance.</p>
 
             <div class="button-group">
                 <a href="/getting-started.html" class="btn btn-primary">
@@ -30,47 +30,18 @@ permalink: /technology.html
         </div>
     </section>
 
-    <!-- Core Concept -->
+    <!-- Why -->
     <section id="concept" class="value-section">
         <div class="section-container">
             <div class="value-content">
                 <div class="value-text">
                     <div class="section-badge">
-                        <i data-lucide="alert-triangle"></i>
-                        <span>The Problem</span>
+                        <i data-lucide="layers"></i>
+                        <span>Background</span>
                     </div>
-                    <h2 class="section-title">Interrupts Are Stealing Your Application's CPU</h2>
-                    <p class="section-subtitle">In a traditional Linux kernel, your application shares cores with the TCP stack, NIC drivers, NVMe completions, and every softirq handler. Under load, interrupt processing steals cycles from your application. The kernel community has spent years building workarounds.</p>
-
-                    <div class="innovation-highlights">
-                        <div class="highlight-item">
-                            <div class="highlight-icon">
-                                <i data-lucide="x-circle"></i>
-                            </div>
-                            <div class="highlight-content">
-                                <h4>isolcpus and irqaffinity</h4>
-                                <p>Pin interrupts to specific cores. But softirqs can still sneak onto app cores under load, and configuration is fragile.</p>
-                            </div>
-                        </div>
-                        <div class="highlight-item">
-                            <div class="highlight-icon">
-                                <i data-lucide="x-circle"></i>
-                            </div>
-                            <div class="highlight-content">
-                                <h4>NAPI threaded mode and SO_BUSY_POLL</h4>
-                                <p>Move poll processing to threads or busy-wait in the application. Trading CPU for latency, still within the same kernel.</p>
-                            </div>
-                        </div>
-                        <div class="highlight-item">
-                            <div class="highlight-icon">
-                                <i data-lucide="x-circle"></i>
-                            </div>
-                            <div class="highlight-content">
-                                <h4>RPS/RFS and XPS</h4>
-                                <p>Steer packets to specific cores. Helps with locality but cannot prevent interrupt coalescing or softirq bursts on the wrong core.</p>
-                            </div>
-                        </div>
-                    </div>
+                    <h2 class="section-title">Why Split-Kernel</h2>
+                    <p class="section-subtitle">A traditional Linux kernel runs application code, device drivers, and interrupt handlers on the same cores. Under load, interrupt processing steals CPU cycles from applications. Years of kernel workarounds -- isolcpus, irqaffinity, NAPI threaded mode, RPS/RFS -- reduce the problem but cannot eliminate it. Within a single kernel, bottom-half work can always reach application cores.</p>
+                    <p class="section-subtitle">The split-kernel architecture removes this contention at the design level. Device processing is offloaded to a dedicated kernel on dedicated cores. Applications run in their own kernels where interrupts are structurally absent. And because Multikernel runs directly on hardware with no hypervisor, it works inside any standard cloud VM -- providing kernel-level isolation without the performance penalty of nested virtualization.</p>
                 </div>
 
                 <div class="value-visual">
@@ -99,16 +70,16 @@ permalink: /technology.html
         </div>
     </section>
 
-    <!-- The Solution -->
+    <!-- Key Components -->
     <section id="solution">
         <div class="section-container">
             <div class="section-header">
                 <div class="section-badge">
-                    <i data-lucide="check-circle"></i>
-                    <span>The Solution</span>
+                    <i data-lucide="cpu"></i>
+                    <span>Key Components</span>
                 </div>
-                <h2 class="section-title">Split the Kernel at the Interrupt Boundary</h2>
-                <p class="section-subtitle">Instead of tuning one kernel to keep interrupts away from your app, split them apart. Each application gets its own app-kernel with zero interrupts. A shared device-kernel handles all drivers and I/O processing on dedicated cores.</p>
+                <h2 class="section-title">The Multikernel System</h2>
+                <p class="section-subtitle">The split-kernel architecture is composed of three components: isolated app-kernels for applications, a shared device-kernel for all I/O, and a lock-free shared memory layer that connects them.</p>
             </div>
 
             <div class="technologies-grid">
@@ -117,7 +88,7 @@ permalink: /technology.html
                         <i data-lucide="monitor"></i>
                     </div>
                     <h3 class="tech-title">App-Kernels</h3>
-                    <p class="tech-description">Each application gets its own kernel running syscalls and VFS on dedicated cores. Zero interrupts, ever. Run as many app-kernels as your workloads need.</p>
+                    <p class="tech-description">Each application runs in its own Linux kernel on dedicated cores. These kernels contain no device drivers, no interrupt handlers, and no network stack. Practically all compute and memory resources are delivered to the application.</p>
                 </div>
 
                 <div class="technology-card primary">
@@ -125,14 +96,22 @@ permalink: /technology.html
                         <i data-lucide="hard-drive"></i>
                     </div>
                     <h3 class="tech-title">Device-Kernel</h3>
-                    <p class="tech-description">A shared kernel that runs the TCP stack, NIC driver, NVMe block layer, and all interrupt handlers. All I/O processing is contained here, serving every app-kernel through shared memory.</p>
+                    <p class="tech-description">All device drivers, interrupt handlers, TCP/IP stack, and I/O processing are offloaded to a dedicated device-kernel on its own cores. This kernel serves every app-kernel and has its own independent update and failure domain.</p>
+                </div>
+
+                <div class="technology-card primary">
+                    <div class="tech-icon">
+                        <i data-lucide="database"></i>
+                    </div>
+                    <h3 class="tech-title">DAXFS Shared Memory</h3>
+                    <p class="tech-description">App-kernels and the device-kernel communicate through DAXFS, a filesystem built on shared DRAM with lock-free CAS-based coordination. Zero-copy, no serialization, no network round trips.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- How It Works -->
-    <section id="how-it-works">
+    <section id="how-it-works" class="how-it-works">
         <div class="section-container">
             <div class="section-header">
                 <div class="section-badge">
@@ -144,47 +123,47 @@ permalink: /technology.html
             </div>
 
             <div class="technologies-grid">
-                <div class="technology-card primary">
+                <div class="technology-card">
                     <div class="tech-icon">
                         <i data-lucide="play-circle"></i>
                     </div>
                     <h3 class="tech-title">Kernel Spawning via Kexec</h3>
-                    <p class="tech-description">New kernel instances are launched using Linux's kexec mechanism, extended to boot alongside the running kernel rather than replacing it. The spawned kernel starts on its assigned CPUs and memory, fully independent of the primary kernel.</p>
+                    <p class="tech-description">New kernel instances are launched using Linux's kexec mechanism, extended to boot alongside the running kernel rather than replacing it. Each spawned kernel starts on its assigned CPUs and memory, fully independent.</p>
                 </div>
 
                 <div class="technology-card">
                     <div class="tech-icon">
                         <i data-lucide="sliders"></i>
                     </div>
-                    <h3 class="tech-title">Dynamic Resource Partitioning</h3>
-                    <p class="tech-description">CPUs, memory, and devices are assigned to kernel instances using Linux's standard hotplug interfaces. Resources can be rebalanced between kernels at runtime without rebooting or restarting applications.</p>
+                    <h3 class="tech-title">Resource Partitioning</h3>
+                    <p class="tech-description">CPUs, memory, and device queues are assigned to each kernel using standard Linux hotplug interfaces. Resources can be rebalanced between kernels at runtime without rebooting.</p>
                 </div>
 
                 <div class="technology-card">
                     <div class="tech-icon">
                         <i data-lucide="hard-drive"></i>
                     </div>
-                    <h3 class="tech-title">Hardware Queue Sharing</h3>
-                    <p class="tech-description">Modern NICs and SSDs expose multiple hardware queues. Each kernel instance gets exclusive access to specific queues, providing true hardware-level I/O isolation without SR-IOV or software bridges.</p>
+                    <h3 class="tech-title">Hardware Queue Isolation</h3>
+                    <p class="tech-description">Modern NICs and NVMe devices expose multiple hardware queues. The device-kernel gets exclusive access to device queues. No software bridge, no SR-IOV. True hardware-level I/O isolation.</p>
                 </div>
 
                 <div class="technology-card">
                     <div class="tech-icon">
-                        <i data-lucide="database"></i>
+                        <i data-lucide="box"></i>
                     </div>
-                    <h3 class="tech-title">DAXFS Shared Memory</h3>
-                    <p class="tech-description">The app-kernel and device-kernel communicate through DAXFS, a filesystem built on shared DRAM with lock-free coordination. Zero-copy, no serialization, no network round trips.</p>
+                    <h3 class="tech-title">Docker Integration</h3>
+                    <p class="tech-description">Spawned kernels boot directly into Docker images using DAXFS to share the container rootfs. No full OS init per instance. Applications run unmodified with standard Linux interfaces.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Comparison -->
-    <section id="comparison" class="how-it-works">
+    <section id="comparison">
         <div class="section-container">
             <div class="section-header">
                 <h2 class="section-title">Split-Kernel vs. Existing Approaches</h2>
-                <p class="section-subtitle">What isolcpus, DPDK, and VMs are all trying to achieve, split-kernel does cleanly by design.</p>
+                <p class="section-subtitle">The split-kernel architecture combines the isolation of separate kernels with native hardware performance, without the overhead of virtualization or the limitations of kernel tuning.</p>
             </div>
 
             <div class="diagram-container">
@@ -230,7 +209,7 @@ permalink: /technology.html
                             <td>Zero-downtime kernel updates</td>
                             <td>No</td>
                             <td>With orchestration</td>
-                            <td>Yes (kernel live update)</td>
+                            <td>Yes</td>
                         </tr>
                         <tr>
                             <td>Attack surface per workload</td>
@@ -257,7 +236,7 @@ permalink: /technology.html
     </section>
 
     <!-- Use Cases -->
-    <section id="use-cases">
+    <section id="use-cases" class="how-it-works">
         <div class="section-container">
             <div class="section-header">
                 <div class="section-badge">
@@ -265,24 +244,16 @@ permalink: /technology.html
                     <span>Applications</span>
                 </div>
                 <h2 class="section-title">Use Cases</h2>
-                <p class="section-subtitle">Split-kernel architecture is designed for workloads where interrupt jitter, I/O isolation, or independent kernel lifecycle matters.</p>
+                <p class="section-subtitle">The split-kernel architecture enables workloads that require strong isolation, predictable performance, or independent kernel lifecycle management.</p>
             </div>
 
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <i data-lucide="server"></i>
+                        <i data-lucide="bar-chart"></i>
                     </div>
                     <h3 class="feature-title">Latency-Sensitive Workloads</h3>
-                    <p class="feature-description">Trading systems, real-time analytics, and game servers where interrupt jitter is unacceptable. App cores never see an interrupt.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i data-lucide="refresh-cw"></i>
-                    </div>
-                    <h3 class="feature-title">Zero-Downtime Kernel Updates</h3>
-                    <p class="feature-description">Boot a new kernel alongside the running one, migrate workloads over, then retire the old kernel. Roll back at any point if something goes wrong.</p>
+                    <p class="feature-description">Trading systems, real-time analytics, and game servers where interrupt jitter affects outcomes. App-kernel cores see zero interrupts by design.</p>
                 </div>
 
                 <div class="feature-card">
@@ -290,23 +261,31 @@ permalink: /technology.html
                         <i data-lucide="brain"></i>
                     </div>
                     <h3 class="feature-title">AI Agent Sandboxing</h3>
-                    <p class="feature-description">Give each AI agent its own kernel with full GPU access and strong isolation. No virtualization layer between the agent and hardware. Works inside cloud VMs.</p>
+                    <p class="feature-description">Each AI agent runs in its own app-kernel with full GPU access and kernel-level isolation. No virtualization layer between the agent and hardware.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="refresh-cw"></i>
+                    </div>
+                    <h3 class="feature-title">Zero-Downtime Updates</h3>
+                    <p class="feature-description">Replace the device-kernel while applications continue running. Roll back a bad driver update without restarting a single workload.</p>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i data-lucide="activity"></i>
                     </div>
-                    <h3 class="feature-title">Kernel Fault Tolerance</h3>
-                    <p class="feature-description">Run a standby kernel that monitors the primary via heartbeat. If the primary crashes, the standby takes over its devices and resumes service in sub-second time.</p>
+                    <h3 class="feature-title">Fault Tolerance</h3>
+                    <p class="feature-description">A driver crash in the device-kernel does not affect application kernels. The device-kernel recovers independently while applications continue running.</p>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <i data-lucide="box"></i>
+                        <i data-lucide="server"></i>
                     </div>
-                    <h3 class="feature-title">Docker Integration</h3>
-                    <p class="feature-description">Boot directly into Docker images with DAXFS sharing the container rootfs across kernel instances. No full OS per instance, just the kernel and your application.</p>
+                    <h3 class="feature-title">Mixed Workload Isolation</h3>
+                    <p class="feature-description">Run databases, web servers, and ML training on the same machine. Each workload gets its own kernel with dedicated resources and no noisy neighbors.</p>
                 </div>
 
                 <div class="feature-card">
@@ -314,7 +293,7 @@ permalink: /technology.html
                         <i data-lucide="database"></i>
                     </div>
                     <h3 class="feature-title">CXL Memory Sharing</h3>
-                    <p class="feature-description">Share data across kernel instances or CXL-connected hosts through DAXFS, with lock-free concurrent access and a shared page cache in DAX memory.</p>
+                    <p class="feature-description">Share data across kernel instances or CXL-connected hosts through DAXFS with lock-free concurrent access and a shared page cache.</p>
                 </div>
             </div>
         </div>
