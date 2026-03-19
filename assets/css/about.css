@@ -32,12 +32,23 @@
 
 .values-item {
     text-align: center;
+    padding: var(--space-6);
+    background: white;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--gray-200);
+    border-top: 2px solid var(--accent-500);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.values-item:hover {
+    box-shadow: var(--shadow-sm);
+    transform: translateY(-2px);
 }
 
 .values-item i {
-    width: 24px;
-    height: 24px;
-    color: var(--gray-900);
+    width: 22px;
+    height: 22px;
+    color: var(--accent-600);
     margin-bottom: var(--space-3);
 }
 
@@ -76,15 +87,17 @@
 
 .founder-info h3 {
     font-size: var(--text-xl);
-    font-weight: 700;
+    font-weight: 800;
     color: var(--gray-900);
     margin-bottom: var(--space-1);
+    letter-spacing: -0.02em;
 }
 
 .founder-title {
+    font-family: var(--font-mono);
     font-size: var(--text-sm);
-    color: var(--gray-900);
-    font-weight: 600;
+    color: var(--accent-700);
+    font-weight: 500;
     margin-bottom: var(--space-4);
 }
 
@@ -102,7 +115,7 @@
 /* Contact Form */
 .contact-form {
     background: white;
-    border-radius: var(--radius-xl);
+    border-radius: var(--radius-lg);
     padding: var(--space-10);
     border: 1px solid var(--gray-200);
 }
@@ -122,16 +135,19 @@
 .form-group input, .form-group textarea, .form-group select {
     width: 100%;
     padding: var(--space-3) var(--space-4);
-    border: 1px solid var(--gray-300);
+    border: 1px solid var(--gray-200);
     border-radius: var(--radius-md);
+    font-family: var(--font-sans);
     font-size: var(--text-sm);
-    transition: border-color 0.15s ease;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    background: var(--gray-25);
 }
 
 .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
     outline: none;
-    border-color: var(--gray-900);
-    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+    border-color: var(--accent-500);
+    box-shadow: 0 0 0 3px rgba(226, 162, 59, 0.1);
+    background: white;
 }
 
 /* Responsive */

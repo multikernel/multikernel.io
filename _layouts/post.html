@@ -6,40 +6,46 @@ layout: default
 .blog-container {
     max-width: 800px;
     margin: 2rem auto;
-    padding: 2rem;
+    padding: 2.5rem;
     background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    border: 1px solid var(--gray-200);
+    border-left: 3px solid var(--accent-500);
     line-height: 1.6;
 }
 
 .blog-title {
+    font-family: var(--font-display);
     font-size: 2.5rem;
     font-weight: 800;
     margin-bottom: 1rem;
-    color: #333;
-    line-height: 1.2;
+    color: var(--gray-900);
+    line-height: 1.15;
+    letter-spacing: -0.04em;
 }
 
 .blog-meta {
-    color: #666;
-    font-size: 0.9rem;
+    font-family: var(--font-mono);
+    color: var(--gray-500);
+    font-size: 0.8rem;
     margin-bottom: 2rem;
     padding-bottom: 1rem;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--gray-200);
 }
 
 .blog-content {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     line-height: 1.7;
+    color: var(--gray-700);
 }
 
 .blog-content h2 {
-    margin-top: 2rem;
+    margin-top: 2.5rem;
     margin-bottom: 1rem;
-    color: #333;
-    font-size: 1.8rem;
-    font-weight: 600;
+    color: var(--gray-900);
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
 }
 
 .blog-content p {
@@ -48,38 +54,42 @@ layout: default
 
 .blog-content ul {
     margin-bottom: 1rem;
-    padding-left: 2rem;
+    padding-left: 1.5rem;
 }
 
 .blog-content a {
-    color: #007bff;
-    text-decoration: none;
+    color: var(--accent-700);
+    text-decoration: underline;
+    text-decoration-color: rgba(226, 162, 59, 0.3);
+    text-underline-offset: 2px;
 }
 
 .blog-content a:hover {
-    text-decoration: underline;
+    color: var(--accent-600);
+    text-decoration-color: var(--accent-500);
 }
 
 /* Code blocks */
 .blog-content .highlighter-rouge {
     margin: 1.5rem 0;
-    border-radius: var(--radius-xl);
+    border-radius: var(--radius-lg);
     overflow: hidden;
     border: 1px solid var(--gray-200);
 }
 
 .blog-content pre.highlight {
-    background: var(--gray-50);
-    color: #334155;
+    background: var(--gray-900);
+    color: var(--gray-300);
     padding: 1.25rem 1.5rem;
     overflow-x: auto;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     line-height: 1.7;
     margin: 0;
-    border-radius: var(--radius-xl);
+    border-radius: var(--radius-lg);
 }
 
 .blog-content pre.highlight code {
+    font-family: var(--font-mono);
     background: none;
     color: inherit;
     padding: 0;
@@ -88,23 +98,24 @@ layout: default
 }
 
 .blog-content code {
+    font-family: var(--font-mono);
     background: var(--gray-50);
-    color: var(--primary-700);
+    color: var(--accent-800);
     padding: 0.15rem 0.4rem;
-    border-radius: 4px;
-    font-size: 0.9em;
+    border-radius: 3px;
+    font-size: 0.88em;
     border: 1px solid var(--gray-200);
 }
 
-/* Rouge syntax highlighting (light theme) */
-.highlight .c, .highlight .c1, .highlight .cm { color: #6b7280; font-style: italic; } /* comments */
-.highlight .k, .highlight .kd, .highlight .kn { color: #7c3aed; } /* keywords */
-.highlight .s, .highlight .s1, .highlight .s2 { color: #16a34a; } /* strings */
-.highlight .nb { color: #2563eb; } /* builtins */
-.highlight .nt { color: #2563eb; } /* tags/flags */
-.highlight .nv, .highlight .nf { color: #b45309; } /* variables, functions */
-.highlight .o { color: #64748b; } /* operators */
-.highlight .m, .highlight .mi, .highlight .mf { color: #d97706; } /* numbers */
+/* Rouge syntax highlighting */
+.highlight .c, .highlight .c1, .highlight .cm { color: #64748b; font-style: italic; }
+.highlight .k, .highlight .kd, .highlight .kn { color: #c084fc; }
+.highlight .s, .highlight .s1, .highlight .s2 { color: #34d399; }
+.highlight .nb { color: #60a5fa; }
+.highlight .nt { color: #60a5fa; }
+.highlight .nv, .highlight .nf { color: #fbbf24; }
+.highlight .o { color: #94a3b8; }
+.highlight .m, .highlight .mi, .highlight .mf { color: #f59e0b; }
 
 /* Tables */
 .blog-content table {
@@ -112,65 +123,69 @@ layout: default
     border-collapse: collapse;
     margin: 1.5rem 0;
     background: white;
-    border-radius: var(--radius-xl);
+    border-radius: var(--radius-lg);
     overflow: hidden;
-    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--gray-200);
 }
 
 .blog-content thead th {
-    background: linear-gradient(135deg, var(--primary-600) 0%, var(--primary-700) 100%);
-    color: white;
-    font-weight: 700;
-    font-size: 0.95rem;
+    background: var(--gray-900);
+    color: rgba(255, 255, 255, 0.85);
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 0.75rem;
     padding: 0.75rem 1.25rem;
     text-align: left;
-    border-bottom: 2px solid var(--primary-700);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border-bottom: none;
 }
 
 .blog-content tbody td {
     padding: 0.75rem 1.25rem;
     border-bottom: 1px solid var(--gray-200);
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     line-height: 1.6;
 }
 
 .blog-content tbody td:first-child {
     font-weight: 600;
-    color: #1e293b;
+    color: var(--gray-900);
     background: var(--gray-50);
 }
 
 .blog-content tbody tr:hover {
-    background: #f8fafc;
+    background: var(--gray-25);
 }
 
 .blog-content tbody tr:last-child td {
     border-bottom: none;
 }
 
-/* Highlight the last column (Lazy CMA) */
+/* Highlight the last column */
 .blog-content thead th:last-child {
-    background: linear-gradient(135deg, var(--primary-700) 0%, #1e40af 100%);
+    background: var(--accent-700);
+    color: white;
 }
 
 .blog-content tbody td:last-child {
-    background: #eff6ff;
+    background: rgba(226, 162, 59, 0.05);
     font-weight: 600;
-    color: var(--primary-700);
+    color: var(--gray-900);
 }
 
 @media (max-width: 768px) {
     .blog-container {
         margin: 1rem;
-        padding: 1rem;
+        padding: 1.25rem;
     }
-    
+
     .blog-title {
-        font-size: 2rem;
+        font-size: 1.75rem;
     }
 
     .blog-content table {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
     }
 
     .blog-content thead th,
@@ -179,7 +194,7 @@ layout: default
     }
 
     .blog-content pre.highlight {
-        font-size: 0.8rem;
+        font-size: 0.78rem;
         padding: 1rem;
     }
 }
@@ -197,7 +212,7 @@ layout: default
         </div>
         {% endif %}
     </div>
-    
+
     <div class="blog-content">
         {{ content }}
     </div>

@@ -32,7 +32,7 @@
     <!-- Using a specific versioned CDN for Lucide icons -->
     <script src="https://cdn.jsdelivr.net/npm/lucide-static@0.269.0/dist/umd/lucide.min.js"></script>
     <!-- Add Google Fonts for Inter and JetBrains Mono -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Favicon and meta tags -->
     <link rel="icon" type="image/png" href="/assets/images/multikernel-logo.png">
     <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}Enterprise Linux Kernel Solutions - Multikernel Technologies delivers highly-customized and well-tuned Linux kernels for different business services.{% endif %}">
@@ -49,21 +49,21 @@
         position: fixed;
         top: 0; left: 0; right: 0;
         width: 100%;
-        height: 72px;
-        background: rgba(255,255,255,0.97);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border-bottom: 1px solid rgba(0,0,0,0.06);
+        height: 64px;
+        background: rgba(15, 23, 42, 0.97);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-bottom: 1px solid rgba(255,255,255,0.06);
         z-index: 999999;
     }
     .site-header-inner {
-        max-width: 1440px;
+        max-width: 1280px;
         margin: 0 auto;
-        padding: 0 60px;
-        height: 72px;
+        padding: 0 40px;
+        height: 64px;
         display: flex;
         align-items: center;
-        gap: 40px;
+        gap: 32px;
     }
     .site-logo {
         display: flex;
@@ -72,31 +72,31 @@
         flex-shrink: 0;
     }
     .site-logo img {
-        height: 40px;
+        height: 34px;
         width: auto;
     }
     .site-nav {
         display: flex;
         align-items: center;
-        gap: 2px;
+        gap: 1px;
         flex: 1;
     }
     .site-nav-link {
-        padding: 8px 16px;
-        font-size: 14px;
+        padding: 6px 14px;
+        font-size: 13px;
         font-weight: 500;
-        color: #374151;
+        color: rgba(255,255,255,0.55);
         text-decoration: none;
-        border-radius: 6px;
+        border-radius: 4px;
         transition: color 0.15s, background 0.15s;
         white-space: nowrap;
     }
     .site-nav-link:hover {
-        color: #111827;
-        background: #f3f4f6;
+        color: rgba(255,255,255,0.9);
+        background: rgba(255,255,255,0.06);
     }
     .site-nav-link.active {
-        color: #111827;
+        color: white;
         font-weight: 600;
     }
     /* Dropdown */
@@ -104,12 +104,12 @@
         position: relative;
     }
     .site-nav-dropdown-trigger {
-        padding: 8px 16px;
-        font-size: 14px;
+        padding: 6px 14px;
+        font-size: 13px;
         font-weight: 500;
-        color: #374151;
+        color: rgba(255,255,255,0.55);
         text-decoration: none;
-        border-radius: 6px;
+        border-radius: 4px;
         cursor: pointer;
         display: flex;
         align-items: center;
@@ -122,17 +122,17 @@
     }
     .site-nav-dropdown-trigger:hover,
     .site-nav-dropdown:hover .site-nav-dropdown-trigger {
-        color: #111827;
-        background: #f3f4f6;
+        color: rgba(255,255,255,0.9);
+        background: rgba(255,255,255,0.06);
     }
     .site-nav-dropdown-trigger.active {
-        color: #111827;
+        color: white;
         font-weight: 600;
     }
     .site-nav-dropdown-trigger svg {
         width: 10px;
         height: 10px;
-        opacity: 0.5;
+        opacity: 0.4;
         transition: transform 0.15s;
     }
     .site-nav-dropdown:hover .site-nav-dropdown-trigger svg {
@@ -143,12 +143,12 @@
         position: absolute;
         top: calc(100% + 8px);
         left: 0;
-        min-width: 240px;
-        background: white;
-        border: 1px solid rgba(0,0,0,0.08);
-        border-radius: 10px;
-        box-shadow: 0 12px 40px rgba(0,0,0,0.1), 0 2px 6px rgba(0,0,0,0.04);
-        padding: 6px;
+        min-width: 260px;
+        background: #1e293b;
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 6px;
+        box-shadow: 0 16px 48px rgba(0,0,0,0.5), 0 2px 8px rgba(0,0,0,0.3);
+        padding: 4px;
         z-index: 1000;
     }
     .site-nav-dropdown:hover .site-nav-dropdown-menu {
@@ -159,72 +159,74 @@
         padding: 10px 14px;
         font-size: 13px;
         font-weight: 500;
-        color: #374151;
+        color: rgba(255,255,255,0.6);
         text-decoration: none;
-        border-radius: 7px;
+        border-radius: 4px;
         transition: color 0.15s, background 0.15s;
         line-height: 1.3;
     }
     .site-nav-dropdown-item:hover {
-        color: #111827;
-        background: #f3f4f6;
+        color: white;
+        background: rgba(255,255,255,0.06);
     }
     .site-nav-dropdown-item.active {
-        color: #111827;
-        background: #f3f4f6;
+        color: white;
+        background: rgba(255,255,255,0.08);
         font-weight: 600;
     }
     .site-nav-dropdown-item small {
         display: block;
-        font-size: 12px;
+        font-size: 11px;
         font-weight: 400;
-        color: #9ca3af;
+        color: rgba(255,255,255,0.3);
         margin-top: 3px;
+        font-family: 'IBM Plex Mono', monospace;
     }
     /* GitHub icon */
     .site-nav-icon {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 36px;
-        height: 36px;
-        color: #6b7280;
+        width: 34px;
+        height: 34px;
+        color: rgba(255,255,255,0.4);
         text-decoration: none;
-        border-radius: 8px;
+        border-radius: 4px;
         transition: color 0.15s, background 0.15s;
     }
     .site-nav-icon:hover {
-        color: #111827;
-        background: #f3f4f6;
+        color: white;
+        background: rgba(255,255,255,0.06);
     }
     .site-nav-icon svg {
-        width: 20px;
-        height: 20px;
+        width: 18px;
+        height: 18px;
     }
     /* CTA */
     .site-nav-cta {
         display: inline-flex;
         align-items: center;
-        padding: 9px 20px;
+        padding: 7px 18px;
         font-size: 13px;
         font-weight: 600;
-        color: white;
-        background: #111827;
+        color: #0f172a;
+        background: #e2a23b;
         text-decoration: none;
-        border-radius: 8px;
+        border-radius: 4px;
         margin-left: 4px;
-        transition: background 0.15s;
+        transition: background 0.15s, box-shadow 0.15s;
         white-space: nowrap;
     }
     .site-nav-cta:hover {
-        background: #374151;
+        background: #f5b829;
+        box-shadow: 0 0 16px rgba(226, 162, 59, 0.25);
     }
     /* Divider */
     .site-nav-divider {
         width: 1px;
-        height: 24px;
-        background: #e5e7eb;
-        margin: 0 12px;
+        height: 20px;
+        background: rgba(255,255,255,0.1);
+        margin: 0 10px;
         margin-left: auto;
         flex-shrink: 0;
     }
@@ -237,16 +239,16 @@
         border: none;
         background: none;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
         margin-left: auto;
     }
     .site-mobile-toggle:hover {
-        background: #f3f4f6;
+        background: rgba(255,255,255,0.06);
     }
     .site-mobile-toggle span {
-        width: 20px;
+        width: 18px;
         height: 2px;
-        background: #374151;
+        background: rgba(255,255,255,0.6);
         display: block;
         border-radius: 1px;
     }

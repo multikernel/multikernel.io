@@ -17,18 +17,20 @@ permalink: /getting-started.html
     text-align: center;
     padding: var(--space-5);
     background: var(--gray-50);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-md);
     border: 1px solid var(--gray-200);
+    border-top: 2px solid var(--accent-500);
 }
 .gs-overview-card .step-num {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     background: var(--gray-900);
-    color: white;
+    color: var(--accent-400);
+    font-family: var(--font-mono);
     font-weight: 700;
     font-size: var(--text-xs);
     margin-bottom: var(--space-3);
@@ -51,11 +53,12 @@ permalink: /getting-started.html
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 26px;
-    height: 26px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
-    background: var(--gray-900);
-    color: white;
+    background: var(--accent-500);
+    color: var(--gray-900);
+    font-family: var(--font-mono);
     font-weight: 700;
     font-size: var(--text-xs);
     flex-shrink: 0;
@@ -65,7 +68,7 @@ permalink: /getting-started.html
 .content-card pre {
     background: var(--gray-900);
     border: none;
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-md);
     padding: var(--space-5) var(--space-6);
     overflow-x: auto;
     font-size: var(--text-sm);
@@ -74,25 +77,25 @@ permalink: /getting-started.html
     margin: var(--space-4) 0;
 }
 .content-card pre code {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     color: var(--gray-300);
 }
 .content-card p code,
 .content-card li code {
-    background: var(--gray-100);
+    background: var(--gray-50);
     padding: 2px 6px;
-    border-radius: var(--radius-base);
+    border-radius: var(--radius-sm);
     border: 1px solid var(--gray-200);
-    color: var(--gray-800);
-    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent-800);
+    font-family: var(--font-mono);
     font-size: 0.88em;
 }
 
 /* Diagram */
 .gs-diagram {
-    background: var(--gray-50);
-    border: 1px solid var(--gray-200);
-    border-radius: var(--radius-lg);
+    background: var(--gray-900);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: var(--radius-md);
     padding: var(--space-5);
     margin: var(--space-5) 0;
     overflow-x: auto;
@@ -105,14 +108,14 @@ permalink: /getting-started.html
     text-align: center;
     font-size: var(--text-sm);
     line-height: 1.5;
-    color: var(--gray-600);
+    color: var(--gray-400);
 }
 
 /* Comparison table */
 .gs-comparison {
     overflow-x: auto;
     margin: var(--space-5) 0;
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-md);
     border: 1px solid var(--gray-200);
 }
 .gs-comparison table {
@@ -122,14 +125,18 @@ permalink: /getting-started.html
 }
 .gs-comparison thead th {
     background: var(--gray-900);
-    color: white;
+    color: rgba(255,255,255,0.8);
+    font-family: var(--font-mono);
     font-weight: 600;
     padding: var(--space-3) var(--space-4);
     text-align: left;
-    font-size: var(--text-sm);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
 }
 .gs-comparison thead th:last-child {
-    background: var(--gray-800);
+    background: var(--accent-700);
+    color: white;
 }
 .gs-comparison tbody td {
     padding: var(--space-3) var(--space-4);
@@ -144,7 +151,7 @@ permalink: /getting-started.html
 .gs-comparison tbody td:last-child {
     color: var(--gray-900);
     font-weight: 600;
-    background: var(--gray-50);
+    background: rgba(226, 162, 59, 0.05);
 }
 .gs-comparison tbody tr:last-child td {
     border-bottom: none;
@@ -157,6 +164,8 @@ permalink: /getting-started.html
 .gs-cta {
     background: var(--gray-50);
     text-align: center;
+    border-top: 2px solid var(--accent-500);
+    border-left: 3px solid transparent;
 }
 .gs-cta .button-group {
     display: flex;
@@ -166,13 +175,14 @@ permalink: /getting-started.html
     margin-top: var(--space-5);
 }
 .gs-cta .btn-primary {
-    background: var(--gray-900);
-    color: white;
-    border-color: var(--gray-900);
+    background: var(--accent-500);
+    color: var(--gray-900);
+    border-color: var(--accent-500);
 }
 .gs-cta .btn-primary:hover {
-    background: var(--gray-800);
-    color: white;
+    background: var(--accent-400);
+    color: var(--gray-900);
+    box-shadow: 0 0 16px rgba(226, 162, 59, 0.2);
 }
 .gs-cta .btn-secondary {
     background: white;

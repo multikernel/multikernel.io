@@ -11,37 +11,38 @@
     padding: 0 var(--space-6);
     display: flex;
     flex-direction: column;
-    gap: var(--space-6);
+    gap: var(--space-5);
 }
 
 .content-card {
     background: white;
-    border-radius: var(--radius-xl);
+    border-radius: var(--radius-lg);
     padding: var(--space-10);
     border: 1px solid var(--gray-200);
+    border-left: 3px solid var(--gray-200);
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .content-card:hover {
-    border-color: var(--gray-300);
+    border-left-color: var(--accent-500);
     box-shadow: var(--shadow-sm);
 }
 
 .content-card h2 {
     font-size: var(--text-2xl);
-    font-weight: 700;
+    font-weight: 800;
     color: var(--gray-900);
     margin-bottom: var(--space-5);
     line-height: var(--leading-tight);
     display: flex;
     align-items: center;
     gap: var(--space-3);
-    letter-spacing: -0.02em;
+    letter-spacing: -0.03em;
 }
 
 .content-card h3 {
     font-size: var(--text-lg);
-    font-weight: 600;
+    font-weight: 700;
     color: var(--gray-900);
     margin: var(--space-5) 0 var(--space-3) 0;
     display: flex;
@@ -69,24 +70,24 @@
 }
 
 .content-card i {
-    width: 18px;
-    height: 18px;
+    width: 17px;
+    height: 17px;
     flex-shrink: 0;
-    color: var(--gray-900);
+    color: var(--accent-600);
 }
 
 /* Roadmap-specific styles */
 .content-card .summary {
     background: var(--gray-50);
     padding: var(--space-5);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-md);
     margin-bottom: var(--space-5);
-    border-left: 3px solid var(--gray-900);
+    border-left: 3px solid var(--accent-500);
 }
 
 .content-card .summary strong {
     color: var(--gray-900);
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .content-card .subsection,
@@ -103,13 +104,13 @@
     background: var(--gray-50);
     padding: var(--space-3);
     border-radius: var(--radius-md);
-    border-left: 3px solid var(--amber-500);
+    border-left: 3px solid var(--accent-500);
     font-size: var(--text-sm);
 }
 
 .content-card .objectives h5 {
     font-size: var(--text-base);
-    font-weight: 600;
+    font-weight: 700;
     color: var(--gray-900);
     margin: var(--space-3) 0 var(--space-2) 0;
 }
@@ -118,15 +119,17 @@
     display: inline-flex;
     align-items: center;
     gap: var(--space-2);
-    padding: var(--space-2) var(--space-4);
-    background: var(--gray-100);
-    color: var(--gray-700);
+    padding: var(--space-1) var(--space-4);
+    background: rgba(226, 162, 59, 0.08);
+    color: var(--accent-700);
+    font-family: var(--font-mono);
     font-size: var(--text-xs);
-    font-weight: 600;
-    border-radius: var(--radius-full);
+    font-weight: 500;
+    border-radius: var(--radius-sm);
     margin-bottom: var(--space-4);
     text-transform: uppercase;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.08em;
+    border: 1px solid rgba(226, 162, 59, 0.15);
 }
 
 /* Responsive */
