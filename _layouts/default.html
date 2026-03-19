@@ -395,23 +395,25 @@
             </button>
         </div>
 
-        <div class="site-mobile-nav">
-            <div class="site-mobile-nav-inner">
-                <a href="/" class="site-mobile-link {% if page.url == '/' %}active{% endif %}">Home</a>
-                <a href="/products/platform.html" class="site-mobile-link {% if page.url == '/products/platform.html' %}active{% endif %}">Multikernel Platform</a>
-                <a href="/products/enclaves.html" class="site-mobile-link {% if page.url == '/products/enclaves.html' %}active{% endif %}">Multikernel Enclaves</a>
-                <a href="/products/resilience.html" class="site-mobile-link {% if page.url == '/products/resilience.html' %}active{% endif %}">Multikernel Resilience</a>
-                <a href="/technology.html" class="site-mobile-link {% if page.url == '/technology.html' %}active{% endif %}">Technology</a>
-                <a href="/roadmap.html" class="site-mobile-link {% if page.url == '/roadmap.html' %}active{% endif %}">Roadmap</a>
-                <a href="/faq.html" class="site-mobile-link {% if page.url == '/faq.html' %}active{% endif %}">FAQ</a>
-                <a href="/getting-started.html" class="site-mobile-link {% if page.url == '/getting-started.html' %}active{% endif %}">Getting Started</a>
-                <a href="/blog/" class="site-mobile-link {% if page.url contains '/blog' or page.layout == 'post' %}active{% endif %}">Blog</a>
-                <a href="/about.html" class="site-mobile-link {% if page.url == '/about.html' %}active{% endif %}">About</a>
-                <a href="https://github.com/multikernel" target="_blank" class="site-mobile-link">GitHub</a>
-                <a href="https://calendar.app.google/nc1upkqQoUeoukdD9" target="_blank" rel="noopener noreferrer" class="site-mobile-cta">Schedule a Demo</a>
-            </div>
         </div>
     </header>
+
+    <div class="site-mobile-nav">
+        <div class="site-mobile-nav-inner">
+            <a href="/" class="site-mobile-link {% if page.url == '/' %}active{% endif %}">Home</a>
+            <a href="/products/platform.html" class="site-mobile-link {% if page.url == '/products/platform.html' %}active{% endif %}">Multikernel Platform</a>
+            <a href="/products/enclaves.html" class="site-mobile-link {% if page.url == '/products/enclaves.html' %}active{% endif %}">Multikernel Enclaves</a>
+            <a href="/products/resilience.html" class="site-mobile-link {% if page.url == '/products/resilience.html' %}active{% endif %}">Multikernel Resilience</a>
+            <a href="/technology.html" class="site-mobile-link {% if page.url == '/technology.html' %}active{% endif %}">Technology</a>
+            <a href="/roadmap.html" class="site-mobile-link {% if page.url == '/roadmap.html' %}active{% endif %}">Roadmap</a>
+            <a href="/faq.html" class="site-mobile-link {% if page.url == '/faq.html' %}active{% endif %}">FAQ</a>
+            <a href="/getting-started.html" class="site-mobile-link {% if page.url == '/getting-started.html' %}active{% endif %}">Getting Started</a>
+            <a href="/blog/" class="site-mobile-link {% if page.url contains '/blog' or page.layout == 'post' %}active{% endif %}">Blog</a>
+            <a href="/about.html" class="site-mobile-link {% if page.url == '/about.html' %}active{% endif %}">About</a>
+            <a href="https://github.com/multikernel" target="_blank" class="site-mobile-link">GitHub</a>
+            <a href="https://calendar.app.google/nc1upkqQoUeoukdD9" target="_blank" rel="noopener noreferrer" class="site-mobile-cta">Schedule a Demo</a>
+        </div>
+    </div>
     
     {{ content }}
 
