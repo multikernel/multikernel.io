@@ -72,6 +72,16 @@ There is no virtual device. No bridge. No netfilter evaluation. Both processes s
 
 Sandlock's security enforcement operates at the syscall boundary, not at the packet level. Landlock restricts which TCP ports a process may `bind()` or `connect()` to, checked once at connection time. The data path syscalls (`sendmsg`, `recvmsg`, `read`, `write`) pass through the seccomp-bpf filter in nanoseconds (arch check, arg filter skip, syscall number match) and proceed directly to the kernel's TCP implementation. There is no per-packet overhead beyond the BPF filter evaluation, which is negligible at this scale.
 
+## Host Mode Is Not the Answer
+
+Docker offers `--network=host`, which bypasses the bridge/veth/iptables stack entirely. The container shares the host's network namespace and gets the same loopback performance as bare metal. This would eliminate the throughput gap we measured.
+
+The tradeoff: `--network=host` provides **zero network isolation**. The container can bind any port, connect to any address, and see all host network traffic. Docker's network isolation depends entirely on the namespace/bridge/iptables layer, and host mode disables all of it.
+
+This is where Sandlock's architecture provides a distinct advantage. Sandlock uses the host network stack (the same fast path as `--network=host`) while still enforcing port-level restrictions through Landlock. A Sandlock-confined process can only `bind()` and `connect()` to the ports specified in the policy. Sandlock also supports transparent port remapping via seccomp user notification: the sandboxed process calls `bind(3000)`, but the kernel silently assigns a unique real port, preventing port conflicts between multiple sandboxes on the same host. This provides the port mapping functionality of Docker's bridge network without the virtual networking overhead.
+
+Docker forces a choice: fast networking without isolation (`--network=host`), or isolated networking with overhead (bridge mode). Sandlock provides both.
+
 ## Same Security, Different Mechanism
 
 The natural question: does Sandlock sacrifice security for performance?
@@ -81,7 +91,7 @@ No. It provides equivalent isolation through different kernel primitives.
 | Capability | Docker | Sandlock |
 |---|---|---|
 | Filesystem confinement | Mount namespace + overlay | Landlock (per-path read/write/deny) |
-| Network port restriction | iptables + bridge rules | Landlock ABI v4 (`net_bind`, `net_connect`) |
+| Network port restriction | iptables + bridge rules (none in host mode) | Landlock ABI v4 (`net_bind`, `net_connect`) |
 | Syscall filtering | Default seccomp profile | Seccomp-bpf with arg-level filtering |
 | Dangerous operation blocking | Capability dropping | Seccomp arg filters (prctl, ioctl, clone flags) |
 | Root required | Yes (daemon) | No |
