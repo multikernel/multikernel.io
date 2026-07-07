@@ -1,0 +1,72 @@
+en:
+  nav:
+    home: Home
+    products: Products
+    cloud: Multikernel Cloud
+    cloud_sub: Cloud-optimized Linux distribution
+    sandbox: Multikernel Sandbox
+    sandbox_sub: AI agent sandboxing runtime
+    liveupdate: Multikernel LiveUpdate
+    liveupdate_sub: Zero-downtime kernel upgrade tool
+    technology: Technology
+    overview: Overview
+    overview_sub: Architecture and approach
+    roadmap: Roadmap
+    roadmap_sub: What we are building next
+    faq: FAQ
+    faq_sub: Common questions answered
+    getting_started: Getting Started
+    blog: Blog
+    about: About
+    demo: Schedule a Demo
+  footer:
+    tagline: Enterprise Linux Solutions
+    company: Company
+    about_us: About Us
+    technology: Technology
+    blog: Blog
+    contact: Contact
+    products: Products
+    tech_overview: Technology Overview
+    resources: Resources
+    faq: FAQ
+    getting_started: Getting Started
+    tech_blog: Technical Blog
+    support: Support
+    rights: All rights reserved.
+zh:
+  nav:
+    home: 首页
+    products: 产品
+    cloud: Multikernel Cloud
+    cloud_sub: 面向云优化的 Linux 发行版
+    sandbox: Multikernel Sandbox
+    sandbox_sub: AI 智能体沙箱运行时
+    liveupdate: Multikernel LiveUpdate
+    liveupdate_sub: 零停机内核升级工具
+    technology: 技术
+    overview: 概览
+    overview_sub: 架构与技术路线
+    roadmap: 路线图
+    roadmap_sub: 后续开发计划
+    faq: 常见问题
+    faq_sub: 常见问题解答
+    getting_started: 快速上手
+    blog: 博客
+    about: 关于我们
+    demo: 预约演示
+  footer:
+    tagline: 企业级 Linux 解决方案
+    company: 公司
+    about_us: 关于我们
+    technology: 技术
+    blog: 博客
+    contact: 联系我们
+    products: 产品
+    tech_overview: 技术概览
+    resources: 资源
+    faq: 常见问题
+    getting_started: 快速上手
+    tech_blog: 技术博客
+    support: 支持
+    rights: 保留所有权利。

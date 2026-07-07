@@ -1,5 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+{%- assign lang = page.lang | default: 'en' -%}
+{%- if lang == 'zh' -%}
+  {%- assign lang_prefix = '/zh' -%}
+  {%- assign rel_url = page.url | remove_first: '/zh' -%}
+{%- else -%}
+  {%- assign lang_prefix = '' -%}
+  {%- assign rel_url = page.url -%}
+{%- endif -%}
+{%- assign t = site.data.i18n[lang] -%}
+{%- assign has_twin = false -%}
+{%- if lang == 'zh' or page.i18n -%}{%- assign has_twin = true -%}{%- endif -%}
+<html lang="{% if lang == 'zh' %}zh-CN{% else %}en{% endif %}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,25 +18,25 @@
     <link rel="stylesheet" href="/assets/css/styles.css">
     
     <!-- Page-specific CSS -->
-    {% if page.url contains '/blog' %}
+    {% if rel_url contains '/blog' %}
         <link rel="stylesheet" href="/assets/css/content-pages.css">
         <link rel="stylesheet" href="/assets/css/blog.css">
-    {% elsif page.url contains '/getting-started' %}
+    {% elsif rel_url contains '/getting-started' %}
         <link rel="stylesheet" href="/assets/css/content-pages.css">
-    {% elsif page.url contains '/roadmap' %}
+    {% elsif rel_url contains '/roadmap' %}
         <link rel="stylesheet" href="/assets/css/content-pages.css">
-    {% elsif page.url contains '/technology' %}
+    {% elsif rel_url contains '/technology' %}
         <link rel="stylesheet" href="/assets/css/technology.css">
-    {% elsif page.url contains '/products/' %}
+    {% elsif rel_url contains '/products/' %}
         <link rel="stylesheet" href="/assets/css/technology.css">
-    {% elsif page.url contains '/faq' %}
+    {% elsif rel_url contains '/faq' %}
         <link rel="stylesheet" href="/assets/css/faq.css">
-    {% elsif page.url contains '/about' %}
+    {% elsif rel_url contains '/about' %}
         <link rel="stylesheet" href="/assets/css/about.css">
-    {% elsif page.url contains '/contact' %}
+    {% elsif rel_url contains '/contact' %}
         <link rel="stylesheet" href="/assets/css/content-pages.css">
         <link rel="stylesheet" href="/assets/css/contact.css">
-    {% elsif page.url == '/' %}
+    {% elsif rel_url == '/' %}
         <link rel="stylesheet" href="/assets/css/products.css">
     {% endif %}
     
@@ -42,6 +53,12 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ site.url }}{{ page.url }}">
     <meta property="og:image" content="{{ site.url }}/assets/images/multikernel-logo.png">
+    {% if has_twin %}
+    <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+    <link rel="alternate" hreflang="en" href="{{ site.url }}{{ rel_url }}">
+    <link rel="alternate" hreflang="zh-CN" href="{{ site.url }}/zh{{ rel_url }}">
+    <link rel="alternate" hreflang="x-default" href="{{ site.url }}{{ rel_url }}">
+    {% endif %}
 </head>
 <body>
     <style>
@@ -239,6 +256,35 @@
         margin-left: auto;
         flex-shrink: 0;
     }
+    /* Language switch */
+    .site-lang-switch {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+        flex-shrink: 0;
+    }
+    .site-lang-link {
+        padding: 6px 8px;
+        font-size: 13px;
+        font-weight: 500;
+        color: rgba(255,255,255,0.55);
+        text-decoration: none;
+        border-radius: 4px;
+        transition: color 0.15s, background 0.15s;
+        white-space: nowrap;
+    }
+    a.site-lang-link:hover {
+        color: rgba(255,255,255,0.9);
+        background: rgba(255,255,255,0.06);
+    }
+    .site-lang-link.active {
+        color: white;
+        font-weight: 600;
+    }
+    .site-lang-sep {
+        color: rgba(255,255,255,0.2);
+        font-size: 11px;
+    }
     /* Mobile */
     .site-mobile-toggle {
         display: none;
@@ -340,61 +386,69 @@
             </a>
 
             <nav class="site-nav">
-                <a href="/" class="site-nav-link {% if page.url == '/' %}active{% endif %}">Home</a>
+                <a href="{{ lang_prefix }}/" class="site-nav-link {% if rel_url == '/' %}active{% endif %}">{{ t.nav.home }}</a>
 
                 <div class="site-nav-dropdown">
-                    <button class="site-nav-dropdown-trigger {% if page.url contains '/products/' %}active{% endif %}">
-                        Products
+                    <button class="site-nav-dropdown-trigger {% if rel_url contains '/products/' %}active{% endif %}">
+                        {{ t.nav.products }}
                         <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 4.5L6 7.5L9 4.5"/></svg>
                     </button>
                     <div class="site-nav-dropdown-menu">
-                        <a href="/products/cloud.html" class="site-nav-dropdown-item {% if page.url == '/products/cloud.html' %}active{% endif %}">
-                            Multikernel Cloud
-                            <small>Cloud-optimized Linux distribution</small>
+                        <a href="{{ lang_prefix }}/products/cloud.html" class="site-nav-dropdown-item {% if rel_url == '/products/cloud.html' %}active{% endif %}">
+                            {{ t.nav.cloud }}
+                            <small>{{ t.nav.cloud_sub }}</small>
                         </a>
-                        <a href="/products/sandbox.html" class="site-nav-dropdown-item {% if page.url == '/products/sandbox.html' %}active{% endif %}">
-                            Multikernel Sandbox
-                            <small>AI agent sandboxing runtime</small>
+                        <a href="{{ lang_prefix }}/products/sandbox.html" class="site-nav-dropdown-item {% if rel_url == '/products/sandbox.html' %}active{% endif %}">
+                            {{ t.nav.sandbox }}
+                            <small>{{ t.nav.sandbox_sub }}</small>
                         </a>
-                        <a href="/products/liveupdate.html" class="site-nav-dropdown-item {% if page.url == '/products/liveupdate.html' %}active{% endif %}">
-                            Multikernel LiveUpdate
-                            <small>Zero-downtime kernel upgrade tool</small>
+                        <a href="{{ lang_prefix }}/products/liveupdate.html" class="site-nav-dropdown-item {% if rel_url == '/products/liveupdate.html' %}active{% endif %}">
+                            {{ t.nav.liveupdate }}
+                            <small>{{ t.nav.liveupdate_sub }}</small>
                         </a>
                     </div>
                 </div>
 
                 <div class="site-nav-dropdown">
-                    <button class="site-nav-dropdown-trigger {% if page.url == '/technology.html' or page.url == '/roadmap.html' or page.url == '/faq.html' %}active{% endif %}">
-                        Technology
+                    <button class="site-nav-dropdown-trigger {% if rel_url == '/technology.html' or rel_url == '/roadmap.html' or rel_url == '/faq.html' %}active{% endif %}">
+                        {{ t.nav.technology }}
                         <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 4.5L6 7.5L9 4.5"/></svg>
                     </button>
                     <div class="site-nav-dropdown-menu">
-                        <a href="/technology.html" class="site-nav-dropdown-item {% if page.url == '/technology.html' %}active{% endif %}">
-                            Overview
-                            <small>Architecture and approach</small>
+                        <a href="{{ lang_prefix }}/technology.html" class="site-nav-dropdown-item {% if rel_url == '/technology.html' %}active{% endif %}">
+                            {{ t.nav.overview }}
+                            <small>{{ t.nav.overview_sub }}</small>
                         </a>
-                        <a href="/roadmap.html" class="site-nav-dropdown-item {% if page.url == '/roadmap.html' %}active{% endif %}">
-                            Roadmap
-                            <small>What we are building next</small>
+                        <a href="{{ lang_prefix }}/roadmap.html" class="site-nav-dropdown-item {% if rel_url == '/roadmap.html' %}active{% endif %}">
+                            {{ t.nav.roadmap }}
+                            <small>{{ t.nav.roadmap_sub }}</small>
                         </a>
-                        <a href="/faq.html" class="site-nav-dropdown-item {% if page.url == '/faq.html' %}active{% endif %}">
-                            FAQ
-                            <small>Common questions answered</small>
+                        <a href="{{ lang_prefix }}/faq.html" class="site-nav-dropdown-item {% if rel_url == '/faq.html' %}active{% endif %}">
+                            {{ t.nav.faq }}
+                            <small>{{ t.nav.faq_sub }}</small>
                         </a>
                     </div>
                 </div>
 
-                <a href="/getting-started.html" class="site-nav-link {% if page.url == '/getting-started.html' %}active{% endif %}">Getting Started</a>
-                <a href="/blog/" class="site-nav-link {% if page.url contains '/blog' or page.layout == 'post' %}active{% endif %}">Blog</a>
-                <a href="/about.html" class="site-nav-link {% if page.url == '/about.html' %}active{% endif %}">About</a>
+                <a href="{{ lang_prefix }}/getting-started.html" class="site-nav-link {% if rel_url == '/getting-started.html' %}active{% endif %}">{{ t.nav.getting_started }}</a>
+                <a href="/blog/" class="site-nav-link {% if rel_url contains '/blog' or page.layout == 'post' %}active{% endif %}">{{ t.nav.blog }}</a>
+                <a href="{{ lang_prefix }}/about.html" class="site-nav-link {% if rel_url == '/about.html' %}active{% endif %}">{{ t.nav.about }}</a>
 
                 <div class="site-nav-divider"></div>
+
+                <div class="site-lang-switch">
+                    {% if lang == 'zh' %}
+                    <a href="{{ rel_url }}" class="site-lang-link" data-lang-choice="en">EN</a><span class="site-lang-sep">·</span><span class="site-lang-link active">中文</span>
+                    {% else %}
+                    <span class="site-lang-link active">EN</span><span class="site-lang-sep">·</span><a href="{% if has_twin %}/zh{{ rel_url }}{% else %}/zh/{% endif %}" class="site-lang-link" data-lang-choice="zh">中文</a>
+                    {% endif %}
+                </div>
 
                 <a href="https://github.com/multikernel" target="_blank" class="site-nav-icon" aria-label="GitHub">
                     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
                 </a>
 
-                <a href="https://calendar.app.google/nc1upkqQoUeoukdD9" target="_blank" rel="noopener noreferrer" class="site-nav-cta">Schedule a Demo</a>
+                <a href="https://calendar.app.google/nc1upkqQoUeoukdD9" target="_blank" rel="noopener noreferrer" class="site-nav-cta">{{ t.nav.demo }}</a>
             </nav>
 
             <button class="site-mobile-toggle" aria-label="Toggle menu">
@@ -409,18 +463,23 @@
 
     <div class="site-mobile-nav">
         <div class="site-mobile-nav-inner">
-            <a href="/" class="site-mobile-link {% if page.url == '/' %}active{% endif %}">Home</a>
-            <a href="/products/cloud.html" class="site-mobile-link {% if page.url == '/products/cloud.html' %}active{% endif %}">Multikernel Cloud</a>
-            <a href="/products/sandbox.html" class="site-mobile-link {% if page.url == '/products/sandbox.html' %}active{% endif %}">Multikernel Sandbox</a>
-            <a href="/products/liveupdate.html" class="site-mobile-link {% if page.url == '/products/liveupdate.html' %}active{% endif %}">Multikernel LiveUpdate</a>
-            <a href="/technology.html" class="site-mobile-link {% if page.url == '/technology.html' %}active{% endif %}">Technology</a>
-            <a href="/roadmap.html" class="site-mobile-link {% if page.url == '/roadmap.html' %}active{% endif %}">Roadmap</a>
-            <a href="/faq.html" class="site-mobile-link {% if page.url == '/faq.html' %}active{% endif %}">FAQ</a>
-            <a href="/getting-started.html" class="site-mobile-link {% if page.url == '/getting-started.html' %}active{% endif %}">Getting Started</a>
-            <a href="/blog/" class="site-mobile-link {% if page.url contains '/blog' or page.layout == 'post' %}active{% endif %}">Blog</a>
-            <a href="/about.html" class="site-mobile-link {% if page.url == '/about.html' %}active{% endif %}">About</a>
+            <a href="{{ lang_prefix }}/" class="site-mobile-link {% if rel_url == '/' %}active{% endif %}">{{ t.nav.home }}</a>
+            <a href="{{ lang_prefix }}/products/cloud.html" class="site-mobile-link {% if rel_url == '/products/cloud.html' %}active{% endif %}">{{ t.nav.cloud }}</a>
+            <a href="{{ lang_prefix }}/products/sandbox.html" class="site-mobile-link {% if rel_url == '/products/sandbox.html' %}active{% endif %}">{{ t.nav.sandbox }}</a>
+            <a href="{{ lang_prefix }}/products/liveupdate.html" class="site-mobile-link {% if rel_url == '/products/liveupdate.html' %}active{% endif %}">{{ t.nav.liveupdate }}</a>
+            <a href="{{ lang_prefix }}/technology.html" class="site-mobile-link {% if rel_url == '/technology.html' %}active{% endif %}">{{ t.nav.technology }}</a>
+            <a href="{{ lang_prefix }}/roadmap.html" class="site-mobile-link {% if rel_url == '/roadmap.html' %}active{% endif %}">{{ t.nav.roadmap }}</a>
+            <a href="{{ lang_prefix }}/faq.html" class="site-mobile-link {% if rel_url == '/faq.html' %}active{% endif %}">{{ t.nav.faq }}</a>
+            <a href="{{ lang_prefix }}/getting-started.html" class="site-mobile-link {% if rel_url == '/getting-started.html' %}active{% endif %}">{{ t.nav.getting_started }}</a>
+            <a href="/blog/" class="site-mobile-link {% if rel_url contains '/blog' or page.layout == 'post' %}active{% endif %}">{{ t.nav.blog }}</a>
+            <a href="{{ lang_prefix }}/about.html" class="site-mobile-link {% if rel_url == '/about.html' %}active{% endif %}">{{ t.nav.about }}</a>
+            {% if lang == 'zh' %}
+            <a href="{{ rel_url }}" class="site-mobile-link" data-lang-choice="en">English</a>
+            {% else %}
+            <a href="{% if has_twin %}/zh{{ rel_url }}{% else %}/zh/{% endif %}" class="site-mobile-link" data-lang-choice="zh">中文</a>
+            {% endif %}
             <a href="https://github.com/multikernel" target="_blank" class="site-mobile-link">GitHub</a>
-            <a href="https://calendar.app.google/nc1upkqQoUeoukdD9" target="_blank" rel="noopener noreferrer" class="site-mobile-cta">Schedule a Demo</a>
+            <a href="https://calendar.app.google/nc1upkqQoUeoukdD9" target="_blank" rel="noopener noreferrer" class="site-mobile-cta">{{ t.nav.demo }}</a>
         </div>
     </div>
     
@@ -436,7 +495,7 @@
                         <img src="/assets/images/multikernel-logo.png" alt="Multikernel Technologies" class="footer-logo-img">
                         <div class="footer-brand-info">
                             <h3>Multikernel Technologies</h3>
-                            <p>Enterprise Linux Solutions</p>
+                            <p>{{ t.footer.tagline }}</p>
                         </div>
                     </div>
                     <div class="footer-contact-info">
@@ -453,33 +512,33 @@
 
                 <div class="footer-links">
                     <div class="footer-column">
-                        <h4>Company</h4>
+                        <h4>{{ t.footer.company }}</h4>
                         <ul>
-                            <li><a href="/about.html">About Us</a></li>
-                            <li><a href="/technology.html">Technology</a></li>
-                            <li><a href="/blog/">Blog</a></li>
-                            <li><a href="/contact.html">Contact</a></li>
+                            <li><a href="{{ lang_prefix }}/about.html">{{ t.footer.about_us }}</a></li>
+                            <li><a href="{{ lang_prefix }}/technology.html">{{ t.footer.technology }}</a></li>
+                            <li><a href="/blog/">{{ t.footer.blog }}</a></li>
+                            <li><a href="{{ lang_prefix }}/contact.html">{{ t.footer.contact }}</a></li>
                         </ul>
                     </div>
-                    
+
                     <div class="footer-column">
-                        <h4>Products</h4>
+                        <h4>{{ t.footer.products }}</h4>
                         <ul>
-                            <li><a href="/products/cloud.html">Multikernel Cloud</a></li>
-                            <li><a href="/products/sandbox.html">Multikernel Sandbox</a></li>
-                            <li><a href="/products/liveupdate.html">Multikernel LiveUpdate</a></li>
-                            <li><a href="/technology.html">Technology Overview</a></li>
+                            <li><a href="{{ lang_prefix }}/products/cloud.html">{{ t.nav.cloud }}</a></li>
+                            <li><a href="{{ lang_prefix }}/products/sandbox.html">{{ t.nav.sandbox }}</a></li>
+                            <li><a href="{{ lang_prefix }}/products/liveupdate.html">{{ t.nav.liveupdate }}</a></li>
+                            <li><a href="{{ lang_prefix }}/technology.html">{{ t.footer.tech_overview }}</a></li>
                         </ul>
                     </div>
-                    
+
                     <div class="footer-column">
-                        <h4>Resources</h4>
+                        <h4>{{ t.footer.resources }}</h4>
                         <ul>
-                            <li><a href="/faq.html">FAQ</a></li>
-                            <li><a href="/getting-started.html">Getting Started</a></li>
+                            <li><a href="{{ lang_prefix }}/faq.html">{{ t.footer.faq }}</a></li>
+                            <li><a href="{{ lang_prefix }}/getting-started.html">{{ t.footer.getting_started }}</a></li>
                             <li><a href="https://github.com/multikernel" target="_blank">GitHub</a></li>
-                            <li><a href="/blog/">Technical Blog</a></li>
-                            <li><a href="/contact.html">Support</a></li>
+                            <li><a href="/blog/">{{ t.footer.tech_blog }}</a></li>
+                            <li><a href="{{ lang_prefix }}/contact.html">{{ t.footer.support }}</a></li>
                         </ul>
                     </div>
 
@@ -489,7 +548,7 @@
             <!-- Footer bottom -->
             <div class="footer-bottom">
                 <div class="footer-bottom-left">
-                    <p>&copy; 2026 Multikernel Technologies, Inc. All rights reserved.</p>
+                    <p>&copy; 2026 Multikernel Technologies, Inc. {{ t.footer.rights }}</p>
                 </div>
                 <div class="footer-bottom-right">
                     <div class="footer-social">
