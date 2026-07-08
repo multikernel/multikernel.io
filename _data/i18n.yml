@@ -43,7 +43,7 @@ zh:
     sandbox: Multikernel Sandbox
     sandbox_sub: AI 智能体沙箱运行时
     liveupdate: Multikernel LiveUpdate
-    liveupdate_sub: 零停机内核升级工具
+    liveupdate_sub: 零停机内核热升级工具
     technology: 技术
     overview: 概览
     overview_sub: 架构与技术路线
