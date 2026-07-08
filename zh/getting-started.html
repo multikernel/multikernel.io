@@ -1,9 +1,9 @@
 ---
 layout: default
-title: "Getting Started - Multikernel Technologies"
-description: "Get up and running with Multikernel Linux. Learn how to build, configure, and launch your first multikernel instance."
-permalink: /getting-started.html
-i18n: true
+lang: zh
+permalink: /zh/getting-started.html
+title: "快速上手"
+description: "快速上手 Multikernel Linux：学习如何构建、配置并启动你的第一个 multikernel 实例。"
 ---
 
 <style>
@@ -206,16 +206,16 @@ i18n: true
 <main>
     <section class="hero">
         <div class="hero-container">
-            <h1>Getting Started with Multikernel</h1>
-            <p class="subtitle">Split your Linux kernel into independent instances for your application and device processing. No hypervisor, no virtualization overhead, full hardware access.</p>
+            <h1>快速上手 Multikernel</h1>
+            <p class="subtitle">将你的 Linux 内核分离为多个独立实例，分别用于应用程序和设备处理。无需虚拟机管理程序，没有虚拟化开销，完整硬件访问权限。</p>
             <div class="button-group">
                 <a href="https://github.com/multikernel/linux" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
                     <i data-lucide="github"></i>
-                    View on GitHub
+                    在 GitHub 上查看
                 </a>
                 <a href="/technology.html" class="btn btn-secondary">
                     <i data-lucide="cpu"></i>
-                    Learn the Architecture
+                    了解架构
                 </a>
             </div>
         </div>
@@ -229,26 +229,26 @@ i18n: true
                 <div class="gs-overview-grid">
                     <div class="gs-overview-card">
                         <div class="step-num">1</div>
-                        <h3>Build the Kernel</h3>
-                        <p>Clone and compile the multikernel-enabled Linux kernel</p>
+                        <h3>构建内核</h3>
+                        <p>克隆并编译支持 multikernel 的 Linux 内核</p>
                     </div>
                     <div class="gs-overview-card">
                         <div class="step-num">2</div>
-                        <h3>Configure Boot</h3>
-                        <p>Reserve a memory pool for spawned kernel instances</p>
+                        <h3>配置启动</h3>
+                        <p>为生成的内核实例预留内存池</p>
                     </div>
                     <div class="gs-overview-card">
                         <div class="step-num">3</div>
-                        <h3>Launch Instances</h3>
-                        <p>Use kerf to create, configure, and run kernel instances</p>
+                        <h3>启动实例</h3>
+                        <p>使用 kerf 创建、配置并运行内核实例</p>
                     </div>
                 </div>
             </div>
 
             <!-- What is Multikernel -->
             <div class="content-card">
-                <h2><i data-lucide="layers"></i>What is Multikernel Linux?</h2>
-                <p>Multikernel splits the Linux kernel into independent instances running simultaneously on the same physical machine. Your application gets its own kernel with dedicated CPUs, memory, and zero interrupt interference. Device drivers and I/O processing run in a separate kernel on separate cores. No hypervisor, native performance.</p>
+                <h2><i data-lucide="layers"></i>什么是 Multikernel Linux？</h2>
+                <p>Multikernel 将 Linux 内核分离为多个独立实例，在同一台物理机器上同时运行。你的应用程序获得属于自己的内核，拥有专用 CPU、内存，且不受任何中断干扰。设备驱动与 I/O 处理运行在独立核心上的另一个内核中。无需虚拟机管理程序，原生性能。</p>
 
                 <div class="gs-diagram"><pre>
 ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐
@@ -261,54 +261,54 @@ i18n: true
 └─────────────────┘  └─────────────────┘  └─────────────────┘
                 </pre></div>
 
-                <p>Each workload runs inside its own kernel with a tailored configuration, fully isolated from other instances. A driver crash or kernel exploit in one instance cannot affect the others. Resources can be rebalanced between kernels at runtime using standard Linux hotplug.</p>
+                <p>每个工作负载都运行在拥有定制配置的独立内核中，与其他实例完全隔离。某个实例中的驱动崩溃或内核漏洞利用无法影响其他实例。可以在运行时使用标准 Linux 热插拔机制在各内核之间重新平衡资源。</p>
 
                 <div class="gs-comparison">
                     <table>
                         <thead>
                             <tr>
                                 <th></th>
-                                <th>Containers</th>
-                                <th>VMs</th>
+                                <th>容器</th>
+                                <th>虚拟机</th>
                                 <th>Multikernel</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Isolation</td>
-                                <td>Shared kernel</td>
-                                <td>Full (hypervisor)</td>
-                                <td>Separate kernels</td>
+                                <td>隔离性</td>
+                                <td>共享内核</td>
+                                <td>完全隔离（虚拟机管理程序）</td>
+                                <td>独立内核</td>
                             </tr>
                             <tr>
-                                <td>Performance</td>
-                                <td>Near-native</td>
-                                <td>5-20% overhead</td>
-                                <td>Native</td>
+                                <td>性能</td>
+                                <td>接近原生</td>
+                                <td>5%-20% 开销</td>
+                                <td>原生</td>
                             </tr>
                             <tr>
-                                <td>Kernel customization</td>
-                                <td>No</td>
-                                <td>Yes</td>
-                                <td>Yes</td>
+                                <td>内核定制</td>
+                                <td>否</td>
+                                <td>可以</td>
+                                <td>可以</td>
                             </tr>
                             <tr>
-                                <td>Dynamic resources</td>
-                                <td>Yes</td>
-                                <td>Limited</td>
-                                <td>Yes (hotplug)</td>
+                                <td>动态资源</td>
+                                <td>可以</td>
+                                <td>有限</td>
+                                <td>可以（热插拔）</td>
                             </tr>
                             <tr>
-                                <td>Zero-downtime updates</td>
-                                <td>App only</td>
-                                <td>With orchestration</td>
-                                <td>Kernel + app</td>
+                                <td>零停机更新</td>
+                                <td>仅应用</td>
+                                <td>需借助编排系统</td>
+                                <td>内核 + 应用</td>
                             </tr>
                             <tr>
-                                <td>Attack surface</td>
-                                <td>Full kernel</td>
-                                <td>Reduced</td>
-                                <td>Minimal per instance</td>
+                                <td>攻击面</td>
+                                <td>完整内核</td>
+                                <td>已缩减</td>
+                                <td>单个实例极小</td>
                             </tr>
                         </tbody>
                     </table>
@@ -317,29 +317,29 @@ i18n: true
 
             <!-- Step 1: Build -->
             <div class="content-card">
-                <h2><i data-lucide="hammer"></i><span class="step-badge">1</span> Build the Multikernel Kernel</h2>
-                <p>Clone the multikernel-enabled Linux kernel and build it with multikernel support enabled.</p>
+                <h2><i data-lucide="hammer"></i><span class="step-badge">1</span> 构建 Multikernel 内核</h2>
+                <p>克隆支持 multikernel 的 Linux 内核，并开启 multikernel 支持进行构建。</p>
                 <pre><code>git clone https://github.com/multikernel/linux.git
 cd linux
 make menuconfig  # Enable CONFIG_MULTIKERNEL
 make -j$(nproc)
 sudo make install</code></pre>
-                <p>This produces a standard Linux kernel with multikernel extensions. It runs as your normal kernel and can additionally spawn new kernel instances.</p>
+                <p>这样会生成一个带有 multikernel 扩展的标准 Linux 内核。它会作为你的常规内核运行，并且还能额外生成新的内核实例。</p>
             </div>
 
             <!-- Step 2: Configure -->
             <div class="content-card">
-                <h2><i data-lucide="settings"></i><span class="step-badge">2</span> Reserve a Memory Pool</h2>
-                <p>Spawned kernels need a contiguous memory region. Add the following kernel boot parameter to your bootloader (GRUB, systemd-boot, etc.):</p>
+                <h2><i data-lucide="settings"></i><span class="step-badge">2</span> 预留内存池</h2>
+                <p>生成的内核需要一段连续的内存区域。请在你的引导加载程序（GRUB、systemd-boot 等）中添加以下内核启动参数：</p>
                 <pre><code>mkkernel_pool=1023M@0x40000000</code></pre>
-                <p>This reserves 1023 MB starting at physical address 0x40000000 for multikernel use. The primary kernel will not use this memory, and it becomes available for spawned instances.</p>
-                <p>Alternatively, you can use <a href="https://github.com/multikernel/lazy_cma" target="_blank" rel="noopener noreferrer">Lazy CMA</a> to allocate this memory at runtime without any boot parameter.</p>
+                <p>这会从物理地址 0x40000000 开始预留 1023 MB 供 multikernel 使用。主内核不会使用这部分内存，它将可供生成的实例使用。</p>
+                <p>你也可以使用 <a href="https://github.com/multikernel/lazy_cma" target="_blank" rel="noopener noreferrer">Lazy CMA</a> 在运行时分配这部分内存，无需任何启动参数。</p>
             </div>
 
             <!-- Step 3: Install kerf -->
             <div class="content-card">
-                <h2><i data-lucide="terminal"></i><span class="step-badge">3</span> Install the Kerf Management Tool</h2>
-                <p>Kerf is the command-line tool for creating, configuring, and managing multikernel instances. It handles resource allocation, kernel loading, and instance lifecycle.</p>
+                <h2><i data-lucide="terminal"></i><span class="step-badge">3</span> 安装 Kerf 管理工具</h2>
+                <p>Kerf 是用于创建、配置和管理 multikernel 实例的命令行工具，负责资源分配、内核加载以及实例生命周期管理。</p>
                 <pre><code>git clone https://github.com/multikernel/kerf.git
 cd kerf
 pip install -e .</code></pre>
@@ -347,8 +347,8 @@ pip install -e .</code></pre>
 
             <!-- Step 4: Launch -->
             <div class="content-card">
-                <h2><i data-lucide="rocket"></i><span class="step-badge">4</span> Launch Your First Instance</h2>
-                <p>Initialize a resource pool, create an instance, and launch it:</p>
+                <h2><i data-lucide="rocket"></i><span class="step-badge">4</span> 启动你的第一个实例</h2>
+                <p>初始化资源池，创建实例，然后将其启动：</p>
                 <pre><code># Initialize: make CPUs 4-31 available for spawned kernels
 kerf init --cpus=4-31
 
@@ -360,37 +360,37 @@ kerf load web-server --kernel=/boot/vmlinuz --initrd=/boot/initrd.img
 
 # Boot the instance
 kerf exec web-server</code></pre>
-                <p>The spawned kernel boots on the assigned CPUs and memory, running directly on hardware. It has its own scheduler, its own network stack, and its own view of the devices assigned to it.</p>
+                <p>生成的内核会在分配到的 CPU 和内存上启动，直接运行在硬件之上。它拥有自己的调度器、自己的网络协议栈，以及对分配给它的设备的独立视图。</p>
             </div>
 
             <!-- Key Components -->
             <div class="content-card">
-                <h2><i data-lucide="box"></i>Key Components</h2>
-                <p>The multikernel stack is composed of several open-source projects:</p>
+                <h2><i data-lucide="box"></i>关键组件</h2>
+                <p>multikernel 技术栈由多个开源项目组成：</p>
                 <ul>
-                    <li><strong><a href="https://github.com/multikernel/linux" target="_blank" rel="noopener noreferrer">Multikernel Linux</a></strong> - Kernel patches that enable spawning and managing additional kernel instances using the kexec subsystem</li>
-                    <li><strong><a href="https://github.com/multikernel/kerf" target="_blank" rel="noopener noreferrer">Kerf</a></strong> - Orchestration tool for managing kernel instances, resources, and lifecycle</li>
-                    <li><strong><a href="https://github.com/multikernel/daxfs" target="_blank" rel="noopener noreferrer">DAXFS</a></strong> - Shared filesystem across kernel instances using direct memory access, enabling shared container rootfs and zero-copy data sharing</li>
-                    <li><strong><a href="https://github.com/multikernel/lazy_cma" target="_blank" rel="noopener noreferrer">Lazy CMA</a></strong> - Runtime contiguous memory allocator, provides memory pools for spawned kernels without boot-time reservation</li>
+                    <li><strong><a href="https://github.com/multikernel/linux" target="_blank" rel="noopener noreferrer">Multikernel Linux</a></strong> - 内核补丁，支持使用 kexec 子系统生成并管理额外的内核实例</li>
+                    <li><strong><a href="https://github.com/multikernel/kerf" target="_blank" rel="noopener noreferrer">Kerf</a></strong> - 用于管理内核实例、资源和生命周期的编排工具</li>
+                    <li><strong><a href="https://github.com/multikernel/daxfs" target="_blank" rel="noopener noreferrer">DAXFS</a></strong> - 使用直接内存访问在多个内核实例之间共享的文件系统，支持共享容器根文件系统和零拷贝数据共享</li>
+                    <li><strong><a href="https://github.com/multikernel/lazy_cma" target="_blank" rel="noopener noreferrer">Lazy CMA</a></strong> - 运行时连续内存分配器，为生成的内核提供内存池，无需启动时预留</li>
                 </ul>
             </div>
 
             <!-- How it works -->
             <div class="content-card">
-                <h2><i data-lucide="cog"></i>How It Works Under the Hood</h2>
+                <h2><i data-lucide="cog"></i>底层工作原理</h2>
                 <ul>
-                    <li><strong>Kernel spawning via kexec</strong> - New kernels are launched using Linux's existing kexec mechanism, extended to run alongside the primary kernel rather than replacing it</li>
-                    <li><strong>Resource partitioning</strong> - CPUs, memory, and devices are split between kernels using standard hotplug interfaces</li>
-                    <li><strong>Hardware queue sharing</strong> - Modern NICs and SSDs have multiple hardware queues; each kernel gets exclusive access to specific queues for true hardware-level isolation</li>
-                    <li><strong>Inter-kernel communication</strong> - Kernels communicate over shared memory using vsock, a standard Linux socket type that applications can use without modification</li>
-                    <li><strong>Docker integration</strong> - Spawned kernels can boot directly into Docker images using DAXFS to share the container rootfs, with no OS init layer</li>
+                    <li><strong>通过 kexec 生成内核</strong> - 新内核使用 Linux 现有的 kexec 机制启动，该机制经过扩展，可与主内核并行运行，而非将其替换</li>
+                    <li><strong>资源分区</strong> - CPU、内存和设备通过标准热插拔接口在各内核之间分配</li>
+                    <li><strong>硬件队列共享</strong> - 现代网卡和 SSD 拥有多个硬件队列；每个内核独占访问特定队列，实现真正的硬件级隔离</li>
+                    <li><strong>内核间通信</strong> - 各内核通过共享内存并使用 vsock 通信，这是一种标准的 Linux 套接字类型，应用程序无需修改即可使用</li>
+                    <li><strong>Docker 集成</strong> - 生成的内核可以使用 DAXFS 共享容器根文件系统，直接启动进 Docker 镜像，无需操作系统初始化层</li>
                 </ul>
             </div>
 
             <!-- CTA -->
             <div class="content-card gs-cta">
-                <h2><i data-lucide="check-circle"></i>Ready to Try It?</h2>
-                <p>All multikernel components are open source. Explore the code, file issues, or reach out for a technical evaluation.</p>
+                <h2><i data-lucide="check-circle"></i>准备好试试了吗？</h2>
+                <p>全部 multikernel 组件均为开源。欢迎查看代码、提交 issue，或联系我们进行技术评估。</p>
                 <div class="button-group">
                     <a href="https://github.com/multikernel" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
                         <i data-lucide="github"></i>
@@ -398,11 +398,11 @@ kerf exec web-server</code></pre>
                     </a>
                     <a href="https://calendar.app.google/nc1upkqQoUeoukdD9" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
                         <i data-lucide="calendar"></i>
-                        Schedule a Demo
+                        预约演示
                     </a>
                     <a href="https://www.youtube.com/@multikernel-tech" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
                         <i data-lucide="play-circle"></i>
-                        Watch Demos
+                        观看演示
                     </a>
                 </div>
             </div>
