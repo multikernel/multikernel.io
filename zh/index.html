@@ -1,8 +1,9 @@
 ---
 layout: default
-title: "Multikernel Technologies - Split-Kernel Architecture for Linux"
-description: "The Multikernel split-kernel architecture offloads device drivers and interrupt processing to a dedicated kernel, delivering isolation and native performance without a hypervisor."
-i18n: true
+lang: zh
+permalink: /zh/
+title: "面向 Linux 的分离内核架构"
+description: "Multikernel 分离内核架构将设备驱动与中断处理卸载到专用内核，无需虚拟机管理程序即可同时获得强隔离与原生性能。"
 ---
 
 <main>
@@ -11,41 +12,41 @@ i18n: true
         <div class="hero-container">
             <div class="hero-badge">
                 <i data-lucide="cpu"></i>
-                <span>Split-Kernel Architecture</span>
+                <span>分离内核架构</span>
             </div>
 
-            <h1>One Machine. Many Kernels. Zero Compromise.</h1>
-            <p class="subtitle">The Multikernel system gives every application its own Linux kernel with dedicated cores and native hardware performance. Device drivers and I/O are offloaded to a separate kernel. No hypervisor. No virtualization overhead. No shared kernel attack surface.</p>
+            <h1>一台机器，多个内核，毫不妥协。</h1>
+            <p class="subtitle">Multikernel 系统为每个应用程序提供独立的 Linux 内核，拥有专用核心和原生硬件性能。设备驱动与 I/O 被卸载到独立的内核处理。无需虚拟机管理程序，没有虚拟化开销，也没有共享内核带来的攻击面。</p>
 
             <div class="button-group">
                 <a href="https://calendar.app.google/nc1upkqQoUeoukdD9" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
                     <i data-lucide="calendar"></i>
-                    Schedule a Demo
+                    预约演示
                 </a>
                 <a href="/technology.html" class="btn btn-secondary">
                     <i data-lucide="cpu"></i>
-                    How It Works
+                    了解工作原理
                 </a>
             </div>
 
             <div class="hero-trust">
-                <p class="trust-text">Built on upstream Linux, 100% open source</p>
+                <p class="trust-text">基于上游 Linux 构建，100% 开源</p>
                 <div class="trust-features">
                     <div class="trust-feature">
                         <i data-lucide="shield-check"></i>
-                        <span>Kernel-Level Isolation</span>
+                        <span>内核级隔离</span>
                     </div>
                     <div class="trust-feature">
                         <i data-lucide="zap"></i>
-                        <span>Native Performance</span>
+                        <span>原生性能</span>
                     </div>
                     <div class="trust-feature">
                         <i data-lucide="refresh-cw"></i>
-                        <span>Zero-Downtime Updates</span>
+                        <span>零停机更新</span>
                     </div>
                     <div class="trust-feature">
                         <i data-lucide="github"></i>
-                        <span>Open Source</span>
+                        <span>开源</span>
                     </div>
                 </div>
             </div>
@@ -59,14 +60,14 @@ i18n: true
                 <div class="value-text">
                     <div class="section-badge">
                         <i data-lucide="layers"></i>
-                        <span>Why Split-Kernel</span>
+                        <span>为何选择分离内核架构</span>
                     </div>
-                    <h2 class="section-title">Isolation Built into the Architecture</h2>
-                    <p class="section-subtitle">In a traditional Linux kernel, application code and device processing compete for the same CPU cores. The split-kernel architecture removes this contention by offloading all device processing to a dedicated kernel on dedicated cores. Applications see zero interrupts, not because of tuning, but because interrupts physically cannot reach them.</p>
+                    <h2 class="section-title">隔离能力内建于架构之中</h2>
+                    <p class="section-subtitle">在传统 Linux 内核中，应用程序代码与设备处理会争用相同的 CPU 核心。分离内核架构将全部设备处理卸载到专用核心上的专用内核，从而消除了这种争用。应用程序感受不到任何中断——这并非调优的结果，而是因为中断在物理上根本无法到达它们。</p>
 
                     <div class="value-cta">
                         <a href="/technology.html" class="btn-link">
-                            Learn more about the architecture
+                            了解更多架构详情
                             <i data-lucide="arrow-right"></i>
                         </a>
                     </div>
@@ -75,39 +76,39 @@ i18n: true
                 <div class="value-visual">
                     <div class="split-diagram">
                         <div class="diagram-side diagram-traditional">
-                            <div class="diagram-label">Traditional</div>
+                            <div class="diagram-label">传统架构</div>
                             <div class="diagram-box diagram-box-shared">
-                                <span class="diagram-tag">Single Kernel</span>
+                                <span class="diagram-tag">单一内核</span>
                                 <div class="diagram-items">
-                                    <span class="diagram-item item-app">App</span>
-                                    <span class="diagram-item item-driver">Drivers</span>
-                                    <span class="diagram-item item-driver">IRQs</span>
+                                    <span class="diagram-item item-app">应用</span>
+                                    <span class="diagram-item item-driver">驱动</span>
+                                    <span class="diagram-item item-driver">中断</span>
                                 </div>
-                                <div class="diagram-caption">All compete for the same cores</div>
+                                <div class="diagram-caption">全部争用相同的核心</div>
                             </div>
                         </div>
                         <div class="diagram-arrow">
                             <i data-lucide="arrow-right"></i>
                         </div>
                         <div class="diagram-side diagram-multikernel">
-                            <div class="diagram-label">Split-Kernel</div>
+                            <div class="diagram-label">分离内核架构</div>
                             <div class="diagram-box diagram-box-app">
-                                <span class="diagram-tag">App-Kernel</span>
+                                <span class="diagram-tag">应用内核</span>
                                 <div class="diagram-items">
-                                    <span class="diagram-item item-app">App</span>
-                                    <span class="diagram-item item-app">App</span>
-                                    <span class="diagram-item item-app">App</span>
+                                    <span class="diagram-item item-app">应用</span>
+                                    <span class="diagram-item item-app">应用</span>
+                                    <span class="diagram-item item-app">应用</span>
                                 </div>
-                                <div class="diagram-caption">Zero interrupts</div>
+                                <div class="diagram-caption">零中断</div>
                             </div>
                             <div class="diagram-box diagram-box-device">
-                                <span class="diagram-tag">Device-Kernel</span>
+                                <span class="diagram-tag">设备内核</span>
                                 <div class="diagram-items">
-                                    <span class="diagram-item item-driver">Drivers</span>
-                                    <span class="diagram-item item-driver">IRQs</span>
+                                    <span class="diagram-item item-driver">驱动</span>
+                                    <span class="diagram-item item-driver">中断</span>
                                     <span class="diagram-item item-driver">I/O</span>
                                 </div>
-                                <div class="diagram-caption">Dedicated cores</div>
+                                <div class="diagram-caption">专用核心</div>
                             </div>
                         </div>
                     </div>
@@ -122,10 +123,10 @@ i18n: true
             <div class="section-header">
                 <div class="section-badge">
                     <i data-lucide="package"></i>
-                    <span>Products</span>
+                    <span>产品</span>
                 </div>
-                <h2 class="section-title">Built on Split-Kernel Architecture</h2>
-                <p class="section-subtitle">Three open-source software products built on split-kernel architecture. Download from GitHub, deploy on your infrastructure.</p>
+                <h2 class="section-title">基于分离内核架构构建</h2>
+                <p class="section-subtitle">三款基于分离内核架构构建的开源软件产品。从 GitHub 下载，部署到您自己的基础设施中。</p>
             </div>
 
             <div class="cards-grid">
@@ -134,25 +135,25 @@ i18n: true
                         <i data-lucide="layers"></i>
                     </div>
                     <h3 class="capability-title">Multikernel Cloud</h3>
-                    <p style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--accent-700); margin-bottom: var(--space-3); letter-spacing: 0.04em;">Cloud-optimized Linux distribution</p>
-                    <p class="capability-description">Split-kernel architecture for cloud workloads. Eliminate noisy neighbors, remove virtualization overhead, and get bare-metal performance inside any standard cloud VM.</p>
+                    <p style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--accent-700); margin-bottom: var(--space-3); letter-spacing: 0.04em;">云优化的 Linux 发行版</p>
+                    <p class="capability-description">面向云端工作负载的分离内核架构。消除嘈杂邻居问题，去除虚拟化开销，在任意标准云虚拟机内获得裸金属性能。</p>
                     <div class="capability-features">
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>Bare-metal performance in cloud VMs</span>
+                            <span>云虚拟机中的裸金属性能</span>
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>Zero noisy-neighbor interference</span>
+                            <span>零嘈杂邻居干扰</span>
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>No hypervisor overhead</span>
+                            <span>无虚拟机管理程序开销</span>
                         </div>
                     </div>
                     <div class="value-cta" style="margin-top: var(--space-4);">
                         <a href="/products/cloud.html" class="btn-link">
-                            Learn more
+                            了解更多
                             <i data-lucide="arrow-right"></i>
                         </a>
                     </div>
@@ -163,25 +164,25 @@ i18n: true
                         <i data-lucide="brain"></i>
                     </div>
                     <h3 class="capability-title">Multikernel Sandbox</h3>
-                    <p style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--accent-700); margin-bottom: var(--space-3); letter-spacing: 0.04em;">AI agent sandboxing runtime</p>
-                    <p class="capability-description">Kernel-level sandboxing for AI agents. Each agent runs in its own kernel with full GPU access and strong isolation. No nested virtualization required.</p>
+                    <p style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--accent-700); margin-bottom: var(--space-3); letter-spacing: 0.04em;">AI 智能体沙箱运行时</p>
+                    <p class="capability-description">面向 AI 智能体的内核级沙箱。每个智能体运行在独立的内核中，拥有完整的 GPU 访问权限与强隔离，无需嵌套虚拟化。</p>
                     <div class="capability-features">
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>Full GPU access per agent</span>
+                            <span>每个智能体拥有完整 GPU 访问权限</span>
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>Kernel-level agent isolation</span>
+                            <span>内核级智能体隔离</span>
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>Fast checkpoint/restore</span>
+                            <span>快速检查点/恢复</span>
                         </div>
                     </div>
                     <div class="value-cta" style="margin-top: var(--space-4);">
                         <a href="/products/sandbox.html" class="btn-link">
-                            Learn more
+                            了解更多
                             <i data-lucide="arrow-right"></i>
                         </a>
                     </div>
@@ -192,25 +193,25 @@ i18n: true
                         <i data-lucide="heart-pulse"></i>
                     </div>
                     <h3 class="capability-title">Multikernel LiveUpdate</h3>
-                    <p style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--accent-700); margin-bottom: var(--space-3); letter-spacing: 0.04em;">Zero-downtime kernel upgrade tool</p>
-                    <p class="capability-description">Zero-downtime kernel upgrades with instant rollback. Apply security patches and kernel updates without rebooting or interrupting running workloads.</p>
+                    <p style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--accent-700); margin-bottom: var(--space-3); letter-spacing: 0.04em;">零停机内核热升级工具</p>
+                    <p class="capability-description">零停机内核热升级，支持即时回滚。无需重启或中断正在运行的工作负载，即可应用安全补丁和内核更新。</p>
                     <div class="capability-features">
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>Zero-downtime kernel upgrades</span>
+                            <span>零停机内核热升级</span>
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>Sub-second crash failover</span>
+                            <span>亚秒级故障切换</span>
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>Instant rollback</span>
+                            <span>即时回滚</span>
                         </div>
                     </div>
                     <div class="value-cta" style="margin-top: var(--space-4);">
                         <a href="/products/liveupdate.html" class="btn-link">
-                            Learn more
+                            了解更多
                             <i data-lucide="arrow-right"></i>
                         </a>
                     </div>
