@@ -36,8 +36,8 @@ zh:
   nav:
     home: 首页
     products: 产品
-    cloud: Multikernel Cloud
-    cloud_sub: 面向云优化的 Linux 发行版
+    cloud: Multikernel Private Cloud
+    cloud_sub: 私有云操作系统
     sandbox: Multikernel Sandbox
     sandbox_sub: AI 智能体沙箱运行时
     liveupdate: Multikernel LiveUpdate
