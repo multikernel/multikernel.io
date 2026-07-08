@@ -1,0 +1,302 @@
+---
+layout: default
+lang: zh
+permalink: /zh/technology.html
+title: "技术 - 分离内核架构"
+description: "Multikernel 系统将设备驱动与中断处理卸载到专用内核，实现更强的隔离、原生性能以及独立的内核生命周期管理。"
+---
+
+<main>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-badge">
+                <i data-lucide="cpu"></i>
+                <span>技术概览</span>
+            </div>
+
+            <h1>分离内核架构</h1>
+            <p class="subtitle">Multikernel 系统将全部设备驱动与中断处理卸载到专用的设备内核。应用程序运行在隔离的应用内核中，拥有专用资源和原生硬件性能。</p>
+
+            <div class="button-group">
+                <a href="/getting-started.html" class="btn btn-primary">
+                    <i data-lucide="rocket"></i>
+                    快速上手
+                </a>
+                <a href="https://github.com/multikernel" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                    <i data-lucide="github"></i>
+                    查看源码
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why -->
+    <section id="concept" class="value-section">
+        <div class="section-container">
+            <div class="value-content">
+                <div class="value-text">
+                    <div class="section-badge">
+                        <i data-lucide="layers"></i>
+                        <span>背景</span>
+                    </div>
+                    <h2 class="section-title">为何需要分离内核架构</h2>
+                    <p class="section-subtitle">传统 Linux 内核在同一批核心上运行应用程序代码、设备驱动和中断处理程序。负载升高时，中断处理会抢占本应属于应用程序的 CPU 周期。isolcpus、irqaffinity、NAPI 线程模式以及 RPS/RFS 等内核层面的变通手段能够缓解这一问题，但无法根除它。只要处于同一个内核之内，下半部（bottom-half）工作总有办法触达应用程序所在的核心。</p>
+                    <p class="section-subtitle">分离内核架构从设计层面消除了这种争用。设备处理被卸载到专用核心上的专用内核。应用程序运行在各自的内核中，中断在结构上根本不存在。由于 Multikernel 直接运行在硬件之上，不依赖虚拟机管理程序，因此它可以在任何标准云虚拟机内部运行，在不产生嵌套虚拟化性能损耗的前提下提供内核级隔离。</p>
+                </div>
+
+                <div class="value-visual">
+                    <div class="architecture-preview">
+                        <div class="preview-title">传统架构：单一内核</div>
+                        <div class="architecture-layers">
+                            <div class="layer multikernel-layer">
+                                <div class="layer-label">应用（用户空间）</div>
+                                <div class="layer-features">
+                                    <span>syscall / VFS</span>
+                                </div>
+                            </div>
+                            <div class="layer hardware-layer">
+                                <div class="layer-label">下半部（抢占应用 CPU）</div>
+                                <div class="layer-features">
+                                    <span>TCP softirq</span>
+                                    <span>NIC hardirq</span>
+                                    <span>NVMe hardirq</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="preview-benefit">所有上下文争用同一批核心</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Components -->
+    <section id="solution" class="value-section">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i data-lucide="cpu"></i>
+                    <span>关键组件</span>
+                </div>
+                <h2 class="section-title">Multikernel 系统</h2>
+                <p class="section-subtitle">三个组件协同工作：为应用程序提供隔离的应用内核、处理全部 I/O 的共享设备内核，以及连接二者的无锁共享内存层。</p>
+            </div>
+
+            <div class="technologies-grid">
+                <div class="technology-card primary">
+                    <div class="tech-icon">
+                        <i data-lucide="monitor"></i>
+                    </div>
+                    <h3 class="tech-title">应用内核</h3>
+                    <p class="tech-description">每个应用程序运行在专用核心上属于自己的 Linux 内核中。这些内核不包含任何设备驱动、中断处理程序或网络协议栈。几乎全部计算与内存资源都直接供应给应用程序。</p>
+                </div>
+
+                <div class="technology-card primary">
+                    <div class="tech-icon">
+                        <i data-lucide="hard-drive"></i>
+                    </div>
+                    <h3 class="tech-title">设备内核</h3>
+                    <p class="tech-description">全部设备驱动、中断处理程序、TCP/IP 协议栈以及 I/O 处理都运行在专用核心上的专用设备内核中。该内核为每一个应用内核提供服务，拥有独立的更新与故障域。</p>
+                </div>
+
+                <div class="technology-card primary">
+                    <div class="tech-icon">
+                        <i data-lucide="database"></i>
+                    </div>
+                    <h3 class="tech-title">DAXFS 共享内存</h3>
+                    <p class="tech-description">应用内核与设备内核通过 DAXFS 通信——这是一个构建在共享 DRAM 之上、采用无锁 CAS 协调机制的文件系统。零拷贝，无需序列化，也没有网络往返开销。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i data-lucide="cog"></i>
+                    <span>底层原理</span>
+                </div>
+                <h2 class="section-title">工作原理</h2>
+                <p class="section-subtitle">完全构建在现有 Linux 基础设施之上。没有新操作系统，没有定制虚拟机管理程序，也没有兼容性缺口。</p>
+            </div>
+
+            <div class="technologies-grid">
+                <div class="technology-card">
+                    <div class="tech-icon">
+                        <i data-lucide="play-circle"></i>
+                    </div>
+                    <h3 class="tech-title">通过 Kexec 生成内核</h3>
+                    <p class="tech-description">新的内核实例通过 Linux 的 kexec 机制启动，该机制经过扩展，可与正在运行的内核并行启动，而非将其替换。每个新生成的内核都在分配给它的 CPU 与内存上启动，完全独立。</p>
+                </div>
+
+                <div class="technology-card">
+                    <div class="tech-icon">
+                        <i data-lucide="sliders"></i>
+                    </div>
+                    <h3 class="tech-title">资源分区</h3>
+                    <p class="tech-description">CPU、内存和设备队列通过标准 Linux 热插拔接口分配给每个内核。资源可以在运行时于各内核之间重新平衡，无需重启。</p>
+                </div>
+
+                <div class="technology-card">
+                    <div class="tech-icon">
+                        <i data-lucide="hard-drive"></i>
+                    </div>
+                    <h3 class="tech-title">硬件队列隔离</h3>
+                    <p class="tech-description">现代网卡和 NVMe 设备都暴露多个硬件队列。设备内核独占访问这些设备队列。无需软件网桥，无需 SR-IOV。这是真正的硬件级 I/O 隔离。</p>
+                </div>
+
+                <div class="technology-card">
+                    <div class="tech-icon">
+                        <i data-lucide="box"></i>
+                    </div>
+                    <h3 class="tech-title">Docker 集成</h3>
+                    <p class="tech-description">新生成的内核通过 DAXFS 共享容器根文件系统，直接启动进 Docker 镜像。无需为每个实例执行完整的操作系统初始化。应用程序无需修改，即可使用标准 Linux 接口运行。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison -->
+    <section id="comparison" class="value-section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">分离内核架构与现有方案对比</h2>
+                <p class="section-subtitle">分离内核架构兼具独立内核的隔离性与原生硬件性能，既没有虚拟化的开销，也不受内核调优的局限。</p>
+            </div>
+
+            <div class="diagram-container">
+                <img src="assets/images/comparison-architecture-diagrams.svg" alt="虚拟机、容器与 Multikernel 架构对比图" class="architecture-diagram">
+            </div>
+
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>能力</th>
+                            <th>容器</th>
+                            <th>虚拟机</th>
+                            <th>Multikernel</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>隔离性</td>
+                            <td>共享内核</td>
+                            <td>完全隔离（虚拟机管理程序）</td>
+                            <td>独立内核</td>
+                        </tr>
+                        <tr>
+                            <td>性能开销</td>
+                            <td>极小</td>
+                            <td>5%-20%</td>
+                            <td>无</td>
+                        </tr>
+                        <tr>
+                            <td>内核定制</td>
+                            <td>否</td>
+                            <td>可以</td>
+                            <td>可以，按工作负载定制</td>
+                        </tr>
+                        <tr>
+                            <td>动态资源分配</td>
+                            <td>可以</td>
+                            <td>有限</td>
+                            <td>可以（CPU/内存热插拔）</td>
+                        </tr>
+                        <tr>
+                            <td>零停机内核更新</td>
+                            <td>否</td>
+                            <td>需借助编排系统</td>
+                            <td>可以</td>
+                        </tr>
+                        <tr>
+                            <td>单个工作负载的攻击面</td>
+                            <td>完整内核</td>
+                            <td>已缩减</td>
+                            <td>极小（精简内核）</td>
+                        </tr>
+                        <tr>
+                            <td>嘈杂邻居效应</td>
+                            <td>存在</td>
+                            <td>已缓解</td>
+                            <td>已消除</td>
+                        </tr>
+                        <tr>
+                            <td>可在云虚拟机内运行</td>
+                            <td>可以</td>
+                            <td>需要嵌套虚拟化</td>
+                            <td>可以</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases -->
+    <section id="use-cases" class="how-it-works">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i data-lucide="target"></i>
+                    <span>应用场景</span>
+                </div>
+                <h2 class="section-title">应用场景</h2>
+                <p class="section-subtitle">分离内核架构适用于需要强隔离、可预测性能或独立内核生命周期管理的工作负载。</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="bar-chart"></i>
+                    </div>
+                    <h3 class="feature-title">延迟敏感型工作负载</h3>
+                    <p class="feature-description">交易系统、实时分析和游戏服务器等场景中，中断抖动会直接影响结果。应用内核所在的核心从设计上就不会看到任何中断。</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="brain"></i>
+                    </div>
+                    <h3 class="feature-title">AI 智能体沙箱</h3>
+                    <p class="feature-description">每个 AI 智能体运行在自己的应用内核中，拥有完整的 GPU 访问权限和内核级隔离。智能体与硬件之间没有虚拟化层。</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="refresh-cw"></i>
+                    </div>
+                    <h3 class="feature-title">零停机更新</h3>
+                    <p class="feature-description">在应用程序持续运行的同时替换设备内核。回滚有问题的驱动更新，无需重启任何一个工作负载。</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="activity"></i>
+                    </div>
+                    <h3 class="feature-title">故障容错</h3>
+                    <p class="feature-description">设备内核中的驱动崩溃不会影响应用内核。设备内核可独立恢复，应用程序则持续运行不受影响。</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="server"></i>
+                    </div>
+                    <h3 class="feature-title">混合工作负载隔离</h3>
+                    <p class="feature-description">在同一台机器上运行数据库、Web 服务器和机器学习训练任务。每个工作负载都拥有自己的内核、专用资源，不受嘈杂邻居干扰。</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="database"></i>
+                    </div>
+                    <h3 class="feature-title">CXL 内存共享</h3>
+                    <p class="feature-description">通过 DAXFS 在多个内核实例或 CXL 互连主机之间共享数据，具备无锁并发访问能力和共享页缓存。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
