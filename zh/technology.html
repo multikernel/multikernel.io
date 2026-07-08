@@ -19,7 +19,7 @@ description: "Multikernel 系统将设备驱动与中断处理卸载到专用内
             <p class="subtitle">Multikernel 系统将全部设备驱动与中断处理卸载到专用的设备内核。应用程序运行在隔离的应用内核中，拥有专用资源和原生硬件性能。</p>
 
             <div class="button-group">
-                <a href="/getting-started.html" class="btn btn-primary">
+                <a href="/zh/getting-started.html" class="btn btn-primary">
                     <i data-lucide="rocket"></i>
                     快速上手
                 </a>
@@ -89,7 +89,7 @@ description: "Multikernel 系统将设备驱动与中断处理卸载到专用内
                         <i data-lucide="monitor"></i>
                     </div>
                     <h3 class="tech-title">应用内核</h3>
-                    <p class="tech-description">每个应用程序运行在专用核心上属于自己的 Linux 内核中。这些内核不包含任何设备驱动、中断处理程序或网络协议栈。几乎全部计算与内存资源都直接供应给应用程序。</p>
+                    <p class="tech-description">每个应用程序都在自己的 Linux 内核中，独占专用核心。这些内核不包含任何设备驱动、中断处理程序或网络协议栈。几乎全部计算与内存资源都直接供应给应用程序。</p>
                 </div>
 
                 <div class="technology-card primary">
@@ -168,7 +168,7 @@ description: "Multikernel 系统将设备驱动与中断处理卸载到专用内
             </div>
 
             <div class="diagram-container">
-                <img src="assets/images/comparison-architecture-diagrams.svg" alt="虚拟机、容器与 Multikernel 架构对比图" class="architecture-diagram">
+                <img src="/assets/images/comparison-architecture-diagrams.svg" alt="虚拟机、容器与 Multikernel 架构对比图" class="architecture-diagram">
             </div>
 
             <div class="comparison-table">
@@ -207,7 +207,7 @@ description: "Multikernel 系统将设备驱动与中断处理卸载到专用内
                             <td>可以（CPU/内存热插拔）</td>
                         </tr>
                         <tr>
-                            <td>零停机内核更新</td>
+                            <td>零停机内核热升级</td>
                             <td>否</td>
                             <td>需借助编排系统</td>
                             <td>可以</td>
