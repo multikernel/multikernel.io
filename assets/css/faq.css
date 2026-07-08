@@ -57,7 +57,7 @@
 .faq-answer a {
     color: var(--accent-700);
     text-decoration: underline;
-    text-decoration-color: rgba(226, 162, 59, 0.3);
+    text-decoration-color: rgba(201, 161, 62, 0.3);
     text-underline-offset: 2px;
 }
 

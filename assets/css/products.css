@@ -255,7 +255,7 @@
 
 .cta-action .btn:hover {
     background: var(--accent-400);
-    box-shadow: 0 0 16px rgba(226, 162, 59, 0.2);
+    box-shadow: 0 0 16px rgba(201, 161, 62, 0.2);
 }
 
 /* Split-Kernel Diagram */
@@ -297,8 +297,8 @@
 }
 
 .diagram-box-app {
-    background: rgba(226, 162, 59, 0.06);
-    border: 1px solid rgba(226, 162, 59, 0.2);
+    background: rgba(201, 161, 62, 0.06);
+    border: 1px solid rgba(201, 161, 62, 0.2);
 }
 
 .diagram-box-device {
@@ -340,7 +340,7 @@
 
 .diagram-item.item-app {
     color: var(--accent-700);
-    border: 1px solid rgba(226, 162, 59, 0.25);
+    border: 1px solid rgba(201, 161, 62, 0.25);
 }
 
 .diagram-item.item-driver {

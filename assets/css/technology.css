@@ -163,7 +163,7 @@
 }
 
 .comparison-table td:last-child {
-    background: rgba(226, 162, 59, 0.05);
+    background: rgba(201, 161, 62, 0.05);
     font-weight: 600;
     color: var(--gray-900);
 }
@@ -253,8 +253,8 @@
 }
 
 .multikernel-layer {
-    background: rgba(226, 162, 59, 0.06);
-    border: 1px solid rgba(226, 162, 59, 0.2);
+    background: rgba(201, 161, 62, 0.06);
+    border: 1px solid rgba(201, 161, 62, 0.2);
 }
 
 .hardware-layer {

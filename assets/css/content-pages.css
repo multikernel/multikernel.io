@@ -120,7 +120,7 @@
     align-items: center;
     gap: var(--space-2);
     padding: var(--space-1) var(--space-4);
-    background: rgba(226, 162, 59, 0.08);
+    background: rgba(201, 161, 62, 0.08);
     color: var(--accent-700);
     font-family: var(--font-mono);
     font-size: var(--text-xs);
@@ -129,7 +129,7 @@
     margin-bottom: var(--space-4);
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    border: 1px solid rgba(226, 162, 59, 0.15);
+    border: 1px solid rgba(201, 161, 62, 0.15);
 }
 
 /* Responsive */
@@ -146,4 +146,17 @@
     .content-card h2 {
         font-size: var(--text-xl);
     }
+}
+
+/* Inline links inside content cards follow the accent system */
+.content-card a:not(.btn):not(.btn-link):not(.card-link) {
+    color: var(--accent-700);
+    text-decoration: underline;
+    text-decoration-color: rgba(201, 161, 62, 0.35);
+    text-underline-offset: 2px;
+}
+
+.content-card a:not(.btn):not(.btn-link):not(.card-link):hover {
+    color: var(--accent-600);
+    text-decoration-color: var(--accent-500);
 }
