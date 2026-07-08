@@ -11,8 +11,6 @@ en:
     technology: Technology
     overview: Overview
     overview_sub: Architecture and approach
-    roadmap: Roadmap
-    roadmap_sub: What we are building next
     faq: FAQ
     faq_sub: Common questions answered
     getting_started: Getting Started
@@ -47,8 +45,6 @@ zh:
     technology: 技术
     overview: 概览
     overview_sub: 架构与技术路线
-    roadmap: 路线图
-    roadmap_sub: 后续开发计划
     faq: 常见问题
     faq_sub: 常见问题解答
     getting_started: 快速上手
