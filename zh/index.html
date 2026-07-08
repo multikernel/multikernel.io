@@ -31,19 +31,19 @@ description: "Multikernel 分离内核架构将设备驱动与中断处理卸载
 
             <div class="hero-stats">
                 <div class="hero-stat">
-                    <span class="hero-stat-number">+25%</span>
-                    <span class="hero-stat-label">吞吐量高于 Docker</span>
-                    <span class="hero-stat-detail">Redis 基准测试，相同二进制与硬件</span>
+                    <span class="hero-stat-number">0</span>
+                    <span class="hero-stat-label">应用核心上的中断次数</span>
+                    <span class="hero-stat-detail">源于架构设计，而非调优</span>
                 </div>
                 <div class="hero-stat">
-                    <span class="hero-stat-number">0.33 ms</span>
-                    <span class="hero-stat-label">中位延迟（Docker 为 0.50 ms）</span>
-                    <span class="hero-stat-detail">与裸金属相差不到 3%</span>
+                    <span class="hero-stat-number">0</span>
+                    <span class="hero-stat-label">应用与硬件之间的中间层</span>
+                    <span class="hero-stat-detail">无虚拟机管理程序，没有 VM exit</span>
                 </div>
                 <div class="hero-stat">
-                    <span class="hero-stat-number">88%</span>
-                    <span class="hero-stat-label">裸金属性能保留率</span>
-                    <span class="hero-stat-detail">Docker 为 71%——<a href="/2026/03/21/sandlock-vs-containers-network-benchmark/" style="color: inherit; text-decoration: underline; text-underline-offset: 3px;">完整基准测试</a></span>
+                    <span class="hero-stat-number">&lt;1 秒</span>
+                    <span class="hero-stat-label">内核崩溃故障切换</span>
+                    <span class="hero-stat-detail">零停机升级，即时回滚</span>
                 </div>
             </div>
 

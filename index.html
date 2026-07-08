@@ -30,19 +30,19 @@ i18n: true
 
             <div class="hero-stats">
                 <div class="hero-stat">
-                    <span class="hero-stat-number">+25%</span>
-                    <span class="hero-stat-label">More throughput than Docker</span>
-                    <span class="hero-stat-detail">Redis, same binary, same hardware</span>
+                    <span class="hero-stat-number">0</span>
+                    <span class="hero-stat-label">Interrupts on application cores</span>
+                    <span class="hero-stat-detail">Structural, not tuning</span>
                 </div>
                 <div class="hero-stat">
-                    <span class="hero-stat-number">0.33 ms</span>
-                    <span class="hero-stat-label">Median latency vs 0.50 ms in Docker</span>
-                    <span class="hero-stat-detail">Within 3% of bare metal</span>
+                    <span class="hero-stat-number">0</span>
+                    <span class="hero-stat-label">Layers between app and hardware</span>
+                    <span class="hero-stat-detail">No hypervisor, no VM exits</span>
                 </div>
                 <div class="hero-stat">
-                    <span class="hero-stat-number">88%</span>
-                    <span class="hero-stat-label">Of bare-metal performance retained</span>
-                    <span class="hero-stat-detail">Docker retains 71% — <a href="/2026/03/21/sandlock-vs-containers-network-benchmark/" style="color: inherit; text-decoration: underline; text-underline-offset: 3px;">full benchmark</a></span>
+                    <span class="hero-stat-number">&lt;1 s</span>
+                    <span class="hero-stat-label">Kernel crash failover</span>
+                    <span class="hero-stat-detail">Zero-downtime upgrades, instant rollback</span>
                 </div>
             </div>
 
