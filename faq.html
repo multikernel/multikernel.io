@@ -61,7 +61,7 @@ i18n: true
                 <div class="faq-question">
                     <i data-lucide="hard-drive"></i> How does the split-kernel architecture handle hardware resources?
                 </div>
-                <p class="faq-answer">In our split-kernel architecture, the host kernel manages hardware and device processing, while application kernels run workloads with dedicated CPU cores and no kernel context switching. Hardware resources like I/O queues are allocated exclusively to each application kernel by the host kernel, providing both strong isolation and near bare-metal performance. Modern servers with 256+ cores make this dedicated allocation practical at scale.</p>
+                <p class="faq-answer">In our split-kernel architecture, the device-kernel manages hardware and device processing, while application kernels run workloads with dedicated CPU cores and no kernel context switching. Hardware resources like I/O queues are allocated exclusively to each application kernel by the device-kernel, providing both strong isolation and near bare-metal performance. Modern servers with 256+ cores make this dedicated allocation practical at scale.</p>
             </div>
 
             <div class="faq-item">
