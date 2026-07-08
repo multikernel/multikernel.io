@@ -11,6 +11,7 @@ encoding: utf-8
 permalink: /:year/:month/:day/:title/
 plugins:
   - jekyll-feed
+  - jekyll-sitemap
 
 # Custom domain
 github_pages:
