@@ -1,9 +1,9 @@
 ---
 layout: default
-title: "Multikernel LiveUpdate - Zero-Downtime Kernel Upgrades"
-description: "Upgrade your Linux kernel without rebooting. Apply security patches and kernel updates with instant rollback while applications keep running."
-permalink: /products/liveupdate.html
-i18n: true
+lang: zh
+permalink: /zh/products/liveupdate.html
+title: "Multikernel LiveUpdate - 零停机内核升级"
+description: "无需重启即可升级 Linux 内核：在应用持续运行的同时应用安全补丁与内核更新，并支持即时回滚。"
 ---
 
 <main>
@@ -14,17 +14,17 @@ i18n: true
                 <span>Multikernel LiveUpdate</span>
             </div>
 
-            <h1>Upgrade Your Kernel Without Rebooting</h1>
-            <p class="subtitle">Apply kernel security patches and updates without downtime. Boot the new kernel alongside the old one, migrate workloads, and roll back instantly if anything goes wrong. No maintenance windows required.</p>
+            <h1>无需重启即可升级内核</h1>
+            <p class="subtitle">在不产生停机的情况下应用内核安全补丁与更新。新内核与旧内核同时启动，逐步迁移工作负载，一旦出现问题即可即时回滚。无需维护窗口。</p>
 
             <div class="button-group">
                 <a href="/getting-started.html" class="btn btn-primary">
                     <i data-lucide="rocket"></i>
-                    Get Started
+                    快速上手
                 </a>
                 <a href="https://calendar.app.google/nc1upkqQoUeoukdD9" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
                     <i data-lucide="calendar"></i>
-                    Schedule a Demo
+                    预约演示
                 </a>
             </div>
         </div>
@@ -33,8 +33,8 @@ i18n: true
     <section id="planned" class="value-section">
         <div class="section-container">
             <div class="section-header">
-                <h2 class="section-title">Zero-Downtime Kernel Upgrades</h2>
-                <p class="section-subtitle">Kernel upgrades are one of the most painful operations in production Linux. Teams delay security patches for weeks because they require reboots. Multikernel LiveUpdate removes that tradeoff.</p>
+                <h2 class="section-title">零停机内核升级</h2>
+                <p class="section-subtitle">内核升级是生产环境 Linux 中最令人头疼的操作之一。由于需要重启，许多团队将安全补丁的应用一拖再拖。Multikernel LiveUpdate 彻底消除了这一取舍。</p>
             </div>
 
             <div class="cards-grid">
@@ -42,24 +42,24 @@ i18n: true
                     <div class="capability-icon">
                         <i data-lucide="play-circle"></i>
                     </div>
-                    <h3 class="capability-title">Boot New Alongside Old</h3>
-                    <p class="capability-description">Launch the new kernel alongside the running one. Both kernels operate simultaneously on separate cores. No downtime window to schedule.</p>
+                    <h3 class="capability-title">新旧内核并行启动</h3>
+                    <p class="capability-description">在运行中的内核旁启动新内核。两个内核在不同核心上同时运行，无需安排停机窗口。</p>
                 </div>
 
                 <div class="capability-card">
                     <div class="capability-icon">
                         <i data-lucide="arrow-right-left"></i>
                     </div>
-                    <h3 class="capability-title">Migrate Workloads</h3>
-                    <p class="capability-description">Move applications from the old kernel to the new one gradually. Validate each migration before proceeding. Keep full control over the transition.</p>
+                    <h3 class="capability-title">迁移工作负载</h3>
+                    <p class="capability-description">将应用逐步从旧内核迁移到新内核。每次迁移前都可先行验证，全程掌控迁移过程。</p>
                 </div>
 
                 <div class="capability-card">
                     <div class="capability-icon">
                         <i data-lucide="undo"></i>
                     </div>
-                    <h3 class="capability-title">Instant Rollback</h3>
-                    <p class="capability-description">If something goes wrong, roll back instantly. The old kernel is still running. No reboot, no recovery procedure, no data loss.</p>
+                    <h3 class="capability-title">即时回滚</h3>
+                    <p class="capability-description">一旦出现问题，可立即回滚。旧内核依然在运行，无需重启，无需恢复流程，也不会造成数据丢失。</p>
                 </div>
             </div>
         </div>
@@ -68,8 +68,8 @@ i18n: true
     <section id="unplanned" class="how-it-works">
         <div class="section-container">
             <div class="section-header">
-                <h2 class="section-title">Automatic Kernel Failover</h2>
-                <p class="section-subtitle">When a kernel crashes today, the answer is reboot and hope. Multikernel LiveUpdate turns a minutes-long outage into a sub-second failover.</p>
+                <h2 class="section-title">内核自动故障转移</h2>
+                <p class="section-subtitle">如今内核崩溃时，唯一的应对方式就是重启并祈祷。Multikernel LiveUpdate 把长达数分钟的服务中断，缩短为亚秒级的故障转移。</p>
             </div>
 
             <div class="cards-grid">
@@ -77,24 +77,24 @@ i18n: true
                     <div class="capability-icon">
                         <i data-lucide="activity"></i>
                     </div>
-                    <h3 class="capability-title">Continuous Monitoring</h3>
-                    <p class="capability-description">A standby kernel runs alongside your primary kernel, monitoring it via heartbeat. Always ready to take over.</p>
+                    <h3 class="capability-title">持续监控</h3>
+                    <p class="capability-description">一个备用内核与主内核同时运行，通过心跳机制对其进行监控，随时准备接管。</p>
                 </div>
 
                 <div class="capability-card">
                     <div class="capability-icon">
                         <i data-lucide="zap"></i>
                     </div>
-                    <h3 class="capability-title">Sub-Second Failover</h3>
-                    <p class="capability-description">When the primary kernel crashes, the standby takes over its devices and resumes service. No full reboot. No kdump. Applications continue running.</p>
+                    <h3 class="capability-title">亚秒级故障转移</h3>
+                    <p class="capability-description">主内核崩溃时，备用内核接管其设备并恢复服务。无需完整重启，无需 kdump，应用持续运行不受影响。</p>
                 </div>
 
                 <div class="capability-card">
                     <div class="capability-icon">
                         <i data-lucide="refresh-cw"></i>
                     </div>
-                    <h3 class="capability-title">Automatic Recovery</h3>
-                    <p class="capability-description">After failover, the system automatically reclaims resources from the failed kernel and prepares a new standby. Self-healing without operator intervention.</p>
+                    <h3 class="capability-title">自动恢复</h3>
+                    <p class="capability-description">故障转移完成后，系统自动回收失效内核占用的资源，并准备新的备用内核。全程自愈，无需运维人员介入。</p>
                 </div>
             </div>
         </div>
@@ -103,7 +103,7 @@ i18n: true
     <section id="benefits" class="value-section">
         <div class="section-container">
             <div class="section-header">
-                <h2 class="section-title">Benefits</h2>
+                <h2 class="section-title">核心优势</h2>
             </div>
 
             <div class="features-grid">
@@ -111,24 +111,24 @@ i18n: true
                     <div class="feature-icon">
                         <i data-lucide="clock"></i>
                     </div>
-                    <h3 class="feature-title">Ship Security Patches Faster</h3>
-                    <p class="feature-description">No more delaying kernel updates because of reboot windows. Apply patches immediately with zero application downtime.</p>
+                    <h3 class="feature-title">更快交付安全补丁</h3>
+                    <p class="feature-description">不再因为需要重启窗口而推迟内核更新。立即应用补丁，应用零停机。</p>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i data-lucide="shield-check"></i>
                     </div>
-                    <h3 class="feature-title">Improve SLA</h3>
-                    <p class="feature-description">Sub-second failover means kernel crashes no longer translate to minutes of downtime. Directly measurable improvement in service reliability.</p>
+                    <h3 class="feature-title">提升 SLA</h3>
+                    <p class="feature-description">亚秒级故障转移意味着内核崩溃不再等同于数分钟的停机，服务可靠性的提升可直接量化。</p>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i data-lucide="users"></i>
                     </div>
-                    <h3 class="feature-title">Reduce Operator Burden</h3>
-                    <p class="feature-description">No more scheduling maintenance windows. No more manual crash recovery. The system handles both planned and unplanned events automatically.</p>
+                    <h3 class="feature-title">减轻运维负担</h3>
+                    <p class="feature-description">无需再安排维护窗口，无需再手动进行崩溃恢复。系统自动处理计划内与计划外事件。</p>
                 </div>
             </div>
         </div>
@@ -137,8 +137,8 @@ i18n: true
     <section id="get-it" class="how-it-works">
         <div class="section-container">
             <div class="section-header">
-                <h2 class="section-title">How to Get It</h2>
-                <p class="section-subtitle">Multikernel LiveUpdate is open-source software you install on your own infrastructure. Available as a free download with optional enterprise support.</p>
+                <h2 class="section-title">如何获取</h2>
+                <p class="section-subtitle">Multikernel LiveUpdate 是一款开源软件，您可以将其部署在自己的基础设施上。提供免费下载，并可选购企业级支持。</p>
             </div>
 
             <div class="cards-grid">
@@ -146,11 +146,11 @@ i18n: true
                     <div class="capability-icon">
                         <i data-lucide="github"></i>
                     </div>
-                    <h3 class="capability-title">Open Source</h3>
-                    <p class="capability-description">Download and build from source. Perform zero-downtime kernel upgrades on any multikernel-enabled system. Community support via GitHub issues.</p>
+                    <h3 class="capability-title">开源版</h3>
+                    <p class="capability-description">下载并从源码构建。在任何支持多内核的系统上执行零停机内核升级。通过 GitHub issues 获得社区支持。</p>
                     <div class="value-cta" style="margin-top: var(--space-4);">
                         <a href="https://github.com/multikernel" target="_blank" class="btn-link">
-                            View on GitHub
+                            前往 GitHub 查看
                             <i data-lucide="arrow-right"></i>
                         </a>
                     </div>
@@ -160,37 +160,37 @@ i18n: true
                     <div class="capability-icon">
                         <i data-lucide="building"></i>
                     </div>
-                    <h3 class="capability-title">Enterprise</h3>
-                    <p class="capability-description">Managed kernel lifecycle for production environments where downtime is not an option.</p>
+                    <h3 class="capability-title">企业级</h3>
+                    <p class="capability-description">为不容许停机的生产环境提供托管式内核生命周期管理。</p>
                     <div class="capability-features">
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>Validated kernel update paths tested against your workloads</span>
+                            <span>针对您的工作负载测试验证的内核更新路径</span>
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>Automated upgrade orchestration with rollback policies</span>
+                            <span>具备回滚策略的自动化升级编排</span>
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>Security patch delivery within 48 hours of upstream disclosure</span>
+                            <span>上游披露后 48 小时内交付安全补丁</span>
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>Priority engineering support with SLA-backed response times</span>
+                            <span>具备 SLA 响应时间保障的优先工程支持</span>
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>Failover configuration and disaster recovery planning</span>
+                            <span>故障转移配置与灾难恢复规划</span>
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>Quarterly kernel health reviews and upgrade roadmap</span>
+                            <span>季度内核健康检查与升级路线图</span>
                         </div>
                     </div>
                     <div class="value-cta" style="margin-top: var(--space-5);">
                         <a href="https://calendar.app.google/nc1upkqQoUeoukdD9" target="_blank" rel="noopener noreferrer" class="btn-link">
-                            Schedule a Demo
+                            预约演示
                             <i data-lucide="arrow-right"></i>
                         </a>
                     </div>
