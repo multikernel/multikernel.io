@@ -1,23 +1,23 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600">
   <!-- Background -->
-  <rect x="0" y="0" width="1000" height="600" fill="#f8faf7" stroke="none"/>
+  <rect x="0" y="0" width="1000" height="600" fill="#f8fafc" stroke="none"/>
   
   <!-- Containerized Architecture (Left) -->
   <g transform="translate(100, 70)">
     <!-- Box border without bottom extension -->
-    <path d="M 0,0 L 250,0 L 250,280 L 0,280 L 0,0" fill="white" stroke="#0f2b1e" stroke-width="2" rx="5"/>
+    <path d="M 0,0 L 250,0 L 250,280 L 0,280 L 0,0" fill="white" stroke="#0e1e33" stroke-width="2" rx="5"/>
     
     <!-- Container architecture elements -->
-    <rect x="25" y="50" width="90" height="70" fill="#f1f5f1" stroke="#33443b" stroke-width="1.5"/>
-    <rect x="135" y="50" width="90" height="70" fill="#f1f5f1" stroke="#33443b" stroke-width="1.5"/>
+    <rect x="25" y="50" width="90" height="70" fill="#f2f5f8" stroke="#334354" stroke-width="1.5"/>
+    <rect x="135" y="50" width="90" height="70" fill="#f2f5f8" stroke="#334354" stroke-width="1.5"/>
     
     <!-- Split application boxes into Application/Container -->
-    <line x1="25" y1="85" x2="115" y2="85" stroke="#33443b" stroke-width="1.5"/>
-    <line x1="135" y1="85" x2="225" y2="85" stroke="#33443b" stroke-width="1.5"/>
+    <line x1="25" y1="85" x2="115" y2="85" stroke="#334354" stroke-width="1.5"/>
+    <line x1="135" y1="85" x2="225" y2="85" stroke="#334354" stroke-width="1.5"/>
     
-    <rect x="0" y="140" width="250" height="40" fill="#e6ede7" stroke="#33443b" stroke-width="1.5"/>
-    <rect x="0" y="180" width="250" height="40" fill="#d3ded5" stroke="#33443b" stroke-width="1.5"/>
-    <rect x="0" y="220" width="250" height="60" fill="#c9d6cc" stroke="#33443b" stroke-width="1.5"/>
+    <rect x="0" y="140" width="250" height="40" fill="#e7ecf1" stroke="#334354" stroke-width="1.5"/>
+    <rect x="0" y="180" width="250" height="40" fill="#d4dde5" stroke="#334354" stroke-width="1.5"/>
+    <rect x="0" y="220" width="250" height="60" fill="#c3d1dd" stroke="#334354" stroke-width="1.5"/>
     
     <!-- Labels -->
     <text x="70" y="70" font-family="Arial" font-size="12" text-anchor="middle">Application</text>
@@ -38,29 +38,29 @@
   <!-- VM Architecture (Middle) -->
   <g transform="translate(375, 70)">
     <!-- Box border without bottom extension -->
-    <path d="M 0,0 L 250,0 L 250,280 L 0,280 L 0,0" fill="white" stroke="#0f2b1e" stroke-width="2" rx="5"/>
+    <path d="M 0,0 L 250,0 L 250,280 L 0,280 L 0,0" fill="white" stroke="#0e1e33" stroke-width="2" rx="5"/>
     
     <!-- VM architecture elements -->
-    <rect x="25" y="50" width="90" height="120" fill="#f1f5f1" stroke="#33443b" stroke-width="1.5"/>
-    <rect x="135" y="50" width="90" height="120" fill="#f1f5f1" stroke="#33443b" stroke-width="1.5"/>
+    <rect x="25" y="50" width="90" height="120" fill="#f2f5f8" stroke="#334354" stroke-width="1.5"/>
+    <rect x="135" y="50" width="90" height="120" fill="#f2f5f8" stroke="#334354" stroke-width="1.5"/>
     
-    <rect x="25" y="80" width="90" height="30" fill="#eef7f1" stroke="#33443b" stroke-width="1"/>
-    <rect x="135" y="80" width="90" height="30" fill="#eef7f1" stroke="#33443b" stroke-width="1"/>
+    <rect x="25" y="80" width="90" height="30" fill="#eef4f9" stroke="#334354" stroke-width="1"/>
+    <rect x="135" y="80" width="90" height="30" fill="#eef4f9" stroke="#334354" stroke-width="1"/>
     
-    <rect x="25" y="110" width="90" height="60" fill="#f3e7bf" stroke="#33443b" stroke-width="1"/>
-    <rect x="135" y="110" width="90" height="60" fill="#f3e7bf" stroke="#33443b" stroke-width="1"/>
+    <rect x="25" y="110" width="90" height="60" fill="#f3e7bf" stroke="#334354" stroke-width="1"/>
+    <rect x="135" y="110" width="90" height="60" fill="#f3e7bf" stroke="#334354" stroke-width="1"/>
     
-    <rect x="0" y="170" width="250" height="30" fill="#e6ede7" stroke="#33443b" stroke-width="1.5"/>
-    <rect x="0" y="200" width="250" height="30" fill="#d3ded5" stroke="#33443b" stroke-width="1.5"/>
-    <rect x="0" y="230" width="250" height="50" fill="#c9d6cc" stroke="#33443b" stroke-width="1.5"/>
+    <rect x="0" y="170" width="250" height="30" fill="#e7ecf1" stroke="#334354" stroke-width="1.5"/>
+    <rect x="0" y="200" width="250" height="30" fill="#d4dde5" stroke="#334354" stroke-width="1.5"/>
+    <rect x="0" y="230" width="250" height="50" fill="#c3d1dd" stroke="#334354" stroke-width="1.5"/>
     
     <!-- Dotted lines with arrows -->
-    <line x1="70" y1="230" x2="70" y2="140" stroke="#33443b" stroke-width="1.5" stroke-dasharray="4,2"/>
-    <line x1="180" y1="230" x2="180" y2="140" stroke="#33443b" stroke-width="1.5" stroke-dasharray="4,2"/>
+    <line x1="70" y1="230" x2="70" y2="140" stroke="#334354" stroke-width="1.5" stroke-dasharray="4,2"/>
+    <line x1="180" y1="230" x2="180" y2="140" stroke="#334354" stroke-width="1.5" stroke-dasharray="4,2"/>
     
     <!-- Arrow heads -->
-    <polygon points="70,140 65,150 75,150" fill="#33443b"/>
-    <polygon points="180,140 175,150 185,150" fill="#33443b"/>
+    <polygon points="70,140 65,150 75,150" fill="#334354"/>
+    <polygon points="180,140 175,150 185,150" fill="#334354"/>
     
     <!-- Labels -->
     <text x="70" y="70" font-family="Arial" font-size="12" text-anchor="middle">Application</text>
@@ -86,28 +86,28 @@
   <!-- Multikernel Architecture (Right) -->
   <g transform="translate(650, 70)">
     <!-- Box border without bottom extension -->
-    <path d="M 0,0 L 250,0 L 250,280 L 0,280 L 0,0" fill="white" stroke="#0f2b1e" stroke-width="2" rx="5"/>
+    <path d="M 0,0 L 250,0 L 250,280 L 0,280 L 0,0" fill="white" stroke="#0e1e33" stroke-width="2" rx="5"/>
     
     <!-- Multikernel architecture elements -->
-    <rect x="25" y="50" width="90" height="120" fill="#f1f5f1" stroke="#33443b" stroke-width="1.5"/>
-    <rect x="135" y="50" width="90" height="120" fill="#f1f5f1" stroke="#33443b" stroke-width="1.5"/>
+    <rect x="25" y="50" width="90" height="120" fill="#f2f5f8" stroke="#334354" stroke-width="1.5"/>
+    <rect x="135" y="50" width="90" height="120" fill="#f2f5f8" stroke="#334354" stroke-width="1.5"/>
     
-    <rect x="25" y="80" width="90" height="30" fill="#eef7f1" stroke="#33443b" stroke-width="1"/>
-    <rect x="135" y="80" width="90" height="30" fill="#eef7f1" stroke="#33443b" stroke-width="1"/>
+    <rect x="25" y="80" width="90" height="30" fill="#eef4f9" stroke="#334354" stroke-width="1"/>
+    <rect x="135" y="80" width="90" height="30" fill="#eef4f9" stroke="#334354" stroke-width="1"/>
     
-    <rect x="25" y="110" width="90" height="60" fill="#f3e7bf" stroke="#33443b" stroke-width="1"/>
-    <rect x="135" y="110" width="90" height="60" fill="#f3e7bf" stroke="#33443b" stroke-width="1"/>
+    <rect x="25" y="110" width="90" height="60" fill="#f3e7bf" stroke="#334354" stroke-width="1"/>
+    <rect x="135" y="110" width="90" height="60" fill="#f3e7bf" stroke="#334354" stroke-width="1"/>
     
-    <rect x="0" y="170" width="250" height="30" fill="#d3ded5" stroke="#33443b" stroke-width="1.5"/>
-    <rect x="0" y="200" width="250" height="80" fill="#c9d6cc" stroke="#33443b" stroke-width="1.5"/> <!-- Extended hardware box -->
+    <rect x="0" y="170" width="250" height="30" fill="#d4dde5" stroke="#334354" stroke-width="1.5"/>
+    <rect x="0" y="200" width="250" height="80" fill="#c3d1dd" stroke="#334354" stroke-width="1.5"/> <!-- Extended hardware box -->
     
     <!-- Curved arrows -->
-    <path d="M 70 200 C 70 180, 70 180, 70 170" fill="none" stroke="#33443b" stroke-width="1.5"/>
-    <path d="M 180 200 C 180 180, 180 180, 180 170" fill="none" stroke="#33443b" stroke-width="1.5"/>
+    <path d="M 70 200 C 70 180, 70 180, 70 170" fill="none" stroke="#334354" stroke-width="1.5"/>
+    <path d="M 180 200 C 180 180, 180 180, 180 170" fill="none" stroke="#334354" stroke-width="1.5"/>
     
     <!-- Arrow heads -->
-    <polygon points="70,170 65,180 75,180" fill="#33443b"/>
-    <polygon points="180,170 175,180 185,180" fill="#33443b"/>
+    <polygon points="70,170 65,180 75,180" fill="#334354"/>
+    <polygon points="180,170 175,180 185,180" fill="#334354"/>
     
     <!-- Labels -->
     <text x="70" y="70" font-family="Arial" font-size="12" text-anchor="middle">Application</text>
