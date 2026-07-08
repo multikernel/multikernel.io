@@ -16,17 +16,35 @@ description: "Multikernel 分离内核架构将设备驱动与中断处理卸载
             </div>
 
             <h1>一台机器，多个内核，毫不妥协。</h1>
-            <p class="subtitle">Multikernel 系统为每个应用程序提供独立的 Linux 内核，拥有专用核心和原生硬件性能。设备驱动与 I/O 被卸载到独立的内核处理。无需虚拟机管理程序，没有虚拟化开销，也没有共享内核带来的攻击面。</p>
+            <p class="subtitle">让每个工作负载都获得独占整机般的性能——就在您已有的硬件或已租用的虚拟机上。每个应用程序运行在自己的 Linux 内核中，独享专用核心；设备驱动与 I/O 被卸载到独立的内核。无需虚拟机管理程序，没有虚拟化开销，也没有共享内核带来的攻击面。</p>
 
             <div class="button-group">
-                <a href="https://calendar.app.google/nc1upkqQoUeoukdD9" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                <a href="https://github.com/multikernel" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                    <i data-lucide="github"></i>
+                    前往 GitHub 查看
+                </a>
+                <a href="https://calendar.app.google/nc1upkqQoUeoukdD9" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
                     <i data-lucide="calendar"></i>
                     预约演示
                 </a>
-                <a href="/zh/technology.html" class="btn btn-secondary">
-                    <i data-lucide="cpu"></i>
-                    了解工作原理
-                </a>
+            </div>
+
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <span class="hero-stat-number">+25%</span>
+                    <span class="hero-stat-label">吞吐量高于 Docker</span>
+                    <span class="hero-stat-detail">Redis 基准测试，相同二进制与硬件</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-number">0.33 ms</span>
+                    <span class="hero-stat-label">中位延迟（Docker 为 0.50 ms）</span>
+                    <span class="hero-stat-detail">与裸金属相差不到 3%</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-number">88%</span>
+                    <span class="hero-stat-label">裸金属性能保留率</span>
+                    <span class="hero-stat-detail">Docker 为 71%——<a href="/2026/03/21/sandlock-vs-containers-network-benchmark/" style="color: inherit; text-decoration: underline; text-underline-offset: 3px;">完整基准测试</a></span>
+                </div>
             </div>
 
             <div class="hero-trust">
@@ -112,6 +130,45 @@ description: "Multikernel 分离内核架构将设备驱动与中断处理卸载
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Who It's For -->
+    <section id="use-cases" class="how-it-works">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i data-lucide="users"></i>
+                    <span>为谁而建</span>
+                </div>
+                <h2 class="section-title">为自主运营基础设施的团队而建</h2>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="layers"></i>
+                    </div>
+                    <h3 class="feature-title">平台与基础设施团队</h3>
+                    <p class="feature-description">在每台机器上整合更多 Linux 工作负载，没有虚拟机管理程序损耗，没有嘈杂邻居——也不必再续费虚拟化授权。</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="brain"></i>
+                    </div>
+                    <h3 class="feature-title">AI 基础设施团队</h3>
+                    <p class="feature-description">以内核级隔离和直接 GPU 访问为不可信智能体与生成代码提供沙箱，速度堪比容器。</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="heart-pulse"></i>
+                    </div>
+                    <h3 class="feature-title">SRE 与集群运维团队</h3>
+                    <p class="feature-description">在整个集群范围内应用内核安全补丁：零停机、亚秒级故障切换、即时回滚。从此告别维护窗口。</p>
                 </div>
             </div>
         </div>
@@ -216,6 +273,26 @@ description: "Multikernel 分离内核架构将设备驱动与中断处理卸载
                         </a>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Closing CTA -->
+    <section id="get-started" class="value-section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">让基础设施运行在内核之上，而非虚拟机管理程序之上</h2>
+                <p class="section-subtitle">Multikernel 完全开源，可运行在您现有的硬件上。从文档开始上手，或直接与开发团队交流。</p>
+            </div>
+            <div class="button-group">
+                <a href="/zh/getting-started.html" class="btn btn-primary">
+                    <i data-lucide="rocket"></i>
+                    快速上手
+                </a>
+                <a href="https://calendar.app.google/nc1upkqQoUeoukdD9" target="_blank" rel="noopener noreferrer" class="btn-link">
+                    预约演示
+                    <i data-lucide="arrow-right"></i>
+                </a>
             </div>
         </div>
     </section>
