@@ -1,0 +1,139 @@
+---
+layout: default
+lang: zh
+permalink: /zh/faq.html
+title: "常见问题"
+description: "关于 Multikernel 分离内核架构、产品与部署的常见问题解答。"
+---
+
+<main>
+    <section class="hero">
+        <div class="hero-container">
+            <h1>常见问题</h1>
+            <p class="subtitle">关于 multikernel 技术、架构与实现的常见问题。</p>
+        </div>
+    </section>
+
+    <section class="content-page">
+        <div class="faq-content">
+
+            <!-- Overview -->
+            <h2 class="faq-category">概览</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i data-lucide="info"></i> 什么是 multikernel？
+                </div>
+                <p class="faq-answer">Multikernel 是一种无需依赖虚拟化即可并行运行多个内核的架构。与将机器视为由消息传递核心组成的分布式系统的<a href="https://www.sigops.org/s/conferences/sosp/2009/papers/baumann-sosp09.pdf" target="_blank" rel="noopener noreferrer">原始学术定义</a>不同，我们的实现专注于实用的内核隔离与性能优化。</p>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i data-lucide="help-circle"></i> multikernel 与容器、虚拟机有什么区别？
+                </div>
+                <p class="faq-answer">容器共享单一内核，隔离性受限。虚拟机提供隔离，但会带来虚拟化开销。Multikernel 提供真正的内核级隔离，具备接近裸金属性能与动态资源分配能力，且没有虚拟机管理程序的开销。</p>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i data-lucide="cpu"></i> 哪些类型的工作负载受益最大？
+                </div>
+                <p class="faq-answer">高性能计算、AI/ML 训练与推理、延迟敏感型服务，以及对安全性或隔离性有严格要求的工作负载，从 multikernel 架构中获益最多。</p>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i data-lucide="check-circle"></i> multikernel 是否兼容现有的 Linux 应用程序？
+                </div>
+                <p class="faq-answer">是的。Multikernel 与现有 Linux 应用程序及系统接口保持完全兼容。我们的实现仅引入极少量、非侵入式的内核修改，完整保留 API 与 ABI 兼容性。你的应用程序无需改动即可运行。</p>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i data-lucide="layers"></i> multikernel 能否与现有基础设施协同工作？
+                </div>
+                <p class="faq-answer">可以。Multikernel 可与标准云端及本地基础设施集成，提供一条从传统虚拟化或容器环境迁移过来的实用路径。</p>
+            </div>
+
+            <!-- Architecture & Design -->
+            <h2 class="faq-category">架构与设计</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i data-lucide="hard-drive"></i> 分离内核架构如何处理硬件资源？
+                </div>
+                <p class="faq-answer">在我们的分离内核架构中，宿主内核负责管理硬件与设备处理，而应用内核则在专用 CPU 核心上运行工作负载，不存在内核上下文切换。I/O 队列等硬件资源由宿主内核独占分配给每个应用内核，从而同时提供强隔离与接近裸金属的性能。拥有 256 个以上核心的现代服务器使这种专用分配在大规模场景下切实可行。</p>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i data-lucide="shuffle"></i> 为什么选择动态资源分配而非静态分区？
+                </div>
+                <p class="faq-answer">现代云端工作负载需要弹性。当资源保持不变时，静态分区可以视为动态分配的一种特殊情形，但反过来则不成立。要在大规模场景下实现高效的资源利用，动态分配必不可少。</p>
+            </div>
+
+            <!-- Comparisons -->
+            <h2 class="faq-category">与其他方案的对比</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i data-lucide="zap"></i> 为什么不使用 unikernel？
+                </div>
+                <p class="faq-answer">Unikernel 消除了系统调用开销，但现代 CPU 已经提供了高度优化的系统调用性能，这一优势因此变得微不足道。大多数 unikernel 仍然依赖虚拟化层，也就继承了其性能损耗。Multikernel 无需虚拟化开销，也无需为专用内核环境重新构建应用程序，即可提供更出色的隔离性与性能。</p>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i data-lucide="git-branch"></i> 与 Jailhouse 有什么区别？
+                </div>
+                <p class="faq-answer"><a href="https://github.com/siemens/jailhouse" target="_blank" rel="noopener noreferrer">Jailhouse</a> 仅支持静态分区，并依赖 VMEXIT、SR-IOV 等传统虚拟化机制。Multikernel 提供动态资源分配，完全避免虚拟化开销，同时在需要时仍能与现有虚拟化技术保持兼容。</p>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i data-lucide="minus-circle"></i> 为什么不采用 Directvisor 或去虚拟化方案？
+                </div>
+                <p class="faq-answer"><a href="https://dl.acm.org/doi/10.1145/3381052.3381317" target="_blank" rel="noopener noreferrer">Directvisor</a> 及类似的去虚拟化方案，在本质上依然依赖虚拟化基础设施。先虚拟化再去虚拟化，等效于从未虚拟化，因此从一开始就彻底摒弃虚拟化层反而更为高效。</p>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i data-lucide="box"></i> 嵌套虚拟化真的是一个问题吗？
+                </div>
+                <p class="faq-answer">是的，而且比许多人意识到的更为普遍。云服务商为租户运行虚拟机，而这些租户内部又往往运行着基于虚拟机管理程序隔离的自有虚拟机或容器。云实例上的 Kubernetes 节点、启动虚拟机的 CI/CD 流水线，以及各类安全沙箱，在实践中都会形成嵌套虚拟化。每一层都会成倍放大开销：额外的 VM 退出、影子页表和模拟 I/O 会显著叠加延迟。Multikernel 通过在没有任何虚拟机管理程序的情况下提供内核级隔离，从根本上消除了这一问题，使嵌套虚拟化层从一开始就没有存在的必要。</p>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i data-lucide="activity"></i> SR-IOV 能否消除虚拟化开销？
+                </div>
+                <p class="faq-answer">不能。虽然 SR-IOV 与硬件加速能显著降低虚拟化开销，但无法将其彻底消除。VM 退出、IOMMU 地址转换以及针对特权操作的虚拟机管理程序介入，仍会带来可测量的延迟。Multikernel 完全绕开这些虚拟化层，无需依赖硬件加速即可实现接近裸金属的性能。</p>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i data-lucide="settings"></i> 那用于 I/O 的 SR-IOV 呢？
+                </div>
+                <p class="faq-answer">SR-IOV 速度很快，配置得当时 IOMMU 开销也可以很小。然而，VF 提供的是粗粒度的隔离机制。Multikernel 将硬件队列作为更灵活、更具弹性的资源加以利用，相比 VF 的静态特性，能够提供更细的粒度与动态资源分配能力。</p>
+            </div>
+
+            <!-- Security -->
+            <h2 class="faq-category">安全与信任</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i data-lucide="shield"></i> multikernel 如何增强安全性？
+                </div>
+                <p class="faq-answer">我们的架构在工作负载之间提供硬件强制隔离，通过定制化内核最小化攻击面，并支持机密计算以处理敏感数据。通过让应用程序直接运行在 initramfs 中而无需完整操作系统，我们相较传统环境进一步缩小了攻击面。</p>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i data-lucide="lock"></i> 信任模型是怎样的？
+                </div>
+                <p class="faq-answer">内核本身即是信任边界。虽然被攻破的内核有可能影响同一节点上的其他内核，但通过基于 kexec 的内核签名、内核锁定，以及利用机密计算技术进行内存加密，这一风险得到了缓解。</p>
+            </div>
+
+        </div>
+    </section>
+</main>
