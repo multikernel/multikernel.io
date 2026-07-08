@@ -2,8 +2,8 @@ en:
   nav:
     home: Home
     products: Products
-    cloud: Multikernel Cloud
-    cloud_sub: Cloud-optimized Linux distribution
+    cloud: Multikernel Private Cloud
+    cloud_sub: Private cloud operating system
     sandbox: Multikernel Sandbox
     sandbox_sub: AI agent sandboxing runtime
     liveupdate: Multikernel LiveUpdate

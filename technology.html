@@ -42,7 +42,7 @@ i18n: true
                     </div>
                     <h2 class="section-title">Why Split-Kernel</h2>
                     <p class="section-subtitle">A traditional Linux kernel runs application code, device drivers, and interrupt handlers on the same cores. Under load, interrupt processing steals CPU cycles from applications. Kernel workarounds like isolcpus, irqaffinity, NAPI threaded mode, and RPS/RFS reduce the problem but cannot eliminate it. Within a single kernel, bottom-half work can always reach application cores.</p>
-                    <p class="section-subtitle">The split-kernel architecture removes this contention at the design level. Device processing is offloaded to a dedicated kernel on dedicated cores. Applications run in their own kernels where interrupts are structurally absent. Because Multikernel runs directly on hardware with no hypervisor, it works inside any standard cloud VM, providing kernel-level isolation without the performance penalty of nested virtualization.</p>
+                    <p class="section-subtitle">The split-kernel architecture removes this contention at the design level. Device processing is offloaded to a dedicated kernel on dedicated cores. Applications run in their own kernels where interrupts are structurally absent. Because Multikernel runs directly on hardware with no hypervisor, it works on bare metal or inside VMs you already run, providing kernel-level isolation without the performance penalty of nested virtualization.</p>
                 </div>
 
                 <div class="value-visual">
