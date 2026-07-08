@@ -1,9 +1,9 @@
 ---
 layout: default
-title: "Multikernel Sandbox - AI Agent Sandboxing"
-description: "Kernel-level sandboxing for AI agents. Full GPU access, strong isolation, and fast checkpoint/restore without virtualization overhead."
-permalink: /products/sandbox.html
-i18n: true
+lang: zh
+permalink: /zh/products/sandbox.html
+title: "Multikernel Sandbox - AI 智能体沙箱"
+description: "面向 AI 智能体的内核级沙箱：完整 GPU 访问、强隔离，以及无虚拟化开销的快速检查点/恢复。"
 ---
 
 <main>
@@ -14,17 +14,17 @@ i18n: true
                 <span>Multikernel Sandbox</span>
             </div>
 
-            <h1>Kernel-Level Sandboxing for AI Agents</h1>
-            <p class="subtitle">Give each AI agent its own Linux kernel with full GPU access and strong isolation. No virtualization layer between the agent and hardware. No nested virtualization required. Works inside any standard cloud VM.</p>
+            <h1>面向 AI 智能体的内核级沙箱</h1>
+            <p class="subtitle">让每个 AI 智能体拥有自己的 Linux 内核，具备完整 GPU 访问权限和强隔离。智能体与硬件之间没有虚拟化层，无需嵌套虚拟化，可在任何标准云虚拟机内运行。</p>
 
             <div class="button-group">
                 <a href="/getting-started.html" class="btn btn-primary">
                     <i data-lucide="rocket"></i>
-                    Get Started
+                    快速上手
                 </a>
                 <a href="https://calendar.app.google/nc1upkqQoUeoukdD9" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
                     <i data-lucide="calendar"></i>
-                    Schedule a Demo
+                    预约演示
                 </a>
             </div>
         </div>
@@ -33,8 +33,8 @@ i18n: true
     <section id="problem" class="value-section">
         <div class="section-container">
             <div class="section-header">
-                <h2 class="section-title">The Problem</h2>
-                <p class="section-subtitle">AI agents need sandboxing, GPU access, and fast lifecycle management. Today's options force a tradeoff.</p>
+                <h2 class="section-title">问题所在</h2>
+                <p class="section-subtitle">AI 智能体需要沙箱隔离、GPU 访问和快速的生命周期管理。而今天的方案却总是逼你做出取舍。</p>
             </div>
 
             <div class="cards-grid">
@@ -42,16 +42,16 @@ i18n: true
                     <div class="capability-icon">
                         <i data-lucide="box"></i>
                     </div>
-                    <h3 class="capability-title">Containers</h3>
-                    <p class="capability-description">Fast to start but share a kernel. A rogue agent can escape. GPU passthrough works but isolation is weak. Not sufficient for untrusted code execution.</p>
+                    <h3 class="capability-title">容器</h3>
+                    <p class="capability-description">启动速度快，但共享同一个内核。失控的智能体可能借此逃逸。GPU 透传虽然可行，但隔离性薄弱，不足以支撑不可信代码的执行。</p>
                 </div>
 
                 <div class="capability-card">
                     <div class="capability-icon">
                         <i data-lucide="server"></i>
                     </div>
-                    <h3 class="capability-title">Virtual Machines</h3>
-                    <p class="capability-description">Strong isolation but heavyweight. GPU passthrough requires SR-IOV or vGPU. Nested virtualization in cloud VMs adds significant performance overhead.</p>
+                    <h3 class="capability-title">虚拟机</h3>
+                    <p class="capability-description">隔离性强，但十分笨重。GPU 透传需要依赖 SR-IOV 或 vGPU。在云虚拟机中进行嵌套虚拟化会带来显著的性能开销。</p>
                 </div>
 
                 <div class="capability-card primary">
@@ -59,7 +59,7 @@ i18n: true
                         <i data-lucide="brain"></i>
                     </div>
                     <h3 class="capability-title">Multikernel Sandbox</h3>
-                    <p class="capability-description">Each agent gets its own kernel with direct GPU access. Kernel-level sandboxing without virtualization. Native performance inside any cloud VM.</p>
+                    <p class="capability-description">每个智能体都拥有自己的内核，具备直接的 GPU 访问权限。无需虚拟化即可实现内核级沙箱，在任何云虚拟机内都能获得原生性能。</p>
                 </div>
             </div>
         </div>
@@ -68,7 +68,7 @@ i18n: true
     <section id="capabilities" class="how-it-works">
         <div class="section-container">
             <div class="section-header">
-                <h2 class="section-title">Built for AI Workloads</h2>
+                <h2 class="section-title">为 AI 工作负载而生</h2>
             </div>
 
             <div class="features-grid">
@@ -76,48 +76,48 @@ i18n: true
                     <div class="feature-icon">
                         <i data-lucide="cpu"></i>
                     </div>
-                    <h3 class="feature-title">Full GPU Access</h3>
-                    <p class="feature-description">No virtualization layer between the agent and GPU hardware. Direct access to CUDA, ROCm, and other GPU frameworks at native performance.</p>
+                    <h3 class="feature-title">完整 GPU 访问</h3>
+                    <p class="feature-description">智能体与 GPU 硬件之间没有虚拟化层。可直接访问 CUDA、ROCm 等 GPU 框架，性能与原生一致。</p>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i data-lucide="shield-check"></i>
                     </div>
-                    <h3 class="feature-title">Kernel-Level Isolation</h3>
-                    <p class="feature-description">Each agent is sandboxed in its own kernel. A compromised agent cannot access other agents' memory, devices, or kernel state.</p>
+                    <h3 class="feature-title">内核级隔离</h3>
+                    <p class="feature-description">每个智能体都在自己的内核中运行沙箱。即便某个智能体被攻破，也无法访问其他智能体的内存、设备或内核状态。</p>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i data-lucide="camera"></i>
                     </div>
-                    <h3 class="feature-title">Fast Checkpoint/Restore</h3>
-                    <p class="feature-description">Lightweight kernel state enables rapid snapshots. Save, restore, and clone agent environments in milliseconds.</p>
+                    <h3 class="feature-title">快速检查点/恢复</h3>
+                    <p class="feature-description">轻量级的内核状态使快照能够快速完成。以毫秒级速度保存、恢复并克隆智能体运行环境。</p>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i data-lucide="cloud"></i>
                     </div>
-                    <h3 class="feature-title">No Nested Virtualization</h3>
-                    <p class="feature-description">Runs inside any standard cloud VM on AWS, GCP, or Azure. No special instance types. No hypervisor overhead.</p>
+                    <h3 class="feature-title">无需嵌套虚拟化</h3>
+                    <p class="feature-description">可在 AWS、GCP 或 Azure 上任意标准云虚拟机内运行。无需特殊实例类型，没有虚拟机管理程序开销。</p>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i data-lucide="database"></i>
                     </div>
-                    <h3 class="feature-title">Shared Model Weights</h3>
-                    <p class="feature-description">DAXFS enables zero-copy sharing of model weights across agent enclaves. One copy in memory serves all agents.</p>
+                    <h3 class="feature-title">共享模型权重</h3>
+                    <p class="feature-description">DAXFS 支持在各智能体飞地之间零拷贝共享模型权重。内存中仅需一份副本即可服务所有智能体。</p>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i data-lucide="box"></i>
                     </div>
-                    <h3 class="feature-title">Docker Compatible</h3>
-                    <p class="feature-description">Deploy agents using your existing Docker images and workflows. No new packaging format, no new APIs.</p>
+                    <h3 class="feature-title">兼容 Docker</h3>
+                    <p class="feature-description">使用您现有的 Docker 镜像和工作流部署智能体。无需新的打包格式，无需新的 API。</p>
                 </div>
             </div>
         </div>
@@ -126,8 +126,8 @@ i18n: true
     <section id="get-it" class="value-section">
         <div class="section-container">
             <div class="section-header">
-                <h2 class="section-title">How to Get It</h2>
-                <p class="section-subtitle">Multikernel Sandbox is open-source software you deploy on your own infrastructure. Available as a free download with optional enterprise support.</p>
+                <h2 class="section-title">如何获取</h2>
+                <p class="section-subtitle">Multikernel Sandbox 是一款开源软件，您可以将其部署在自己的基础设施上。提供免费下载，并可选购企业级支持。</p>
             </div>
 
             <div class="cards-grid">
@@ -135,11 +135,11 @@ i18n: true
                     <div class="capability-icon">
                         <i data-lucide="github"></i>
                     </div>
-                    <h3 class="capability-title">Open Source</h3>
-                    <p class="capability-description">Download and build from source. Deploy AI agent sandboxes on any Linux machine with full GPU access. Community support via GitHub issues.</p>
+                    <h3 class="capability-title">开源版</h3>
+                    <p class="capability-description">下载并从源码构建。在任何 Linux 机器上部署具备完整 GPU 访问权限的 AI 智能体沙箱。通过 GitHub issues 获得社区支持。</p>
                     <div class="value-cta" style="margin-top: var(--space-4);">
                         <a href="https://github.com/multikernel" target="_blank" class="btn-link">
-                            View on GitHub
+                            前往 GitHub 查看
                             <i data-lucide="arrow-right"></i>
                         </a>
                     </div>
@@ -149,37 +149,37 @@ i18n: true
                     <div class="capability-icon">
                         <i data-lucide="building"></i>
                     </div>
-                    <h3 class="capability-title">Enterprise</h3>
-                    <p class="capability-description">Turnkey AI sandboxing with dedicated engineering support for your agent infrastructure.</p>
+                    <h3 class="capability-title">企业级</h3>
+                    <p class="capability-description">开箱即用的 AI 沙箱方案，为您的智能体基础设施提供专属工程支持。</p>
                     <div class="capability-features">
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>Pre-configured sandbox images with GPU drivers pre-installed</span>
+                            <span>预配置沙箱镜像，预装 GPU 驱动</span>
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>Integration with your AI orchestration pipeline</span>
+                            <span>与您的 AI 编排流水线集成</span>
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>Custom security policies and sandbox hardening</span>
+                            <span>定制安全策略与沙箱加固</span>
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>Priority engineering support with SLA-backed response times</span>
+                            <span>具备 SLA 响应时间保障的优先工程支持</span>
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>Multi-tenant isolation architecture design</span>
+                            <span>多租户隔离架构设计</span>
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>Monitoring and observability for sandbox fleet management</span>
+                            <span>面向沙箱集群管理的监控与可观测性</span>
                         </div>
                     </div>
                     <div class="value-cta" style="margin-top: var(--space-5);">
                         <a href="https://calendar.app.google/nc1upkqQoUeoukdD9" target="_blank" rel="noopener noreferrer" class="btn-link">
-                            Schedule a Demo
+                            预约演示
                             <i data-lucide="arrow-right"></i>
                         </a>
                     </div>
