@@ -1,8 +1,7 @@
 /* ===== MULTIKERNEL TECHNOLOGIES - "THE BOARD" DESIGN SYSTEM =====
    Enterprise ink navy with ENIG pad-gold accents, cool silkscreen
-   neutrals, datasheet mono annotations. Signature: the kerf - a cut
-   rule with offset halves (after Kerf, the orchestrator, named for
-   a saw cut). */
+   neutrals, datasheet mono annotations. Signature: a solid gold
+   rule under hero headlines and above section titles. */
 
 /* Design Variables */
 :root {
@@ -64,10 +63,10 @@
     --info: var(--secondary-500);
 
     /* Typography */
-    --font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     --font-mono: 'IBM Plex Mono', 'JetBrains Mono', 'Fira Code', 'SF Mono', Consolas, monospace;
-    --font-display: 'Archivo', 'IBM Plex Sans', system-ui, sans-serif;
-    --font-body: 'IBM Plex Sans', system-ui, sans-serif;
+    --font-display: 'DM Sans', system-ui, sans-serif;
+    --font-body: 'DM Sans', system-ui, sans-serif;
 
     /* Font Sizes */
     --text-xs: 0.75rem;
@@ -460,29 +459,26 @@ body {
 
 .hero h1 {
     font-family: var(--font-display);
-    font-size: clamp(var(--text-4xl), 4.6vw, var(--text-6xl));
+    font-size: clamp(var(--text-4xl), 5vw, var(--text-6xl));
     font-weight: 800;
-    font-stretch: 112%;
     line-height: var(--leading-tight);
-    letter-spacing: -0.01em;
+    letter-spacing: -0.04em;
     margin-bottom: var(--space-6);
     color: white;
-    max-width: 960px;
+    max-width: 900px;
     margin-left: auto;
     margin-right: auto;
     text-wrap: balance;
 }
 
-/* The kerf: a cut rule, halves offset like a saw cut */
+/* Solid gold rule under the hero headline */
 .hero h1::after {
     content: '';
     display: block;
     width: 148px;
-    height: 6px;
+    height: 3px;
     margin: var(--space-6) auto 0;
-    background:
-        linear-gradient(var(--accent-500), var(--accent-500)) no-repeat left top / calc(50% - 4px) 2px,
-        linear-gradient(var(--accent-400), var(--accent-400)) no-repeat right bottom / calc(50% - 4px) 2px;
+    background: var(--accent-500);
 }
 
 .subtitle {
@@ -667,25 +663,22 @@ body {
     font-family: var(--font-display);
     font-size: clamp(var(--text-2xl), 3.5vw, var(--text-4xl));
     font-weight: 800;
-    font-stretch: 112%;
     line-height: var(--leading-tight);
     color: var(--gray-900);
     margin-bottom: var(--space-4);
-    letter-spacing: -0.01em;
+    letter-spacing: -0.03em;
 }
 
-/* Kerf mark above section titles (scoped: .content-card h2 is a flex
+/* Solid gold rule above section titles (scoped: .content-card h2 is a flex
    container where a ::before would become a flex item and shift the text) */
 .section-header .section-title::before,
 .value-text .section-title::before {
     content: '';
     display: block;
     width: 56px;
-    height: 6px;
+    height: 3px;
     margin: 0 0 var(--space-4);
-    background:
-        linear-gradient(var(--accent-500), var(--accent-500)) no-repeat left top / calc(50% - 4px) 2px,
-        linear-gradient(var(--accent-400), var(--accent-400)) no-repeat right bottom / calc(50% - 4px) 2px;
+    background: var(--accent-500);
 }
 
 .section-header .section-title::before {
