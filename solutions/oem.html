@@ -1,0 +1,231 @@
+---
+layout: default
+title: "Multikernel for OEMs - Ship Split-Kernel Fault Domains Inside Your Appliance"
+description: "For storage and appliance vendors: split one controller into independent kernel fault domains, patch kernels without failover events, and redistribute signed Multikernel builds under your brand."
+permalink: /solutions/oem.html
+i18n: true
+---
+
+<main>
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-badge">
+                <i data-lucide="package"></i>
+                <span>OEM &amp; Embedded</span>
+            </div>
+
+            <h1>Ship Multikernel Inside Your Appliance</h1>
+            <p class="subtitle">Built for storage and appliance vendors who embed an operating system and ship it to their customers. Multikernel splits one controller into independent kernel fault domains: a driver fault becomes a restartable component instead of a controller-wide panic, and a kernel patch no longer triggers a failover event.</p>
+
+            <div class="button-group">
+                <a href="/contact.html" class="btn btn-primary">
+                    <i data-lucide="users"></i>
+                    Talk to Engineering
+                </a>
+                <a href="/technology.html" class="btn btn-secondary">
+                    <i data-lucide="layers"></i>
+                    See the Architecture
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="fault-domains" class="value-section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">Sub-Node Fault Domains</h2>
+                <p class="section-subtitle">In a monolithic controller OS, a single driver fault panics the entire node, triggering controller failover, peer degradation, and a DRAM cache re-mirror. The split-kernel architecture reduces the fault domain to one layer of the I/O stack: kernel boundaries follow the data path, and each layer fails and recovers independently.</p>
+            </div>
+
+            <div class="partition-figure">
+                <div class="partition-title">A Storage Controller &middot; Example Kernel Fault-Domain Split</div>
+                <div class="partition-domains">
+                    <div class="partition-domain">
+                        <div class="partition-cores">
+                            {% for i in (1..4) %}<span class="partition-core"></span>{% endfor %}
+                        </div>
+                        <div class="partition-name">Front-end kernel</div>
+                        <div class="partition-detail">FC / Ethernet &middot; protocol termination</div>
+                    </div>
+                    <div class="partition-domain domain-app">
+                        <div class="partition-cores">
+                            {% for i in (1..8) %}<span class="partition-core"></span>{% endfor %}
+                        </div>
+                        <div class="partition-name">Data kernel</div>
+                        <div class="partition-detail">cache &middot; data protection &middot; data services</div>
+                    </div>
+                    <div class="partition-domain">
+                        <div class="partition-cores">
+                            {% for i in (1..4) %}<span class="partition-core"></span>{% endfor %}
+                        </div>
+                        <div class="partition-name">Back-end kernel</div>
+                        <div class="partition-detail">SAS / NVMe drivers</div>
+                    </div>
+                </div>
+                <p class="partition-caption">A driver fault restarts one kernel. <strong>No controller failover, no cache re-mirror event.</strong></p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="shield-check"></i>
+                    </div>
+                    <h3 class="feature-title">Component-Level Fault Recovery</h3>
+                    <p class="feature-description">A failed driver kernel restarts in place while the data kernel continues serving from cache. The impact is confined to one layer of the I/O stack rather than the node covered by your availability SLA.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="activity"></i>
+                    </div>
+                    <h3 class="feature-title">Structural Tail-Latency Isolation</h3>
+                    <p class="feature-description">Rebuild, resync, and background scrubbing run in their own kernel on their own cores. p99.9 latency is protected by architectural isolation rather than by tuning that degrades under load.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="cpu"></i>
+                    </div>
+                    <h3 class="feature-title">Per-Layer Kernel Specialization</h3>
+                    <p class="feature-description">An interrupt-free data kernel, a polling device kernel, and smaller synchronization domains on many-core controllers. Each kernel is configured for a single role.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="entry" class="how-it-works">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">LiveUpdate as the Entry Point</h2>
+                <p class="section-subtitle">LiveUpdate integrates into an existing storage OS without architectural changes. It deploys standalone, per node, inside the operating system you already ship, and delivers value before any fault-domain redesign.</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="capability-card primary">
+                    <div class="capability-icon">
+                        <i data-lucide="arrow-up-circle"></i>
+                    </div>
+                    <h3 class="capability-title">Kernel Patches Without Failover</h3>
+                    <p class="capability-description">The patched kernel boots alongside the running one; the data path migrates incrementally, with instant rollback available throughout. No peer degradation, no cache re-mirror, and no maintenance window on single-controller systems.</p>
+                </div>
+
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <i data-lucide="shield-check"></i>
+                    </div>
+                    <h3 class="capability-title">CVE Management for Appliances</h3>
+                    <p class="capability-description">Security backports delivered under SLA, an errata feed that integrates with your release process, and a ready-to-apply LiveUpdate image for every fix. Field systems stay patched without reboot-driven support escalations.</p>
+                </div>
+
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <i data-lucide="zap"></i>
+                    </div>
+                    <h3 class="capability-title">Sub-Second Crash Failover</h3>
+                    <p class="capability-description">A standby kernel monitors the primary and takes over its devices in under a second, removing kernel panics as a driving factor in your availability model.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="licensing" class="value-section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">Licensing and Redistribution</h2>
+                <p class="section-subtitle">Multikernel is licensed under GPL-2.0 and remains fully open source. The OEM subscription covers what commercial redistribution requires: the rights and build infrastructure to ship signed Multikernel builds under your brand, backed by SLA-based engineering support behind your support organization.</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <i data-lucide="github"></i>
+                    </div>
+                    <h3 class="capability-title">Open Source Base</h3>
+                    <p class="capability-description">Built on upstream Linux under GPL-2.0. Evaluate, prototype, and embed without license negotiation. Joint engineering work is contributed upstream.</p>
+                </div>
+
+                <div class="capability-card primary">
+                    <div class="capability-icon">
+                        <i data-lucide="package"></i>
+                    </div>
+                    <h3 class="capability-title">OEM Subscription</h3>
+                    <p class="capability-description">Priced per shipped controller.</p>
+                    <div class="capability-features">
+                        <div class="feature-item">
+                            <i data-lucide="check"></i>
+                            <span>Redistribute signed, validated Multikernel builds inside your appliance OS</span>
+                        </div>
+                        <div class="feature-item">
+                            <i data-lucide="check"></i>
+                            <span>Your hardware in our validation matrix, every release tested on your controllers</span>
+                        </div>
+                        <div class="feature-item">
+                            <i data-lucide="check"></i>
+                            <span>CVE backports under SLA with errata feed and matching LiveUpdate images</span>
+                        </div>
+                        <div class="feature-item">
+                            <i data-lucide="check"></i>
+                            <span>Second-line engineering support behind your support organization</span>
+                        </div>
+                        <div class="feature-item">
+                            <i data-lucide="check"></i>
+                            <span>Fault-domain design review for your data path</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <i data-lucide="scale"></i>
+                    </div>
+                    <h3 class="capability-title">Evaluation-Based Performance Claims</h3>
+                    <p class="capability-description">We do not publish synthetic benchmark headlines. The documented benefits are structural: fault containment, tail-latency isolation, and reboot-free maintenance. Performance characteristics are validated during evaluation on your hardware and workloads.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="engagement" class="how-it-works">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i data-lucide="users"></i>
+                    <span>Engagement</span>
+                </div>
+                <h2 class="section-title">From Evaluation to Shipping</h2>
+                <p class="section-subtitle">A three-step engagement model, from proof of concept to a shipping product line.</p>
+            </div>
+
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-num">01</div>
+                    <h3 class="step-title">Evaluation</h3>
+                    <p class="step-description">Proof of concept on your controller hardware and I/O stack: LiveUpdate integration first, followed by a fault-domain split, measured on your workloads.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-num">02</div>
+                    <h3 class="step-title">Integration</h3>
+                    <p class="step-description">Embed Multikernel into your appliance OS with our engineers working alongside your team: fault-domain boundaries for your data path, device kernel enablement for your HBAs and NICs.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-num">03</div>
+                    <h3 class="step-title">Ship and Maintain</h3>
+                    <p class="step-description">Signed build stream, CVE SLA, and second-line support for the life of the product line. Enablement work is contributed upstream with your platform as the reference implementation.</p>
+                </div>
+            </div>
+
+            <div class="value-cta" style="margin-top: var(--space-10); text-align: center;">
+                <a href="mailto:cwang@multikernel.io" class="btn btn-primary">
+                    <i data-lucide="mail"></i>
+                    Start the Conversation
+                </a>
+                <a href="https://calendar.app.google/nc1upkqQoUeoukdD9" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                    <i data-lucide="calendar"></i>
+                    Schedule a Demo
+                </a>
+            </div>
+        </div>
+    </section>
+</main>
