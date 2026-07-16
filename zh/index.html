@@ -32,7 +32,7 @@ description: "Multikernel 分离内核架构将设备驱动与中断处理卸载
             <div class="hero-stats">
                 <div class="hero-stat">
                     <span class="hero-stat-number">0</span>
-                    <span class="hero-stat-label">应用核心上的中断次数</span>
+                    <span class="hero-stat-label">应用核心上的设备中断次数</span>
                     <span class="hero-stat-detail">源于架构设计，而非调优</span>
                 </div>
                 <div class="hero-stat">
@@ -81,7 +81,7 @@ description: "Multikernel 分离内核架构将设备驱动与中断处理卸载
                         <span>为何选择分离内核架构</span>
                     </div>
                     <h2 class="section-title">隔离能力内建于架构之中</h2>
-                    <p class="section-subtitle">在传统 Linux 内核中，应用程序代码与设备处理会争用相同的 CPU 核心。分离内核架构将全部设备处理卸载到专用核心上的专用内核，从而消除了这种争用。应用程序感受不到任何中断——这并非调优的结果，而是因为中断在物理上根本无法到达它们。</p>
+                    <p class="section-subtitle">在传统 Linux 内核中，应用程序代码与设备处理会争用相同的 CPU 核心。分离内核架构将全部设备处理卸载到专用核心上的专用内核，从而消除了这种争用。应用程序感受不到任何设备中断——这并非调优的结果，而是因为设备中断在物理上根本无法到达它们。</p>
 
                     <div class="value-cta">
                         <a href="/zh/technology.html" class="btn-link">
@@ -117,7 +117,7 @@ description: "Multikernel 分离内核架构将设备驱动与中断处理卸载
                                     <span class="diagram-item item-app">应用</span>
                                     <span class="diagram-item item-app">应用</span>
                                 </div>
-                                <div class="diagram-caption">零中断</div>
+                                <div class="diagram-caption">零设备中断</div>
                             </div>
                             <div class="diagram-box diagram-box-device">
                                 <span class="diagram-tag">设备内核</span>

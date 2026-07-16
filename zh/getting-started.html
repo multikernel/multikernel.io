@@ -382,7 +382,7 @@ kerf exec web-server</code></pre>
                     <li><strong>通过 kexec 生成内核</strong> - 新内核使用 Linux 现有的 kexec 机制启动，该机制经过扩展，可与主内核并行运行，而非将其替换</li>
                     <li><strong>资源分区</strong> - CPU、内存和设备通过标准热插拔接口在各内核之间分配</li>
                     <li><strong>硬件队列共享</strong> - 现代网卡和 SSD 拥有多个硬件队列；每个内核独占访问特定队列，实现真正的硬件级隔离</li>
-                    <li><strong>内核间通信</strong> - 各内核通过共享内存并使用 vsock 通信，这是一种标准的 Linux 套接字类型，应用程序无需修改即可使用</li>
+                    <li><strong>内核间网络</strong> - 每个派生内核都获得一个标准 Linux 网络设备，底层由共享内存中的描述符环支撑；数据帧留在共享内存中，跨内核传递的只有描述符，应用程序无需修改即可使用普通套接字</li>
                     <li><strong>Docker 集成</strong> - 生成的内核可以使用 DAXFS 共享容器根文件系统，直接启动进 Docker 镜像，无需操作系统初始化层</li>
                 </ul>
             </div>

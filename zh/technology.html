@@ -42,7 +42,7 @@ description: "Multikernel 系统将设备驱动与中断处理卸载到专用内
                     </div>
                     <h2 class="section-title">为何需要分离内核架构</h2>
                     <p class="section-subtitle">传统 Linux 内核在同一批核心上运行应用程序代码、设备驱动和中断处理程序。负载升高时，中断处理会抢占本应属于应用程序的 CPU 周期。isolcpus、irqaffinity、NAPI 线程模式以及 RPS/RFS 等内核层面的变通手段能够缓解这一问题，但无法根除它。只要处于同一个内核之内，下半部（bottom-half）工作总有办法触达应用程序所在的核心。</p>
-                    <p class="section-subtitle">分离内核架构从设计层面消除了这种争用。设备处理卸载到专用核心上的专用内核。应用程序运行在各自的内核中，中断在结构上根本不存在。由于 Multikernel 直接运行在硬件之上，不依赖虚拟机管理程序，因此它既可以运行在裸金属上，也可以运行在您现有的虚拟机内部，在不产生嵌套虚拟化性能损耗的前提下提供内核级隔离。</p>
+                    <p class="section-subtitle">分离内核架构从设计层面消除了这种争用。设备处理卸载到专用核心上的专用内核。应用程序运行在各自的内核中，设备中断在结构上根本不存在。由于 Multikernel 直接运行在硬件之上，不依赖虚拟机管理程序，因此它既可以运行在裸金属上，也可以运行在您现有的虚拟机内部，在不产生嵌套虚拟化性能损耗的前提下提供内核级隔离。</p>
                 </div>
 
                 <div class="value-visual">
@@ -89,7 +89,7 @@ description: "Multikernel 系统将设备驱动与中断处理卸载到专用内
                         <i data-lucide="monitor"></i>
                     </div>
                     <h3 class="tech-title">应用内核</h3>
-                    <p class="tech-description">每个应用程序都在自己的 Linux 内核中，独占专用核心。这些内核不包含任何设备驱动、中断处理程序或网络协议栈。几乎全部计算与内存资源都直接供应给应用程序。</p>
+                    <p class="tech-description">每个应用程序都在自己的 Linux 内核中，独占专用核心。这些内核不包含任何物理设备驱动，也不接收任何设备中断。每个应用内核通过一块虚拟网卡运行自己的网络协议栈，几乎全部计算与内存资源都直接供应给应用程序。</p>
                 </div>
 
                 <div class="technology-card primary">
@@ -97,7 +97,7 @@ description: "Multikernel 系统将设备驱动与中断处理卸载到专用内
                         <i data-lucide="hard-drive"></i>
                     </div>
                     <h3 class="tech-title">设备内核</h3>
-                    <p class="tech-description">全部设备驱动、中断处理程序、TCP/IP 协议栈以及 I/O 处理都运行在专用核心上的专用设备内核中。该内核为每一个应用内核提供服务，拥有独立的更新与故障域。</p>
+                    <p class="tech-description">全部物理设备驱动、中断处理程序以及设备 I/O 都运行在专用核心上的专用设备内核中。它为每一个应用内核提供一块虚拟网卡，在应用与硬件队列之间调度流量，并拥有独立的更新与故障域。</p>
                 </div>
 
                 <div class="technology-card primary">
@@ -105,7 +105,7 @@ description: "Multikernel 系统将设备驱动与中断处理卸载到专用内
                         <i data-lucide="database"></i>
                     </div>
                     <h3 class="tech-title">DAXFS 共享内存</h3>
-                    <p class="tech-description">应用内核与设备内核通过 DAXFS 通信——这是一个构建在共享 DRAM 之上、采用无锁 CAS 协调机制的文件系统。零拷贝，无需序列化，也没有网络往返开销。</p>
+                    <p class="tech-description">应用内核与设备内核通过 DAXFS 共享数据——这是一个构建在共享 DRAM 之上、采用无锁 CAS 协调机制的文件系统。零拷贝，无需序列化，也没有网络往返开销。</p>
                 </div>
             </div>
         </div>
@@ -145,7 +145,7 @@ description: "Multikernel 系统将设备驱动与中断处理卸载到专用内
                         <i data-lucide="hard-drive"></i>
                     </div>
                     <h3 class="tech-title">硬件队列隔离</h3>
-                    <p class="tech-description">现代网卡和 NVMe 设备都暴露多个硬件队列。设备内核独占访问这些设备队列。无需软件网桥，无需 SR-IOV。这是真正的硬件级 I/O 隔离。</p>
+                    <p class="tech-description">现代网卡和 NVMe 设备都暴露多个硬件队列。设备内核持有物理设备，并为每个应用内核提供位于共享内存中的专属描述符环：数据帧留在原地，跨内核传递的只有描述符。无需软件交换机，无需 SR-IOV。这正是云厂商以专用卸载卡形态交付的设计，而 Multikernel 用您已有的核心实现它。</p>
                 </div>
 
                 <div class="technology-card">
@@ -254,7 +254,7 @@ description: "Multikernel 系统将设备驱动与中断处理卸载到专用内
                         <i data-lucide="bar-chart"></i>
                     </div>
                     <h3 class="feature-title">延迟敏感型工作负载</h3>
-                    <p class="feature-description">交易系统、实时分析和游戏服务器等场景中，中断抖动会直接影响结果。应用内核所在的核心从设计上就不会看到任何中断。</p>
+                    <p class="feature-description">交易系统、实时分析和游戏服务器等场景中，中断抖动会直接影响结果。应用内核所在的核心从设计上就不会看到任何设备中断。</p>
                 </div>
 
                 <div class="feature-card">
