@@ -8,6 +8,9 @@ en:
     sandbox_sub: AI agent sandboxing runtime
     liveupdate: Multikernel LiveUpdate
     liveupdate_sub: Zero-downtime kernel upgrade tool
+    oem: OEM & Embedded
+    oem_sub: Ship Multikernel inside your appliance
+    solutions: Solutions
     technology: Technology
     overview: Overview
     overview_sub: Architecture and approach
@@ -46,6 +49,9 @@ zh:
     sandbox_sub: AI 智能体沙箱运行时
     liveupdate: Multikernel LiveUpdate
     liveupdate_sub: 零停机内核热升级工具
+    oem: OEM 与内嵌
+    oem_sub: 让 Multikernel 随您的整机出货
+    solutions: 解决方案
     technology: 技术
     overview: 概览
     overview_sub: 架构与技术路线

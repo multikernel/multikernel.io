@@ -1,0 +1,231 @@
+---
+layout: default
+lang: zh
+permalink: /zh/solutions/oem.html
+title: "Multikernel OEM 方案 - 让分离内核故障域随您的整机出货"
+description: "面向存储与整机厂商：把一台控制器拆分为多个独立的内核故障域，内核打补丁不再触发故障转移，并以您的品牌再分发经签名的 Multikernel 构建。"
+---
+
+<main>
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-badge">
+                <i data-lucide="package"></i>
+                <span>OEM 与内嵌</span>
+            </div>
+
+            <h1>让 Multikernel 随您的整机出货</h1>
+            <p class="subtitle">专为将操作系统内嵌进产品、再交付给客户的存储与整机厂商打造。Multikernel 把一台控制器拆分为多个独立的内核故障域：驱动故障变成一个可重启的组件，而不是整机内核崩溃；内核打补丁也不再触发故障转移。</p>
+
+            <div class="button-group">
+                <a href="/zh/contact.html" class="btn btn-primary">
+                    <i data-lucide="users"></i>
+                    与工程团队交流
+                </a>
+                <a href="/zh/technology.html" class="btn btn-secondary">
+                    <i data-lucide="layers"></i>
+                    了解架构
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="fault-domains" class="value-section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">小于节点的故障域</h2>
+                <p class="section-subtitle">在单体控制器操作系统中，一个驱动故障会导致整个节点崩溃，随之而来的是控制器故障转移、对端降级与 DRAM 缓存重新镜像。分离内核架构把故障域缩小到 I/O 栈中的单独一层：内核边界沿数据通路划分，每一层独立失效、独立恢复。</p>
+            </div>
+
+            <div class="partition-figure">
+                <div class="partition-title">一台存储控制器 &middot; 内核故障域拆分示例</div>
+                <div class="partition-domains">
+                    <div class="partition-domain">
+                        <div class="partition-cores">
+                            {% for i in (1..4) %}<span class="partition-core"></span>{% endfor %}
+                        </div>
+                        <div class="partition-name">前端内核</div>
+                        <div class="partition-detail">FC / 以太网 &middot; 协议终结</div>
+                    </div>
+                    <div class="partition-domain domain-app">
+                        <div class="partition-cores">
+                            {% for i in (1..8) %}<span class="partition-core"></span>{% endfor %}
+                        </div>
+                        <div class="partition-name">数据内核</div>
+                        <div class="partition-detail">缓存 &middot; 数据保护 &middot; 数据服务</div>
+                    </div>
+                    <div class="partition-domain">
+                        <div class="partition-cores">
+                            {% for i in (1..4) %}<span class="partition-core"></span>{% endfor %}
+                        </div>
+                        <div class="partition-name">后端内核</div>
+                        <div class="partition-detail">SAS / NVMe 驱动</div>
+                    </div>
+                </div>
+                <p class="partition-caption">驱动故障只重启一个内核。<strong>没有控制器故障转移，也没有缓存重新镜像事件。</strong></p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="shield-check"></i>
+                    </div>
+                    <h3 class="feature-title">组件级故障恢复</h3>
+                    <p class="feature-description">失效的驱动内核就地重启，数据内核继续从缓存提供服务。影响范围被限定在 I/O 栈中的一层，而不是可用性 SLA 所覆盖的整个节点。</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="activity"></i>
+                    </div>
+                    <h3 class="feature-title">结构性尾延迟隔离</h3>
+                    <p class="feature-description">重建、重同步与后台校验运行在自己的内核和核心上。p99.9 延迟由架构级隔离保障，而不是依赖在高负载下逐渐失效的调优。</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="cpu"></i>
+                    </div>
+                    <h3 class="feature-title">按层特化的内核</h3>
+                    <p class="feature-description">无中断的数据内核、轮询模式的设备内核，以及多核控制器上更小的同步域。每个内核只为单一职责配置。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="entry" class="how-it-works">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">以 LiveUpdate 作为集成起点</h2>
+                <p class="section-subtitle">LiveUpdate 无需架构改动即可集成进现有存储操作系统：作为独立组件按节点部署，运行在您现有出货的操作系统内，在任何故障域重构之前就能交付价值。</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="capability-card primary">
+                    <div class="capability-icon">
+                        <i data-lucide="arrow-up-circle"></i>
+                    </div>
+                    <h3 class="capability-title">内核打补丁，不触发故障转移</h3>
+                    <p class="capability-description">补丁内核与运行中的内核并行启动，数据通路逐步迁移，全程可即时回滚。没有对端降级，没有缓存重新镜像，单控系统也无需维护窗口。</p>
+                </div>
+
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <i data-lucide="shield-check"></i>
+                    </div>
+                    <h3 class="capability-title">面向整机的 CVE 管理</h3>
+                    <p class="capability-description">SLA 保障的安全向后移植、可接入您发布流程的勘误公告源，以及每个修复配套的即用型 LiveUpdate 镜像。现场系统持续保持已修补状态，避免因重启引发的支持升级。</p>
+                </div>
+
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <i data-lucide="zap"></i>
+                    </div>
+                    <h3 class="capability-title">亚秒级崩溃故障转移</h3>
+                    <p class="capability-description">备用内核持续监控主内核，并在一秒之内接管其设备，使内核崩溃不再是可用性模型中的主导因素。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="licensing" class="value-section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">许可与再分发</h2>
+                <p class="section-subtitle">Multikernel 基于 GPL-2.0 许可，完全开源。OEM 订阅涵盖商业再分发所需的全部配套：以您的品牌出货经签名的 Multikernel 构建的授权与构建基础设施，并为您的支持组织提供 SLA 保障的二线工程支持。</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <i data-lucide="github"></i>
+                    </div>
+                    <h3 class="capability-title">开源基础</h3>
+                    <p class="capability-description">构建于上游 Linux，采用 GPL-2.0 许可。评估、原型验证与内嵌都无需许可谈判。联合工程成果将贡献至上游。</p>
+                </div>
+
+                <div class="capability-card primary">
+                    <div class="capability-icon">
+                        <i data-lucide="package"></i>
+                    </div>
+                    <h3 class="capability-title">OEM 订阅</h3>
+                    <p class="capability-description">按出货控制器计价。</p>
+                    <div class="capability-features">
+                        <div class="feature-item">
+                            <i data-lucide="check"></i>
+                            <span>在您的整机操作系统中再分发经签名、经验证的 Multikernel 构建</span>
+                        </div>
+                        <div class="feature-item">
+                            <i data-lucide="check"></i>
+                            <span>您的硬件进入我们的验证矩阵，每个版本都在您的控制器上测试</span>
+                        </div>
+                        <div class="feature-item">
+                            <i data-lucide="check"></i>
+                            <span>SLA 保障的 CVE 向后移植，附勘误公告源与配套 LiveUpdate 镜像</span>
+                        </div>
+                        <div class="feature-item">
+                            <i data-lucide="check"></i>
+                            <span>面向您支持组织的二线工程支持</span>
+                        </div>
+                        <div class="feature-item">
+                            <i data-lucide="check"></i>
+                            <span>针对您的数据通路的故障域设计评审</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <i data-lucide="scale"></i>
+                    </div>
+                    <h3 class="capability-title">以评估为准的性能数据</h3>
+                    <p class="capability-description">我们不发布用于营销的合成基准数字。已明确的收益是结构性的：故障约束、尾延迟隔离与免重启维护。性能特征在您的硬件与工作负载上的评估中验证。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="engagement" class="how-it-works">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i data-lucide="users"></i>
+                    <span>合作模式</span>
+                </div>
+                <h2 class="section-title">从评估到出货</h2>
+                <p class="section-subtitle">三步合作模式，从概念验证到量产产品线。</p>
+            </div>
+
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-num">01</div>
+                    <h3 class="step-title">评估</h3>
+                    <p class="step-description">在您的控制器硬件和 I/O 栈上完成概念验证：先集成 LiveUpdate，再进行故障域拆分，并在您的工作负载上度量结果。</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-num">02</div>
+                    <h3 class="step-title">集成</h3>
+                    <p class="step-description">我们的工程师与您的团队协同，将 Multikernel 内嵌进您的整机操作系统：为您的数据通路划定故障域边界，为您的 HBA 与网卡使能设备内核。</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-num">03</div>
+                    <h3 class="step-title">出货与维护</h3>
+                    <p class="step-description">签名构建流、CVE SLA 与二线支持贯穿产品线的整个生命周期。适配成果贡献至上游，以您的平台为参考实现。</p>
+                </div>
+            </div>
+
+            <div class="value-cta" style="margin-top: var(--space-10); text-align: center;">
+                <a href="mailto:cwang@multikernel.io" class="btn btn-primary">
+                    <i data-lucide="mail"></i>
+                    开启合作对话
+                </a>
+                <a href="https://calendar.app.google/nc1upkqQoUeoukdD9" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                    <i data-lucide="calendar"></i>
+                    预约演示
+                </a>
+            </div>
+        </div>
+    </section>
+</main>
