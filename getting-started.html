@@ -382,7 +382,7 @@ kerf exec web-server</code></pre>
                     <li><strong>Kernel spawning via kexec</strong> - New kernels are launched using Linux's existing kexec mechanism, extended to run alongside the primary kernel rather than replacing it</li>
                     <li><strong>Resource partitioning</strong> - CPUs, memory, and devices are split between kernels using standard hotplug interfaces</li>
                     <li><strong>Hardware queue sharing</strong> - Modern NICs and SSDs have multiple hardware queues; each kernel gets exclusive access to specific queues for true hardware-level isolation</li>
-                    <li><strong>Inter-kernel communication</strong> - Kernels communicate over shared memory using vsock, a standard Linux socket type that applications can use without modification</li>
+                    <li><strong>Inter-kernel networking</strong> - Each spawned kernel gets a standard Linux network device backed by descriptor rings in shared memory; frames stay in place and only descriptors cross kernels, so applications use unmodified sockets</li>
                     <li><strong>Docker integration</strong> - Spawned kernels can boot directly into Docker images using DAXFS to share the container rootfs, with no OS init layer</li>
                 </ul>
             </div>

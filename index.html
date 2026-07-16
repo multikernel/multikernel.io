@@ -15,7 +15,7 @@ i18n: true
             </div>
 
             <h1>Bare-Metal Performance. Kernel-Level Isolation. No Hypervisor.</h1>
-            <p class="subtitle">Every workload gets the performance of a dedicated machine — on hardware you already own or VMs you already rent. Each application runs in its own Linux kernel with dedicated cores; device drivers and I/O are offloaded to a separate kernel. No hypervisor. No virtualization overhead. No shared kernel attack surface.</p>
+            <p class="subtitle">Every workload gets the performance of a dedicated machine, on hardware you already own or VMs you already rent. Each application runs in its own Linux kernel with dedicated cores; device drivers and I/O are offloaded to a separate kernel. No hypervisor. No virtualization overhead. No shared kernel attack surface.</p>
 
             <div class="button-group">
                 <a href="https://github.com/multikernel" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
@@ -31,7 +31,7 @@ i18n: true
             <div class="hero-stats">
                 <div class="hero-stat">
                     <span class="hero-stat-number">0</span>
-                    <span class="hero-stat-label">Interrupts on application cores</span>
+                    <span class="hero-stat-label">Device interrupts on app cores</span>
                     <span class="hero-stat-detail">Structural, not tuning</span>
                 </div>
                 <div class="hero-stat">
@@ -80,7 +80,7 @@ i18n: true
                         <span>Why Split-Kernel</span>
                     </div>
                     <h2 class="section-title">Isolation Built into the Architecture</h2>
-                    <p class="section-subtitle">In a traditional Linux kernel, application code and device processing compete for the same CPU cores. The split-kernel architecture removes this contention by offloading all device processing to a dedicated kernel on dedicated cores. Applications see zero interrupts, not because of tuning, but because interrupts physically cannot reach them.</p>
+                    <p class="section-subtitle">In a traditional Linux kernel, application code and device processing compete for the same CPU cores. The split-kernel architecture removes this contention by offloading all device processing to a dedicated kernel on dedicated cores. Applications see zero device interrupts, not because of tuning, but because device interrupts physically cannot reach them.</p>
 
                     <div class="value-cta">
                         <a href="/technology.html" class="btn-link">
@@ -116,7 +116,7 @@ i18n: true
                                     <span class="diagram-item item-app">App</span>
                                     <span class="diagram-item item-app">App</span>
                                 </div>
-                                <div class="diagram-caption">Zero interrupts</div>
+                                <div class="diagram-caption">Zero device interrupts</div>
                             </div>
                             <div class="diagram-box diagram-box-device">
                                 <span class="diagram-tag">Device-Kernel</span>
@@ -151,7 +151,7 @@ i18n: true
                         <i data-lucide="layers"></i>
                     </div>
                     <h3 class="feature-title">Platform &amp; Infrastructure Teams</h3>
-                    <p class="feature-description">Consolidate more Linux workloads per machine without a hypervisor tax or noisy neighbors — and without renewing that virtualization license.</p>
+                    <p class="feature-description">Consolidate more Linux workloads per machine without a hypervisor tax, without noisy neighbors, and without renewing that virtualization license.</p>
                 </div>
 
                 <div class="feature-card">
@@ -192,7 +192,7 @@ i18n: true
                     </div>
                     <h3 class="capability-title">Multikernel Private Cloud</h3>
                     <p style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--accent-700); margin-bottom: var(--space-3); letter-spacing: 0.04em;">Private cloud operating system</p>
-                    <p class="capability-description">Private cloud without the hypervisor. Consolidate Linux workloads on bare metal or VMs you already rent — each with its own kernel, dedicated cores, and native hardware access.</p>
+                    <p class="capability-description">Private cloud without the hypervisor. Consolidate Linux workloads on bare metal or VMs you already rent. Each gets its own kernel, dedicated cores, and native hardware access.</p>
                     <div class="capability-features">
                         <div class="feature-item">
                             <i data-lucide="check"></i>

@@ -76,6 +76,13 @@ i18n: true
 
             <div class="faq-item">
                 <div class="faq-question">
+                    <i data-lucide="cpu"></i> How does this relate to AWS Nitro?
+                </div>
+                <p class="faq-answer">AWS proved the architecture. Nitro moved device processing off the main CPUs into dedicated offload cards, kept the network stack in the guest, and reduced the data path between card and instance to descriptor rings and DMA. Multikernel delivers the same design in software: the device-kernel plays the role of the offload card, owning physical devices and steering traffic, while each app-kernel keeps its own network stack and exchanges only descriptors over shared-memory rings. The difference is that Nitro is custom hardware you can only rent from AWS. Multikernel runs on the servers and standard NICs you already own.</p>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
                     <i data-lucide="zap"></i> Why not use unikernels?
                 </div>
                 <p class="faq-answer">Unikernels eliminate syscall overhead, but modern CPUs already provide highly optimized syscall performance, making this benefit marginal. Most unikernels still rely on virtualization layers, inheriting their performance penalties. Multikernel delivers superior isolation and performance without virtualization overhead or the need to rebuild applications for specialized kernel environments.</p>

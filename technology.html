@@ -42,7 +42,7 @@ i18n: true
                     </div>
                     <h2 class="section-title">Why Split-Kernel</h2>
                     <p class="section-subtitle">A traditional Linux kernel runs application code, device drivers, and interrupt handlers on the same cores. Under load, interrupt processing steals CPU cycles from applications. Kernel workarounds like isolcpus, irqaffinity, NAPI threaded mode, and RPS/RFS reduce the problem but cannot eliminate it. Within a single kernel, bottom-half work can always reach application cores.</p>
-                    <p class="section-subtitle">The split-kernel architecture removes this contention at the design level. Device processing is offloaded to a dedicated kernel on dedicated cores. Applications run in their own kernels where interrupts are structurally absent. Because Multikernel runs directly on hardware with no hypervisor, it works on bare metal or inside VMs you already run, providing kernel-level isolation without the performance penalty of nested virtualization.</p>
+                    <p class="section-subtitle">The split-kernel architecture removes this contention at the design level. Device processing is offloaded to a dedicated kernel on dedicated cores. Applications run in their own kernels where device interrupts are structurally absent. Because Multikernel runs directly on hardware with no hypervisor, it works on bare metal or inside VMs you already run, providing kernel-level isolation without the performance penalty of nested virtualization.</p>
                 </div>
 
                 <div class="value-visual">
@@ -89,7 +89,7 @@ i18n: true
                         <i data-lucide="monitor"></i>
                     </div>
                     <h3 class="tech-title">App-Kernels</h3>
-                    <p class="tech-description">Each application runs in its own Linux kernel on dedicated cores. These kernels contain no device drivers, no interrupt handlers, and no network stack. Practically all compute and memory resources go directly to the application.</p>
+                    <p class="tech-description">Each application runs in its own Linux kernel on dedicated cores. These kernels contain no physical device drivers and take no device interrupts. Each runs its own network stack over a virtual NIC, so practically all compute and memory resources go directly to the application.</p>
                 </div>
 
                 <div class="technology-card primary">
@@ -97,7 +97,7 @@ i18n: true
                         <i data-lucide="hard-drive"></i>
                     </div>
                     <h3 class="tech-title">Device-Kernel</h3>
-                    <p class="tech-description">All device drivers, interrupt handlers, TCP/IP stack, and I/O processing run in a dedicated device-kernel on its own cores. This kernel serves every app-kernel and has its own independent update and failure domain.</p>
+                    <p class="tech-description">All physical device drivers, interrupt handlers, and device I/O run in a dedicated device-kernel on its own cores. It presents each app-kernel a virtual NIC and steers traffic between apps and hardware queues, with its own independent update and failure domain.</p>
                 </div>
 
                 <div class="technology-card primary">
@@ -105,7 +105,7 @@ i18n: true
                         <i data-lucide="database"></i>
                     </div>
                     <h3 class="tech-title">DAXFS Shared Memory</h3>
-                    <p class="tech-description">App-kernels and the device-kernel communicate through DAXFS, a filesystem built on shared DRAM with lock-free CAS-based coordination. Zero-copy, no serialization, no network round trips.</p>
+                    <p class="tech-description">App-kernels and the device-kernel share data through DAXFS, a filesystem built on shared DRAM with lock-free CAS-based coordination. Zero-copy, no serialization, no network round trips.</p>
                 </div>
             </div>
         </div>
@@ -145,7 +145,7 @@ i18n: true
                         <i data-lucide="hard-drive"></i>
                     </div>
                     <h3 class="tech-title">Hardware Queue Isolation</h3>
-                    <p class="tech-description">Modern NICs and NVMe devices expose multiple hardware queues. The device-kernel gets exclusive access to device queues. No software bridge, no SR-IOV. True hardware-level I/O isolation.</p>
+                    <p class="tech-description">Modern NICs and NVMe devices expose multiple hardware queues. The device-kernel owns the physical device and gives each app-kernel its own descriptor rings in shared memory: packet frames stay in place, only descriptors cross kernels. No software switch, no SR-IOV. This is the same design cloud providers ship as dedicated offload cards, built from cores you already own.</p>
                 </div>
 
                 <div class="technology-card">
@@ -254,7 +254,7 @@ i18n: true
                         <i data-lucide="bar-chart"></i>
                     </div>
                     <h3 class="feature-title">Latency-Sensitive Workloads</h3>
-                    <p class="feature-description">Trading systems, real-time analytics, and game servers where interrupt jitter affects outcomes. App-kernel cores see zero interrupts by design.</p>
+                    <p class="feature-description">Trading systems, real-time analytics, and game servers where interrupt jitter affects outcomes. App-kernel cores see zero device interrupts by design.</p>
                 </div>
 
                 <div class="feature-card">
