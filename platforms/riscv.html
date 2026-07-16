@@ -1,0 +1,182 @@
+---
+layout: default
+title: "Multikernel on RISC-V - One Kernel Per Cluster, Every Core at Full Capability"
+description: "Heterogeneous RISC-V silicon ships clusters with different vector widths on the same die. A single kernel refuses or degrades that hardware. Multikernel runs one kernel per cluster, each at its full vector width."
+permalink: /platforms/riscv.html
+i18n: true
+---
+
+<main>
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-badge">
+                <i data-lucide="cpu"></i>
+                <span>RISC-V Platform</span>
+            </div>
+
+            <h1>One Kernel Per Cluster, Every Core at Full Capability</h1>
+            <p class="subtitle">RISC-V server silicon now ships clusters with different vector widths on the same die: 256-bit general-purpose cores next to 1024-bit AI cores. A single kernel either refuses half the machine or degrades all of it. Multikernel takes the hardware's side: one Linux kernel per cluster, each compiled for its exact silicon, each running at full width.</p>
+
+            <div class="button-group">
+                <a href="/contact.html" class="btn btn-primary">
+                    <i data-lucide="users"></i>
+                    Partner With Us
+                </a>
+                <a href="/2026/07/08/multikernel-heterogeneous-riscv/" class="btn btn-secondary">
+                    <i data-lucide="book-open"></i>
+                    Read the Full Analysis
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="problem" class="value-section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">The Partition Is Not Optional</h2>
+                <p class="section-subtitle">A wide vector unit is the most expensive block in a modern core, so vendors put it only where it earns its keep. Heterogeneous width is not a mistake in these products. It is the product. The machine will be partitioned no matter what you do; the only question is whether the partition is a boundary you designed or an accident inside the scheduler.</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="layers"></i>
+                    </div>
+                    <h3 class="feature-title">The Silicon Splits</h3>
+                    <p class="feature-description">Shipping parts pair 256-bit and 1024-bit vector clusters on one die, a four-fold width gap. The installed base is harder still: draft RVV 0.7.1 silicon is instruction-level incompatible with ratified RVV 1.0.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="power-off"></i>
+                    </div>
+                    <h3 class="feature-title">A Single Kernel Refuses</h3>
+                    <p class="feature-description">Mainline Linux inspects each core as it comes up, sees a vector width that does not match the boot core, and never brings it online. The headline cluster, the reason the chip exists, stays dark.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="trending-down"></i>
+                    </div>
+                    <h3 class="feature-title">A Patched Kernel Degrades</h3>
+                    <p class="feature-description">Per-process width patches hide the partition instead of removing it: hotplug restrictions, deadline scheduling refused, affinity silently overridden, and a kernel binary compiled for the narrowest cluster. The scalar cores pay for the AI cluster they never touch.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="solution" class="how-it-works">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">Draw the Boundary Where the Silicon Drew It</h2>
+                <p class="section-subtitle">Multikernel boots one independent Linux kernel per cluster. Inside each domain, Linux behaves like Linux on an ordinary machine, because from that kernel's point of view, it is one.</p>
+            </div>
+
+            <div class="partition-figure">
+                <div class="partition-title">A 16-Core Heterogeneous SoC &middot; One Kernel Per Cluster</div>
+                <div class="partition-domains">
+                    <div class="partition-domain">
+                        <div class="partition-cores">
+                            {% for i in (1..2) %}<span class="partition-core"></span>{% endfor %}
+                        </div>
+                        <div class="partition-name">Device kernel</div>
+                        <div class="partition-detail">2 cores &middot; RVV 256-bit</div>
+                    </div>
+                    <div class="partition-domain">
+                        <div class="partition-cores">
+                            {% for i in (1..6) %}<span class="partition-core"></span>{% endfor %}
+                        </div>
+                        <div class="partition-name">General services</div>
+                        <div class="partition-detail">6 cores &middot; RVV 256-bit</div>
+                    </div>
+                    <div class="partition-domain domain-app">
+                        <div class="partition-cores">
+                            {% for i in (1..8) %}<span class="partition-core core-wide"></span>{% endfor %}
+                        </div>
+                        <div class="partition-name">AI inference</div>
+                        <div class="partition-detail">8 cores &middot; RVV 1024-bit</div>
+                    </div>
+                </div>
+                <p class="partition-caption">Same die, two vector widths. Each kernel records the width its cores really have, so <strong>every cluster runs at full capability on day one</strong>.</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="check-circle"></i>
+                    </div>
+                    <h3 class="feature-title">Every Kernel Sees Matched Cores</h3>
+                    <p class="feature-description">The capability word describes silicon its programs will actually run on, and the C library selects the vector routines the hardware really has. No lowest common denominator, because nothing is shared.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="wrench"></i>
+                    </div>
+                    <h3 class="feature-title">Compiled for Its Exact Silicon</h3>
+                    <p class="feature-description">Each kernel gets its own instruction set, its own errata workarounds, its own vector code at full width. RVV 0.7.1 and RVV 1.0 software run side by side on one machine, each with the toolchain that matches.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="unlock"></i>
+                    </div>
+                    <h3 class="feature-title">Nothing Enforced, Nothing Shared</h3>
+                    <p class="feature-description">No affinity lists to maintain or silently override. Hotplug works. SCHED_DEADLINE admits your inference job on the wide cluster. Cpusets do what the documentation says.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="target"></i>
+                    </div>
+                    <h3 class="feature-title">Placement Is a Decision</h3>
+                    <p class="feature-description">Inference and data-parallel jobs deploy to the wide-vector domain, general services to the scalar domains, and the device kernel runs on scalar cores so the expensive vector silicon serves applications only.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="partnership" class="value-section">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i data-lucide="users"></i>
+                    <span>Adaptation &amp; Partnership</span>
+                </div>
+                <h2 class="section-title">Build It With Us</h2>
+                <p class="section-subtitle">If you make RISC-V silicon, we want to do the bring-up on your parts. If you build boards or systems, we want your platform in our support matrix from day one. If you operate infrastructure, we will run a proof of concept on your real workloads and let the results speak.</p>
+            </div>
+
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-num">01</div>
+                    <h3 class="step-title">Platform Adaptation</h3>
+                    <p class="step-description">Kernel spawning on your boot flow, device kernel enablement for your I/O, one kernel per cluster running at its full vector width.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-num">02</div>
+                    <h3 class="step-title">Proof of Concept</h3>
+                    <p class="step-description">Validate performance, isolation, and operational gains on your real workloads, with every cluster fully enabled.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-num">03</div>
+                    <h3 class="step-title">Upstream &amp; Ecosystem</h3>
+                    <p class="step-description">Push everything into upstream Linux together. The work is open source end to end, and your silicon becomes the reference platform every RISC-V vendor builds on.</p>
+                </div>
+            </div>
+
+            <div class="value-cta" style="margin-top: var(--space-10); text-align: center;">
+                <a href="mailto:cwang@multikernel.io" class="btn btn-primary">
+                    <i data-lucide="mail"></i>
+                    Start the Conversation
+                </a>
+                <a href="https://github.com/multikernel/linux" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                    <i data-lucide="github"></i>
+                    Explore the Kernel Code
+                </a>
+            </div>
+        </div>
+    </section>
+</main>

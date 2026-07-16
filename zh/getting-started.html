@@ -235,7 +235,7 @@ description: "快速上手 Multikernel Linux：学习如何构建、配置并启
                     <div class="gs-overview-card">
                         <div class="step-num">2</div>
                         <h3>配置启动</h3>
-                        <p>为生成的内核实例预留内存池</p>
+                        <p>为子内核实例预留内存池</p>
                     </div>
                     <div class="gs-overview-card">
                         <div class="step-num">3</div>
@@ -330,7 +330,7 @@ sudo make install</code></pre>
             <!-- Step 2: Configure -->
             <div class="content-card">
                 <h2><i data-lucide="settings"></i><span class="step-badge">2</span> 预留内存池</h2>
-                <p>生成的内核需要一段连续的内存区域。请在你的引导加载程序（GRUB、systemd-boot 等）中添加以下内核启动参数：</p>
+                <p>子内核需要一段连续的内存区域。请在你的引导加载程序（GRUB、systemd-boot 等）中添加以下内核启动参数：</p>
                 <pre><code>mkkernel_pool=1023M@0x40000000</code></pre>
                 <p>这会从物理地址 0x40000000 开始预留 1023 MB 供 multikernel 使用。主内核不会使用这部分内存，它将可供生成的实例使用。</p>
                 <p>你也可以使用 <a href="https://github.com/multikernel/lazy_cma" target="_blank" rel="noopener noreferrer">Lazy CMA</a> 在运行时分配这部分内存，无需任何启动参数。</p>
@@ -360,7 +360,7 @@ kerf load web-server --kernel=/boot/vmlinuz --initrd=/boot/initrd.img
 
 # Boot the instance
 kerf exec web-server</code></pre>
-                <p>生成的内核会在分配到的 CPU 和内存上启动，直接运行在硬件之上。它拥有自己的调度器、自己的网络协议栈，以及对分配给它的设备的独立视图。</p>
+                <p>子内核会在分配到的 CPU 和内存上启动，直接运行在硬件之上。它拥有自己的调度器、自己的网络协议栈，以及对分配给它的设备的独立视图。</p>
             </div>
 
             <!-- Key Components -->
@@ -371,7 +371,7 @@ kerf exec web-server</code></pre>
                     <li><strong><a href="https://github.com/multikernel/linux" target="_blank" rel="noopener noreferrer">Multikernel Linux</a></strong> - 内核补丁，支持使用 kexec 子系统生成并管理额外的内核实例</li>
                     <li><strong><a href="https://github.com/multikernel/kerf" target="_blank" rel="noopener noreferrer">Kerf</a></strong> - 用于管理内核实例、资源和生命周期的编排工具</li>
                     <li><strong><a href="https://github.com/multikernel/daxfs" target="_blank" rel="noopener noreferrer">DAXFS</a></strong> - 使用直接内存访问在多个内核实例之间共享的文件系统，支持共享容器根文件系统和零拷贝数据共享</li>
-                    <li><strong><a href="https://github.com/multikernel/lazy_cma" target="_blank" rel="noopener noreferrer">Lazy CMA</a></strong> - 运行时连续内存分配器，为生成的内核提供内存池，无需启动时预留</li>
+                    <li><strong><a href="https://github.com/multikernel/lazy_cma" target="_blank" rel="noopener noreferrer">Lazy CMA</a></strong> - 运行时连续内存分配器，为子内核提供内存池，无需启动时预留</li>
                 </ul>
             </div>
 
@@ -382,8 +382,8 @@ kerf exec web-server</code></pre>
                     <li><strong>通过 kexec 生成内核</strong> - 新内核使用 Linux 现有的 kexec 机制启动，该机制经过扩展，可与主内核并行运行，而非将其替换</li>
                     <li><strong>资源分区</strong> - CPU、内存和设备通过标准热插拔接口在各内核之间分配</li>
                     <li><strong>硬件队列共享</strong> - 现代网卡和 SSD 拥有多个硬件队列；每个内核独占访问特定队列，实现真正的硬件级隔离</li>
-                    <li><strong>内核间网络</strong> - 每个派生内核都获得一个标准 Linux 网络设备，底层由共享内存中的描述符环支撑；数据帧留在共享内存中，跨内核传递的只有描述符，应用程序无需修改即可使用普通套接字</li>
-                    <li><strong>Docker 集成</strong> - 生成的内核可以使用 DAXFS 共享容器根文件系统，直接启动进 Docker 镜像，无需操作系统初始化层</li>
+                    <li><strong>内核间网络</strong> - 每个子内核都获得一个标准 Linux 网络设备，底层由共享内存中的描述符环支撑；数据帧留在共享内存中，跨内核传递的只有描述符，应用程序无需修改即可使用普通套接字</li>
+                    <li><strong>Docker 集成</strong> - 子内核可以使用 DAXFS 共享容器根文件系统，直接启动进 Docker 镜像，无需操作系统初始化层</li>
                 </ul>
             </div>
 

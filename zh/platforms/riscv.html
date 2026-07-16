@@ -1,0 +1,182 @@
+---
+layout: default
+lang: zh
+permalink: /zh/platforms/riscv.html
+title: "Multikernel RISC-V 平台 - 每个核心簇一个内核，每个核心都全力运行"
+description: "异构 RISC-V 芯片在同一颗芯片上集成不同向量宽度的核心簇。单内核要么拒绝这样的硬件，要么让它全面降级。Multikernel 为每个核心簇运行一个内核，各自跑满自己的向量宽度。"
+---
+
+<main>
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-badge">
+                <i data-lucide="cpu"></i>
+                <span>RISC-V 平台</span>
+            </div>
+
+            <h1>每个核心簇一个内核 · 每个核心全力运行</h1>
+            <p class="subtitle">RISC-V 服务器芯片已经在同一颗芯片上集成不同向量宽度的核心簇：256 位通用核心与 1024 位 AI 核心并存。单内核要么拒绝半台机器，要么让整台机器降级。Multikernel 站在硬件这一边：每个核心簇一个 Linux 内核，各自针对真实硬件编译，各自跑满全部宽度。</p>
+
+            <div class="button-group">
+                <a href="/zh/contact.html" class="btn btn-primary">
+                    <i data-lucide="users"></i>
+                    与我们合作
+                </a>
+                <a href="/2026/07/08/multikernel-heterogeneous-riscv/" class="btn btn-secondary">
+                    <i data-lucide="book-open"></i>
+                    阅读完整分析（英文）
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="problem" class="value-section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">分区不是可选项</h2>
+                <p class="section-subtitle">宽向量单元是现代核心中最昂贵的模块，厂商只会把它放在能挣回成本的地方。异构宽度不是这些产品的缺陷，它就是产品本身。这台机器注定会被分区，唯一的问题是：这条分界线是您设计的边界，还是调度器内部的一次意外。</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="layers"></i>
+                    </div>
+                    <h3 class="feature-title">芯片本身就是分裂的</h3>
+                    <p class="feature-description">量产芯片把 256 位与 1024 位向量核心簇放在同一颗芯片上，宽度相差四倍。存量市场更棘手：草案版 RVV 0.7.1 芯片与正式版 RVV 1.0 在指令级互不兼容。</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="power-off"></i>
+                    </div>
+                    <h3 class="feature-title">单内核直接拒绝</h3>
+                    <p class="feature-description">主线 Linux 在每个核心上线时逐一检查，发现向量宽度与启动核心不符，就永远不再启用它。整颗芯片的招牌核心簇，也就是它存在的理由，始终一片漆黑。</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="trending-down"></i>
+                    </div>
+                    <h3 class="feature-title">打补丁的内核全面降级</h3>
+                    <p class="feature-description">按进程记录宽度的补丁只是把分区藏起来，而不是消除它：热插拔受限、SCHED_DEADLINE 被拒、亲和性被悄悄改写、内核二进制仍按最窄核心簇编译。为 AI 核心簇买单的，是从不碰它的通用核心。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="solution" class="how-it-works">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">沿着芯片划下的线，划下软件的边界</h2>
+                <p class="section-subtitle">Multikernel 为每个核心簇启动一个独立的 Linux 内核。在每个域内部，Linux 的行为与普通机器上别无二致，因为从那个内核的视角看，它就是一台普通机器。</p>
+            </div>
+
+            <div class="partition-figure">
+                <div class="partition-title">一颗 16 核异构 SoC &middot; 每个核心簇一个内核</div>
+                <div class="partition-domains">
+                    <div class="partition-domain">
+                        <div class="partition-cores">
+                            {% for i in (1..2) %}<span class="partition-core"></span>{% endfor %}
+                        </div>
+                        <div class="partition-name">设备内核</div>
+                        <div class="partition-detail">2 核 &middot; RVV 256 位</div>
+                    </div>
+                    <div class="partition-domain">
+                        <div class="partition-cores">
+                            {% for i in (1..6) %}<span class="partition-core"></span>{% endfor %}
+                        </div>
+                        <div class="partition-name">通用服务</div>
+                        <div class="partition-detail">6 核 &middot; RVV 256 位</div>
+                    </div>
+                    <div class="partition-domain domain-app">
+                        <div class="partition-cores">
+                            {% for i in (1..8) %}<span class="partition-core core-wide"></span>{% endfor %}
+                        </div>
+                        <div class="partition-name">AI 推理</div>
+                        <div class="partition-detail">8 核 &middot; RVV 1024 位</div>
+                    </div>
+                </div>
+                <p class="partition-caption">同一颗芯片，两种向量宽度。每个内核记录其核心真实的宽度，<strong>每个核心簇从第一天起就全力运行</strong>。</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="check-circle"></i>
+                    </div>
+                    <h3 class="feature-title">每个内核看到的核心都彼此匹配</h3>
+                    <p class="feature-description">内核上报的硬件能力（hwcap）描述的是程序真正运行其上的硬件，C 库选中的是硬件真正具备的向量例程。没有最小公分母，因为没有任何东西被共享。</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="wrench"></i>
+                    </div>
+                    <h3 class="feature-title">为真实硬件量身编译</h3>
+                    <p class="feature-description">每个内核拥有自己的指令集、自己的勘误规避方案、自己以全宽度运行的向量代码。RVV 0.7.1 与 RVV 1.0 软件在同一台机器上并肩运行，各配各的工具链。</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="unlock"></i>
+                    </div>
+                    <h3 class="feature-title">无需强制，因为无需共享</h3>
+                    <p class="feature-description">没有需要维护或被悄悄改写的亲和性列表。热插拔正常工作，SCHED_DEADLINE 在宽向量核心簇上照常接纳您的推理任务，cpuset 的行为与文档所说完全一致。</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="target"></i>
+                    </div>
+                    <h3 class="feature-title">部署位置是一个决策</h3>
+                    <p class="feature-description">推理与数据并行任务部署到宽向量域，通用服务部署到标量域，设备内核运行在标量核心上，让昂贵的向量单元只为应用服务。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="partnership" class="value-section">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i data-lucide="users"></i>
+                    <span>适配与合作</span>
+                </div>
+                <h2 class="section-title">与我们共建</h2>
+                <p class="section-subtitle">如果您是 RISC-V 芯片厂商，我们希望在您的芯片上完成启动适配；如果您制造板卡或整机，我们希望您的平台从第一天起就进入我们的支持矩阵；如果您运营基础设施并正在评估 RISC-V，我们会在您的真实工作负载上做概念验证，让结果说话。</p>
+            </div>
+
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-num">01</div>
+                    <h3 class="step-title">平台适配</h3>
+                    <p class="step-description">在您的启动流程上实现子内核生成，为您的 I/O 使能设备内核，让每个核心簇的内核跑满自己的向量宽度。</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-num">02</div>
+                    <h3 class="step-title">概念验证</h3>
+                    <p class="step-description">在您的真实工作负载上验证性能、隔离与运维收益，每个核心簇全部启用。</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-num">03</div>
+                    <h3 class="step-title">上游与生态</h3>
+                    <p class="step-description">共同将全部成果推入上游 Linux。工作端到端开源，您的芯片将成为整个 RISC-V 生态共同构建的参考平台。</p>
+                </div>
+            </div>
+
+            <div class="value-cta" style="margin-top: var(--space-10); text-align: center;">
+                <a href="mailto:cwang@multikernel.io" class="btn btn-primary">
+                    <i data-lucide="mail"></i>
+                    开启合作对话
+                </a>
+                <a href="https://github.com/multikernel/linux" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                    <i data-lucide="github"></i>
+                    浏览内核代码
+                </a>
+            </div>
+        </div>
+    </section>
+</main>

@@ -1,0 +1,158 @@
+/* ===== PLATFORM PAGES (ARM / RISC-V) =====
+   Kernel-domain partition figures rendered as dark board panels,
+   and the three-step partnership sequence. */
+
+.partition-figure {
+    max-width: 900px;
+    margin: 0 auto var(--space-12);
+    padding: var(--space-8) var(--space-6);
+    background: var(--gray-900);
+    border: 1px solid var(--gray-700);
+    border-radius: 12px;
+}
+
+.partition-title {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent-300);
+    text-align: center;
+    margin-bottom: var(--space-8);
+}
+
+.partition-domains {
+    display: flex;
+    gap: var(--space-4);
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.partition-domain {
+    padding: var(--space-3);
+    border: 1px solid var(--secondary-500);
+    border-radius: 8px;
+    background: rgba(47, 109, 157, 0.10);
+}
+
+.partition-domain.domain-app {
+    border-color: var(--accent-600);
+    background: rgba(201, 161, 62, 0.07);
+}
+
+.partition-cores {
+    display: grid;
+    grid-template-columns: repeat(4, 15px);
+    gap: 4px;
+    justify-content: center;
+}
+
+.partition-core {
+    width: 15px;
+    height: 15px;
+    border-radius: 3px;
+    background: var(--secondary-400);
+}
+
+.domain-app .partition-core {
+    background: var(--accent-500);
+}
+
+.domain-app.shade-2 .partition-core {
+    background: var(--accent-600);
+}
+
+.partition-core.core-wide {
+    background: var(--accent-400);
+    outline: 1px solid var(--accent-200);
+    outline-offset: -1px;
+}
+
+.partition-name {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--secondary-200);
+    text-align: center;
+    margin-top: var(--space-3);
+}
+
+.domain-app .partition-name {
+    color: var(--accent-200);
+}
+
+.partition-detail {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--gray-400);
+    text-align: center;
+    margin-top: var(--space-1);
+}
+
+.partition-caption {
+    font-size: var(--text-sm);
+    color: var(--gray-300);
+    text-align: center;
+    margin-top: var(--space-8);
+}
+
+.partition-caption strong {
+    color: var(--accent-300);
+    font-weight: 600;
+}
+
+/* Three-step partnership sequence */
+.steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.step-card {
+    padding: var(--space-6);
+    background: white;
+    border: 1px solid var(--gray-200);
+    border-radius: 12px;
+}
+
+.step-num {
+    font-family: var(--font-mono);
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    color: var(--accent-600);
+    margin-bottom: var(--space-3);
+}
+
+.step-title {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--gray-800);
+    margin-bottom: var(--space-2);
+}
+
+.step-description {
+    font-size: var(--text-sm);
+    color: var(--gray-600);
+    line-height: var(--leading-relaxed);
+}
+
+@media (max-width: 768px) {
+    .steps-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .partition-domains {
+        gap: var(--space-3);
+    }
+
+    .partition-cores {
+        grid-template-columns: repeat(4, 12px);
+    }
+
+    .partition-core {
+        width: 12px;
+        height: 12px;
+    }
+}
