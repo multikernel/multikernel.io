@@ -167,8 +167,90 @@ description: "Multikernel 系统将设备驱动与中断处理卸载到专用内
                 <p class="section-subtitle">分离内核架构兼具独立内核的隔离性与原生硬件性能，既没有虚拟化的开销，也不受内核调优的局限。</p>
             </div>
 
-            <div class="diagram-container">
-                <img src="/assets/images/comparison-architecture-diagrams.svg" alt="虚拟机、容器与 Multikernel 架构对比图" class="architecture-diagram">
+            <div class="comparison-diagrams">
+                <div class="architecture-preview">
+                    <div class="preview-title">虚拟机</div>
+                    <div class="architecture-layers">
+                        <div class="layer multikernel-layer">
+                            <div class="layer-label">应用程序</div>
+                            <div class="layer-features">
+                                <span>应用</span>
+                                <span>应用</span>
+                            </div>
+                        </div>
+                        <div class="layer hardware-layer">
+                            <div class="layer-label">客户机内核</div>
+                            <div class="layer-features">
+                                <span>内核</span>
+                                <span>内核</span>
+                            </div>
+                        </div>
+                        <div class="layer hardware-layer">
+                            <div class="layer-label">虚拟机管理程序 + 宿主机内核</div>
+                            <div class="layer-features">
+                                <span>VM 退出</span>
+                                <span>模拟 I/O</span>
+                            </div>
+                        </div>
+                        <div class="layer hardware-layer">
+                            <div class="layer-label">硬件</div>
+                        </div>
+                    </div>
+                    <div class="preview-benefit">应用与硬件之间隔着两层内核和一个虚拟机管理程序</div>
+                </div>
+
+                <div class="architecture-preview">
+                    <div class="preview-title">容器</div>
+                    <div class="architecture-layers">
+                        <div class="layer multikernel-layer">
+                            <div class="layer-label">应用程序</div>
+                            <div class="layer-features">
+                                <span>应用</span>
+                                <span>应用</span>
+                            </div>
+                        </div>
+                        <div class="layer hardware-layer">
+                            <div class="layer-label">共享内核</div>
+                            <div class="layer-features">
+                                <span>一个内核</span>
+                                <span>所有租户</span>
+                            </div>
+                        </div>
+                        <div class="layer hardware-layer">
+                            <div class="layer-label">硬件</div>
+                        </div>
+                    </div>
+                    <div class="preview-benefit">所有租户共享同一个内核</div>
+                </div>
+
+                <div class="architecture-preview highlight">
+                    <div class="preview-title">Multikernel</div>
+                    <div class="architecture-layers">
+                        <div class="layer multikernel-layer">
+                            <div class="layer-label">应用程序</div>
+                            <div class="layer-features">
+                                <span>应用</span>
+                                <span>应用</span>
+                            </div>
+                        </div>
+                        <div class="layer multikernel-layer">
+                            <div class="layer-label">独立内核</div>
+                            <div class="layer-features">
+                                <span>内核 A</span>
+                                <span>内核 B</span>
+                                <span>设备内核</span>
+                            </div>
+                        </div>
+                        <div class="layer hardware-layer">
+                            <div class="layer-label">硬件</div>
+                            <div class="layer-features">
+                                <span>专用核心</span>
+                                <span>硬件队列</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="preview-benefit">应用与硬件之间空无一物</div>
+                </div>
             </div>
 
             <div class="comparison-table">

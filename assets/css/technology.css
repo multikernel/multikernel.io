@@ -294,6 +294,35 @@
     font-style: italic;
 }
 
+/* Architecture comparison: three preview cards side by side */
+.comparison-diagrams {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+    max-width: 1100px;
+    margin: var(--space-12) auto;
+}
+
+.comparison-diagrams .architecture-preview {
+    max-width: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.comparison-diagrams .architecture-layers {
+    flex: 1;
+}
+
+.comparison-diagrams .architecture-preview.highlight {
+    border-top: 2px solid var(--accent-500);
+}
+
+@media (max-width: 900px) {
+    .comparison-diagrams {
+        grid-template-columns: 1fr;
+    }
+}
+
 .innovation-highlights {
     display: flex;
     flex-direction: column;

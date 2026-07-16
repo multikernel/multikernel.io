@@ -167,8 +167,90 @@ i18n: true
                 <p class="section-subtitle">The split-kernel architecture combines the isolation of separate kernels with native hardware performance, without the overhead of virtualization or the limitations of kernel tuning.</p>
             </div>
 
-            <div class="diagram-container">
-                <img src="assets/images/comparison-architecture-diagrams.svg" alt="Comparison of VM, Container, and Multikernel architectures" class="architecture-diagram">
+            <div class="comparison-diagrams">
+                <div class="architecture-preview">
+                    <div class="preview-title">Virtual Machines</div>
+                    <div class="architecture-layers">
+                        <div class="layer multikernel-layer">
+                            <div class="layer-label">Applications</div>
+                            <div class="layer-features">
+                                <span>App</span>
+                                <span>App</span>
+                            </div>
+                        </div>
+                        <div class="layer hardware-layer">
+                            <div class="layer-label">Guest Kernels</div>
+                            <div class="layer-features">
+                                <span>Kernel</span>
+                                <span>Kernel</span>
+                            </div>
+                        </div>
+                        <div class="layer hardware-layer">
+                            <div class="layer-label">Hypervisor + Host Kernel</div>
+                            <div class="layer-features">
+                                <span>VM exits</span>
+                                <span>emulated I/O</span>
+                            </div>
+                        </div>
+                        <div class="layer hardware-layer">
+                            <div class="layer-label">Hardware</div>
+                        </div>
+                    </div>
+                    <div class="preview-benefit">Two kernels and a hypervisor between app and hardware</div>
+                </div>
+
+                <div class="architecture-preview">
+                    <div class="preview-title">Containers</div>
+                    <div class="architecture-layers">
+                        <div class="layer multikernel-layer">
+                            <div class="layer-label">Applications</div>
+                            <div class="layer-features">
+                                <span>App</span>
+                                <span>App</span>
+                            </div>
+                        </div>
+                        <div class="layer hardware-layer">
+                            <div class="layer-label">Shared Kernel</div>
+                            <div class="layer-features">
+                                <span>one kernel</span>
+                                <span>every tenant</span>
+                            </div>
+                        </div>
+                        <div class="layer hardware-layer">
+                            <div class="layer-label">Hardware</div>
+                        </div>
+                    </div>
+                    <div class="preview-benefit">One kernel shared by every tenant</div>
+                </div>
+
+                <div class="architecture-preview highlight">
+                    <div class="preview-title">Multikernel</div>
+                    <div class="architecture-layers">
+                        <div class="layer multikernel-layer">
+                            <div class="layer-label">Applications</div>
+                            <div class="layer-features">
+                                <span>App</span>
+                                <span>App</span>
+                            </div>
+                        </div>
+                        <div class="layer multikernel-layer">
+                            <div class="layer-label">Independent Kernels</div>
+                            <div class="layer-features">
+                                <span>Kernel A</span>
+                                <span>Kernel B</span>
+                                <span>Device Kernel</span>
+                            </div>
+                        </div>
+                        <div class="layer hardware-layer">
+                            <div class="layer-label">Hardware</div>
+                            <div class="layer-features">
+                                <span>dedicated cores</span>
+                                <span>hardware queues</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="preview-benefit">Nothing between app and hardware</div>
+                </div>
             </div>
 
             <div class="comparison-table">
