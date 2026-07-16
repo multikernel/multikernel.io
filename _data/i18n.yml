@@ -11,6 +11,10 @@ en:
     technology: Technology
     overview: Overview
     overview_sub: Architecture and approach
+    arm: ARM Platform
+    arm_sub: Split-kernel on high-core-count servers
+    riscv: RISC-V Platform
+    riscv_sub: One kernel per cluster on heterogeneous SoCs
     faq: FAQ
     faq_sub: Common questions answered
     getting_started: Getting Started
@@ -45,6 +49,10 @@ zh:
     technology: 技术
     overview: 概览
     overview_sub: 架构与技术路线
+    arm: ARM 平台
+    arm_sub: 高核数服务器上的分离内核
+    riscv: RISC-V 平台
+    riscv_sub: 异构 SoC 上每个核心簇一个内核
     faq: 常见问题
     faq_sub: 常见问题解答
     getting_started: 快速上手

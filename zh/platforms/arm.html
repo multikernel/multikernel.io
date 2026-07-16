@@ -1,0 +1,188 @@
+---
+layout: default
+lang: zh
+permalink: /zh/platforms/arm.html
+title: "Multikernel ARM 平台 - 128 核 ARM 服务器是分离内核的最佳舞台"
+description: "高核数 ARM 服务器拥有充裕的核心与领先的能效。Multikernel 将其划分为互不共享的内核域，可扩展性由架构本身保证。"
+---
+
+<main>
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-badge">
+                <i data-lucide="cpu"></i>
+                <span>ARM 平台</span>
+            </div>
+
+            <h1>128 核 ARM 服务器 · 分离内核的最佳舞台</h1>
+            <p class="subtitle">高核数 ARM 平台拥有充裕的核心与领先的能效，而分离内核的优势恰恰随每一个新增的核心而增长，两者天然契合。Multikernel 将大型多核服务器划分为互不共享的内核域，可扩展性由架构本身保证。</p>
+
+            <div class="button-group">
+                <a href="/zh/contact.html" class="btn btn-primary">
+                    <i data-lucide="users"></i>
+                    与我们合作
+                </a>
+                <a href="/zh/technology.html" class="btn btn-secondary">
+                    <i data-lucide="layers"></i>
+                    了解架构
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="scalability" class="value-section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">核越多，优势越大</h2>
+                <p class="section-subtitle">在传统单内核上，所有核心共享同一个内核：核心越多，全局锁竞争与跨核缓存一致性流量就越重，规模反而成了负担。Multikernel 反转了这条曲线：每个内核只管理属于自己的那部分核心，增加核心只会增加容量，而不会增加竞争。</p>
+            </div>
+
+            <div class="partition-figure">
+                <div class="partition-title">一台 128 核服务器 &middot; 内核域分区示例</div>
+                <div class="partition-domains">
+                    <div class="partition-domain">
+                        <div class="partition-cores">
+                            {% for i in (1..16) %}<span class="partition-core"></span>{% endfor %}
+                        </div>
+                        <div class="partition-name">设备内核</div>
+                        <div class="partition-detail">16 核</div>
+                    </div>
+                    <div class="partition-domain domain-app">
+                        <div class="partition-cores">
+                            {% for i in (1..32) %}<span class="partition-core"></span>{% endfor %}
+                        </div>
+                        <div class="partition-name">应用域 A</div>
+                        <div class="partition-detail">32 核</div>
+                    </div>
+                    <div class="partition-domain domain-app shade-2">
+                        <div class="partition-cores">
+                            {% for i in (1..32) %}<span class="partition-core"></span>{% endfor %}
+                        </div>
+                        <div class="partition-name">应用域 B</div>
+                        <div class="partition-detail">32 核</div>
+                    </div>
+                    <div class="partition-domain domain-app">
+                        <div class="partition-cores">
+                            {% for i in (1..24) %}<span class="partition-core"></span>{% endfor %}
+                        </div>
+                        <div class="partition-name">应用域 C</div>
+                        <div class="partition-detail">24 核</div>
+                    </div>
+                    <div class="partition-domain domain-app shade-2">
+                        <div class="partition-cores">
+                            {% for i in (1..24) %}<span class="partition-core"></span>{% endfor %}
+                        </div>
+                        <div class="partition-name">应用域 D</div>
+                        <div class="partition-detail">24 核</div>
+                    </div>
+                </div>
+                <p class="partition-caption">每个域都是一个拥有专属核心的独立 Linux 内核。<strong>这台机器如何分区，由您决定。</strong></p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="unlock"></i>
+                    </div>
+                    <h3 class="feature-title">锁竞争不随规模增长</h3>
+                    <p class="feature-description">内核之间互不共享：128 核与 8 核一样从容，机器变大也无需重新调优。</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="shield-check"></i>
+                    </div>
+                    <h3 class="feature-title">故障与干扰止步于各自的域</h3>
+                    <p class="feature-description">某个域过载或崩溃，绝不会拖垮整台机器；其余一切照常运行。</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="trending-up"></i>
+                    </div>
+                    <h3 class="feature-title">每个核心都物尽其用</h3>
+                    <p class="feature-description">核心越多，每台机器能承载的独立域就越多：更高的密度，更高的利用率。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="why-arm" class="how-it-works">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">为什么偏偏是 ARM</h2>
+                <p class="section-subtitle">让 ARM 成为增长最快的服务器架构的那套经济学，也正是分离内核最受益的经济学。</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="grid-3x3"></i>
+                    </div>
+                    <h3 class="feature-title">核数领先业界</h3>
+                    <p class="feature-description">单路 128 核以上正是 ARM 服务器芯片的主场。共享单内核会把这份充裕变成竞争；分区之后，它变成一份份独立的算力。</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="battery-charging"></i>
+                    </div>
+                    <h3 class="feature-title">能效就是卖点</h3>
+                    <p class="feature-description">ARM 靠每瓦性能赢下订单。Multikernel 去掉了虚拟机管理程序这一层，没有一个周期浪费在虚拟化开销上，让这份优势原样保留。</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="git-branch"></i>
+                    </div>
+                    <h3 class="feature-title">上游 Linux，而非分叉</h3>
+                    <p class="feature-description">Multikernel 构建于上游 Linux，基于 kexec 的子内核生成与标准热插拔接口。平台适配成果进入上游，整个 ARM 生态共同受益。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="partnership" class="value-section">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i data-lucide="users"></i>
+                    <span>适配与合作</span>
+                </div>
+                <h2 class="section-title">通向合作的三步路径</h2>
+                <p class="section-subtitle">我们带来分离内核软件栈，您带来芯片与平台。全部工作端到端开源。</p>
+            </div>
+
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-num">01</div>
+                    <h3 class="step-title">平台适配</h3>
+                    <p class="step-description">在您的目标机器上联合完成启动适配：内核引导、设备内核，以及覆盖网络、存储与 GPU 的驱动使能。</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-num">02</div>
+                    <h3 class="step-title">概念验证</h3>
+                    <p class="step-description">在您的真实工作负载上，与您现有的虚拟化方案并排对比，验证性能、隔离与运维收益。</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-num">03</div>
+                    <h3 class="step-title">上游与生态</h3>
+                    <p class="step-description">将适配成果推入上游 Linux，联合发布结果，共同建设高核数 ARM 软件生态。</p>
+                </div>
+            </div>
+
+            <div class="value-cta" style="margin-top: var(--space-10); text-align: center;">
+                <a href="mailto:cwang@multikernel.io" class="btn btn-primary">
+                    <i data-lucide="mail"></i>
+                    开启合作对话
+                </a>
+                <a href="/assets/docs/poster_zh.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                    <i data-lucide="file-down"></i>
+                    下载产品概览（PDF）
+                </a>
+            </div>
+        </div>
+    </section>
+</main>

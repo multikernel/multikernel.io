@@ -27,6 +27,9 @@
         <link rel="stylesheet" href="/assets/css/technology.css">
     {% elsif rel_url contains '/products/' %}
         <link rel="stylesheet" href="/assets/css/technology.css">
+    {% elsif rel_url contains '/platforms/' %}
+        <link rel="stylesheet" href="/assets/css/technology.css">
+        <link rel="stylesheet" href="/assets/css/platforms.css">
     {% elsif rel_url contains '/faq' %}
         <link rel="stylesheet" href="/assets/css/faq.css">
     {% elsif rel_url contains '/about' %}
@@ -408,7 +411,7 @@
                 </div>
 
                 <div class="site-nav-dropdown">
-                    <button class="site-nav-dropdown-trigger {% if rel_url == '/technology.html' or rel_url == '/faq.html' %}active{% endif %}">
+                    <button class="site-nav-dropdown-trigger {% if rel_url == '/technology.html' or rel_url == '/faq.html' or rel_url contains '/platforms/' %}active{% endif %}">
                         {{ t.nav.technology }}
                         <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 4.5L6 7.5L9 4.5"/></svg>
                     </button>
@@ -416,6 +419,14 @@
                         <a href="{{ lang_prefix }}/technology.html" class="site-nav-dropdown-item {% if rel_url == '/technology.html' %}active{% endif %}">
                             {{ t.nav.overview }}
                             <small>{{ t.nav.overview_sub }}</small>
+                        </a>
+                        <a href="{{ lang_prefix }}/platforms/arm.html" class="site-nav-dropdown-item {% if rel_url == '/platforms/arm.html' %}active{% endif %}">
+                            {{ t.nav.arm }}
+                            <small>{{ t.nav.arm_sub }}</small>
+                        </a>
+                        <a href="{{ lang_prefix }}/platforms/riscv.html" class="site-nav-dropdown-item {% if rel_url == '/platforms/riscv.html' %}active{% endif %}">
+                            {{ t.nav.riscv }}
+                            <small>{{ t.nav.riscv_sub }}</small>
                         </a>
                         <a href="{{ lang_prefix }}/faq.html" class="site-nav-dropdown-item {% if rel_url == '/faq.html' %}active{% endif %}">
                             {{ t.nav.faq }}

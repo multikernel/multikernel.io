@@ -1,0 +1,188 @@
+---
+layout: default
+title: "Multikernel on ARM - 128-Core Servers Are the Ideal Stage for Split-Kernel"
+description: "High-core-count ARM servers offer abundant cores and leading energy efficiency. Multikernel partitions them into share-nothing kernel domains, so scalability is guaranteed by the architecture itself."
+permalink: /platforms/arm.html
+i18n: true
+---
+
+<main>
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-badge">
+                <i data-lucide="cpu"></i>
+                <span>ARM Platform</span>
+            </div>
+
+            <h1>128-Core ARM Servers: The Ideal Stage for Split-Kernel</h1>
+            <p class="subtitle">High-core-count ARM platforms offer abundant cores and leading energy efficiency, a natural match for an architecture whose advantages grow with every added core. Multikernel partitions large many-core servers into share-nothing kernel domains, so scalability is guaranteed by the architecture itself.</p>
+
+            <div class="button-group">
+                <a href="/contact.html" class="btn btn-primary">
+                    <i data-lucide="users"></i>
+                    Partner With Us
+                </a>
+                <a href="/technology.html" class="btn btn-secondary">
+                    <i data-lucide="layers"></i>
+                    See the Architecture
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="scalability" class="value-section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">More Cores, More Advantage</h2>
+                <p class="section-subtitle">On a traditional single kernel, every core shares one kernel: the more cores, the heavier the global lock contention and cross-core cache-coherence traffic, and scale becomes a liability. Multikernel inverts that curve. Each kernel manages only its own subset of cores, so adding cores adds capacity without adding contention.</p>
+            </div>
+
+            <div class="partition-figure">
+                <div class="partition-title">A 128-Core Server &middot; Example Kernel-Domain Partition</div>
+                <div class="partition-domains">
+                    <div class="partition-domain">
+                        <div class="partition-cores">
+                            {% for i in (1..16) %}<span class="partition-core"></span>{% endfor %}
+                        </div>
+                        <div class="partition-name">Device kernel</div>
+                        <div class="partition-detail">16 cores</div>
+                    </div>
+                    <div class="partition-domain domain-app">
+                        <div class="partition-cores">
+                            {% for i in (1..32) %}<span class="partition-core"></span>{% endfor %}
+                        </div>
+                        <div class="partition-name">App domain A</div>
+                        <div class="partition-detail">32 cores</div>
+                    </div>
+                    <div class="partition-domain domain-app shade-2">
+                        <div class="partition-cores">
+                            {% for i in (1..32) %}<span class="partition-core"></span>{% endfor %}
+                        </div>
+                        <div class="partition-name">App domain B</div>
+                        <div class="partition-detail">32 cores</div>
+                    </div>
+                    <div class="partition-domain domain-app">
+                        <div class="partition-cores">
+                            {% for i in (1..24) %}<span class="partition-core"></span>{% endfor %}
+                        </div>
+                        <div class="partition-name">App domain C</div>
+                        <div class="partition-detail">24 cores</div>
+                    </div>
+                    <div class="partition-domain domain-app shade-2">
+                        <div class="partition-cores">
+                            {% for i in (1..24) %}<span class="partition-core"></span>{% endfor %}
+                        </div>
+                        <div class="partition-name">App domain D</div>
+                        <div class="partition-detail">24 cores</div>
+                    </div>
+                </div>
+                <p class="partition-caption">Each domain is an independent Linux kernel with dedicated cores. <strong>You decide how the machine is partitioned.</strong></p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="unlock"></i>
+                    </div>
+                    <h3 class="feature-title">Lock Contention Doesn't Grow With Scale</h3>
+                    <p class="feature-description">Kernels share nothing: 128 cores stay as calm as 8, with no re-tuning for bigger machines.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="shield-check"></i>
+                    </div>
+                    <h3 class="feature-title">Faults and Interference Stay in Their Domain</h3>
+                    <p class="feature-description">An overloaded or crashed domain never takes down the machine; everything else keeps running.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="trending-up"></i>
+                    </div>
+                    <h3 class="feature-title">Full Value From Every Core</h3>
+                    <p class="feature-description">More cores means more independent domains per machine: higher density, higher utilization.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="why-arm" class="how-it-works">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">Why ARM, Specifically</h2>
+                <p class="section-subtitle">The economics that made ARM the fastest-growing server architecture are the same economics that reward split-kernel.</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="grid-3x3"></i>
+                    </div>
+                    <h3 class="feature-title">Core Counts Lead the Industry</h3>
+                    <p class="feature-description">128 cores and beyond per socket is where ARM server silicon already lives. A single shared kernel turns that abundance into contention; a partitioned machine turns it into independent capacity.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="battery-charging"></i>
+                    </div>
+                    <h3 class="feature-title">Efficiency Is the Selling Point</h3>
+                    <p class="feature-description">ARM wins deals on performance per watt. Multikernel preserves that edge by removing the hypervisor layer, so no cycles are spent on virtualization overhead.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="git-branch"></i>
+                    </div>
+                    <h3 class="feature-title">Upstream Linux, Not a Fork</h3>
+                    <p class="feature-description">Multikernel is built on upstream Linux with kexec-based kernel spawning and standard hotplug interfaces. Platform enablement lands upstream, where the whole ARM ecosystem benefits.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="partnership" class="value-section">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i data-lucide="users"></i>
+                    <span>Adaptation &amp; Partnership</span>
+                </div>
+                <h2 class="section-title">A Three-Step Path to Partnership</h2>
+                <p class="section-subtitle">We bring the split-kernel stack; you bring the silicon and the platforms. The work is open source end to end.</p>
+            </div>
+
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-num">01</div>
+                    <h3 class="step-title">Platform Adaptation</h3>
+                    <p class="step-description">Joint bring-up on your target machines: kernel boot, device kernel, and driver enablement covering network, storage, and GPU.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-num">02</div>
+                    <h3 class="step-title">Proof of Concept</h3>
+                    <p class="step-description">Validate performance, isolation, and operational gains on your real workloads, side by side with your current virtualization stack.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-num">03</div>
+                    <h3 class="step-title">Upstream &amp; Ecosystem</h3>
+                    <p class="step-description">Push adaptation work into upstream Linux, publish joint results, and build the high-core-count ARM software ecosystem together.</p>
+                </div>
+            </div>
+
+            <div class="value-cta" style="margin-top: var(--space-10); text-align: center;">
+                <a href="mailto:cwang@multikernel.io" class="btn btn-primary">
+                    <i data-lucide="mail"></i>
+                    Start the Conversation
+                </a>
+                <a href="/assets/docs/poster_en.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                    <i data-lucide="file-down"></i>
+                    Download the Overview (PDF)
+                </a>
+            </div>
+        </div>
+    </section>
+</main>

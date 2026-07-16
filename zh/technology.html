@@ -129,7 +129,7 @@ description: "Multikernel 系统将设备驱动与中断处理卸载到专用内
                         <i data-lucide="play-circle"></i>
                     </div>
                     <h3 class="tech-title">通过 Kexec 生成内核</h3>
-                    <p class="tech-description">新的内核实例通过 Linux 的 kexec 机制启动，该机制经过扩展，可与正在运行的内核并行启动，而非将其替换。每个新生成的内核都在分配给它的 CPU 与内存上启动，完全独立。</p>
+                    <p class="tech-description">新的内核实例通过 Linux 的 kexec 机制启动，该机制经过扩展，可与主内核并行启动，而非将其替换。每个子内核都在分配给它的 CPU 与内存上启动，完全独立。</p>
                 </div>
 
                 <div class="technology-card">
@@ -153,7 +153,7 @@ description: "Multikernel 系统将设备驱动与中断处理卸载到专用内
                         <i data-lucide="box"></i>
                     </div>
                     <h3 class="tech-title">Docker 集成</h3>
-                    <p class="tech-description">新生成的内核通过 DAXFS 共享容器根文件系统，直接启动进 Docker 镜像。无需为每个实例执行完整的操作系统初始化。应用程序无需修改，即可使用标准 Linux 接口运行。</p>
+                    <p class="tech-description">子内核通过 DAXFS 共享容器根文件系统，直接启动进 Docker 镜像。无需为每个实例执行完整的操作系统初始化。应用程序无需修改，即可使用标准 Linux 接口运行。</p>
                 </div>
             </div>
         </div>
