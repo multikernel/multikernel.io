@@ -1,0 +1,224 @@
+---
+layout: default
+title: "Multikernel for SaaS and Database Clouds - One Kernel Per Tenant on Shared Nodes"
+description: "For SaaS and database cloud providers: run every tenant in its own kernel on the VMs you already rent. VM-grade isolation at container density, with no nested virtualization and no bare-metal requirement."
+permalink: /solutions/saas.html
+i18n: true
+---
+
+<main>
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-badge">
+                <i data-lucide="database"></i>
+                <span>SaaS &amp; Database Clouds</span>
+            </div>
+
+            <h1>Run Every Tenant in Its Own Kernel</h1>
+            <p class="subtitle">Built for SaaS and database cloud providers who run customer workloads on shared nodes. Multikernel gives each tenant an independent kernel with dedicated cores inside the cloud VMs you already rent: VM-grade isolation at container density, with no nested virtualization and no bare-metal requirement.</p>
+
+            <div class="button-group">
+                <a href="/contact.html" class="btn btn-primary">
+                    <i data-lucide="users"></i>
+                    Talk to Engineering
+                </a>
+                <a href="/technology.html" class="btn btn-secondary">
+                    <i data-lucide="layers"></i>
+                    See the Architecture
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="tradeoff" class="value-section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">The Multi-Tenant Compute Tradeoff</h2>
+                <p class="section-subtitle">Providers running tenant workloads on shared infrastructure currently choose between three compromises.</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <i data-lucide="box"></i>
+                    </div>
+                    <h3 class="capability-title">Containers</h3>
+                    <p class="capability-description">High density, but every tenant on the node shares one kernel. Cross-tenant interference appears in tail latency, and kernel-level vulnerabilities expose all tenants at once.</p>
+                </div>
+
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <i data-lucide="server"></i>
+                    </div>
+                    <h3 class="capability-title">MicroVMs</h3>
+                    <p class="capability-description">Strong isolation, but they require bare-metal instances or nested virtualization. Fleet cost rises and instance selection narrows.</p>
+                </div>
+
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <i data-lucide="cloud"></i>
+                    </div>
+                    <h3 class="capability-title">One VM Per Tenant</h3>
+                    <p class="capability-description">Clean isolation with poor economics: low density, slow provisioning, and unsustainable cost for small and serverless tiers.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="model" class="how-it-works">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">Kernel-Per-Tenant on Shared Nodes</h2>
+                <p class="section-subtitle">Multikernel partitions each node into independent Linux kernels: one per tenant, plus a device kernel that owns physical I/O. Tenants share hardware, not a kernel.</p>
+            </div>
+
+            <div class="partition-figure">
+                <div class="partition-title">A 32-Core Cloud Instance &middot; Example Tenant Partition</div>
+                <div class="partition-domains">
+                    <div class="partition-domain">
+                        <div class="partition-cores">
+                            {% for i in (1..4) %}<span class="partition-core"></span>{% endfor %}
+                        </div>
+                        <div class="partition-name">Device kernel</div>
+                        <div class="partition-detail">NIC / NVMe queues &middot; 4 cores</div>
+                    </div>
+                    <div class="partition-domain domain-app">
+                        <div class="partition-cores">
+                            {% for i in (1..12) %}<span class="partition-core"></span>{% endfor %}
+                        </div>
+                        <div class="partition-name">Tenant A</div>
+                        <div class="partition-detail">database instance &middot; 12 cores</div>
+                    </div>
+                    <div class="partition-domain domain-app shade-2">
+                        <div class="partition-cores">
+                            {% for i in (1..8) %}<span class="partition-core"></span>{% endfor %}
+                        </div>
+                        <div class="partition-name">Tenant B</div>
+                        <div class="partition-detail">database instance &middot; 8 cores</div>
+                    </div>
+                    <div class="partition-domain domain-app">
+                        <div class="partition-cores">
+                            {% for i in (1..8) %}<span class="partition-core"></span>{% endfor %}
+                        </div>
+                        <div class="partition-name">Tenant C</div>
+                        <div class="partition-detail">database instance &middot; 8 cores</div>
+                    </div>
+                </div>
+                <p class="partition-caption">Each tenant runs on its own kernel with dedicated cores. <strong>Tenants share hardware, not a kernel.</strong></p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="activity"></i>
+                    </div>
+                    <h3 class="feature-title">Tail Latency by Architecture</h3>
+                    <p class="feature-description">Dedicated cores, a private page cache, and no cross-tenant interrupts or kernel lock contention. p99 query latency is protected structurally rather than by cgroup tuning.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="shield-check"></i>
+                    </div>
+                    <h3 class="feature-title">Isolation for Untrusted Code</h3>
+                    <p class="feature-description">User-defined functions, extensions, and customer code run inside the tenant's own kernel. A compromise is contained by a kernel boundary, not a container boundary.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="cpu"></i>
+                    </div>
+                    <h3 class="feature-title">Per-Tenant Network Isolation</h3>
+                    <p class="feature-description">Each tenant kernel has its own network device backed by dedicated descriptor rings and hardware queues. Packet frames never cross tenant boundaries; only descriptors move between kernels.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="sliders"></i>
+                    </div>
+                    <h3 class="feature-title">Runtime Rebalancing</h3>
+                    <p class="feature-description">CPU cores and memory move between tenant kernels through standard Linux hotplug interfaces, without rebooting the node or the tenants that stay in place.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="operations" class="value-section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">Fleet Operations Under Tenant SLAs</h2>
+                <p class="section-subtitle">The operational properties that matter when thousands of nodes carry customer commitments.</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="capability-card primary">
+                    <div class="capability-icon">
+                        <i data-lucide="arrow-up-circle"></i>
+                    </div>
+                    <h3 class="capability-title">Kernel Patching Without Downtime</h3>
+                    <p class="capability-description">LiveUpdate applies kernel security patches across the fleet without rebooting nodes or interrupting tenant databases. CVE response stops competing with customer SLAs.</p>
+                </div>
+
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <i data-lucide="zap"></i>
+                    </div>
+                    <h3 class="capability-title">Sub-Second Kernel Failover</h3>
+                    <p class="capability-description">A kernel crash fails over to a standby in under a second instead of taking down every tenant on the node for a reboot cycle.</p>
+                </div>
+
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <i data-lucide="rocket"></i>
+                    </div>
+                    <h3 class="capability-title">Fast Tenant Provisioning</h3>
+                    <p class="capability-description">Tenant kernels boot directly into Docker images via kexec, with no full OS initialization per instance. Suitable for dedicated tiers and scale-to-zero serverless compute alike.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="engagement" class="how-it-works">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i data-lucide="users"></i>
+                    <span>Engagement</span>
+                </div>
+                <h2 class="section-title">From Evaluation to Production</h2>
+                <p class="section-subtitle">A three-step engagement model, integrated with the orchestration you already run.</p>
+            </div>
+
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-num">01</div>
+                    <h3 class="step-title">Evaluation</h3>
+                    <p class="step-description">Proof of concept on your dedicated-compute tier: kernel-per-tenant on your instance types, measured against your current isolation approach on your workloads.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-num">02</div>
+                    <h3 class="step-title">Integration</h3>
+                    <p class="step-description">Kernel lifecycle integrated under your existing orchestration and provisioning flow, with our engineers working alongside your platform team.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-num">03</div>
+                    <h3 class="step-title">Production</h3>
+                    <p class="step-description">Fleet rollout on a per-node subscription: validated builds, CVE stream with LiveUpdate images, and SLA-backed engineering support.</p>
+                </div>
+            </div>
+
+            <div class="value-cta" style="margin-top: var(--space-10); text-align: center;">
+                <a href="mailto:cwang@multikernel.io" class="btn btn-primary">
+                    <i data-lucide="mail"></i>
+                    Start the Conversation
+                </a>
+                <a href="https://calendar.app.google/nc1upkqQoUeoukdD9" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                    <i data-lucide="calendar"></i>
+                    Schedule a Demo
+                </a>
+            </div>
+        </div>
+    </section>
+</main>

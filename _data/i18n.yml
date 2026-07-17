@@ -10,6 +10,8 @@ en:
     liveupdate_sub: Zero-downtime kernel upgrade tool
     oem: OEM & Embedded
     oem_sub: Ship Multikernel inside your appliance
+    saas: SaaS & Database Clouds
+    saas_sub: One kernel per tenant on shared nodes
     solutions: Solutions
     technology: Technology
     overview: Overview
@@ -51,6 +53,8 @@ zh:
     liveupdate_sub: 零停机内核热升级工具
     oem: OEM 与内嵌
     oem_sub: 让 Multikernel 随您的整机出货
+    saas: SaaS 与数据库云
+    saas_sub: 共享节点上每个租户一个内核
     solutions: 解决方案
     technology: 技术
     overview: 概览
