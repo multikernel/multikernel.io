@@ -15,7 +15,7 @@ i18n: true
             </div>
 
             <h1>One Kernel Per Cluster, Every Core at Full Capability</h1>
-            <p class="subtitle">RISC-V server silicon now ships clusters with different vector widths on the same die: 256-bit general-purpose cores next to 1024-bit AI cores. A single kernel either refuses half the machine or degrades all of it. Multikernel takes the hardware's side: one Linux kernel per cluster, each compiled for its exact silicon, each running at full width.</p>
+            <p class="subtitle">RISC-V server silicon now ships clusters with different vector widths on the same die: 256-bit general-purpose cores next to 1024-bit AI cores. A single kernel either refuses half the machine or degrades all of it. Multikernel aligns the software boundary with the silicon: one Linux kernel per cluster, each compiled for its exact hardware, each running at full width.</p>
 
             <div class="button-group">
                 <a href="/contact.html" class="btn btn-primary">
@@ -34,7 +34,7 @@ i18n: true
         <div class="section-container">
             <div class="section-header">
                 <h2 class="section-title">The Partition Is Not Optional</h2>
-                <p class="section-subtitle">A wide vector unit is the most expensive block in a modern core, so vendors put it only where it earns its keep. Heterogeneous width is not a mistake in these products. It is the product. The machine will be partitioned no matter what you do; the only question is whether the partition is a boundary you designed or an accident inside the scheduler.</p>
+                <p class="section-subtitle">A wide vector unit is the most expensive block in a modern core, so vendors deploy it only on the clusters that need it. Heterogeneous vector width is a deliberate product decision, not a defect. The machine will be partitioned in either case; the choice is between a designed boundary and an incidental one inside the scheduler.</p>
             </div>
 
             <div class="features-grid">
@@ -51,7 +51,7 @@ i18n: true
                         <i data-lucide="power-off"></i>
                     </div>
                     <h3 class="feature-title">A Single Kernel Refuses</h3>
-                    <p class="feature-description">Mainline Linux inspects each core as it comes up, sees a vector width that does not match the boot core, and never brings it online. The headline cluster, the reason the chip exists, stays dark.</p>
+                    <p class="feature-description">Mainline Linux inspects each core as it comes up, sees a vector width that does not match the boot core, and never brings it online. The flagship cluster, the chip's defining feature, never comes online.</p>
                 </div>
 
                 <div class="feature-card">
@@ -59,7 +59,7 @@ i18n: true
                         <i data-lucide="trending-down"></i>
                     </div>
                     <h3 class="feature-title">A Patched Kernel Degrades</h3>
-                    <p class="feature-description">Per-process width patches hide the partition instead of removing it: hotplug restrictions, deadline scheduling refused, affinity silently overridden, and a kernel binary compiled for the narrowest cluster. The scalar cores pay for the AI cluster they never touch.</p>
+                    <p class="feature-description">Per-process width patches hide the partition instead of removing it: hotplug restrictions, deadline scheduling refused, affinity silently overridden, and a kernel binary compiled for the narrowest cluster. The general-purpose cores absorb the cost of an AI cluster they never use.</p>
                 </div>
             </div>
         </div>
@@ -106,7 +106,7 @@ i18n: true
                         <i data-lucide="check-circle"></i>
                     </div>
                     <h3 class="feature-title">Every Kernel Sees Matched Cores</h3>
-                    <p class="feature-description">The capability word describes silicon its programs will actually run on, and the C library selects the vector routines the hardware really has. No lowest common denominator, because nothing is shared.</p>
+                    <p class="feature-description">The reported hardware capabilities (hwcap) describe the silicon programs actually run on, and the C library selects the vector routines the hardware provides. No lowest common denominator, because nothing is shared.</p>
                 </div>
 
                 <div class="feature-card">
@@ -122,7 +122,7 @@ i18n: true
                         <i data-lucide="unlock"></i>
                     </div>
                     <h3 class="feature-title">Nothing Enforced, Nothing Shared</h3>
-                    <p class="feature-description">No affinity lists to maintain or silently override. Hotplug works. SCHED_DEADLINE admits your inference job on the wide cluster. Cpusets do what the documentation says.</p>
+                    <p class="feature-description">No affinity lists to maintain or silently override. Hotplug works. SCHED_DEADLINE admits your inference job on the wide cluster. Cpuset isolation behaves as documented.</p>
                 </div>
 
                 <div class="feature-card">
@@ -144,7 +144,7 @@ i18n: true
                     <span>Adaptation &amp; Partnership</span>
                 </div>
                 <h2 class="section-title">Build It With Us</h2>
-                <p class="section-subtitle">If you make RISC-V silicon, we want to do the bring-up on your parts. If you build boards or systems, we want your platform in our support matrix from day one. If you operate infrastructure, we will run a proof of concept on your real workloads and let the results speak.</p>
+                <p class="section-subtitle">If you make RISC-V silicon, we want to do the bring-up on your parts. If you build boards or systems, we want your platform in our support matrix from day one. If you operate infrastructure, we will run a proof of concept on your real workloads and share the measured results.</p>
             </div>
 
             <div class="steps-grid">
