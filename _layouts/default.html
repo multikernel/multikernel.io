@@ -428,6 +428,10 @@
                             {{ t.nav.oem }}
                             <small>{{ t.nav.oem_sub }}</small>
                         </a>
+                        <a href="{{ lang_prefix }}/solutions/saas.html" class="site-nav-dropdown-item {% if rel_url == '/solutions/saas.html' %}active{% endif %}">
+                            {{ t.nav.saas }}
+                            <small>{{ t.nav.saas_sub }}</small>
+                        </a>
                     </div>
                 </div>
 
@@ -488,6 +492,7 @@
             <a href="{{ lang_prefix }}/platforms/arm.html" class="site-mobile-link {% if rel_url == '/platforms/arm.html' %}active{% endif %}">{{ t.nav.arm }}</a>
             <a href="{{ lang_prefix }}/platforms/riscv.html" class="site-mobile-link {% if rel_url == '/platforms/riscv.html' %}active{% endif %}">{{ t.nav.riscv }}</a>
             <a href="{{ lang_prefix }}/solutions/oem.html" class="site-mobile-link {% if rel_url == '/solutions/oem.html' %}active{% endif %}">{{ t.nav.oem }}</a>
+            <a href="{{ lang_prefix }}/solutions/saas.html" class="site-mobile-link {% if rel_url == '/solutions/saas.html' %}active{% endif %}">{{ t.nav.saas }}</a>
             <a href="{{ lang_prefix }}/technology.html" class="site-mobile-link {% if rel_url == '/technology.html' %}active{% endif %}">{{ t.nav.technology }}</a>
             <a href="{{ lang_prefix }}/faq.html" class="site-mobile-link {% if rel_url == '/faq.html' %}active{% endif %}">{{ t.nav.faq }}</a>
             <a href="{{ lang_prefix }}/getting-started.html" class="site-mobile-link {% if rel_url == '/getting-started.html' %}active{% endif %}">{{ t.nav.getting_started }}</a>

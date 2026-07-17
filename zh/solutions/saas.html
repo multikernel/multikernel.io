@@ -1,0 +1,224 @@
+---
+layout: default
+lang: zh
+permalink: /zh/solutions/saas.html
+title: "Multikernel SaaS 与数据库云方案 - 共享节点上每个租户一个内核"
+description: "面向 SaaS 与数据库云服务商：在您已租用的虚拟机上，让每个租户运行在自己的内核中。以容器级密度获得虚拟机级隔离，无需嵌套虚拟化，也不依赖裸金属实例。"
+---
+
+<main>
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-badge">
+                <i data-lucide="database"></i>
+                <span>SaaS 与数据库云</span>
+            </div>
+
+            <h1>让每个租户运行在自己的内核中</h1>
+            <p class="subtitle">专为在共享节点上运行客户工作负载的 SaaS 与数据库云服务商打造。Multikernel 在您已租用的云虚拟机内，为每个租户提供一个拥有专用核心的独立内核：以容器级密度获得虚拟机级隔离，无需嵌套虚拟化，也不依赖裸金属实例。</p>
+
+            <div class="button-group">
+                <a href="/zh/contact.html" class="btn btn-primary">
+                    <i data-lucide="users"></i>
+                    与工程团队交流
+                </a>
+                <a href="/zh/technology.html" class="btn btn-secondary">
+                    <i data-lucide="layers"></i>
+                    了解架构
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="tradeoff" class="value-section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">多租户算力的三难取舍</h2>
+                <p class="section-subtitle">在共享基础设施上运行租户工作负载的服务商，目前只能在三种妥协中选择。</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <i data-lucide="box"></i>
+                    </div>
+                    <h3 class="capability-title">容器</h3>
+                    <p class="capability-description">密度高，但节点上所有租户共享同一个内核。跨租户干扰直接体现在尾延迟上，一个内核级漏洞会同时暴露所有租户。</p>
+                </div>
+
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <i data-lucide="server"></i>
+                    </div>
+                    <h3 class="capability-title">MicroVM</h3>
+                    <p class="capability-description">隔离性强，但需要裸金属实例或嵌套虚拟化。机队成本上升，可选实例类型收窄。</p>
+                </div>
+
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <i data-lucide="cloud"></i>
+                    </div>
+                    <h3 class="capability-title">每租户一台虚拟机</h3>
+                    <p class="capability-description">隔离干净但经济性差：密度低、开通慢，对小规格与无服务器档位而言成本难以为继。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="model" class="how-it-works">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">共享节点上的租户级内核</h2>
+                <p class="section-subtitle">Multikernel 把每个节点划分为多个独立的 Linux 内核：每个租户一个，另有一个持有物理 I/O 的设备内核。租户共享的是硬件，而不是内核。</p>
+            </div>
+
+            <div class="partition-figure">
+                <div class="partition-title">一台 32 核云实例 &middot; 租户分区示例</div>
+                <div class="partition-domains">
+                    <div class="partition-domain">
+                        <div class="partition-cores">
+                            {% for i in (1..4) %}<span class="partition-core"></span>{% endfor %}
+                        </div>
+                        <div class="partition-name">设备内核</div>
+                        <div class="partition-detail">网卡 / NVMe 队列 &middot; 4 核</div>
+                    </div>
+                    <div class="partition-domain domain-app">
+                        <div class="partition-cores">
+                            {% for i in (1..12) %}<span class="partition-core"></span>{% endfor %}
+                        </div>
+                        <div class="partition-name">租户 A</div>
+                        <div class="partition-detail">数据库实例 &middot; 12 核</div>
+                    </div>
+                    <div class="partition-domain domain-app shade-2">
+                        <div class="partition-cores">
+                            {% for i in (1..8) %}<span class="partition-core"></span>{% endfor %}
+                        </div>
+                        <div class="partition-name">租户 B</div>
+                        <div class="partition-detail">数据库实例 &middot; 8 核</div>
+                    </div>
+                    <div class="partition-domain domain-app">
+                        <div class="partition-cores">
+                            {% for i in (1..8) %}<span class="partition-core"></span>{% endfor %}
+                        </div>
+                        <div class="partition-name">租户 C</div>
+                        <div class="partition-detail">数据库实例 &middot; 8 核</div>
+                    </div>
+                </div>
+                <p class="partition-caption">每个租户都运行在拥有专用核心的独立内核上。<strong>租户共享的是硬件，而不是内核。</strong></p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="activity"></i>
+                    </div>
+                    <h3 class="feature-title">由架构保障的尾延迟</h3>
+                    <p class="feature-description">专用核心、私有页缓存，没有跨租户中断，也没有内核锁竞争。p99 查询延迟由结构保障，而不是依赖 cgroup 调优。</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="shield-check"></i>
+                    </div>
+                    <h3 class="feature-title">面向不可信代码的隔离</h3>
+                    <p class="feature-description">用户自定义函数（UDF）、扩展与客户代码都运行在租户自己的内核里。一旦失守，约束它的是内核边界，而不是容器边界。</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="cpu"></i>
+                    </div>
+                    <h3 class="feature-title">租户级网络隔离</h3>
+                    <p class="feature-description">每个租户内核都有自己的网络设备，由专属描述符环与硬件队列支撑。数据帧从不跨越租户边界，跨内核传递的只有描述符。</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="sliders"></i>
+                    </div>
+                    <h3 class="feature-title">运行时资源再平衡</h3>
+                    <p class="feature-description">CPU 核心与内存通过标准 Linux 热插拔接口在租户内核之间调配，节点无需重启，未受影响的租户照常运行。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="operations" class="value-section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">租户 SLA 之下的机队运维</h2>
+                <p class="section-subtitle">当数千个节点承载着客户承诺时，真正重要的运维特性。</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="capability-card primary">
+                    <div class="capability-icon">
+                        <i data-lucide="arrow-up-circle"></i>
+                    </div>
+                    <h3 class="capability-title">零停机内核补丁</h3>
+                    <p class="capability-description">LiveUpdate 在整个机队上应用内核安全补丁，无需重启节点，也不中断租户数据库。CVE 响应不再与客户 SLA 相互挤压。</p>
+                </div>
+
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <i data-lucide="zap"></i>
+                    </div>
+                    <h3 class="capability-title">亚秒级内核故障转移</h3>
+                    <p class="capability-description">内核崩溃在一秒之内切换到备用内核，而不是让节点上的所有租户一起经历一次重启周期。</p>
+                </div>
+
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <i data-lucide="rocket"></i>
+                    </div>
+                    <h3 class="capability-title">租户快速开通</h3>
+                    <p class="capability-description">租户内核通过 kexec 直接启动进 Docker 镜像，无需为每个实例执行完整的操作系统初始化。同时适用于独享档位与缩容到零的无服务器算力。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="engagement" class="how-it-works">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i data-lucide="users"></i>
+                    <span>合作模式</span>
+                </div>
+                <h2 class="section-title">从评估到生产</h2>
+                <p class="section-subtitle">三步合作模式，与您现有的编排体系集成。</p>
+            </div>
+
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-num">01</div>
+                    <h3 class="step-title">评估</h3>
+                    <p class="step-description">在您的独享算力档位上完成概念验证：在您的实例类型上运行租户级内核，与您当前的隔离方案在您的工作负载上对比度量。</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-num">02</div>
+                    <h3 class="step-title">集成</h3>
+                    <p class="step-description">内核生命周期接入您现有的编排与开通流程，我们的工程师与您的平台团队协同完成。</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-num">03</div>
+                    <h3 class="step-title">生产</h3>
+                    <p class="step-description">按节点订阅完成机队推广：经验证的构建、附 LiveUpdate 镜像的 CVE 流，以及 SLA 保障的工程支持。</p>
+                </div>
+            </div>
+
+            <div class="value-cta" style="margin-top: var(--space-10); text-align: center;">
+                <a href="mailto:cwang@multikernel.io" class="btn btn-primary">
+                    <i data-lucide="mail"></i>
+                    开启合作对话
+                </a>
+                <a href="https://calendar.app.google/nc1upkqQoUeoukdD9" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                    <i data-lucide="calendar"></i>
+                    预约演示
+                </a>
+            </div>
+        </div>
+    </section>
+</main>
