@@ -234,8 +234,8 @@ i18n: true
                     </div>
                     <div class="gs-overview-card">
                         <div class="step-num">2</div>
-                        <h3>Configure Boot</h3>
-                        <p>Reserve a memory pool for spawned kernel instances</p>
+                        <h3>Load Lazy CMA</h3>
+                        <p>Enable runtime memory pool allocation, no boot parameter needed</p>
                     </div>
                     <div class="gs-overview-card">
                         <div class="step-num">3</div>
@@ -329,11 +329,13 @@ sudo make install</code></pre>
 
             <!-- Step 2: Configure -->
             <div class="content-card">
-                <h2><i data-lucide="settings"></i><span class="step-badge">2</span> Reserve a Memory Pool</h2>
-                <p>Spawned kernels need a contiguous memory region. Add the following kernel boot parameter to your bootloader (GRUB, systemd-boot, etc.):</p>
-                <pre><code>mkkernel_pool=1023M@0x40000000</code></pre>
-                <p>This reserves 1023 MB starting at physical address 0x40000000 for multikernel use. The primary kernel will not use this memory, and it becomes available for spawned instances.</p>
-                <p>Alternatively, you can use <a href="https://github.com/multikernel/lazy_cma" target="_blank" rel="noopener noreferrer">Lazy CMA</a> to allocate this memory at runtime without any boot parameter.</p>
+                <h2><i data-lucide="settings"></i><span class="step-badge">2</span> Load the Lazy CMA Module</h2>
+                <p>Spawned kernels need contiguous physical memory. <a href="https://github.com/multikernel/lazy_cma" target="_blank" rel="noopener noreferrer">Lazy CMA</a>, an out-of-tree kernel module, allocates it at runtime: no boot parameter, no reboot, no capacity planning.</p>
+                <pre><code>git clone https://github.com/multikernel/lazy_cma.git
+cd lazy_cma
+make
+sudo insmod lazy_cma.ko</code></pre>
+                <p>Loading the module creates <code>/dev/lazy_cma</code>. Kerf allocates memory pools through it directly, so there is nothing else to configure. Pools are resizable, NUMA-aware, and visible in <code>/proc/iomem</code>.</p>
             </div>
 
             <!-- Step 3: Install kerf -->
@@ -349,18 +351,24 @@ pip install -e .</code></pre>
             <div class="content-card">
                 <h2><i data-lucide="rocket"></i><span class="step-badge">4</span> Launch Your First Instance</h2>
                 <p>Initialize a resource pool, create an instance, and launch it:</p>
-                <pre><code># Initialize: make CPUs 4-31 available for spawned kernels
-kerf init --cpus=4-31
+                <pre><code># Initialize: CPUs 4-31 and an 8 GB memory pool (allocated via lazy_cma)
+kerf init --cpus=4-31 --memory=8GB
 
 # Create an instance with 4 CPUs and 2 GB of memory
 kerf create web-server --cpus=4-7 --memory=2GB
 
-# Load a kernel and initrd into the instance
-kerf load web-server --kernel=/boot/vmlinuz --initrd=/boot/initrd.img
+# Load a kernel that boots straight into a Docker image (via DAXFS)
+kerf load web-server --kernel=/boot/vmlinuz --image=nginx:latest
 
 # Boot the instance
 kerf exec web-server</code></pre>
                 <p>The spawned kernel boots on the assigned CPUs and memory, running directly on hardware. It has its own scheduler, its own network stack, and its own view of the devices assigned to it.</p>
+                <p>With <code>--image</code>, kerf builds a <a href="https://github.com/multikernel/daxfs" target="_blank" rel="noopener noreferrer">DAXFS</a> image from the Docker image and the spawned kernel mounts it directly as its root filesystem. DAXFS is an out-of-tree module, and kerf does not load it for you. Load it explicitly first, but only when you boot from a Docker image or share a host directory:</p>
+                <pre><code>git clone https://github.com/multikernel/daxfs.git
+cd daxfs
+make
+sudo insmod daxfs.ko</code></pre>
+                <p>The spawned kernel needs DAXFS support as well: build it into the kernel, or pass <code>--initrd</code> with an initramfs that loads <code>daxfs.ko</code>. Booting a traditional initrd with <code>--initrd</code> alone needs no DAXFS at all.</p>
             </div>
 
             <!-- Key Components -->
@@ -369,9 +377,9 @@ kerf exec web-server</code></pre>
                 <p>The multikernel stack is composed of several open-source projects:</p>
                 <ul>
                     <li><strong><a href="https://github.com/multikernel/linux" target="_blank" rel="noopener noreferrer">Multikernel Linux</a></strong> - Kernel patches that enable spawning and managing additional kernel instances using the kexec subsystem</li>
-                    <li><strong><a href="https://github.com/multikernel/kerf" target="_blank" rel="noopener noreferrer">Kerf</a></strong> - Orchestration tool for managing kernel instances, resources, and lifecycle</li>
-                    <li><strong><a href="https://github.com/multikernel/daxfs" target="_blank" rel="noopener noreferrer">DAXFS</a></strong> - Shared filesystem across kernel instances using direct memory access, enabling shared container rootfs and zero-copy data sharing</li>
-                    <li><strong><a href="https://github.com/multikernel/lazy_cma" target="_blank" rel="noopener noreferrer">Lazy CMA</a></strong> - Runtime contiguous memory allocator, provides memory pools for spawned kernels without boot-time reservation</li>
+                    <li><strong><a href="https://github.com/multikernel/kerf" target="_blank" rel="noopener noreferrer">Kerf</a></strong> - Orchestration tool for managing kernel instances, resources, and lifecycle; drives Lazy CMA and DAXFS directly, so no separate tooling is needed</li>
+                    <li><strong><a href="https://github.com/multikernel/daxfs" target="_blank" rel="noopener noreferrer">DAXFS</a></strong> - Out-of-tree kernel module providing a shared filesystem across kernel instances using direct memory access, enabling shared container rootfs and zero-copy data sharing</li>
+                    <li><strong><a href="https://github.com/multikernel/lazy_cma" target="_blank" rel="noopener noreferrer">Lazy CMA</a></strong> - Out-of-tree kernel module providing runtime contiguous memory allocation; memory pools for spawned kernels are resizable, NUMA-aware, and need no boot-time reservation</li>
                 </ul>
             </div>
 

@@ -234,8 +234,8 @@ description: "快速上手 Multikernel Linux：学习如何构建、配置并启
                     </div>
                     <div class="gs-overview-card">
                         <div class="step-num">2</div>
-                        <h3>配置启动</h3>
-                        <p>为子内核实例预留内存池</p>
+                        <h3>加载 Lazy CMA</h3>
+                        <p>在运行时分配内存池，无需任何启动参数</p>
                     </div>
                     <div class="gs-overview-card">
                         <div class="step-num">3</div>
@@ -329,11 +329,13 @@ sudo make install</code></pre>
 
             <!-- Step 2: Configure -->
             <div class="content-card">
-                <h2><i data-lucide="settings"></i><span class="step-badge">2</span> 预留内存池</h2>
-                <p>子内核需要一段连续的内存区域。请在你的引导加载程序（GRUB、systemd-boot 等）中添加以下内核启动参数：</p>
-                <pre><code>mkkernel_pool=1023M@0x40000000</code></pre>
-                <p>这会从物理地址 0x40000000 开始预留 1023 MB 供 multikernel 使用。主内核不会使用这部分内存，它将可供生成的实例使用。</p>
-                <p>你也可以使用 <a href="https://github.com/multikernel/lazy_cma" target="_blank" rel="noopener noreferrer">Lazy CMA</a> 在运行时分配这部分内存，无需任何启动参数。</p>
+                <h2><i data-lucide="settings"></i><span class="step-badge">2</span> 加载 Lazy CMA 模块</h2>
+                <p>子内核需要连续的物理内存。<a href="https://github.com/multikernel/lazy_cma" target="_blank" rel="noopener noreferrer">Lazy CMA</a> 是一个树外（out-of-tree）内核模块，可在运行时完成分配：无需启动参数，无需重启，也无需提前规划容量。</p>
+                <pre><code>git clone https://github.com/multikernel/lazy_cma.git
+cd lazy_cma
+make
+sudo insmod lazy_cma.ko</code></pre>
+                <p>加载模块后会创建 <code>/dev/lazy_cma</code>。Kerf 会直接通过它分配内存池，因此无需其他配置。内存池可调整大小、支持 NUMA 感知，并可在 <code>/proc/iomem</code> 中查看。</p>
             </div>
 
             <!-- Step 3: Install kerf -->
@@ -349,18 +351,24 @@ pip install -e .</code></pre>
             <div class="content-card">
                 <h2><i data-lucide="rocket"></i><span class="step-badge">4</span> 启动你的第一个实例</h2>
                 <p>初始化资源池，创建实例，然后将其启动：</p>
-                <pre><code># Initialize: make CPUs 4-31 available for spawned kernels
-kerf init --cpus=4-31
+                <pre><code># Initialize: CPUs 4-31 and an 8 GB memory pool (allocated via lazy_cma)
+kerf init --cpus=4-31 --memory=8GB
 
 # Create an instance with 4 CPUs and 2 GB of memory
 kerf create web-server --cpus=4-7 --memory=2GB
 
-# Load a kernel and initrd into the instance
-kerf load web-server --kernel=/boot/vmlinuz --initrd=/boot/initrd.img
+# Load a kernel that boots straight into a Docker image (via DAXFS)
+kerf load web-server --kernel=/boot/vmlinuz --image=nginx:latest
 
 # Boot the instance
 kerf exec web-server</code></pre>
                 <p>子内核会在分配到的 CPU 和内存上启动，直接运行在硬件之上。它拥有自己的调度器、自己的网络协议栈，以及对分配给它的设备的独立视图。</p>
+                <p>使用 <code>--image</code> 时，kerf 会从 Docker 镜像构建 <a href="https://github.com/multikernel/daxfs" target="_blank" rel="noopener noreferrer">DAXFS</a> 镜像，子内核直接将其挂载为根文件系统。DAXFS 是树外模块，kerf 不会自动加载它。仅当你需要从 Docker 镜像启动或共享主机目录时，才需要先手动加载：</p>
+                <pre><code>git clone https://github.com/multikernel/daxfs.git
+cd daxfs
+make
+sudo insmod daxfs.ko</code></pre>
+                <p>子内核同样需要 DAXFS 支持：将其编译进内核，或通过 <code>--initrd</code> 传入包含 <code>daxfs.ko</code> 的 initramfs。仅用 <code>--initrd</code> 启动传统 initrd 时完全不需要 DAXFS。</p>
             </div>
 
             <!-- Key Components -->
@@ -369,9 +377,9 @@ kerf exec web-server</code></pre>
                 <p>multikernel 技术栈由多个开源项目组成：</p>
                 <ul>
                     <li><strong><a href="https://github.com/multikernel/linux" target="_blank" rel="noopener noreferrer">Multikernel Linux</a></strong> - 内核补丁，支持使用 kexec 子系统生成并管理额外的内核实例</li>
-                    <li><strong><a href="https://github.com/multikernel/kerf" target="_blank" rel="noopener noreferrer">Kerf</a></strong> - 用于管理内核实例、资源和生命周期的编排工具</li>
-                    <li><strong><a href="https://github.com/multikernel/daxfs" target="_blank" rel="noopener noreferrer">DAXFS</a></strong> - 使用直接内存访问在多个内核实例之间共享的文件系统，支持共享容器根文件系统和零拷贝数据共享</li>
-                    <li><strong><a href="https://github.com/multikernel/lazy_cma" target="_blank" rel="noopener noreferrer">Lazy CMA</a></strong> - 运行时连续内存分配器，为子内核提供内存池，无需启动时预留</li>
+                    <li><strong><a href="https://github.com/multikernel/kerf" target="_blank" rel="noopener noreferrer">Kerf</a></strong> - 用于管理内核实例、资源和生命周期的编排工具；直接驱动 Lazy CMA 与 DAXFS，无需额外工具</li>
+                    <li><strong><a href="https://github.com/multikernel/daxfs" target="_blank" rel="noopener noreferrer">DAXFS</a></strong> - 树外内核模块，使用直接内存访问在多个内核实例之间共享的文件系统，支持共享容器根文件系统和零拷贝数据共享</li>
+                    <li><strong><a href="https://github.com/multikernel/lazy_cma" target="_blank" rel="noopener noreferrer">Lazy CMA</a></strong> - 树外内核模块，提供运行时连续内存分配；为子内核提供的内存池可调整大小、支持 NUMA 感知，无需启动时预留</li>
                 </ul>
             </div>
 
