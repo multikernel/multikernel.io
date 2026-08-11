@@ -207,7 +207,7 @@ i18n: true
     <section class="hero">
         <div class="hero-container">
             <h1>Getting Started with Multikernel</h1>
-            <p class="subtitle">Split your Linux kernel into independent instances for your application and device processing. No hypervisor, no virtualization overhead, full hardware access.</p>
+            <p class="subtitle">Partition a single machine into independent Linux kernel instances, each with dedicated CPUs, memory, and devices. No hypervisor, no virtualization overhead, direct hardware access.</p>
             <div class="button-group">
                 <a href="https://github.com/multikernel/linux" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
                     <i data-lucide="github"></i>
@@ -235,7 +235,7 @@ i18n: true
                     <div class="gs-overview-card">
                         <div class="step-num">2</div>
                         <h3>Load Lazy CMA</h3>
-                        <p>Enable runtime memory pool allocation, no boot parameter needed</p>
+                        <p>Allocate memory for spawned kernels at runtime, without boot parameters</p>
                     </div>
                     <div class="gs-overview-card">
                         <div class="step-num">3</div>
@@ -248,7 +248,7 @@ i18n: true
             <!-- What is Multikernel -->
             <div class="content-card">
                 <h2><i data-lucide="layers"></i>What is Multikernel Linux?</h2>
-                <p>Multikernel splits the Linux kernel into independent instances running simultaneously on the same physical machine. Your application gets its own kernel with dedicated CPUs, memory, and zero interrupt interference. Device drivers and I/O processing run in a separate kernel on separate cores. No hypervisor, native performance.</p>
+                <p>Multikernel Linux runs multiple independent kernel instances simultaneously on the same physical machine. Each application receives its own kernel with dedicated CPUs and memory, free from interrupt interference, while device drivers and I/O processing run in a separate kernel on separate cores. Because no hypervisor is involved, every instance runs at native performance.</p>
 
                 <div class="gs-diagram"><pre>
 ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐
@@ -261,7 +261,7 @@ i18n: true
 └─────────────────┘  └─────────────────┘  └─────────────────┘
                 </pre></div>
 
-                <p>Each workload runs inside its own kernel with a tailored configuration, fully isolated from other instances. A driver crash or kernel exploit in one instance cannot affect the others. Resources can be rebalanced between kernels at runtime using standard Linux hotplug.</p>
+                <p>Each workload runs inside its own kernel with a configuration tailored to that workload, fully isolated from other instances. A driver crash or kernel exploit in one instance cannot affect the others, and resources can be rebalanced between kernels at runtime through standard Linux hotplug interfaces.</p>
 
                 <div class="gs-comparison">
                     <table>
@@ -318,30 +318,30 @@ i18n: true
             <!-- Step 1: Build -->
             <div class="content-card">
                 <h2><i data-lucide="hammer"></i><span class="step-badge">1</span> Build the Multikernel Kernel</h2>
-                <p>Clone the multikernel-enabled Linux kernel and build it with multikernel support enabled.</p>
+                <p>Clone the Linux kernel source with multikernel support and build it with <code>CONFIG_MULTIKERNEL</code> enabled.</p>
                 <pre><code>git clone https://github.com/multikernel/linux.git
 cd linux
 make menuconfig  # Enable CONFIG_MULTIKERNEL
 make -j$(nproc)
 sudo make install</code></pre>
-                <p>This produces a standard Linux kernel with multikernel extensions. It runs as your normal kernel and can additionally spawn new kernel instances.</p>
+                <p>The result is a standard Linux kernel with multikernel extensions. It boots and operates as the regular host kernel, and can additionally spawn and manage new kernel instances.</p>
             </div>
 
             <!-- Step 2: Configure -->
             <div class="content-card">
                 <h2><i data-lucide="settings"></i><span class="step-badge">2</span> Load the Lazy CMA Module</h2>
-                <p>Spawned kernels need contiguous physical memory. <a href="https://github.com/multikernel/lazy_cma" target="_blank" rel="noopener noreferrer">Lazy CMA</a>, an out-of-tree kernel module, allocates it at runtime: no boot parameter, no reboot, no capacity planning.</p>
+                <p>Spawned kernel instances require contiguous physical memory. <a href="https://github.com/multikernel/lazy_cma" target="_blank" rel="noopener noreferrer">Lazy CMA</a>, an out-of-tree kernel module, allocates this memory at runtime, so no boot parameters, reboots, or upfront capacity planning are required.</p>
                 <pre><code>git clone https://github.com/multikernel/lazy_cma.git
 cd lazy_cma
 make
 sudo insmod lazy_cma.ko</code></pre>
-                <p>Loading the module creates <code>/dev/lazy_cma</code>. Kerf allocates memory pools through it directly, so there is nothing else to configure. Pools are resizable, NUMA-aware, and visible in <code>/proc/iomem</code>.</p>
+                <p>Loading the module creates <code>/dev/lazy_cma</code>. Kerf allocates memory pools through this interface automatically, and no further configuration is needed. Pools can be resized at runtime, are NUMA-aware, and are registered in <code>/proc/iomem</code>.</p>
             </div>
 
             <!-- Step 3: Install kerf -->
             <div class="content-card">
                 <h2><i data-lucide="terminal"></i><span class="step-badge">3</span> Install the Kerf Management Tool</h2>
-                <p>Kerf is the command-line tool for creating, configuring, and managing multikernel instances. It handles resource allocation, kernel loading, and instance lifecycle.</p>
+                <p>Kerf is the command-line tool for creating, configuring, and managing multikernel instances. It handles resource allocation, kernel loading, and the full instance lifecycle.</p>
                 <pre><code>git clone https://github.com/multikernel/kerf.git
 cd kerf
 pip install -e .</code></pre>
@@ -362,13 +362,13 @@ kerf load web-server --kernel=/boot/vmlinuz --image=nginx:latest
 
 # Boot the instance
 kerf exec web-server</code></pre>
-                <p>The spawned kernel boots on the assigned CPUs and memory, running directly on hardware. It has its own scheduler, its own network stack, and its own view of the devices assigned to it.</p>
-                <p>With <code>--image</code>, kerf builds a <a href="https://github.com/multikernel/daxfs" target="_blank" rel="noopener noreferrer">DAXFS</a> image from the Docker image and the spawned kernel mounts it directly as its root filesystem. DAXFS is an out-of-tree module, and kerf does not load it for you. Load it explicitly first, but only when you boot from a Docker image or share a host directory:</p>
+                <p>The spawned kernel boots on the assigned CPUs and memory, running directly on the hardware. It has its own scheduler, its own network stack, and its own view of the devices assigned to it.</p>
+                <p>With <code>--image</code>, kerf builds a <a href="https://github.com/multikernel/daxfs" target="_blank" rel="noopener noreferrer">DAXFS</a> image from the Docker image, and the spawned kernel mounts it directly as its root filesystem. DAXFS is an out-of-tree kernel module that kerf does not load automatically. Load it before running <code>kerf load</code>, but only when booting from a Docker image or sharing a host directory:</p>
                 <pre><code>git clone https://github.com/multikernel/daxfs.git
 cd daxfs
 make
 sudo insmod daxfs.ko</code></pre>
-                <p>The spawned kernel needs DAXFS support as well: build it into the kernel, or pass <code>--initrd</code> with an initramfs that loads <code>daxfs.ko</code>. Booting a traditional initrd with <code>--initrd</code> alone needs no DAXFS at all.</p>
+                <p>The spawned kernel also requires DAXFS support: either build it into the kernel, or pass <code>--initrd</code> with an initramfs that loads <code>daxfs.ko</code>. A conventional boot using <code>--initrd</code> alone does not require DAXFS.</p>
             </div>
 
             <!-- Key Components -->
@@ -376,10 +376,10 @@ sudo insmod daxfs.ko</code></pre>
                 <h2><i data-lucide="box"></i>Key Components</h2>
                 <p>The multikernel stack is composed of several open-source projects:</p>
                 <ul>
-                    <li><strong><a href="https://github.com/multikernel/linux" target="_blank" rel="noopener noreferrer">Multikernel Linux</a></strong> - Kernel patches that enable spawning and managing additional kernel instances using the kexec subsystem</li>
-                    <li><strong><a href="https://github.com/multikernel/kerf" target="_blank" rel="noopener noreferrer">Kerf</a></strong> - Orchestration tool for managing kernel instances, resources, and lifecycle; drives Lazy CMA and DAXFS directly, so no separate tooling is needed</li>
-                    <li><strong><a href="https://github.com/multikernel/daxfs" target="_blank" rel="noopener noreferrer">DAXFS</a></strong> - Out-of-tree kernel module providing a shared filesystem across kernel instances using direct memory access, enabling shared container rootfs and zero-copy data sharing</li>
-                    <li><strong><a href="https://github.com/multikernel/lazy_cma" target="_blank" rel="noopener noreferrer">Lazy CMA</a></strong> - Out-of-tree kernel module providing runtime contiguous memory allocation; memory pools for spawned kernels are resizable, NUMA-aware, and need no boot-time reservation</li>
+                    <li><strong><a href="https://github.com/multikernel/linux" target="_blank" rel="noopener noreferrer">Multikernel Linux</a></strong> - Kernel patches that enable spawning and managing additional kernel instances through the kexec subsystem</li>
+                    <li><strong><a href="https://github.com/multikernel/kerf" target="_blank" rel="noopener noreferrer">Kerf</a></strong> - Orchestration tool that manages kernel instances, resources, and lifecycle; it drives Lazy CMA and DAXFS directly, so no separate tooling is required</li>
+                    <li><strong><a href="https://github.com/multikernel/daxfs" target="_blank" rel="noopener noreferrer">DAXFS</a></strong> - Out-of-tree kernel module that provides a shared filesystem across kernel instances via direct memory access, enabling a shared container root filesystem and zero-copy data sharing</li>
+                    <li><strong><a href="https://github.com/multikernel/lazy_cma" target="_blank" rel="noopener noreferrer">Lazy CMA</a></strong> - Out-of-tree kernel module that allocates contiguous memory at runtime; memory pools for spawned kernels are resizable, NUMA-aware, and require no boot-time reservation</li>
                 </ul>
             </div>
 
@@ -387,18 +387,18 @@ sudo insmod daxfs.ko</code></pre>
             <div class="content-card">
                 <h2><i data-lucide="cog"></i>How It Works Under the Hood</h2>
                 <ul>
-                    <li><strong>Kernel spawning via kexec</strong> - New kernels are launched using Linux's existing kexec mechanism, extended to run alongside the primary kernel rather than replacing it</li>
-                    <li><strong>Resource partitioning</strong> - CPUs, memory, and devices are split between kernels using standard hotplug interfaces</li>
-                    <li><strong>Hardware queue sharing</strong> - Modern NICs and SSDs have multiple hardware queues; each kernel gets exclusive access to specific queues for true hardware-level isolation</li>
-                    <li><strong>Inter-kernel networking</strong> - Each spawned kernel gets a standard Linux network device backed by descriptor rings in shared memory; frames stay in place and only descriptors cross kernels, so applications use unmodified sockets</li>
-                    <li><strong>Docker integration</strong> - Spawned kernels can boot directly into Docker images using DAXFS to share the container rootfs, with no OS init layer</li>
+                    <li><strong>Kernel spawning via kexec</strong> - New kernels are launched through Linux's existing kexec mechanism, extended to run alongside the primary kernel rather than replacing it</li>
+                    <li><strong>Resource partitioning</strong> - CPUs, memory, and devices are divided between kernels through standard hotplug interfaces</li>
+                    <li><strong>Hardware queue sharing</strong> - Modern NICs and SSDs expose multiple hardware queues; each kernel receives exclusive access to specific queues, providing isolation at the hardware level</li>
+                    <li><strong>Inter-kernel networking</strong> - Each spawned kernel receives a standard Linux network device backed by descriptor rings in shared memory; frames stay in place and only descriptors cross kernel boundaries, so applications use unmodified sockets</li>
+                    <li><strong>Docker integration</strong> - Spawned kernels can boot directly into Docker images, using DAXFS to share the container root filesystem without an OS init layer</li>
                 </ul>
             </div>
 
             <!-- CTA -->
             <div class="content-card gs-cta">
                 <h2><i data-lucide="check-circle"></i>Ready to Try It?</h2>
-                <p>All multikernel components are open source. Explore the code, file issues, or reach out for a technical evaluation.</p>
+                <p>All multikernel components are open source. Explore the code, file issues, or contact us to arrange a technical evaluation.</p>
                 <div class="button-group">
                     <a href="https://github.com/multikernel" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
                         <i data-lucide="github"></i>
