@@ -318,11 +318,13 @@ description: "快速上手 Multikernel Linux：学习如何构建、配置并启
             <!-- Step 1: Build -->
             <div class="content-card">
                 <h2><i data-lucide="hammer"></i><span class="step-badge">1</span> 构建 Multikernel 内核</h2>
-                <p>克隆支持 multikernel 的 Linux 内核，并开启 multikernel 支持进行构建。</p>
+                <p>克隆支持 multikernel 的 Linux 内核，并开启 <code>CONFIG_MULTIKERNEL</code> 和 <code>CONFIG_MKTTY</code> 进行构建。</p>
                 <pre><code>git clone https://github.com/multikernel/linux.git
 cd linux
-make menuconfig  # Enable CONFIG_MULTIKERNEL
+cp /boot/config-$(uname -r) .config  # 以当前运行内核的配置为起点
+make menuconfig  # Enable CONFIG_MULTIKERNEL=y and CONFIG_MKTTY=y
 make -j$(nproc)
+sudo make modules_install
 sudo make install</code></pre>
                 <p>这样会生成一个带有 multikernel 扩展的标准 Linux 内核。它会作为你的常规内核运行，并且还能额外生成新的内核实例。</p>
             </div>

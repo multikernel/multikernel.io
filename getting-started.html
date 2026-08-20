@@ -318,11 +318,13 @@ i18n: true
             <!-- Step 1: Build -->
             <div class="content-card">
                 <h2><i data-lucide="hammer"></i><span class="step-badge">1</span> Build the Multikernel Kernel</h2>
-                <p>Clone the Linux kernel source with multikernel support and build it with <code>CONFIG_MULTIKERNEL</code> enabled.</p>
+                <p>Clone the Linux kernel source with multikernel support and build it with <code>CONFIG_MULTIKERNEL</code> and <code>CONFIG_MKTTY</code> enabled.</p>
                 <pre><code>git clone https://github.com/multikernel/linux.git
 cd linux
-make menuconfig  # Enable CONFIG_MULTIKERNEL
+cp /boot/config-$(uname -r) .config  # Start from the running kernel's config
+make menuconfig  # Enable CONFIG_MULTIKERNEL=y and CONFIG_MKTTY=y
 make -j$(nproc)
+sudo make modules_install
 sudo make install</code></pre>
                 <p>The result is a standard Linux kernel with multikernel extensions. It boots and operates as the regular host kernel, and can additionally spawn and manage new kernel instances.</p>
             </div>
