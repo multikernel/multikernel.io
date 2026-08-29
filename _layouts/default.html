@@ -14,7 +14,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% if page.title and page.url != "/" %}{{ page.title }} - {{ site.title }}{% elsif page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
+    <title>{% if page.title and page.url != "/" and page.title contains "Multikernel" %}{{ page.title }}{% elsif page.title and page.url != "/" %}{{ page.title }} - {{ site.title }}{% elsif page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
     <link rel="stylesheet" href="/assets/css/styles.css">
     
     <!-- Page-specific CSS -->

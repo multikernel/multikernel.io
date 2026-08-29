@@ -1,7 +1,7 @@
 title: Multikernel Technologies
 email: contact@multikernel.io
 description: >-
-  Advanced kernel-based security solutions.
+  Split-kernel architecture for Linux: run independent kernels on one machine with bare-metal performance and kernel-level isolation, no hypervisor.
 baseurl: ""
 url: "https://multikernel.io" # Set to your custom domain
 
