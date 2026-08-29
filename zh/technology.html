@@ -104,7 +104,7 @@ description: "Multikernel 系统将设备驱动与中断处理卸载到专用内
                     <div class="tech-icon">
                         <i data-lucide="database"></i>
                     </div>
-                    <h3 class="tech-title">DAXFS 共享内存</h3>
+                    <h3 class="tech-title">共享内存 / DAXFS</h3>
                     <p class="tech-description">应用内核与设备内核通过 DAXFS 共享数据——这是一个构建在共享内存之上、采用无锁 CAS 协调机制的文件系统。零拷贝，无需序列化，也没有网络往返开销。</p>
                 </div>
             </div>
@@ -116,10 +116,10 @@ description: "Multikernel 系统将设备驱动与中断处理卸载到专用内
             <div class="section-header">
                 <div class="section-badge">
                     <i data-lucide="cog"></i>
-                    <span>底层原理</span>
+                    <span>数据通路</span>
                 </div>
-                <h2 class="section-title">构建于标准 Linux 之上</h2>
-                <p class="section-subtitle">没有新操作系统，没有定制虚拟机管理程序，也没有兼容性缺口。关于内核的通用生命周期（资源划分、内核派生、共享内存），请参阅<a href="/zh/how-it-works.html">工作原理</a>。下面这些部分是分离内核配置所特有的。</p>
+                <h2 class="section-title">应用内核如何访问设备</h2>
+                <p class="section-subtitle">应用内核不拥有任何硬件，但其中的应用程序仍能以原生速度进行网络和存储 I/O。下面三个部分正是实现这一点的关键。关于内核的通用生命周期（资源划分、内核派生、共享内存），请参阅<a href="/zh/how-it-works.html">工作原理</a>。</p>
             </div>
 
             <div class="technologies-grid">

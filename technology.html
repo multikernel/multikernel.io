@@ -104,7 +104,7 @@ i18n: true
                     <div class="tech-icon">
                         <i data-lucide="database"></i>
                     </div>
-                    <h3 class="tech-title">DAXFS Shared Memory</h3>
+                    <h3 class="tech-title">Shared Memory / DAXFS</h3>
                     <p class="tech-description">App-kernels and the device-kernel share data through DAXFS, a filesystem built on shared memory with lock-free CAS-based coordination. Zero-copy, no serialization, no network round trips.</p>
                 </div>
             </div>
@@ -117,10 +117,10 @@ i18n: true
             <div class="section-header">
                 <div class="section-badge">
                     <i data-lucide="cog"></i>
-                    <span>Under the Hood</span>
+                    <span>Data Path</span>
                 </div>
-                <h2 class="section-title">Built on Standard Linux</h2>
-                <p class="section-subtitle">No new OS, no custom hypervisor, no compatibility gaps. For the general lifecycle of a kernel (partitioning, spawning, shared memory), see <a href="/how-it-works.html">How It Works</a>. The pieces below are specific to the split-kernel configuration.</p>
+                <h2 class="section-title">How App-Kernels Reach Devices</h2>
+                <p class="section-subtitle">App-kernels own no hardware, yet applications inside them do network and storage I/O at native speed. These three pieces make that possible. For the general kernel lifecycle (partitioning, spawning, shared memory), see <a href="/how-it-works.html">How It Works</a>.</p>
             </div>
 
             <div class="technologies-grid">
