@@ -143,3 +143,25 @@ i18n: true
         </div>
     </section>
 </main>
+
+<script>
+(function () {
+    var items = document.querySelectorAll('.faq-item');
+    var entities = [];
+    for (var i = 0; i < items.length; i++) {
+        var q = items[i].querySelector('.faq-question');
+        var a = items[i].querySelector('.faq-answer');
+        if (!q || !a) continue;
+        entities.push({
+            '@type': 'Question',
+            'name': q.textContent.trim(),
+            'acceptedAnswer': { '@type': 'Answer', 'text': a.textContent.trim() }
+        });
+    }
+    if (!entities.length) return;
+    var s = document.createElement('script');
+    s.type = 'application/ld+json';
+    s.text = JSON.stringify({ '@context': 'https://schema.org', '@type': 'FAQPage', 'mainEntity': entities });
+    document.head.appendChild(s);
+})();
+</script>
