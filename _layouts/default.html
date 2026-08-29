@@ -45,7 +45,7 @@
     {% endif %}
     
     <!-- Using a specific versioned CDN for Lucide icons -->
-    <script src="https://cdn.jsdelivr.net/npm/lucide-static@0.269.0/dist/umd/lucide.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/lucide-static@0.269.0/dist/umd/lucide.min.js"></script>
     <!-- Add Google Fonts for Inter and JetBrains Mono -->
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Favicon and meta tags -->
@@ -56,7 +56,13 @@
     <meta property="og:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description | strip }}{% endif %}">
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ site.url }}{{ page.url }}">
-    <meta property="og:image" content="{{ site.url }}/assets/images/multikernel-logo.png">
+    <meta property="og:image" content="{{ site.url }}{% if page.image %}{{ page.image }}{% else %}/assets/images/multikernel-logo.png{% endif %}">
+    <meta property="og:site_name" content="{{ site.title }}">
+    <meta property="og:locale" content="{% if lang == 'zh' %}zh_CN{% else %}en_US{% endif %}">
+    <meta name="twitter:card" content="{% if page.image %}summary_large_image{% else %}summary{% endif %}">
+    <meta name="twitter:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
+    <meta name="twitter:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description | strip }}{% endif %}">
+    <meta name="twitter:image" content="{{ site.url }}{% if page.image %}{{ page.image }}{% else %}/assets/images/multikernel-logo.png{% endif %}">
     {% if has_twin %}
     {% if rel_url == '/' %}
     <script type="application/ld+json">
