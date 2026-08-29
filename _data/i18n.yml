@@ -16,6 +16,8 @@ en:
     technology: Technology
     overview: Overview
     overview_sub: Architecture and approach
+    how_it_works: How It Works
+    how_it_works_sub: The architecture, step by step
     arm: ARM Platform
     arm_sub: Split-kernel on high-core-count servers
     riscv: RISC-V Platform
@@ -59,6 +61,8 @@ zh:
     technology: 技术
     overview: 概览
     overview_sub: 架构与技术路线
+    how_it_works: 工作原理
+    how_it_works_sub: 逐步了解架构
     arm: ARM 平台
     arm_sub: 高核数服务器上的分离内核
     riscv: RISC-V 平台

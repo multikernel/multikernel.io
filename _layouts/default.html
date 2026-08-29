@@ -25,6 +25,9 @@
         <link rel="stylesheet" href="/assets/css/content-pages.css">
     {% elsif rel_url contains '/technology' %}
         <link rel="stylesheet" href="/assets/css/technology.css">
+    {% elsif rel_url contains '/how-it-works' %}
+        <link rel="stylesheet" href="/assets/css/technology.css">
+        <link rel="stylesheet" href="/assets/css/platforms.css">
     {% elsif rel_url contains '/products/' %}
         <link rel="stylesheet" href="/assets/css/technology.css">
     {% elsif rel_url contains '/platforms/' or rel_url contains '/solutions/' %}
@@ -436,7 +439,7 @@
                 </div>
 
                 <div class="site-nav-dropdown">
-                    <button class="site-nav-dropdown-trigger {% if rel_url == '/technology.html' or rel_url == '/faq.html' %}active{% endif %}">
+                    <button class="site-nav-dropdown-trigger {% if rel_url == '/technology.html' or rel_url == '/how-it-works.html' or rel_url == '/faq.html' %}active{% endif %}">
                         {{ t.nav.technology }}
                         <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 4.5L6 7.5L9 4.5"/></svg>
                     </button>
@@ -444,6 +447,10 @@
                         <a href="{{ lang_prefix }}/technology.html" class="site-nav-dropdown-item {% if rel_url == '/technology.html' %}active{% endif %}">
                             {{ t.nav.overview }}
                             <small>{{ t.nav.overview_sub }}</small>
+                        </a>
+                        <a href="{{ lang_prefix }}/how-it-works.html" class="site-nav-dropdown-item {% if rel_url == '/how-it-works.html' %}active{% endif %}">
+                            {{ t.nav.how_it_works }}
+                            <small>{{ t.nav.how_it_works_sub }}</small>
                         </a>
                         <a href="{{ lang_prefix }}/faq.html" class="site-nav-dropdown-item {% if rel_url == '/faq.html' %}active{% endif %}">
                             {{ t.nav.faq }}
@@ -494,6 +501,7 @@
             <a href="{{ lang_prefix }}/solutions/oem.html" class="site-mobile-link {% if rel_url == '/solutions/oem.html' %}active{% endif %}">{{ t.nav.oem }}</a>
             <a href="{{ lang_prefix }}/solutions/saas.html" class="site-mobile-link {% if rel_url == '/solutions/saas.html' %}active{% endif %}">{{ t.nav.saas }}</a>
             <a href="{{ lang_prefix }}/technology.html" class="site-mobile-link {% if rel_url == '/technology.html' %}active{% endif %}">{{ t.nav.technology }}</a>
+            <a href="{{ lang_prefix }}/how-it-works.html" class="site-mobile-link {% if rel_url == '/how-it-works.html' %}active{% endif %}">{{ t.nav.how_it_works }}</a>
             <a href="{{ lang_prefix }}/faq.html" class="site-mobile-link {% if rel_url == '/faq.html' %}active{% endif %}">{{ t.nav.faq }}</a>
             <a href="{{ lang_prefix }}/getting-started.html" class="site-mobile-link {% if rel_url == '/getting-started.html' %}active{% endif %}">{{ t.nav.getting_started }}</a>
             <a href="/blog/" class="site-mobile-link {% if rel_url contains '/blog' or page.layout == 'post' %}active{% endif %}">{{ t.nav.blog }}</a>
