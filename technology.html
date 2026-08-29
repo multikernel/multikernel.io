@@ -111,33 +111,25 @@ i18n: true
         </div>
     </section>
 
-    <!-- How It Works -->
-    <section id="how-it-works" class="how-it-works">
+    <!-- Implementation -->
+    <section id="implementation" class="how-it-works">
         <div class="section-container">
             <div class="section-header">
                 <div class="section-badge">
                     <i data-lucide="cog"></i>
                     <span>Under the Hood</span>
                 </div>
-                <h2 class="section-title">How It Works</h2>
-                <p class="section-subtitle">Built entirely on existing Linux infrastructure. No new OS, no custom hypervisor, no compatibility gaps.</p>
+                <h2 class="section-title">Built on Standard Linux</h2>
+                <p class="section-subtitle">No new OS, no custom hypervisor, no compatibility gaps. For the general lifecycle of a kernel (partitioning, spawning, shared memory), see <a href="/how-it-works.html">How It Works</a>. The pieces below are specific to the split-kernel configuration.</p>
             </div>
 
             <div class="technologies-grid">
                 <div class="technology-card">
                     <div class="tech-icon">
-                        <i data-lucide="play-circle"></i>
+                        <i data-lucide="network"></i>
                     </div>
-                    <h3 class="tech-title">Kernel Spawning via Kexec</h3>
-                    <p class="tech-description">New kernel instances launch using Linux's kexec mechanism, extended to boot alongside the running kernel rather than replacing it. Each spawned kernel starts on its assigned CPUs and memory, fully independent.</p>
-                </div>
-
-                <div class="technology-card">
-                    <div class="tech-icon">
-                        <i data-lucide="sliders"></i>
-                    </div>
-                    <h3 class="tech-title">Resource Partitioning</h3>
-                    <p class="tech-description">CPUs, memory, and device queues are assigned to each kernel using standard Linux hotplug interfaces. Resources can be rebalanced between kernels at runtime without rebooting.</p>
+                    <h3 class="tech-title">Virtual Devices for App-Kernels</h3>
+                    <p class="tech-description">An app-kernel has no physical drivers. It sees a virtual NIC and a virtual block device backed by the device-kernel, and runs its own network and storage stacks on top of them. Every application-visible interface is the ordinary Linux one.</p>
                 </div>
 
                 <div class="technology-card">
