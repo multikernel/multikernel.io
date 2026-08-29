@@ -111,33 +111,24 @@ description: "Multikernel 系统将设备驱动与中断处理卸载到专用内
         </div>
     </section>
 
-    <!-- How It Works -->
-    <section id="how-it-works" class="how-it-works">
+    <section id="implementation" class="how-it-works">
         <div class="section-container">
             <div class="section-header">
                 <div class="section-badge">
                     <i data-lucide="cog"></i>
                     <span>底层原理</span>
                 </div>
-                <h2 class="section-title">工作原理</h2>
-                <p class="section-subtitle">完全构建在现有 Linux 基础设施之上。没有新操作系统，没有定制虚拟机管理程序，也没有兼容性缺口。</p>
+                <h2 class="section-title">构建于标准 Linux 之上</h2>
+                <p class="section-subtitle">没有新操作系统，没有定制虚拟机管理程序，也没有兼容性缺口。关于内核的通用生命周期（资源划分、内核派生、共享内存），请参阅<a href="/zh/how-it-works.html">工作原理</a>。下面这些部分是分离内核配置所特有的。</p>
             </div>
 
             <div class="technologies-grid">
                 <div class="technology-card">
                     <div class="tech-icon">
-                        <i data-lucide="play-circle"></i>
+                        <i data-lucide="network"></i>
                     </div>
-                    <h3 class="tech-title">通过 Kexec 生成内核</h3>
-                    <p class="tech-description">新的内核实例通过 Linux 的 kexec 机制启动，该机制经过扩展，可与主内核并行启动，而非将其替换。每个子内核都在分配给它的 CPU 与内存上启动，完全独立。</p>
-                </div>
-
-                <div class="technology-card">
-                    <div class="tech-icon">
-                        <i data-lucide="sliders"></i>
-                    </div>
-                    <h3 class="tech-title">资源分区</h3>
-                    <p class="tech-description">CPU、内存和设备队列通过标准 Linux 热插拔接口分配给每个内核。资源可以在运行时于各内核之间重新平衡，无需重启。</p>
+                    <h3 class="tech-title">应用内核的虚拟设备</h3>
+                    <p class="tech-description">应用内核没有物理驱动。它看到的是由设备内核支撑的虚拟网卡和虚拟块设备，并在其上运行自己的网络栈和存储栈。应用程序看到的每一个接口都是普通的 Linux 接口。</p>
                 </div>
 
                 <div class="technology-card">
