@@ -95,13 +95,13 @@ i18n: true
                 <div class="step-card">
                     <div class="step-num">02</div>
                     <h3 class="step-title">Carve Out Resources</h3>
-                    <p class="step-description">You decide how the machine is divided. A set of cores, a block of memory, and optionally some devices are taken offline from the running kernel using standard CPU, memory, and device hotplug, and set aside for a new kernel.</p>
+                    <p class="step-description">You decide how the machine is divided. A set of cores, a block of memory, and optionally some devices are taken offline from the running kernel using standard CPU, memory, and device hotplug, and set aside for a new kernel. The running kernel then writes a device tree describing exactly that hardware, and nothing else.</p>
                 </div>
 
                 <div class="step-card">
                     <div class="step-num">03</div>
                     <h3 class="step-title">Spawn a New Kernel</h3>
-                    <p class="step-description">Linux's kexec mechanism, extended to boot alongside the running kernel rather than replace it, starts a fresh kernel on those resources. It comes up in tens of milliseconds and can boot straight into a container image.</p>
+                    <p class="step-description">Linux's kexec mechanism, extended to boot alongside the running kernel rather than replace it, starts a fresh kernel with that device tree. The new kernel discovers only the cores, memory, and devices it was handed, so it cannot touch anyone else's. It comes up in tens of milliseconds and can boot straight into a container image.</p>
                 </div>
 
                 <div class="step-card">
@@ -113,7 +113,7 @@ i18n: true
                 <div class="step-card">
                     <div class="step-num">05</div>
                     <h3 class="step-title">Run, Rebalance, Retire</h3>
-                    <p class="step-description">Each kernel runs its workload unmodified with native performance. Cores, memory, and devices can be moved between kernels at runtime, and when a kernel is no longer needed it is torn down and its resources return to the pool.</p>
+                    <p class="step-description">Each kernel runs its workload unmodified with native performance. Moving a core, a memory block, or a device between kernels is a hotplug remove on one side and a hotplug add on the other, with no reboot. When a kernel is no longer needed it is torn down and its resources return to the pool.</p>
                 </div>
             </div>
         </div>
@@ -132,7 +132,7 @@ i18n: true
                         <i data-lucide="grid-2x2"></i>
                     </div>
                     <h3 class="tech-title">Resource Partitioning</h3>
-                    <p class="tech-description">Cores, memory, and devices are assigned to exactly one kernel at a time. Ownership is explicit and can change at runtime, so the machine is divided by policy, not by accident.</p>
+                    <p class="tech-description">Cores, memory, and devices are assigned to exactly one kernel at a time. Each kernel's share is spelled out in a device tree at boot, and changed afterwards through the same hotplug interfaces Linux already uses, so the machine is divided by policy, not by accident.</p>
                 </div>
 
                 <div class="technology-card primary">

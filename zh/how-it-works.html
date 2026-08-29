@@ -96,13 +96,13 @@ description: "用通俗的方式介绍 Multikernel 架构：一台机器如何�
                 <div class="step-card">
                     <div class="step-num">02</div>
                     <h3 class="step-title">划出资源</h3>
-                    <p class="step-description">由您决定如何划分机器。通过标准的 CPU、内存和设备热插拔，从正在运行的内核中下线一组核心、一块内存，以及可选的一些设备，预留给新内核使用。</p>
+                    <p class="step-description">由您决定如何划分机器。通过标准的 CPU、内存和设备热插拔，从正在运行的内核中下线一组核心、一块内存，以及可选的一些设备，预留给新内核使用。随后，运行中的内核生成一份设备树，精确描述这些硬件，且仅描述这些硬件。</p>
                 </div>
 
                 <div class="step-card">
                     <div class="step-num">03</div>
                     <h3 class="step-title">启动新内核</h3>
-                    <p class="step-description">Linux 的 kexec 机制经过扩展，可以与正在运行的内核并行启动而非替换它，从而在这些资源上拉起一个全新内核。它在几十毫秒内就绪，并可以直接引导进入容器镜像。</p>
+                    <p class="step-description">Linux 的 kexec 机制经过扩展，可以与正在运行的内核并行启动而非替换它，从而带着这份设备树拉起一个全新内核。新内核只能发现交给它的核心、内存和设备，因此无法触及其他内核的资源。它在几十毫秒内就绪，并可以直接引导进入容器镜像。</p>
                 </div>
 
                 <div class="step-card">
@@ -114,7 +114,7 @@ description: "用通俗的方式介绍 Multikernel 架构：一台机器如何�
                 <div class="step-card">
                     <div class="step-num">05</div>
                     <h3 class="step-title">运行、调整、回收</h3>
-                    <p class="step-description">每个内核以原生性能运行未经修改的工作负载。核心、内存和设备可以在运行时在内核之间迁移；某个内核不再需要时将其销毁，资源回到资源池。</p>
+                    <p class="step-description">每个内核以原生性能运行未经修改的工作负载。在内核之间迁移一个核心、一块内存或一个设备，就是在一侧热拔出、在另一侧热插入，无需重启。某个内核不再需要时将其销毁，资源回到资源池。</p>
                 </div>
             </div>
         </div>
@@ -133,7 +133,7 @@ description: "用通俗的方式介绍 Multikernel 架构：一台机器如何�
                         <i data-lucide="grid-2x2"></i>
                     </div>
                     <h3 class="tech-title">资源划分</h3>
-                    <p class="tech-description">核心、内存和设备在任一时刻只属于一个内核。归属关系是明确的，并且可以在运行时改变，因此机器的划分由策略决定，而不是偶然形成。</p>
+                    <p class="tech-description">核心、内存和设备在任一时刻只属于一个内核。每个内核的份额在启动时由设备树明确写定，之后通过 Linux 已有的热插拔接口调整，因此机器的划分由策略决定，而不是偶然形成。</p>
                 </div>
 
                 <div class="technology-card primary">
