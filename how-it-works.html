@@ -1,0 +1,254 @@
+---
+layout: default
+title: "How It Works - Multikernel"
+description: "A plain walkthrough of the Multikernel architecture: how one machine is partitioned into independent Linux kernels, how they are launched, and how they share memory and devices."
+permalink: /how-it-works.html
+i18n: true
+---
+
+<main>
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-badge">
+                <i data-lucide="route"></i>
+                <span>How It Works</span>
+            </div>
+
+            <h1>One Machine, Many Kernels</h1>
+            <p class="subtitle">Multikernel runs several independent Linux kernels on the same physical server at the same time. Each kernel owns its own cores, memory, and devices, and there is no hypervisor underneath any of them. This page walks through how that happens, without the deep details.</p>
+
+            <div class="button-group">
+                <a href="/technology.html" class="btn btn-primary">
+                    <i data-lucide="layers"></i>
+                    Full Architecture
+                </a>
+                <a href="/getting-started.html" class="btn btn-secondary">
+                    <i data-lucide="rocket"></i>
+                    Try It
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="picture" class="value-section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">The Big Picture</h2>
+                <p class="section-subtitle">A normal server runs one Linux kernel that owns every core, every byte of memory, and every device. Multikernel divides that machine into kernel domains. Each domain is a complete Linux kernel with a dedicated share of the hardware: its own cores, its own memory, and whichever devices you assign to it. The kernels are peers. None of them is a host, a guest, or a hypervisor.</p>
+            </div>
+
+            <div class="partition-figure">
+                <div class="partition-title">One Server &middot; Divided Into Kernel Domains</div>
+                <div class="partition-domains">
+                    <div class="partition-domain domain-app">
+                        <div class="partition-cores">
+                            {% for i in (1..16) %}<span class="partition-core"></span>{% endfor %}
+                        </div>
+                        <div class="partition-name">Kernel A</div>
+                        <div class="partition-detail">16 cores &middot; NIC 0</div>
+                    </div>
+                    <div class="partition-domain domain-app shade-2">
+                        <div class="partition-cores">
+                            {% for i in (1..16) %}<span class="partition-core"></span>{% endfor %}
+                        </div>
+                        <div class="partition-name">Kernel B</div>
+                        <div class="partition-detail">16 cores &middot; NVMe 0</div>
+                    </div>
+                    <div class="partition-domain domain-app">
+                        <div class="partition-cores">
+                            {% for i in (1..12) %}<span class="partition-core"></span>{% endfor %}
+                        </div>
+                        <div class="partition-name">Kernel C</div>
+                        <div class="partition-detail">12 cores &middot; GPU 0</div>
+                    </div>
+                    <div class="partition-domain domain-app shade-2">
+                        <div class="partition-cores">
+                            {% for i in (1..8) %}<span class="partition-core"></span>{% endfor %}
+                        </div>
+                        <div class="partition-name">Kernel D</div>
+                        <div class="partition-detail">8 cores &middot; no devices</div>
+                    </div>
+                </div>
+                <p class="partition-caption">Every box is a complete, unmodified Linux kernel. <strong>They share the machine, not a kernel.</strong></p>
+            </div>
+        </div>
+    </section>
+
+    <section id="steps" class="how-it-works">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i data-lucide="list-ordered"></i>
+                    <span>Step by Step</span>
+                </div>
+                <h2 class="section-title">From Boot to Running Workload</h2>
+                <p class="section-subtitle">Five steps, all built on mechanisms Linux already has.</p>
+            </div>
+
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-num">01</div>
+                    <h3 class="step-title">Boot Linux as Usual</h3>
+                    <p class="step-description">The machine boots a standard Linux kernel with the Multikernel patches. Nothing changes for your firmware, bootloader, or drivers. This first kernel starts out owning the whole machine.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-num">02</div>
+                    <h3 class="step-title">Carve Out Resources</h3>
+                    <p class="step-description">You decide how the machine is divided. A set of cores, a block of memory, and optionally some devices are taken offline from the running kernel using standard CPU, memory, and device hotplug, and set aside for a new kernel.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-num">03</div>
+                    <h3 class="step-title">Spawn a New Kernel</h3>
+                    <p class="step-description">Linux's kexec mechanism, extended to boot alongside the running kernel rather than replace it, starts a fresh kernel on those resources. It comes up in tens of milliseconds and can boot straight into a container image.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-num">04</div>
+                    <h3 class="step-title">Talk Through Shared Memory</h3>
+                    <p class="step-description">Kernels never call into each other. When they need to cooperate, they exchange data through a region of memory mapped by both sides, so nothing is copied and no kernel waits on another one's locks.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-num">05</div>
+                    <h3 class="step-title">Run, Rebalance, Retire</h3>
+                    <p class="step-description">Each kernel runs its workload unmodified with native performance. Cores, memory, and devices can be moved between kernels at runtime, and when a kernel is no longer needed it is torn down and its resources return to the pool.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pieces" class="value-section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">The Three Pieces</h2>
+                <p class="section-subtitle">Everything above comes down to three mechanisms.</p>
+            </div>
+
+            <div class="technologies-grid">
+                <div class="technology-card primary">
+                    <div class="tech-icon">
+                        <i data-lucide="grid-2x2"></i>
+                    </div>
+                    <h3 class="tech-title">Resource Partitioning</h3>
+                    <p class="tech-description">Cores, memory, and devices are assigned to exactly one kernel at a time. Ownership is explicit and can change at runtime, so the machine is divided by policy, not by accident.</p>
+                </div>
+
+                <div class="technology-card primary">
+                    <div class="tech-icon">
+                        <i data-lucide="box"></i>
+                    </div>
+                    <h3 class="tech-title">Kernel Spawning</h3>
+                    <p class="tech-description">Any running kernel can launch another one on resources it has set aside, using kexec. Each new kernel is a full, independent Linux instance with its own failure and update domain.</p>
+                </div>
+
+                <div class="technology-card primary">
+                    <div class="tech-icon">
+                        <i data-lucide="share-2"></i>
+                    </div>
+                    <h3 class="tech-title">Shared Memory (DAXFS)</h3>
+                    <p class="tech-description">The only thing kernels share on purpose. A region of DRAM exposed as a filesystem, used for message queues, container root filesystems, and data that kernels want to exchange without copying.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="split-kernel" class="how-it-works">
+        <div class="section-container">
+            <div class="value-content">
+                <div class="value-text">
+                    <div class="section-badge">
+                        <i data-lucide="git-branch"></i>
+                        <span>A Special Case</span>
+                    </div>
+                    <h2 class="section-title">The Split-Kernel Configuration</h2>
+                    <p class="section-subtitle">Multikernel itself does not care what each kernel does. In practice, one arrangement stands out because it turns kernel isolation into a performance advantage: give all the physical devices to a single kernel, the <strong>device-kernel</strong>, and give none to the others, the <strong>app-kernels</strong>. This is the configuration our products are built on.</p>
+                    <p class="section-subtitle">The device-kernel runs every driver and takes every interrupt. Each app-kernel sees a virtual NIC and virtual disk whose queues live in shared memory, so packets and blocks stay in place and only descriptors cross the boundary. Applications get cores that no device ever interrupts, and the driver stack can be updated or restarted without touching them.</p>
+                    <p class="section-subtitle">This is what the <a href="/technology.html">Technology</a> page describes in depth. It is one way to use Multikernel, not the only one: kernels can also own devices directly, or mix both styles on the same machine.</p>
+                </div>
+
+                <div class="value-visual">
+                    <div class="partition-figure" style="margin: 0; max-width: 460px;">
+                        <div class="partition-title">Split-Kernel Layout</div>
+                        <div class="partition-domains">
+                            <div class="partition-domain">
+                                <div class="partition-cores">
+                                    {% for i in (1..8) %}<span class="partition-core"></span>{% endfor %}
+                                </div>
+                                <div class="partition-name">Device-kernel</div>
+                                <div class="partition-detail">All drivers</div>
+                            </div>
+                            <div class="partition-domain domain-app">
+                                <div class="partition-cores">
+                                    {% for i in (1..12) %}<span class="partition-core"></span>{% endfor %}
+                                </div>
+                                <div class="partition-name">App-kernel</div>
+                                <div class="partition-detail">Virtual devices</div>
+                            </div>
+                            <div class="partition-domain domain-app shade-2">
+                                <div class="partition-cores">
+                                    {% for i in (1..12) %}<span class="partition-core"></span>{% endfor %}
+                                </div>
+                                <div class="partition-name">App-kernel</div>
+                                <div class="partition-detail">Virtual devices</div>
+                            </div>
+                        </div>
+                        <p class="partition-caption">One kernel owns the hardware, the rest are interrupt-free.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="why" class="value-section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">Why This Design</h2>
+                <p class="section-subtitle">What separate kernels buy you that containers and virtual machines do not.</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="shield-check"></i>
+                    </div>
+                    <h3 class="feature-title">Isolation Without a Hypervisor</h3>
+                    <p class="feature-description">Each workload has its own kernel, so a kernel bug or exploit in one cannot reach another. There is no hypervisor layer to pay for, and it works on bare metal or inside VMs you already run.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="gauge"></i>
+                    </div>
+                    <h3 class="feature-title">Native Performance</h3>
+                    <p class="feature-description">Applications run directly on the CPU and memory assigned to them. No trapping, no nested page tables, and no lock contention with kernels running someone else's workload.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="refresh-cw"></i>
+                    </div>
+                    <h3 class="feature-title">Independent Lifecycles</h3>
+                    <p class="feature-description">Kernels come and go independently. Upgrade or restart one kernel while the others keep running, without rebooting the machine.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="sliders"></i>
+                    </div>
+                    <h3 class="feature-title">A Kernel Tailored to Each Application</h3>
+                    <p class="feature-description">Every kernel can be a different build with its own version, config, and tuning. A database gets huge pages and a deadline scheduler, a network service gets a lean stack with busy polling, without either compromise leaking into the other.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="check-circle"></i>
+                    </div>
+                    <h3 class="feature-title">Still Just Linux</h3>
+                    <p class="feature-description">Applications, container images, and tooling run unmodified. There is no new operating system to learn and no compatibility gap to work around.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

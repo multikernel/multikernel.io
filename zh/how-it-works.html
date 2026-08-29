@@ -1,0 +1,255 @@
+---
+layout: default
+lang: zh
+permalink: /zh/how-it-works.html
+title: "工作原理 - Multikernel"
+description: "用通俗的方式介绍 Multikernel 架构：一台机器如何被划分为多个独立的 Linux 内核，这些内核如何启动，以及它们如何共享内存与设备。"
+---
+
+
+<main>
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-badge">
+                <i data-lucide="route"></i>
+                <span>工作原理</span>
+            </div>
+
+            <h1>一台机器，多个内核</h1>
+            <p class="subtitle">Multikernel 在同一台物理服务器上同时运行多个相互独立的 Linux 内核。每个内核拥有自己的核心、内存和设备，它们底下都没有虚拟机管理程序。本页用简明的方式介绍这一切是如何实现的，不深入细节。</p>
+
+            <div class="button-group">
+                <a href="/zh/technology.html" class="btn btn-primary">
+                    <i data-lucide="layers"></i>
+                    完整架构
+                </a>
+                <a href="/zh/getting-started.html" class="btn btn-secondary">
+                    <i data-lucide="rocket"></i>
+                    立即体验
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="picture" class="value-section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">整体概览</h2>
+                <p class="section-subtitle">一台普通服务器只运行一个 Linux 内核，它掌管全部核心、全部内存和全部设备。Multikernel 将这台机器划分为多个内核域。每个域都是一个完整的 Linux 内核，独占一份硬件：自己的核心、自己的内存，以及您分配给它的任何设备。这些内核彼此对等，没有谁是宿主机、客户机或虚拟机管理程序。</p>
+            </div>
+
+            <div class="partition-figure">
+                <div class="partition-title">一台服务器 &middot; 划分为多个内核域</div>
+                <div class="partition-domains">
+                    <div class="partition-domain domain-app">
+                        <div class="partition-cores">
+                            {% for i in (1..16) %}<span class="partition-core"></span>{% endfor %}
+                        </div>
+                        <div class="partition-name">内核 A</div>
+                        <div class="partition-detail">16 核 &middot; 网卡 0</div>
+                    </div>
+                    <div class="partition-domain domain-app shade-2">
+                        <div class="partition-cores">
+                            {% for i in (1..16) %}<span class="partition-core"></span>{% endfor %}
+                        </div>
+                        <div class="partition-name">内核 B</div>
+                        <div class="partition-detail">16 核 &middot; NVMe 0</div>
+                    </div>
+                    <div class="partition-domain domain-app">
+                        <div class="partition-cores">
+                            {% for i in (1..12) %}<span class="partition-core"></span>{% endfor %}
+                        </div>
+                        <div class="partition-name">内核 C</div>
+                        <div class="partition-detail">12 核 &middot; GPU 0</div>
+                    </div>
+                    <div class="partition-domain domain-app shade-2">
+                        <div class="partition-cores">
+                            {% for i in (1..8) %}<span class="partition-core"></span>{% endfor %}
+                        </div>
+                        <div class="partition-name">内核 D</div>
+                        <div class="partition-detail">8 核 &middot; 无设备</div>
+                    </div>
+                </div>
+                <p class="partition-caption">每个方块都是一个完整、未经修改的 Linux 内核。<strong>它们共享的是机器，而不是内核。</strong></p>
+            </div>
+        </div>
+    </section>
+
+    <section id="steps" class="how-it-works">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i data-lucide="list-ordered"></i>
+                    <span>逐步说明</span>
+                </div>
+                <h2 class="section-title">从开机到运行工作负载</h2>
+                <p class="section-subtitle">五个步骤，全部建立在 Linux 已有的机制之上。</p>
+            </div>
+
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-num">01</div>
+                    <h3 class="step-title">像往常一样启动 Linux</h3>
+                    <p class="step-description">机器启动一个带有 Multikernel 补丁的标准 Linux 内核。固件、引导程序和驱动都无需改动。这个最先启动的内核起初拥有整台机器。</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-num">02</div>
+                    <h3 class="step-title">划出资源</h3>
+                    <p class="step-description">由您决定如何划分机器。通过标准的 CPU、内存和设备热插拔，从正在运行的内核中下线一组核心、一块内存，以及可选的一些设备，预留给新内核使用。</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-num">03</div>
+                    <h3 class="step-title">启动新内核</h3>
+                    <p class="step-description">Linux 的 kexec 机制经过扩展，可以与正在运行的内核并行启动而非替换它，从而在这些资源上拉起一个全新内核。它在几十毫秒内就绪，并可以直接引导进入容器镜像。</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-num">04</div>
+                    <h3 class="step-title">通过共享内存通信</h3>
+                    <p class="step-description">内核之间从不互相调用。需要协作时，它们通过一段双方都映射的内存交换数据，因此没有任何拷贝，也没有哪个内核需要等待另一个内核的锁。</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-num">05</div>
+                    <h3 class="step-title">运行、调整、回收</h3>
+                    <p class="step-description">每个内核以原生性能运行未经修改的工作负载。核心、内存和设备可以在运行时在内核之间迁移；某个内核不再需要时将其销毁，资源回到资源池。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pieces" class="value-section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">三个组成部分</h2>
+                <p class="section-subtitle">上面的一切归结为三种机制。</p>
+            </div>
+
+            <div class="technologies-grid">
+                <div class="technology-card primary">
+                    <div class="tech-icon">
+                        <i data-lucide="grid-2x2"></i>
+                    </div>
+                    <h3 class="tech-title">资源划分</h3>
+                    <p class="tech-description">核心、内存和设备在任一时刻只属于一个内核。归属关系是明确的，并且可以在运行时改变，因此机器的划分由策略决定，而不是偶然形成。</p>
+                </div>
+
+                <div class="technology-card primary">
+                    <div class="tech-icon">
+                        <i data-lucide="box"></i>
+                    </div>
+                    <h3 class="tech-title">内核派生</h3>
+                    <p class="tech-description">任何正在运行的内核都可以用 kexec 在预留的资源上启动另一个内核。每个新内核都是完整、独立的 Linux 实例，拥有自己的故障域和更新域。</p>
+                </div>
+
+                <div class="technology-card primary">
+                    <div class="tech-icon">
+                        <i data-lucide="share-2"></i>
+                    </div>
+                    <h3 class="tech-title">共享内存（DAXFS）</h3>
+                    <p class="tech-description">内核之间唯一刻意共享的东西。一段以文件系统形式暴露的 DRAM，用于承载消息队列、容器根文件系统，以及内核之间无需拷贝即可交换的数据。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="split-kernel" class="how-it-works">
+        <div class="section-container">
+            <div class="value-content">
+                <div class="value-text">
+                    <div class="section-badge">
+                        <i data-lucide="git-branch"></i>
+                        <span>一个特例</span>
+                    </div>
+                    <h2 class="section-title">分离内核配置</h2>
+                    <p class="section-subtitle">Multikernel 本身并不关心每个内核做什么。在实践中，有一种布局格外突出，因为它把内核隔离转化为性能优势：把所有物理设备交给一个内核，即<strong>设备内核</strong>；其余内核不分配任何设备，即<strong>应用内核</strong>。我们的产品正是基于这一配置构建的。</p>
+                    <p class="section-subtitle">设备内核运行全部驱动，接收全部中断。每个应用内核看到的是虚拟网卡和虚拟磁盘，其队列位于共享内存中，数据包和数据块原地不动，只有描述符跨越边界。应用程序得到的是永远不会被设备打断的核心，而驱动栈可以在不影响应用的情况下更新或重启。</p>
+                    <p class="section-subtitle"><a href="/zh/technology.html">技术</a>页面深入介绍的正是这种配置。它是使用 Multikernel 的一种方式，而不是唯一方式：内核也可以直接拥有设备，或者在同一台机器上混合使用两种方式。</p>
+                </div>
+
+                <div class="value-visual">
+                    <div class="partition-figure" style="margin: 0; max-width: 460px;">
+                        <div class="partition-title">分离内核布局</div>
+                        <div class="partition-domains">
+                            <div class="partition-domain">
+                                <div class="partition-cores">
+                                    {% for i in (1..8) %}<span class="partition-core"></span>{% endfor %}
+                                </div>
+                                <div class="partition-name">设备内核</div>
+                                <div class="partition-detail">全部驱动</div>
+                            </div>
+                            <div class="partition-domain domain-app">
+                                <div class="partition-cores">
+                                    {% for i in (1..12) %}<span class="partition-core"></span>{% endfor %}
+                                </div>
+                                <div class="partition-name">应用内核</div>
+                                <div class="partition-detail">虚拟设备</div>
+                            </div>
+                            <div class="partition-domain domain-app shade-2">
+                                <div class="partition-cores">
+                                    {% for i in (1..12) %}<span class="partition-core"></span>{% endfor %}
+                                </div>
+                                <div class="partition-name">应用内核</div>
+                                <div class="partition-detail">虚拟设备</div>
+                            </div>
+                        </div>
+                        <p class="partition-caption">一个内核拥有硬件，其余内核不受中断打扰。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="why" class="value-section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">为什么这样设计</h2>
+                <p class="section-subtitle">独立内核带来了容器和虚拟机无法提供的价值。</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="shield-check"></i>
+                    </div>
+                    <h3 class="feature-title">无需虚拟机管理程序的隔离</h3>
+                    <p class="feature-description">每个工作负载拥有自己的内核，一个内核中的漏洞或攻击无法波及另一个。没有虚拟机管理程序这一层开销，并且既可以运行在裸机上，也可以运行在您已有的虚拟机内。</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="gauge"></i>
+                    </div>
+                    <h3 class="feature-title">原生性能</h3>
+                    <p class="feature-description">应用程序直接运行在分配给它的 CPU 和内存上。没有陷入，没有嵌套页表，也不会与运行其他人工作负载的内核发生锁竞争。</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="refresh-cw"></i>
+                    </div>
+                    <h3 class="feature-title">独立的生命周期</h3>
+                    <p class="feature-description">内核各自独立地创建与销毁。可以在其他内核持续运行的同时升级或重启某一个内核，无需重启整机。</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="sliders"></i>
+                    </div>
+                    <h3 class="feature-title">为每个应用量身定制的内核</h3>
+                    <p class="feature-description">每个内核都可以是不同的构建，拥有各自的版本、配置和调优参数。数据库使用大页和 deadline 调度器，网络服务使用精简协议栈和忙轮询，彼此的取舍互不干扰。</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="check-circle"></i>
+                    </div>
+                    <h3 class="feature-title">依然是 Linux</h3>
+                    <p class="feature-description">应用程序、容器镜像和工具链无需修改即可运行。没有新的操作系统需要学习，也没有兼容性缺口需要绕过。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
