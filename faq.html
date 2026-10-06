@@ -140,6 +140,51 @@ i18n: true
                 <p class="faq-answer">The kernel itself is the trust boundary. While a compromised kernel could potentially affect other kernels on the same node, this risk is mitigated through kernel signing via kexec, kernel lockdown, and memory encryption using confidential computing technologies.</p>
             </div>
 
+            <!-- RISC-V -->
+            <h2 class="faq-category">RISC-V</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i data-lucide="cpu"></i> Why not use KVM to partition a heterogeneous RISC-V chip?
+                </div>
+                <p class="faq-answer">KVM runs guests only on cores with the H (Hypervisor) extension, and AI cores such as those on the SpacemiT K3 lack it, so KVM can only divide the uniform general-purpose cluster. It also needs one host kernel that owns every core, which brings back the mismatched vector widths that keep a single kernel from running the machine safely. See <a href="/2026/07/08/multikernel-heterogeneous-riscv/">our heterogeneous RISC-V post</a>.</p>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i data-lucide="alert-triangle"></i> Why does KVM refuse to start when only some cores have H?
+                </div>
+                <p class="faq-answer">Linux intersects the ISA extensions of every core at boot, and KVM checks that machine-wide result. One core without H removes H from the intersection, so KVM fails with "hypervisor extension not available" even on cores that support it.</p>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i data-lucide="alert-circle"></i> Could Linux simply drop the check that rejects cores with a different vector length?
+                </div>
+                <p class="faq-answer">No. Vector save buffers are sized for the boot core, so a 1024-bit core writes 4 KB into a 1 KB buffer on its first context switch and corrupts the kernel heap. Making it safe means pinning tasks to one cluster, which brings back the costs described in <a href="/2026/07/08/multikernel-heterogeneous-riscv/">our heterogeneous RISC-V post</a>.</p>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i data-lucide="grid-2x2"></i> Can multikernel use OpenSBI domains to enforce isolation?
+                </div>
+                <p class="faq-answer">Partly. <a href="https://github.com/riscv-software-src/opensbi/blob/master/docs/domain_support.md" target="_blank" rel="noopener noreferrer">OpenSBI domains</a> use PMP to enforce fixed hart and memory partitions in firmware, which suits a static boundary such as the split between two clusters. But they are set once at boot with few PMP entries, while multikernel spawns kernels, moves memory, and shares regions at runtime.</p>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i data-lucide="shield"></i> What are RISC-V Supervisor Domains, and do they replace multikernel?
+                </div>
+                <p class="faq-answer"><a href="https://github.com/riscv/riscv-smmtt" target="_blank" rel="noopener noreferrer">Supervisor Domains</a> are draft RISC-V extensions that let M-mode firmware confine each hart, device, and interrupt to a domain using page-granular memory protection tables. They do not replace multikernel: every domain still needs its own kernel. Supervisor Domains are the hardware for running multiple kernels, and multikernel is the software that runs them.</p>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i data-lucide="lock"></i> Are Supervisor Domains the memory protection multikernel needs?
+                </div>
+                <p class="faq-answer">On RISC-V, yes. They confine CPU and DMA accesses per kernel, allow memory to move and be shared between kernels at runtime, scale to many kernels, and do not require the H extension. Without them, isolation relies on each kernel seeing only its assigned resources plus an IOMMU. No shipping silicon implements them yet.</p>
+            </div>
+
         </div>
     </section>
 </main>

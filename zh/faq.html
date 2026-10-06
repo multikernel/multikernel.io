@@ -141,6 +141,51 @@ description: "关于 Multikernel 分离内核架构、产品与部署的常见�
                 <p class="faq-answer">内核本身即是信任边界。虽然被攻破的内核有可能影响同一节点上的其他内核，但通过基于 kexec 的内核签名、内核锁定，以及利用机密计算技术进行内存加密，这一风险得到了缓解。</p>
             </div>
 
+            <!-- RISC-V -->
+            <h2 class="faq-category">RISC-V</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i data-lucide="cpu"></i> 为什么不用 KVM 来划分异构 RISC-V 芯片？
+                </div>
+                <p class="faq-answer">KVM 只能在具备 H（Hypervisor）扩展的核心上运行客户机，而 SpacemiT K3 等芯片上的 AI 核心不具备该扩展，因此 KVM 只能划分本就同构的通用核心簇。KVM 还需要一个掌管全部核心的主机内核，这又带回了让单一内核无法安全运行整台机器的向量宽度不一致问题。详见<a href="/2026/07/08/multikernel-heterogeneous-riscv/">我们关于异构 RISC-V 的文章</a>。</p>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i data-lucide="alert-triangle"></i> 为什么只有部分核心具备 H 扩展时，KVM 会拒绝启动？
+                </div>
+                <p class="faq-answer">Linux 在启动时对所有核心的 ISA 扩展取交集，KVM 检查的正是这个全机结果。只要有一个核心缺少 H，H 就会从交集中消失，KVM 随即报告 "hypervisor extension not available"，即便在支持 H 的核心上也无法启动。</p>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i data-lucide="alert-circle"></i> Linux 能否直接去掉拒绝不同向量长度核心的检查？
+                </div>
+                <p class="faq-answer">不能。向量保存缓冲区按启动核心的宽度分配，1024 位核心在第一次上下文切换时就会把 4 KB 数据写进 1 KB 的缓冲区，破坏内核堆。要保证安全就必须把任务固定在单一核心簇上，这又会带回<a href="/2026/07/08/multikernel-heterogeneous-riscv/">我们关于异构 RISC-V 的文章</a>中所述的代价。</p>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i data-lucide="grid-2x2"></i> multikernel 能否借助 OpenSBI 域（domain）强制实现隔离？
+                </div>
+                <p class="faq-answer">部分可以。<a href="https://github.com/riscv-software-src/opensbi/blob/master/docs/domain_support.md" target="_blank" rel="noopener noreferrer">OpenSBI 域</a>在固件中借助 PMP 强制执行固定的 hart 与内存分区，适合两个核心簇之间这类静态边界。但它们只在启动时配置一次，PMP 条目也很少，而 multikernel 需要在运行时生成子内核、转移内存并共享内存区域。</p>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i data-lucide="shield"></i> 什么是 RISC-V Supervisor Domains？它能替代 multikernel 吗？
+                </div>
+                <p class="faq-answer"><a href="https://github.com/riscv/riscv-smmtt" target="_blank" rel="noopener noreferrer">Supervisor Domains</a>（监管域）是一组草案阶段的 RISC-V 扩展，允许 M 模式固件借助页粒度的内存保护表，把每个 hart、设备和中断限定在各自的域内。它们不能替代 multikernel：每个域仍然需要自己的内核。Supervisor Domains 是运行多个内核的硬件基础，multikernel 则是运行这些内核的软件。</p>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i data-lucide="lock"></i> Supervisor Domains 是 multikernel 所需的内存保护机制吗？
+                </div>
+                <p class="faq-answer">在 RISC-V 上，是的。它们按内核限制 CPU 与 DMA 访问，支持在运行时于内核之间转移和共享内存，可扩展到众多内核，且不依赖 H 扩展。在没有它的情况下，隔离依赖于每个内核只看到分配给它的资源，并由 IOMMU 限制 DMA。目前尚无量产芯片实现这些扩展。</p>
+            </div>
+
         </div>
     </section>
 </main>
