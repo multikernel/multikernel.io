@@ -18,6 +18,8 @@ en:
     overview_sub: Architecture and approach
     how_it_works: How It Works
     how_it_works_sub: The architecture, step by step
+    performance: Performance
+    performance_sub: Benchmarks vs KVM and a single kernel
     arm: ARM Platform
     arm_sub: Split-kernel on high-core-count servers
     riscv: RISC-V Platform
@@ -63,6 +65,8 @@ zh:
     overview_sub: 架构与技术路线
     how_it_works: 工作原理
     how_it_works_sub: 逐步了解架构
+    performance: 性能
+    performance_sub: 对比 KVM 与单内核的基准测试
     arm: ARM 平台
     arm_sub: 高核数服务器上的分离内核
     riscv: RISC-V 平台

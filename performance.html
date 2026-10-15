@@ -1,0 +1,372 @@
+---
+layout: default
+title: "Performance and Benchmarks"
+description: "Measured results for Multikernel against KVM and a single Linux kernel: kernel hot paths, network CPU cost, multicore scaling, tail latency under memory pressure, instance memory setup, and crash recovery."
+permalink: /performance.html
+i18n: true
+---
+
+<main>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-badge">
+                <i data-lucide="gauge"></i>
+                <span>Benchmarks</span>
+            </div>
+
+            <h1>Performance, Measured</h1>
+            <p class="subtitle">Every result on this page compares Multikernel with the alternative on the same machine, with the same kernel build, changing one variable at a time. Each one links to a full write-up with setup, caveats, and steps to reproduce it.</p>
+
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <span class="hero-stat-number">2.5x</span>
+                    <span class="hero-stat-label">Faster context switches</span>
+                    <span class="hero-stat-detail">vs an accelerated KVM guest</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-number">10x</span>
+                    <span class="hero-stat-label">Less CPU to receive</span>
+                    <span class="hero-stat-detail">vs KVM with vhost-net, at line rate</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-number">2.6x</span>
+                    <span class="hero-stat-label">More throughput, same cores</span>
+                    <span class="hero-stat-detail">two kernels vs one</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Test Bed -->
+    <section class="value-section">
+        <div class="section-container">
+            <div class="section-header" style="margin-bottom: 0;">
+                <div class="section-badge">
+                    <i data-lucide="server"></i>
+                    <span>Test Bed</span>
+                </div>
+                <h2 class="section-title">One Machine, One Variable</h2>
+                <p class="section-subtitle">All results come from a dual-socket Intel Xeon Gold 5418Y (Sapphire Rapids, 24 cores per socket, SMT off). The multikernel instance and the KVM guest boot the same kernel build from the same source tree, run the same binaries, and get the same cores and memory. Numbers are medians of three runs unless a section says otherwise.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kernel hot paths -->
+    <section id="kernel-paths" class="how-it-works">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i data-lucide="cpu"></i>
+                    <span>Multikernel vs KVM · lmbench</span>
+                </div>
+                <h2 class="section-title">Kernel Hot Paths Without a Hypervisor Tax</h2>
+                <p class="section-subtitle">A multikernel instance on two dedicated cores against a KVM guest with EPT, APICv, IPI virtualization, and two pinned vCPUs. Memory bandwidth and DRAM latency were identical. Every kernel entry was not.</p>
+            </div>
+
+            <div class="bench-body">
+                <div class="comparison-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Operation</th>
+                                <th>KVM guest</th>
+                                <th>Multikernel</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Context switch (2 processes)</td><td>3.42 µs</td><td>1.37 µs<span class="bench-ratio">2.50x faster</span></td></tr>
+                            <tr><td>Pipe latency</td><td>7.06 µs</td><td>3.24 µs<span class="bench-ratio">2.18x faster</span></td></tr>
+                            <tr><td>AF_UNIX stream latency</td><td>7.48 µs</td><td>4.81 µs<span class="bench-ratio">1.55x faster</span></td></tr>
+                            <tr><td>Null syscall</td><td>0.099 µs</td><td>0.070 µs<span class="bench-ratio">1.42x faster</span></td></tr>
+                            <tr><td>write()</td><td>0.114 µs</td><td>0.082 µs<span class="bench-ratio">1.39x faster</span></td></tr>
+                            <tr><td>Signal handler install</td><td>0.159 µs</td><td>0.123 µs<span class="bench-ratio">1.29x faster</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>The wakeup gap can be bought back, and the price is the real result. A guest closes it only by never sleeping, or by taking exclusive control of physical cores away from the host. Multikernel posts the fast numbers while idling in hardware C-states, because its kernel owns the cores it runs on.</p>
+
+                <div class="comparison-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Idle policy</th>
+                                <th>KVM, HLT (default)</th>
+                                <th>KVM, idle=poll</th>
+                                <th>KVM, mwait passthrough</th>
+                                <th>Multikernel</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Context switch</td><td>3.42 µs</td><td>1.49 µs</td><td>1.58 µs</td><td>1.37 µs</td></tr>
+                            <tr><td>Pipe latency</td><td>7.06 µs</td><td>3.34 µs</td><td>3.49 µs</td><td>3.24 µs</td></tr>
+                            <tr><td>Idle cores, as the host sees them</td><td>~0% busy</td><td>100% busy</td><td>100% busy</td><td>Sleeping in C1 to C6</td></tr>
+                            <tr><td>Idle package power</td><td>Baseline</td><td>+19 W</td><td>+12 W</td><td>Baseline</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p class="bench-caveat"><strong>Scope:</strong> a clean KVM setup with no overcommit, no ballooning, and no emulated devices in the measured path. A production VM on a shared host pays this floor plus scheduling on top. About 1.4x on null syscalls remained in every KVM configuration we tried.</p>
+
+                <div class="value-cta">
+                    <a href="/2026/08/16/multikernel-vs-kvm-lmbench/" class="btn-link">
+                        Read the full benchmark
+                        <i data-lucide="arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Network -->
+    <section id="network" class="value-section">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i data-lucide="network"></i>
+                    <span>Multikernel vs KVM · iperf</span>
+                </div>
+                <h2 class="section-title">Same Wire, a Fraction of the CPU</h2>
+                <p class="section-subtitle">An app-kernel served by mk_vnet, our in-kernel virtio-net backend, against a KVM guest with vhost-net and pinned vCPUs, both pushing iperf over a 1 Gbit link. Both reached line rate on every test. The CPU bill differed.</p>
+            </div>
+
+            <div class="bench-body">
+                <div class="comparison-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Total CPU, % of one core</th>
+                                <th>KVM, host total</th>
+                                <th>Multikernel, total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Download, 1 stream</td><td>215%</td><td>21%<span class="bench-ratio">10x less CPU</span></td></tr>
+                            <tr><td>Download, KVM halt polling off</td><td>54%</td><td>21%<span class="bench-ratio">2.6x less CPU</span></td></tr>
+                            <tr><td>Upload, 4 streams</td><td>100%</td><td>13%<span class="bench-ratio">7.7x less CPU</span></td></tr>
+                            <tr><td>Upload, 256-byte writes</td><td>61%</td><td>24%<span class="bench-ratio">2.5x less CPU</span></td></tr>
+                            <tr><td>Upload, 1 stream</td><td>26%</td><td>13%<span class="bench-ratio">2.0x less CPU</span></td></tr>
+                            <tr><td>Round trip added over the host</td><td>+0.40 ms</td><td>+0.10 ms<span class="bench-ratio">4x less added latency</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>An app-kernel's network path has none of the machinery the VM pays for: no VM exits, no tap device, no vhost worker, no interrupt injection. A doorbell is a store and an IPI into a core the driver owns, and packets move by XDP redirect with one copy and no skb.</p>
+
+                <p class="bench-caveat"><strong>Scope:</strong> measured at 1 Gbit/s, where both sides are line-rate bound; we have not yet measured 25 or 100 Gbit/s. The multikernel side ran without transmit offloads because XDP was attached, so its numbers include software checksumming and segmentation the guest did not do.</p>
+
+                <div class="value-cta">
+                    <a href="/2026/09/06/multikernel-vs-kvm-iperf/" class="btn-link">
+                        Read the full benchmark
+                        <i data-lucide="arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scalability -->
+    <section id="scalability" class="how-it-works">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i data-lucide="layers"></i>
+                    <span>Two Kernels vs One · will-it-scale</span>
+                </div>
+                <h2 class="section-title">More Throughput from the Same Cores</h2>
+                <p class="section-subtitle">On one Linux kernel, 48 cores creating and deleting their own private files in one directory deliver 40% of what a single core does alone. The bottleneck is kernel state every core shares. Splitting the same 24 cores between two kernels removes the sharing.</p>
+            </div>
+
+            <div class="bench-body">
+                <div class="comparison-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Test</th>
+                                <th>1 kernel, 24 tasks</th>
+                                <th>2 kernels, 12 + 12 tasks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>unlink1 (directory lock)</td><td>300K/s</td><td>780K/s<span class="bench-ratio">2.60x</span></td></tr>
+                            <tr><td>open3 (shared dentry)</td><td>3.42M/s</td><td>7.41M/s<span class="bench-ratio">2.17x</span></td></tr>
+                            <tr><td>stat2 (shared dentry)</td><td>9.42M/s</td><td>19.8M/s<span class="bench-ratio">2.10x</span></td></tr>
+                            <tr><td>mmap1 (commit accounting)</td><td>9.9M/s</td><td>12.2M/s<span class="bench-ratio">1.23x</span></td></tr>
+                            <tr><td>tcp_conn1 (connection hashes)</td><td>1.81M/s</td><td>2.10M/s<span class="bench-ratio">1.16x</span></td></tr>
+                            <tr><td>getppid1 (control)</td><td>268.2M/s</td><td>267.1M/s<span class="bench-ratio">1.00x</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>The locks did not get faster; they stopped being shared. Across both sockets, one kernel per socket delivered 4.07x the unlink throughput of one kernel spanning both, and a cross-directory rename test gained 2.14x. Control benchmarks moved by at most 1%, so the gains come from the partition and nothing else.</p>
+
+                <p class="bench-caveat"><strong>Scope:</strong> this helps workloads built from independent processes, which is most server fleets: sharded web workers, build farms, CI runners. A workload that needs one shared mutable directory or one 48-core address space cannot be split this way. Some single-kernel walls disappear with a configuration change, such as turning off a security module; the table leaves those out.</p>
+
+                <div class="value-cta">
+                    <a href="/2026/08/17/multikernel-will-it-scale/" class="btn-link">
+                        Read the full benchmark
+                        <i data-lucide="arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tail latency -->
+    <section id="tail-latency" class="value-section">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i data-lucide="activity"></i>
+                    <span>Noisy Neighbors · Memory Pressure</span>
+                </div>
+                <h2 class="section-title">Tail Latency That Holds Under Memory Pressure</h2>
+                <p class="section-subtitle">A latency-sensitive task on its own four cores, next to a batch job pushing the same NUMA node into sustained reclaim. On one kernel, the victim's p99 reached 35.6 seconds. The only single-kernel fix protects the victim by starving the batch job.</p>
+            </div>
+
+            <div class="bench-body">
+                <div class="comparison-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Beside the batch job</th>
+                                <th>One kernel</th>
+                                <th>One kernel, memory.high on the batch job</th>
+                                <th>KVM guest, locked RAM</th>
+                                <th>Two kernels</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Victim p50</td><td>824 ms</td><td>58 ms</td><td>219 ms</td><td>208 ms</td></tr>
+                            <tr><td>Victim p99</td><td>35.6 s</td><td>91 ms</td><td>254 ms</td><td>232 ms</td></tr>
+                            <tr><td>Batch job passes in 300 s</td><td>29,719</td><td>10</td><td>29,064</td><td>27,501</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>Two kernels keep both tenants healthy at once: the victim's whole distribution sits in a 33 ms band with no outliers, while the batch job runs at full speed. The remaining gap to an idle machine is DRAM contention, not the kernel. Placing the batch job's memory on the other node, a control Multikernel already owns, brought the victim's p99 to 67 ms with the batch job still unthrottled.</p>
+
+                <p class="bench-caveat"><strong>Scope:</strong> the batch job is a deliberate worst case, 120% of the node with thin swap. A KVM guest with default RAM did not finish booting beside it; the KVM column needed its memory locked and reserved first. We report the first of two single-kernel runs; the repeat was worse, with a 58.8 s p99.</p>
+
+                <div class="value-cta">
+                    <a href="/2026/08/25/memory-pressure-tail-latency/" class="btn-link">
+                        Read the full benchmark
+                        <i data-lucide="arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instance memory setup -->
+    <section id="memory-setup" class="how-it-works">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i data-lucide="memory-stick"></i>
+                    <span>Instance Creation · Memory Setup</span>
+                </div>
+                <h2 class="section-title">Large-Memory Instances in About 110 ms</h2>
+                <p class="section-subtitle">Before a VM's first instruction runs, its RAM has to be populated, and for device passthrough, pinned. Multikernel prepares a physical memory pool once and assigns ranges from it to each instance.</p>
+            </div>
+
+            <div class="bench-body">
+                <div class="comparison-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Assigned RAM</th>
+                                <th>QEMU, lazy backing</th>
+                                <th>QEMU, preallocated</th>
+                                <th>Multikernel, from pool</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1 GiB</td><td>88 ms</td><td>392 ms</td><td>107 ms</td></tr>
+                            <tr><td>8 GiB</td><td>101 ms</td><td>1,986 ms</td><td>105 ms</td></tr>
+                            <tr><td>32 GiB</td><td>96 ms</td><td>6,812 ms</td><td>111 ms<span class="bench-ratio">61x faster than preallocated</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>Lazy backing starts fast because it defers the work: pages are populated when the guest first touches them. Workloads that need their memory ready up front, such as device passthrough, pay it at launch. Pinning 32 GiB of fresh memory took 6.40 seconds on its own; pinning memory that was already populated took 16 ms. Multikernel assigns physical ranges it already owns, so the cost stays flat as the instance grows.</p>
+
+                <p class="bench-caveat"><strong>Scope:</strong> preparing the 34 GiB pool took 19.2 seconds, paid once and reused across many instance lifetimes. QEMU was version 4.2.1 with its default preallocation behavior. Kernel boot and memory scrubbing between tenants were outside the measurement.</p>
+
+                <div class="value-cta">
+                    <a href="/2026/10/14/before-the-kernel-boots-memory-setup/" class="btn-link">
+                        Read the full benchmark
+                        <i data-lucide="arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Crash recovery -->
+    <section id="crash-recovery" class="value-section">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i data-lucide="shield-check"></i>
+                    <span>Reliability · DAXFS</span>
+                </div>
+                <h2 class="section-title">Memory That Survives a Kernel Panic</h2>
+                <p class="section-subtitle">An app-kernel wrote to a file on DAXFS through a plain mmap, then panicked itself mid-write. The memory was checked word by word and a fresh kernel booted on it. We did it four times in a row.</p>
+            </div>
+
+            <div class="bench-body">
+                <div class="comparison-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Panic</th>
+                                <th>Rounds completed</th>
+                                <th>Torn page found</th>
+                                <th>Data verified</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1</td><td>395,012</td><td>page 197, 468 of 512 words new</td><td>0 bad words</td></tr>
+                            <tr><td>2</td><td>841,890</td><td>page 1, 115 of 512 words new</td><td>0 bad words</td></tr>
+                            <tr><td>3</td><td>1,289,978</td><td>page 49, 94 of 512 words new</td><td>0 bad words</td></tr>
+                            <tr><td>4</td><td>1,736,965</td><td>page 45, 505 of 512 words new</td><td>0 bad words</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>Every store made before the panic was still there, down to the half-written page. There was no log to replay and no cache to reload: recovery was a kernel boot and an mmap. Applications that already tolerate a thread dying mid-update, such as lock-free structures, write-ahead logs, and checksummed caches, keep their working set across an app-kernel crash without adding transactions.</p>
+
+                <p class="bench-caveat"><strong>Scope:</strong> a correctness experiment on one machine, not a throughput benchmark. It covers app-kernel crashes only. The region is DRAM, so it does not survive power loss or a crash of the device-kernel.</p>
+
+                <div class="value-cta">
+                    <a href="/2026/09/30/the-kernel-crashed-the-memory-didnt/" class="btn-link">
+                        Read the full experiment
+                        <i data-lucide="arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Closing CTA -->
+    <section id="get-started" class="how-it-works">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">Run the Numbers on Your Hardware</h2>
+                <p class="section-subtitle">Every benchmark uses open-source tools, and each write-up describes how to reproduce it. Run them on your own machines, or talk to us about measuring your workload.</p>
+            </div>
+            <div class="button-group">
+                <a href="/getting-started.html" class="btn btn-primary">
+                    <i data-lucide="rocket"></i>
+                    Get Started
+                </a>
+                <a href="https://calendar.app.google/nc1upkqQoUeoukdD9" target="_blank" rel="noopener noreferrer" class="btn-link">
+                    Schedule a Demo
+                    <i data-lucide="arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+</main>

@@ -30,21 +30,21 @@ description: "Multikernel 分离内核架构把您自有的服务器和已租用
             </div>
 
             <div class="hero-stats">
-                <div class="hero-stat">
-                    <span class="hero-stat-number">0</span>
-                    <span class="hero-stat-label">应用核心上的设备中断次数</span>
-                    <span class="hero-stat-detail">源于架构设计，而非调优</span>
-                </div>
-                <div class="hero-stat">
-                    <span class="hero-stat-number">0</span>
-                    <span class="hero-stat-label">应用与硬件之间的中间层</span>
-                    <span class="hero-stat-detail">无虚拟机管理程序，没有 VM exit</span>
-                </div>
-                <div class="hero-stat">
-                    <span class="hero-stat-number">&lt;1 秒</span>
-                    <span class="hero-stat-label">内核崩溃故障转移</span>
-                    <span class="hero-stat-detail">零停机升级，即时回滚</span>
-                </div>
+                <a class="hero-stat" href="/2026/08/16/multikernel-vs-kvm-lmbench/">
+                    <span class="hero-stat-number">2.5x</span>
+                    <span class="hero-stat-label">上下文切换比 KVM 快</span>
+                    <span class="hero-stat-detail">1.37 µs 对比 3.42 µs</span>
+                </a>
+                <a class="hero-stat" href="/2026/09/06/multikernel-vs-kvm-iperf/">
+                    <span class="hero-stat-number">10x</span>
+                    <span class="hero-stat-label">线速接收所需 CPU 更少</span>
+                    <span class="hero-stat-detail">对比 vhost-net 下的 KVM</span>
+                </a>
+                <a class="hero-stat" href="/2026/08/25/memory-pressure-tail-latency/">
+                    <span class="hero-stat-number">153x</span>
+                    <span class="hero-stat-label">嘈杂邻居旁的 p99 更低</span>
+                    <span class="hero-stat-detail">232 ms 对比 35.6 s</span>
+                </a>
             </div>
 
             <div class="hero-trust">
@@ -132,6 +132,72 @@ description: "Multikernel 分离内核架构把您自有的服务器和已租用
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Measured Results -->
+    <section id="performance" class="proof-section">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i data-lucide="gauge"></i>
+                    <span>基准测试</span>
+                </div>
+                <h2 class="section-title">同一台机器上的实测数据</h2>
+                <p class="section-subtitle">同一台服务器、同一个内核构建，每次只改变一个变量：Multikernel 实例对比启用全部硬件加速的 KVM 虚拟机，或两个内核对比一个内核。每个数字都链接到完整的测试环境、注意事项和复现步骤。</p>
+            </div>
+
+            <div class="proof-grid">
+                <a class="proof-card" href="/2026/08/16/multikernel-vs-kvm-lmbench/">
+                    <span class="proof-number">2.5x</span>
+                    <span class="proof-label">上下文切换比 KVM 快</span>
+                    <span class="proof-compare"><strong>1.37 µs</strong> 对比 3.42 µs</span>
+                    <p class="proof-detail">对比对象是启用 EPT、APICv 并绑定 vCPU 的虚拟机。KVM 只能靠让空闲核心空转来追平差距，每台虚拟机最多多耗 19 W。Multikernel 在真实的 C-state 中休眠，同样保持高速。</p>
+                    <span class="proof-source">lmbench 对比 KVM <i data-lucide="arrow-right"></i></span>
+                </a>
+
+                <a class="proof-card" href="/2026/09/06/multikernel-vs-kvm-iperf/">
+                    <span class="proof-number">10x</span>
+                    <span class="proof-label">线速接收所需 CPU 更少</span>
+                    <span class="proof-compare"><strong>21%</strong> 对比 215% 单核</span>
+                    <p class="proof-detail">双方都跑满了线速。虚拟机发送耗费 2 倍 CPU，接收耗费 10 倍，经过 vhost-net 增加的往返延迟也是 Multikernel 的 4 倍（0.40 ms 对比 0.10 ms）。</p>
+                    <span class="proof-source">iperf 对比 KVM <i data-lucide="arrow-right"></i></span>
+                </a>
+
+                <a class="proof-card" href="/2026/08/17/multikernel-will-it-scale/">
+                    <span class="proof-number">2.6x</span>
+                    <span class="proof-label">同样 24 个核心，吞吐更高</span>
+                    <span class="proof-compare"><strong>780K</strong> 对比 300K 次 unlink/s</span>
+                    <p class="proof-detail">在完全相同的硬件上用两个内核代替一个：共享文件的 stat() 提升 2.1 倍，跨插槽的 unlink 提升 4.1 倍。不共享的锁就不会争用。对照基准的变化不超过 1%。</p>
+                    <span class="proof-source">will-it-scale <i data-lucide="arrow-right"></i></span>
+                </a>
+
+                <a class="proof-card" href="/2026/08/25/memory-pressure-tail-latency/">
+                    <span class="proof-number">153x</span>
+                    <span class="proof-label">嘈杂邻居旁的 p99 更低</span>
+                    <span class="proof-compare"><strong>232 ms</strong> 对比 35.6 s</span>
+                    <p class="proof-detail">延迟敏感任务与一个大量占用内存的批处理作业同机运行。在单内核上，cgroup 只能把批处理作业压到 10 轮来保护前者。使用两个内核，双方都能全速运行。</p>
+                    <span class="proof-source">尾延迟 <i data-lucide="arrow-right"></i></span>
+                </a>
+
+                <a class="proof-card" href="/2026/10/14/before-the-kernel-boots-memory-setup/">
+                    <span class="proof-number">61x</span>
+                    <span class="proof-label">大内存实例创建更快</span>
+                    <span class="proof-compare"><strong>111 ms</strong> 对比 6.81 s，32 GiB 预分配</span>
+                    <p class="proof-detail">使用预分配内存的 QEMU 在 vCPU 运行前要花数秒填充页面，为设备直通锁定内存的开销与此相当。Multikernel 直接分配它已拥有的物理内存区间，从 1 GiB 到 32 GiB 都约为 110 ms。</p>
+                    <span class="proof-source">实例内存准备 <i data-lucide="arrow-right"></i></span>
+                </a>
+
+                <a class="proof-card" href="/2026/09/30/the-kernel-crashed-the-memory-didnt/">
+                    <span class="proof-number">0</span>
+                    <span class="proof-label">四次内核崩溃，零字节丢失</span>
+                    <span class="proof-compare"><strong>4 / 4</strong> 次崩溃均验证完好</span>
+                    <p class="proof-detail">一个应用内核在写入过程中连续崩溃四次。每次在同一块 DAXFS 内存上启动的新内核都发现每个字节原样保留，连写了一半的页面也不例外。无需重放日志，也无需重新加载。</p>
+                    <span class="proof-source">崩溃恢复 <i data-lucide="arrow-right"></i></span>
+                </a>
+            </div>
+
+            <p class="proof-footnote"><a href="/zh/performance.html">查看全部基准测试结果</a></p>
         </div>
     </section>
 

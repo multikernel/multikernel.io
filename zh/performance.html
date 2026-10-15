@@ -1,0 +1,372 @@
+---
+layout: default
+lang: zh
+permalink: /zh/performance.html
+title: "性能与基准测试"
+description: "Multikernel 对比 KVM 和单个 Linux 内核的实测结果：内核热路径、网络 CPU 开销、多核扩展性、内存压力下的尾延迟、实例内存准备以及崩溃恢复。"
+---
+
+<main>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-badge">
+                <i data-lucide="gauge"></i>
+                <span>基准测试</span>
+            </div>
+
+            <h1>性能 · 实测为证</h1>
+            <p class="subtitle">本页每项结果都在同一台机器、同一个内核构建上，把 Multikernel 与替代方案进行对比，每次只改变一个变量。每项结果都链接到完整的技术文章，包含测试环境、注意事项和复现步骤。</p>
+
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <span class="hero-stat-number">2.5x</span>
+                    <span class="hero-stat-label">上下文切换更快</span>
+                    <span class="hero-stat-detail">对比全加速的 KVM 虚拟机</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-number">10x</span>
+                    <span class="hero-stat-label">接收所需 CPU 更少</span>
+                    <span class="hero-stat-detail">对比 vhost-net 下的 KVM，均为线速</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-number">2.6x</span>
+                    <span class="hero-stat-label">同样核心，吞吐更高</span>
+                    <span class="hero-stat-detail">两个内核对比一个内核</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Test Bed -->
+    <section class="value-section">
+        <div class="section-container">
+            <div class="section-header" style="margin-bottom: 0;">
+                <div class="section-badge">
+                    <i data-lucide="server"></i>
+                    <span>测试平台</span>
+                </div>
+                <h2 class="section-title">一台机器 · 一个变量</h2>
+                <p class="section-subtitle">所有结果均来自一台双路 Intel Xeon Gold 5418Y（Sapphire Rapids，每路 24 核，关闭 SMT）。Multikernel 实例与 KVM 虚拟机从同一份源码树启动同一个内核构建，运行相同的二进制程序，并分配相同的核心和内存。除特别说明外，数字均为三次运行的中位数。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kernel hot paths -->
+    <section id="kernel-paths" class="how-it-works">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i data-lucide="cpu"></i>
+                    <span>Multikernel 对比 KVM · lmbench</span>
+                </div>
+                <h2 class="section-title">内核热路径，没有虚拟化开销</h2>
+                <p class="section-subtitle">Multikernel 实例运行在两个专用核心上，对比启用 EPT、APICv、IPI 虚拟化并绑定两个 vCPU 的 KVM 虚拟机。内存带宽与 DRAM 延迟完全一致，但每一次进入内核的开销并不一致。</p>
+            </div>
+
+            <div class="bench-body">
+                <div class="comparison-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>操作</th>
+                                <th>KVM 虚拟机</th>
+                                <th>Multikernel</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>上下文切换（2 个进程）</td><td>3.42 µs</td><td>1.37 µs<span class="bench-ratio">快 2.50 倍</span></td></tr>
+                            <tr><td>管道延迟</td><td>7.06 µs</td><td>3.24 µs<span class="bench-ratio">快 2.18 倍</span></td></tr>
+                            <tr><td>AF_UNIX 流延迟</td><td>7.48 µs</td><td>4.81 µs<span class="bench-ratio">快 1.55 倍</span></td></tr>
+                            <tr><td>空系统调用</td><td>0.099 µs</td><td>0.070 µs<span class="bench-ratio">快 1.42 倍</span></td></tr>
+                            <tr><td>write()</td><td>0.114 µs</td><td>0.082 µs<span class="bench-ratio">快 1.39 倍</span></td></tr>
+                            <tr><td>安装信号处理函数</td><td>0.159 µs</td><td>0.123 µs<span class="bench-ratio">快 1.29 倍</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>唤醒延迟的差距可以花钱买回来，而代价才是真正的结论。虚拟机要追平差距，要么永不休眠，要么从主机手中夺走物理核心的独占控制权。Multikernel 在硬件 C-state 中空闲时依然保持这些数字，因为它的内核拥有自己运行的核心。</p>
+
+                <div class="comparison-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>空闲策略</th>
+                                <th>KVM，HLT（默认）</th>
+                                <th>KVM，idle=poll</th>
+                                <th>KVM，mwait 直通</th>
+                                <th>Multikernel</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>上下文切换</td><td>3.42 µs</td><td>1.49 µs</td><td>1.58 µs</td><td>1.37 µs</td></tr>
+                            <tr><td>管道延迟</td><td>7.06 µs</td><td>3.34 µs</td><td>3.49 µs</td><td>3.24 µs</td></tr>
+                            <tr><td>主机眼中的空闲核心</td><td>约 0% 占用</td><td>100% 占用</td><td>100% 占用</td><td>在 C1 至 C6 中休眠</td></tr>
+                            <tr><td>空闲时的封装功耗</td><td>基线</td><td>+19 W</td><td>+12 W</td><td>基线</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p class="bench-caveat"><strong>适用范围：</strong>这是一个干净的 KVM 配置，没有超分、没有内存气球，测量路径中也没有模拟设备。共享主机上的生产虚拟机要在此基础上再承担调度开销。在我们尝试过的所有 KVM 配置中，空系统调用始终慢约 1.4 倍。</p>
+
+                <div class="value-cta">
+                    <a href="/2026/08/16/multikernel-vs-kvm-lmbench/" class="btn-link">
+                        阅读完整测试（英文）
+                        <i data-lucide="arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Network -->
+    <section id="network" class="value-section">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i data-lucide="network"></i>
+                    <span>Multikernel 对比 KVM · iperf</span>
+                </div>
+                <h2 class="section-title">同一条链路，只需一小部分 CPU</h2>
+                <p class="section-subtitle">由 mk_vnet（我们的内核态 virtio-net 后端）提供网络的应用内核，对比使用 vhost-net 并绑定 vCPU 的 KVM 虚拟机，双方都通过 1 Gbit 链路运行 iperf。每项测试双方都达到了线速，但 CPU 账单截然不同。</p>
+            </div>
+
+            <div class="bench-body">
+                <div class="comparison-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>总 CPU，单核百分比</th>
+                                <th>KVM，主机合计</th>
+                                <th>Multikernel，合计</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>下载，1 条流</td><td>215%</td><td>21%<span class="bench-ratio">CPU 减少 10 倍</span></td></tr>
+                            <tr><td>下载，KVM 关闭 halt polling</td><td>54%</td><td>21%<span class="bench-ratio">CPU 减少 2.6 倍</span></td></tr>
+                            <tr><td>上传，4 条流</td><td>100%</td><td>13%<span class="bench-ratio">CPU 减少 7.7 倍</span></td></tr>
+                            <tr><td>上传，256 字节写入</td><td>61%</td><td>24%<span class="bench-ratio">CPU 减少 2.5 倍</span></td></tr>
+                            <tr><td>上传，1 条流</td><td>26%</td><td>13%<span class="bench-ratio">CPU 减少 2.0 倍</span></td></tr>
+                            <tr><td>相对主机增加的往返延迟</td><td>+0.40 ms</td><td>+0.10 ms<span class="bench-ratio">增量减少 4 倍</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>应用内核的网络路径中没有虚拟机所要付费的那些机制：没有 VM exit，没有 tap 设备，没有 vhost 工作线程，也没有中断注入。一次门铃通知只是一次内存写入加一个 IPI，送到驱动所拥有的核心上；数据包通过 XDP 重定向传输，只复制一次，不经过 skb。</p>
+
+                <p class="bench-caveat"><strong>适用范围：</strong>测试在 1 Gbit/s 下进行，双方都受线速限制；25 或 100 Gbit/s 尚未测量。Multikernel 一侧因挂载了 XDP 而未启用发送卸载，因此其数字包含了虚拟机无需承担的软件校验和与分段开销。</p>
+
+                <div class="value-cta">
+                    <a href="/2026/09/06/multikernel-vs-kvm-iperf/" class="btn-link">
+                        阅读完整测试（英文）
+                        <i data-lucide="arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scalability -->
+    <section id="scalability" class="how-it-works">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i data-lucide="layers"></i>
+                    <span>两个内核对比一个 · will-it-scale</span>
+                </div>
+                <h2 class="section-title">同样的核心，更高的吞吐</h2>
+                <p class="section-subtitle">在单个 Linux 内核上，48 个核心在同一目录中各自创建、删除私有文件，总吞吐只有单核独自运行时的 40%。瓶颈在于所有核心共享的内核状态。把同样的 24 个核心分给两个内核，共享就消失了。</p>
+            </div>
+
+            <div class="bench-body">
+                <div class="comparison-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>测试</th>
+                                <th>1 个内核，24 个任务</th>
+                                <th>2 个内核，12 + 12 个任务</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>unlink1（目录锁）</td><td>300K/s</td><td>780K/s<span class="bench-ratio">2.60x</span></td></tr>
+                            <tr><td>open3（共享 dentry）</td><td>3.42M/s</td><td>7.41M/s<span class="bench-ratio">2.17x</span></td></tr>
+                            <tr><td>stat2（共享 dentry）</td><td>9.42M/s</td><td>19.8M/s<span class="bench-ratio">2.10x</span></td></tr>
+                            <tr><td>mmap1（内存提交计数）</td><td>9.9M/s</td><td>12.2M/s<span class="bench-ratio">1.23x</span></td></tr>
+                            <tr><td>tcp_conn1（连接哈希表）</td><td>1.81M/s</td><td>2.10M/s<span class="bench-ratio">1.16x</span></td></tr>
+                            <tr><td>getppid1（对照组）</td><td>268.2M/s</td><td>267.1M/s<span class="bench-ratio">1.00x</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>锁并没有变快，只是不再被共享。跨越两个插槽时，每个插槽一个内核的 unlink 吞吐是单个内核横跨两个插槽的 4.07 倍；跨目录 rename 测试提升 2.14 倍。对照基准的变化不超过 1%，说明收益完全来自分区本身。</p>
+
+                <p class="bench-caveat"><strong>适用范围：</strong>这适用于由独立进程组成的工作负载，也就是大多数服务器集群：分片的 Web 工作进程、构建农场、CI 运行器。需要单个共享可变目录或单个 48 核地址空间的工作负载无法这样拆分。部分单内核瓶颈可以通过配置消除，例如关闭某个安全模块，上表未包含这些项。</p>
+
+                <div class="value-cta">
+                    <a href="/2026/08/17/multikernel-will-it-scale/" class="btn-link">
+                        阅读完整测试（英文）
+                        <i data-lucide="arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tail latency -->
+    <section id="tail-latency" class="value-section">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i data-lucide="activity"></i>
+                    <span>嘈杂邻居 · 内存压力</span>
+                </div>
+                <h2 class="section-title">内存压力下依然稳定的尾延迟</h2>
+                <p class="section-subtitle">一个延迟敏感任务独占四个核心，旁边的批处理作业把同一 NUMA 节点推入持续的内存回收。在单内核上，该任务的 p99 达到 35.6 秒。单内核唯一的解决办法，是以饿死批处理作业为代价来保护它。</p>
+            </div>
+
+            <div class="bench-body">
+                <div class="comparison-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>与批处理作业同机</th>
+                                <th>单内核</th>
+                                <th>单内核，批处理作业设 memory.high</th>
+                                <th>KVM 虚拟机，锁定内存</th>
+                                <th>两个内核</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>延迟敏感任务 p50</td><td>824 ms</td><td>58 ms</td><td>219 ms</td><td>208 ms</td></tr>
+                            <tr><td>延迟敏感任务 p99</td><td>35.6 s</td><td>91 ms</td><td>254 ms</td><td>232 ms</td></tr>
+                            <tr><td>批处理作业 300 秒内完成轮数</td><td>29,719</td><td>10</td><td>29,064</td><td>27,501</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>两个内核让双方同时保持健康：延迟敏感任务的整个分布落在 33 ms 的区间内，没有任何离群值，批处理作业则全速运行。与空闲机器之间剩余的差距来自 DRAM 争用，而非内核。把批处理作业的内存放到另一个节点（Multikernel 本来就掌握的放置控制），延迟敏感任务的 p99 降到 67 ms，批处理作业依然不受限。</p>
+
+                <p class="bench-caveat"><strong>适用范围：</strong>批处理作业是刻意构造的最坏情况，占用节点内存的 120% 且交换空间很小。默认内存配置的 KVM 虚拟机在它旁边连启动都没能完成，KVM 一列需要预先锁定并预留内存。单内核结果取两次运行中的第一次；第二次更差，p99 为 58.8 秒。</p>
+
+                <div class="value-cta">
+                    <a href="/2026/08/25/memory-pressure-tail-latency/" class="btn-link">
+                        阅读完整测试（英文）
+                        <i data-lucide="arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instance memory setup -->
+    <section id="memory-setup" class="how-it-works">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i data-lucide="memory-stick"></i>
+                    <span>实例创建 · 内存准备</span>
+                </div>
+                <h2 class="section-title">大内存实例约 110 ms 就绪</h2>
+                <p class="section-subtitle">在虚拟机执行第一条指令之前，必须先填充它的内存；如需设备直通，还要锁定内存。Multikernel 只需准备一次物理内存池，再从中为每个实例分配内存区间。</p>
+            </div>
+
+            <div class="bench-body">
+                <div class="comparison-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>分配内存</th>
+                                <th>QEMU，延迟填充</th>
+                                <th>QEMU，预分配</th>
+                                <th>Multikernel，从内存池分配</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1 GiB</td><td>88 ms</td><td>392 ms</td><td>107 ms</td></tr>
+                            <tr><td>8 GiB</td><td>101 ms</td><td>1,986 ms</td><td>105 ms</td></tr>
+                            <tr><td>32 GiB</td><td>96 ms</td><td>6,812 ms</td><td>111 ms<span class="bench-ratio">比预分配快 61 倍</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>延迟填充之所以启动快，是因为它把工作推迟到了虚拟机首次访问页面时。需要内存提前就绪的工作负载，例如设备直通，要在启动时付出这笔开销。单独锁定 32 GiB 新内存耗时 6.40 秒，而锁定已填充的内存只需 16 ms。Multikernel 分配的是它已经拥有的物理内存区间，因此开销不随实例规模增长。</p>
+
+                <p class="bench-caveat"><strong>适用范围：</strong>准备 34 GiB 内存池耗时 19.2 秒，只需一次，之后可在多个实例生命周期中复用。QEMU 版本为 4.2.1，使用默认预分配行为。内核启动以及租户之间的内存清零不在测量范围内。</p>
+
+                <div class="value-cta">
+                    <a href="/2026/10/14/before-the-kernel-boots-memory-setup/" class="btn-link">
+                        阅读完整测试（英文）
+                        <i data-lucide="arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Crash recovery -->
+    <section id="crash-recovery" class="value-section">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i data-lucide="shield-check"></i>
+                    <span>可靠性 · DAXFS</span>
+                </div>
+                <h2 class="section-title">内核崩溃，内存数据依然完好</h2>
+                <p class="section-subtitle">一个应用内核通过普通 mmap 向 DAXFS 上的文件写入数据，然后在写入过程中主动触发崩溃。随后逐字校验这块内存，并在其上启动一个新内核。我们连续做了四次。</p>
+            </div>
+
+            <div class="bench-body">
+                <div class="comparison-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>崩溃</th>
+                                <th>已完成轮数</th>
+                                <th>发现的部分写入页</th>
+                                <th>数据校验</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1</td><td>395,012</td><td>第 197 页，512 字中 468 字为新值</td><td>0 个错误字</td></tr>
+                            <tr><td>2</td><td>841,890</td><td>第 1 页，512 字中 115 字为新值</td><td>0 个错误字</td></tr>
+                            <tr><td>3</td><td>1,289,978</td><td>第 49 页，512 字中 94 字为新值</td><td>0 个错误字</td></tr>
+                            <tr><td>4</td><td>1,736,965</td><td>第 45 页，512 字中 505 字为新值</td><td>0 个错误字</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>崩溃前的每一次写入都原样保留，连写了一半的页面也不例外。无需重放日志，也无需重新加载缓存：恢复就是一次内核启动加一次 mmap。本身就能容忍线程在更新中途退出的应用，例如无锁数据结构、预写日志和带校验和的缓存，无需引入事务，就能在应用内核崩溃后保住工作集。</p>
+
+                <p class="bench-caveat"><strong>适用范围：</strong>这是在单台机器上进行的正确性实验，而非吞吐基准测试，仅覆盖应用内核崩溃。该内存区域是 DRAM，无法在断电或设备内核崩溃后保留。</p>
+
+                <div class="value-cta">
+                    <a href="/2026/09/30/the-kernel-crashed-the-memory-didnt/" class="btn-link">
+                        阅读完整实验（英文）
+                        <i data-lucide="arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Closing CTA -->
+    <section id="get-started" class="how-it-works">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">在您的硬件上亲自验证</h2>
+                <p class="section-subtitle">每项基准测试都使用开源工具，每篇文章都说明了复现方法。您可以在自己的机器上运行，也可以联系我们一起测量您的工作负载。</p>
+            </div>
+            <div class="button-group">
+                <a href="/zh/getting-started.html" class="btn btn-primary">
+                    <i data-lucide="rocket"></i>
+                    快速上手
+                </a>
+                <a href="https://calendar.app.google/nc1upkqQoUeoukdD9" target="_blank" rel="noopener noreferrer" class="btn-link">
+                    预约演示
+                    <i data-lucide="arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+</main>
