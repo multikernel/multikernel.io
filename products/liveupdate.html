@@ -69,7 +69,7 @@ i18n: true
         <div class="section-container">
             <div class="section-header">
                 <h2 class="section-title">Surviving Kernel Crashes</h2>
-                <p class="section-subtitle">A kernel crash today means a full reboot, minutes of downtime, and every cache starting cold. With Multikernel, a crash stays inside one kernel, and its memory outlives it. Automatic failover builds on that.</p>
+                <p class="section-subtitle">A kernel crash today means a full reboot, minutes of downtime, and every cache starting cold. With Multikernel, a crash stays inside one kernel, and its memory outlives it.</p>
             </div>
 
             <div class="cards-grid">
@@ -82,15 +82,19 @@ i18n: true
                 </a>
 
                 <div class="capability-card">
-                    <span class="roadmap-tag">In development</span>
-                    <h3 class="capability-title">Standby Takeover</h3>
-                    <p class="capability-description">A standby kernel monitors the primary via heartbeat. When the primary crashes, the standby fences it, adopts its CPUs, memory, and devices, and resumes service without a full reboot.</p>
+                    <div class="capability-icon">
+                        <i data-lucide="shield-check"></i>
+                    </div>
+                    <h3 class="capability-title">Crash Containment</h3>
+                    <p class="capability-description">A panic in one kernel stays in that kernel. Workloads in the other kernels keep running, with no machine reboot.</p>
                 </div>
 
                 <div class="capability-card">
-                    <span class="roadmap-tag">In development</span>
-                    <h3 class="capability-title">Automatic Recovery</h3>
-                    <p class="capability-description">After a takeover, the system reclaims resources from the failed kernel and prepares a new standby, without operator intervention.</p>
+                    <div class="capability-icon">
+                        <i data-lucide="refresh-cw"></i>
+                    </div>
+                    <h3 class="capability-title">Warm Restart</h3>
+                    <p class="capability-description">The crashed workload restarts on a fresh kernel and maps its DAXFS memory back, so caches and indexes do not rebuild from cold.</p>
                 </div>
             </div>
         </div>

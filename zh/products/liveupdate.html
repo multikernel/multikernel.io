@@ -69,7 +69,7 @@ description: "无需重启即可升级 Linux 内核：在应用持续运行的�
         <div class="section-container">
             <div class="section-header">
                 <h2 class="section-title">从内核崩溃中幸存</h2>
-                <p class="section-subtitle">如今一次内核崩溃意味着整机重启、数分钟的停机，以及所有缓存从零开始。在 Multikernel 上，崩溃只局限于一个内核，而它的内存比内核活得更久。自动故障转移正是建立在这一基础之上。</p>
+                <p class="section-subtitle">如今一次内核崩溃意味着整机重启、数分钟的停机，以及所有缓存从零开始。在 Multikernel 上，崩溃只局限于一个内核，而它的内存比内核活得更久。</p>
             </div>
 
             <div class="cards-grid">
@@ -82,15 +82,19 @@ description: "无需重启即可升级 Linux 内核：在应用持续运行的�
                 </a>
 
                 <div class="capability-card">
-                    <span class="roadmap-tag">开发中</span>
-                    <h3 class="capability-title">备用内核接管</h3>
-                    <p class="capability-description">备用内核通过心跳机制监控主内核。主内核崩溃时，备用内核将其隔离，接管其 CPU、内存与设备，无需完整重启即可恢复服务。</p>
+                    <div class="capability-icon">
+                        <i data-lucide="shield-check"></i>
+                    </div>
+                    <h3 class="capability-title">崩溃不扩散</h3>
+                    <p class="capability-description">一个内核的崩溃只局限在该内核内。其他内核中的工作负载持续运行，无需整机重启。</p>
                 </div>
 
                 <div class="capability-card">
-                    <span class="roadmap-tag">开发中</span>
-                    <h3 class="capability-title">自动恢复</h3>
-                    <p class="capability-description">接管完成后，系统自动回收失效内核占用的资源，并准备新的备用内核，无需运维人员介入。</p>
+                    <div class="capability-icon">
+                        <i data-lucide="refresh-cw"></i>
+                    </div>
+                    <h3 class="capability-title">热重启</h3>
+                    <p class="capability-description">崩溃的工作负载在新内核上重启，并重新映射其 DAXFS 内存，缓存与索引无需从零重建。</p>
                 </div>
             </div>
         </div>
