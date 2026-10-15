@@ -1,0 +1,224 @@
+---
+layout: default
+title: "Multikernel for High-Frequency Trading - A Kernel for the Trading Path"
+description: "For trading firms: run market data, strategy, and execution in their own Linux kernel on dedicated cores and memory. Drivers, interrupts, reclaim, and background work run in a different kernel on different cores."
+permalink: /solutions/hft.html
+i18n: true
+---
+
+<main>
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-badge">
+                <i data-lucide="trending-up"></i>
+                <span>High-Frequency Trading</span>
+            </div>
+
+            <h1>Give the Trading Path a Kernel of Its Own</h1>
+            <p class="subtitle">Built for trading firms running market data, strategy, and order execution on Linux. Kernel tuning reduces operating-system noise on trading cores. Multikernel removes its sources: the trading path runs in its own kernel on dedicated cores and memory, while drivers, interrupts, reclaim, and everything else run in a different kernel on different cores.</p>
+
+            <div class="button-group">
+                <a href="/contact.html" class="btn btn-primary">
+                    <i data-lucide="users"></i>
+                    Talk to Engineering
+                </a>
+                <a href="/technology.html" class="btn btn-secondary">
+                    <i data-lucide="layers"></i>
+                    See the Architecture
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="floor" class="value-section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">Why Tuning Has a Floor</h2>
+                <p class="section-subtitle">Isolated CPUs, tickless operation, RCU offload, and IRQ affinity move most noise off trading cores. They cannot move what the cores still share: the kernel itself.</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <i data-lucide="database"></i>
+                    </div>
+                    <h3 class="capability-title">Shared Kernel State</h3>
+                    <p class="capability-description">Isolated cores still use one page allocator, one reclaim path, and one set of global locks. A risk process, logger, or batch job on other cores can stall the trading thread through them.</p>
+                </div>
+
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <i data-lucide="radio"></i>
+                    </div>
+                    <h3 class="capability-title">Machine-Wide Interruptions</h3>
+                    <p class="capability-description">Code patching, kernel TLB flushes, and other machine-wide operations interrupt every CPU the kernel runs on, isolated or not. Boot flags can defer this work but not remove it.</p>
+                </div>
+
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <i data-lucide="calendar-x"></i>
+                    </div>
+                    <h3 class="capability-title">One Kernel, One Change Window</h3>
+                    <p class="capability-description">Every strategy, feed handler, and research job shares one kernel version and one boot configuration. Changing either means a reboot outside market hours.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="model" class="how-it-works">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">A Kernel Per Trading Path</h2>
+                <p class="section-subtitle">Multikernel partitions each server into independent Linux kernels with dedicated cores and memory. Latency-critical paths share hardware with the rest of the system, not a kernel.</p>
+            </div>
+
+            <div class="partition-figure">
+                <div class="partition-title">A 32-Core Trading Server &middot; Example Partition</div>
+                <div class="partition-domains">
+                    <div class="partition-domain">
+                        <div class="partition-cores">
+                            {% for i in (1..4) %}<span class="partition-core"></span>{% endfor %}
+                        </div>
+                        <div class="partition-name">Device kernel</div>
+                        <div class="partition-detail">storage, admin NIC &middot; 4 cores</div>
+                    </div>
+                    <div class="partition-domain domain-app">
+                        <div class="partition-cores">
+                            {% for i in (1..8) %}<span class="partition-core"></span>{% endfor %}
+                        </div>
+                        <div class="partition-name">Market data</div>
+                        <div class="partition-detail">feeds, own NIC &middot; 8 cores</div>
+                    </div>
+                    <div class="partition-domain domain-app shade-2">
+                        <div class="partition-cores">
+                            {% for i in (1..12) %}<span class="partition-core"></span>{% endfor %}
+                        </div>
+                        <div class="partition-name">Strategy &amp; execution</div>
+                        <div class="partition-detail">orders, own NIC &middot; 12 cores</div>
+                    </div>
+                    <div class="partition-domain domain-app">
+                        <div class="partition-cores">
+                            {% for i in (1..8) %}<span class="partition-core"></span>{% endfor %}
+                        </div>
+                        <div class="partition-name">Risk &amp; research</div>
+                        <div class="partition-detail">analytics, batch &middot; 8 cores</div>
+                    </div>
+                </div>
+                <p class="partition-caption">Each path runs its own kernel on its own cores and memory. <strong>Housekeeping for one kernel never runs on another kernel's cores.</strong></p>
+            </div>
+
+            <div class="features-grid two-up">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="cpu"></i>
+                    </div>
+                    <h3 class="feature-title">Interrupt-Free Trading Cores</h3>
+                    <p class="feature-description">Interrupts from disks, management networks, and every other device belong to the device kernel on its own cores. A trading kernel sees interrupts only from the devices assigned to it.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="network"></i>
+                    </div>
+                    <h3 class="feature-title">Direct NIC Ownership</h3>
+                    <p class="feature-description">Assign an exchange-facing NIC to a trading kernel by PCI address. Its driver runs in that kernel, and its packets never pass through another one.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="memory-stick"></i>
+                    </div>
+                    <h3 class="feature-title">Memory Nobody Else Can Reclaim</h3>
+                    <p class="feature-description">A trading kernel has its own allocator, page cache, and reclaim. In our measurement under heavy memory pressure, page-fault p99 was 153x lower than on a shared kernel, with the memory-hungry job still running at full speed. <a href="/2026/08/25/memory-pressure-tail-latency/">Read the measurement</a>.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="sliders"></i>
+                    </div>
+                    <h3 class="feature-title">Your Tuning, Per Kernel</h3>
+                    <p class="feature-description">Keep your low-latency configuration: tickless cores, timer frequency, preemption model, huge page and reclaim policy. Each kernel boots its own build and command line, so the trading kernel can be tuned hard while research runs a general-purpose one.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="operations" class="value-section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">Operations Around Market Hours</h2>
+                <p class="section-subtitle">Separate kernels also mean separate change windows and separate failure domains.</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="capability-card primary">
+                    <div class="capability-icon">
+                        <i data-lucide="arrow-up-circle"></i>
+                    </div>
+                    <h3 class="capability-title">Kernel Changes Without a Reboot</h3>
+                    <p class="capability-description">LiveUpdate boots a patched or retuned kernel alongside the running one, moves the workload when you choose, and keeps the old kernel for instant rollback. Research kernels can change mid-session without touching the trading path.</p>
+                </div>
+
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <i data-lucide="shield-check"></i>
+                    </div>
+                    <h3 class="capability-title">Crash Containment</h3>
+                    <p class="capability-description">A panic in a research or analytics kernel stays in that kernel; the trading kernels keep running. State kept on DAXFS shared memory survives an app-kernel crash intact, so a restart does not begin cold.</p>
+                </div>
+
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <i data-lucide="server"></i>
+                    </div>
+                    <h3 class="capability-title">Colocation and Cloud</h3>
+                    <p class="capability-description">The same stack runs on bare-metal servers in colocation and on the cloud instances you already rent for research and backtesting. No hypervisor is added in either place.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="engagement" class="how-it-works">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i data-lucide="users"></i>
+                    <span>Engagement</span>
+                </div>
+                <h2 class="section-title">From Evaluation to Production</h2>
+                <p class="section-subtitle">A three-step engagement model, measured with your own latency tooling.</p>
+            </div>
+
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-num">01</div>
+                    <h3 class="step-title">Evaluation</h3>
+                    <p class="step-description">Your feed handlers and strategy on a dedicated trading kernel, measured against your current tuned setup on your hardware, under your normal background load.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-num">02</div>
+                    <h3 class="step-title">Integration</h3>
+                    <p class="step-description">Kernel profiles, CPU, memory, and NIC layout, and boot automation, built with your infrastructure team for your colocation and cloud footprint.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-num">03</div>
+                    <h3 class="step-title">Production</h3>
+                    <p class="step-description">Rollout on a per-node subscription: validated builds, CVE stream with LiveUpdate images, and SLA-backed engineering support.</p>
+                </div>
+            </div>
+
+            <div class="value-cta" style="margin-top: var(--space-10); text-align: center;">
+                <a href="mailto:cwang@multikernel.io" class="btn btn-primary">
+                    <i data-lucide="mail"></i>
+                    Start the Conversation
+                </a>
+                <a href="https://calendar.app.google/nc1upkqQoUeoukdD9" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                    <i data-lucide="calendar"></i>
+                    Schedule a Demo
+                </a>
+            </div>
+        </div>
+    </section>
+</main>

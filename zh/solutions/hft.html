@@ -1,0 +1,224 @@
+---
+layout: default
+lang: zh
+permalink: /zh/solutions/hft.html
+title: "Multikernel 高频交易方案 - 为交易路径配备专属内核"
+description: "面向交易机构：让行情、策略与执行运行在独占核心与内存的独立 Linux 内核中，驱动、中断、内存回收与后台任务则运行在另一个内核、另一组核心上。"
+---
+
+<main>
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-badge">
+                <i data-lucide="trending-up"></i>
+                <span>高频交易</span>
+            </div>
+
+            <h1>让交易路径拥有专属内核</h1>
+            <p class="subtitle">专为在 Linux 上运行行情、策略与订单执行的交易机构打造。内核调优可以减少交易核心上的操作系统噪声，Multikernel 则从源头消除噪声：交易路径运行在独占核心与内存的独立内核中，驱动、中断、内存回收以及其他一切都运行在另一个内核、另一组核心上。</p>
+
+            <div class="button-group">
+                <a href="/zh/contact.html" class="btn btn-primary">
+                    <i data-lucide="users"></i>
+                    与工程团队交流
+                </a>
+                <a href="/zh/technology.html" class="btn btn-secondary">
+                    <i data-lucide="layers"></i>
+                    了解架构
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="floor" class="value-section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">调优为何存在下限</h2>
+                <p class="section-subtitle">CPU 隔离、无时钟节拍运行、RCU 卸载与中断亲和性，可以把大部分噪声移出交易核心，却无法移走这些核心仍在共享的东西：内核本身。</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <i data-lucide="database"></i>
+                    </div>
+                    <h3 class="capability-title">共享的内核状态</h3>
+                    <p class="capability-description">隔离后的核心仍然使用同一个页分配器、同一条内存回收路径和同一组全局锁。其他核心上的风控进程、日志程序或批处理作业，都可能借此拖慢交易线程。</p>
+                </div>
+
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <i data-lucide="radio"></i>
+                    </div>
+                    <h3 class="capability-title">全局性打断</h3>
+                    <p class="capability-description">代码修补、内核 TLB 刷新等全局操作会打断该内核所运行的每一个 CPU，无论是否隔离。启动参数只能推迟这类工作，无法消除。</p>
+                </div>
+
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <i data-lucide="calendar-x"></i>
+                    </div>
+                    <h3 class="capability-title">一个内核 · 一个变更窗口</h3>
+                    <p class="capability-description">所有策略、行情处理程序和研究任务共享同一个内核版本和同一套启动配置。改动其中任何一项，都意味着要在交易时段之外重启。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="model" class="how-it-works">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">每条交易路径一个内核</h2>
+                <p class="section-subtitle">Multikernel 把每台服务器划分为多个独立的 Linux 内核，各自拥有专用核心与内存。延迟敏感的路径与系统其余部分共享硬件，而不共享内核。</p>
+            </div>
+
+            <div class="partition-figure">
+                <div class="partition-title">32 核交易服务器 &middot; 分区示例</div>
+                <div class="partition-domains">
+                    <div class="partition-domain">
+                        <div class="partition-cores">
+                            {% for i in (1..4) %}<span class="partition-core"></span>{% endfor %}
+                        </div>
+                        <div class="partition-name">设备内核</div>
+                        <div class="partition-detail">存储、管理网络 &middot; 4 核</div>
+                    </div>
+                    <div class="partition-domain domain-app">
+                        <div class="partition-cores">
+                            {% for i in (1..8) %}<span class="partition-core"></span>{% endfor %}
+                        </div>
+                        <div class="partition-name">行情</div>
+                        <div class="partition-detail">行情处理、独占网卡 &middot; 8 核</div>
+                    </div>
+                    <div class="partition-domain domain-app shade-2">
+                        <div class="partition-cores">
+                            {% for i in (1..12) %}<span class="partition-core"></span>{% endfor %}
+                        </div>
+                        <div class="partition-name">策略与执行</div>
+                        <div class="partition-detail">订单路径、独占网卡 &middot; 12 核</div>
+                    </div>
+                    <div class="partition-domain domain-app">
+                        <div class="partition-cores">
+                            {% for i in (1..8) %}<span class="partition-core"></span>{% endfor %}
+                        </div>
+                        <div class="partition-name">风控与研究</div>
+                        <div class="partition-detail">分析、批处理 &middot; 8 核</div>
+                    </div>
+                </div>
+                <p class="partition-caption">每条路径都在自己的核心与内存上运行自己的内核。<strong>一个内核的后台维护工作，永远不会跑到另一个内核的核心上。</strong></p>
+            </div>
+
+            <div class="features-grid two-up">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="cpu"></i>
+                    </div>
+                    <h3 class="feature-title">无中断的交易核心</h3>
+                    <p class="feature-description">磁盘、管理网络以及其他所有设备的中断都归设备内核所有，在它自己的核心上处理。交易内核只会收到分配给它的设备所产生的中断。</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="network"></i>
+                    </div>
+                    <h3 class="feature-title">直接拥有网卡</h3>
+                    <p class="feature-description">按 PCI 地址把面向交易所的网卡分配给交易内核。网卡驱动运行在该内核中，数据包从不经过其他内核。</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="memory-stick"></i>
+                    </div>
+                    <h3 class="feature-title">无人能回收的内存</h3>
+                    <p class="feature-description">交易内核拥有自己的分配器、页缓存与内存回收。在我们的高内存压力测试中，缺页处理的 p99 比共享内核低 153 倍，而大量占用内存的作业依然全速运行。<a href="/2026/08/25/memory-pressure-tail-latency/">阅读测试详情（英文）</a>。</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="sliders"></i>
+                    </div>
+                    <h3 class="feature-title">按内核保留您的调优</h3>
+                    <p class="feature-description">保留您的低延迟配置：无时钟节拍核心、时钟频率、抢占模型、大页与内存回收策略。每个内核都启动自己的构建和命令行参数，交易内核可以深度调优，研究任务则运行通用内核。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="operations" class="value-section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">围绕交易时段的运维</h2>
+                <p class="section-subtitle">独立的内核也意味着独立的变更窗口与独立的故障域。</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="capability-card primary">
+                    <div class="capability-icon">
+                        <i data-lucide="arrow-up-circle"></i>
+                    </div>
+                    <h3 class="capability-title">内核变更无需重启</h3>
+                    <p class="capability-description">LiveUpdate 在运行中的内核旁启动打过补丁或重新调优的内核，在您选定的时机迁移工作负载，并保留旧内核以便即时回滚。研究内核可以在交易时段内变更，而不触碰交易路径。</p>
+                </div>
+
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <i data-lucide="shield-check"></i>
+                    </div>
+                    <h3 class="capability-title">崩溃不扩散</h3>
+                    <p class="capability-description">研究或分析内核的崩溃只局限在该内核内，交易内核持续运行。保存在 DAXFS 共享内存上的状态可在应用内核崩溃后完好保留，重启无需从零开始。</p>
+                </div>
+
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <i data-lucide="server"></i>
+                    </div>
+                    <h3 class="capability-title">托管机房与云</h3>
+                    <p class="capability-description">同一套技术栈既可运行在托管机房的裸金属服务器上，也可运行在您已租用、用于研究与回测的云实例上。两处都不会额外引入虚拟机管理程序。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="engagement" class="how-it-works">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i data-lucide="users"></i>
+                    <span>合作模式</span>
+                </div>
+                <h2 class="section-title">从评估到生产</h2>
+                <p class="section-subtitle">三步合作模式，用您自己的延迟测量工具验证。</p>
+            </div>
+
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-num">01</div>
+                    <h3 class="step-title">评估</h3>
+                    <p class="step-description">在您的硬件上，把行情处理与策略运行在专属交易内核中，在日常后台负载下，与您当前的调优方案进行对比测量。</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-num">02</div>
+                    <h3 class="step-title">集成</h3>
+                    <p class="step-description">与您的基础设施团队一起，针对您的托管机房与云环境，制定内核配置，规划 CPU、内存与网卡布局，并实现启动自动化。</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-num">03</div>
+                    <h3 class="step-title">生产</h3>
+                    <p class="step-description">按节点订阅推广上线：经过验证的构建、附带 LiveUpdate 镜像的 CVE 更新流，以及具备 SLA 保障的工程支持。</p>
+                </div>
+            </div>
+
+            <div class="value-cta" style="margin-top: var(--space-10); text-align: center;">
+                <a href="mailto:cwang@multikernel.io" class="btn btn-primary">
+                    <i data-lucide="mail"></i>
+                    开启合作对话
+                </a>
+                <a href="https://calendar.app.google/nc1upkqQoUeoukdD9" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                    <i data-lucide="calendar"></i>
+                    预约演示
+                </a>
+            </div>
+        </div>
+    </section>
+</main>

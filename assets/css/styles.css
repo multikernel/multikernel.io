@@ -1130,6 +1130,17 @@ a.hero-stat:hover {
     border-bottom-color: var(--accent-600);
 }
 
+.features-grid.two-up {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+}
+
+.feature-description a {
+    color: var(--accent-700);
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent-300);
+}
+
 .roadmap-tag {
     display: inline-block;
     font-family: var(--font-mono);
