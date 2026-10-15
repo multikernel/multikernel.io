@@ -1118,6 +1118,37 @@ a.hero-stat:hover {
     margin: var(--space-10) auto 0;
 }
 
+.proof-footnote a {
+    color: var(--accent-700);
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent-300);
+}
+
+.proof-footnote a:hover {
+    color: var(--accent-800);
+    border-bottom-color: var(--accent-600);
+}
+
+.roadmap-tag {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    color: var(--gray-600);
+    background: var(--gray-50);
+    border: 1px solid var(--gray-300);
+    border-radius: var(--radius-sm);
+    padding: 1px var(--space-2);
+    margin-bottom: var(--space-3);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.proof-section .section-header {
+    margin-bottom: var(--space-12);
+}
+
 .bench-ratio {
     display: block;
     font-family: var(--font-mono);

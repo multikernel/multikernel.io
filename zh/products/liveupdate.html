@@ -68,33 +68,29 @@ description: "无需重启即可升级 Linux 内核：在应用持续运行的�
     <section id="unplanned" class="how-it-works">
         <div class="section-container">
             <div class="section-header">
-                <h2 class="section-title">内核自动故障转移</h2>
-                <p class="section-subtitle">如今一次内核崩溃意味着整机重启与数分钟的停机。Multikernel LiveUpdate 把同样的事件缩短为亚秒级的故障转移。</p>
+                <h2 class="section-title">从内核崩溃中幸存</h2>
+                <p class="section-subtitle">如今一次内核崩溃意味着整机重启、数分钟的停机，以及所有缓存从零开始。在 Multikernel 上，崩溃只局限于一个内核，而它的内存比内核活得更久。自动故障转移正是建立在这一基础之上。</p>
             </div>
 
             <div class="cards-grid">
-                <div class="capability-card primary">
-                    <div class="capability-icon">
-                        <i data-lucide="activity"></i>
-                    </div>
-                    <h3 class="capability-title">持续监控</h3>
-                    <p class="capability-description">一个备用内核与主内核同时运行，通过心跳机制对其进行监控，随时准备接管。</p>
+                <a class="proof-card" href="/2026/09/30/the-kernel-crashed-the-memory-didnt/">
+                    <span class="proof-number">0</span>
+                    <span class="proof-label">四次内核崩溃，零字节丢失</span>
+                    <span class="proof-compare"><strong>4 / 4</strong> 次崩溃均验证完好</span>
+                    <p class="proof-detail">一个应用内核在写入过程中连续崩溃四次。每次它在 DAXFS 上的内存都完好无损，连写了一半的页面也不例外，机器的其余部分持续运行。恢复只需一次内核启动，无需重放日志。</p>
+                    <span class="proof-source">崩溃恢复 <i data-lucide="arrow-right"></i></span>
+                </a>
+
+                <div class="capability-card">
+                    <span class="roadmap-tag">开发中</span>
+                    <h3 class="capability-title">备用内核接管</h3>
+                    <p class="capability-description">备用内核通过心跳机制监控主内核。主内核崩溃时，备用内核将其隔离，接管其 CPU、内存与设备，无需完整重启即可恢复服务。</p>
                 </div>
 
                 <div class="capability-card">
-                    <div class="capability-icon">
-                        <i data-lucide="zap"></i>
-                    </div>
-                    <h3 class="capability-title">亚秒级故障转移</h3>
-                    <p class="capability-description">主内核崩溃时，备用内核接管其设备并恢复服务。无需完整重启，无需 kdump，应用持续运行不受影响。</p>
-                </div>
-
-                <div class="capability-card">
-                    <div class="capability-icon">
-                        <i data-lucide="refresh-cw"></i>
-                    </div>
+                    <span class="roadmap-tag">开发中</span>
                     <h3 class="capability-title">自动恢复</h3>
-                    <p class="capability-description">故障转移完成后，系统自动回收失效内核占用的资源，并准备新的备用内核。全程自愈，无需运维人员介入。</p>
+                    <p class="capability-description">接管完成后，系统自动回收失效内核占用的资源，并准备新的备用内核，无需运维人员介入。</p>
                 </div>
             </div>
         </div>
@@ -119,8 +115,8 @@ description: "无需重启即可升级 Linux 内核：在应用持续运行的�
                     <div class="feature-icon">
                         <i data-lucide="shield-check"></i>
                     </div>
-                    <h3 class="feature-title">提升 SLA</h3>
-                    <p class="feature-description">亚秒级故障转移意味着内核崩溃不再等同于数分钟的停机，服务可靠性的提升可直接量化。</p>
+                    <h3 class="feature-title">隔离内核故障</h3>
+                    <p class="feature-description">一个内核的崩溃只局限在该内核内。其他工作负载持续运行，崩溃的工作负载重启时内存完好，无需从零重建。</p>
                 </div>
 
                 <div class="feature-card">
@@ -128,7 +124,7 @@ description: "无需重启即可升级 Linux 内核：在应用持续运行的�
                         <i data-lucide="users"></i>
                     </div>
                     <h3 class="feature-title">减轻运维负担</h3>
-                    <p class="feature-description">免除计划性维护窗口与手动崩溃恢复。系统自动处理计划内与计划外事件。</p>
+                    <p class="feature-description">免除内核更新所需的计划性维护窗口。升级、验证与回滚都在工作负载持续运行的同时完成。</p>
                 </div>
             </div>
         </div>
@@ -185,7 +181,7 @@ description: "无需重启即可升级 Linux 内核：在应用持续运行的�
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>故障转移配置与灾难恢复规划</span>
+                            <span>崩溃恢复与灾难恢复规划</span>
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>

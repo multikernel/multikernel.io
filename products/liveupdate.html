@@ -68,33 +68,29 @@ i18n: true
     <section id="unplanned" class="how-it-works">
         <div class="section-container">
             <div class="section-header">
-                <h2 class="section-title">Automatic Kernel Failover</h2>
-                <p class="section-subtitle">A kernel crash today means a full reboot and minutes of downtime. Multikernel LiveUpdate turns the same event into a sub-second failover.</p>
+                <h2 class="section-title">Surviving Kernel Crashes</h2>
+                <p class="section-subtitle">A kernel crash today means a full reboot, minutes of downtime, and every cache starting cold. With Multikernel, a crash stays inside one kernel, and its memory outlives it. Automatic failover builds on that.</p>
             </div>
 
             <div class="cards-grid">
-                <div class="capability-card primary">
-                    <div class="capability-icon">
-                        <i data-lucide="activity"></i>
-                    </div>
-                    <h3 class="capability-title">Continuous Monitoring</h3>
-                    <p class="capability-description">A standby kernel runs alongside your primary kernel, monitoring it via heartbeat. Always ready to take over.</p>
+                <a class="proof-card" href="/2026/09/30/the-kernel-crashed-the-memory-didnt/">
+                    <span class="proof-number">0</span>
+                    <span class="proof-label">Bytes lost across four kernel panics</span>
+                    <span class="proof-compare"><strong>4 of 4</strong> panics verified intact</span>
+                    <p class="proof-detail">An app-kernel panicked mid-write four times. Each time, its memory on DAXFS was intact down to a half-written page, and the rest of the machine kept running. Recovery was a kernel boot, with no log to replay.</p>
+                    <span class="proof-source">Crash recovery <i data-lucide="arrow-right"></i></span>
+                </a>
+
+                <div class="capability-card">
+                    <span class="roadmap-tag">In development</span>
+                    <h3 class="capability-title">Standby Takeover</h3>
+                    <p class="capability-description">A standby kernel monitors the primary via heartbeat. When the primary crashes, the standby fences it, adopts its CPUs, memory, and devices, and resumes service without a full reboot.</p>
                 </div>
 
                 <div class="capability-card">
-                    <div class="capability-icon">
-                        <i data-lucide="zap"></i>
-                    </div>
-                    <h3 class="capability-title">Sub-Second Failover</h3>
-                    <p class="capability-description">When the primary kernel crashes, the standby takes over its devices and resumes service. No full reboot. No kdump. Applications continue running.</p>
-                </div>
-
-                <div class="capability-card">
-                    <div class="capability-icon">
-                        <i data-lucide="refresh-cw"></i>
-                    </div>
+                    <span class="roadmap-tag">In development</span>
                     <h3 class="capability-title">Automatic Recovery</h3>
-                    <p class="capability-description">After failover, the system automatically reclaims resources from the failed kernel and prepares a new standby. Self-healing without operator intervention.</p>
+                    <p class="capability-description">After a takeover, the system reclaims resources from the failed kernel and prepares a new standby, without operator intervention.</p>
                 </div>
             </div>
         </div>
@@ -119,8 +115,8 @@ i18n: true
                     <div class="feature-icon">
                         <i data-lucide="shield-check"></i>
                     </div>
-                    <h3 class="feature-title">Improve SLA</h3>
-                    <p class="feature-description">Sub-second failover means kernel crashes no longer translate to minutes of downtime. Directly measurable improvement in service reliability.</p>
+                    <h3 class="feature-title">Contain Kernel Failures</h3>
+                    <p class="feature-description">A crash in one kernel stays in that kernel. Other workloads keep running, and the crashed workload restarts with its memory intact instead of rebuilding from cold.</p>
                 </div>
 
                 <div class="feature-card">
@@ -128,7 +124,7 @@ i18n: true
                         <i data-lucide="users"></i>
                     </div>
                     <h3 class="feature-title">Reduce Operator Burden</h3>
-                    <p class="feature-description">Eliminates scheduled maintenance windows and manual crash recovery. The system handles both planned and unplanned events automatically.</p>
+                    <p class="feature-description">Eliminates scheduled maintenance windows for kernel updates. Upgrades, validation, and rollback happen while workloads keep running.</p>
                 </div>
             </div>
         </div>
@@ -185,7 +181,7 @@ i18n: true
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>Failover configuration and disaster recovery planning</span>
+                            <span>Crash recovery and disaster recovery planning</span>
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>

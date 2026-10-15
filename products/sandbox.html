@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Multikernel Sandbox - AI Agent Sandboxing"
-description: "Kernel-level sandboxing for AI agents. Full GPU access, strong isolation, and fast checkpoint/restore without virtualization overhead."
+description: "Kernel-level sandboxing for AI agents. Each agent gets its own Linux kernel on dedicated cores, with strong isolation and no virtualization overhead."
 permalink: /products/sandbox.html
 i18n: true
 ---
@@ -15,7 +15,7 @@ i18n: true
             </div>
 
             <h1>Kernel-Level Sandboxing for AI Agents</h1>
-            <p class="subtitle">Give each AI agent its own Linux kernel with full GPU access and strong isolation. No virtualization layer between the agent and hardware. No nested virtualization required. Works on bare metal or inside VMs you already run.</p>
+            <p class="subtitle">Give each AI agent its own Linux kernel on dedicated cores and memory. Strong isolation with no hypervisor underneath and no nested virtualization required. Works on bare metal or inside VMs you already run.</p>
 
             <div class="button-group">
                 <a href="/getting-started.html" class="btn btn-primary">
@@ -34,7 +34,7 @@ i18n: true
         <div class="section-container">
             <div class="section-header">
                 <h2 class="section-title">The Problem</h2>
-                <p class="section-subtitle">AI agents need sandboxing, GPU access, and fast lifecycle management. Today's options force a tradeoff.</p>
+                <p class="section-subtitle">AI agents need strong isolation, native performance, and fast lifecycle management. Today's options force a tradeoff.</p>
             </div>
 
             <div class="cards-grid">
@@ -59,13 +59,50 @@ i18n: true
                         <i data-lucide="brain"></i>
                     </div>
                     <h3 class="capability-title">Multikernel Sandbox</h3>
-                    <p class="capability-description">Each agent gets its own kernel with direct GPU access. Kernel-level sandboxing without virtualization. Native performance inside any cloud VM.</p>
+                    <p class="capability-description">Each agent gets its own kernel on dedicated cores. Kernel-level sandboxing without virtualization, on bare metal or inside the cloud VMs you already run.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="capabilities" class="how-it-works">
+    <section id="measured" class="proof-section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">Measured, Not Promised</h2>
+                <p class="section-subtitle">Same server, same kernel build, one variable at a time.</p>
+            </div>
+
+            <div class="proof-grid">
+                <a class="proof-card" href="/2026/10/14/before-the-kernel-boots-memory-setup/">
+                    <span class="proof-number">111 ms</span>
+                    <span class="proof-label">To set up a 32 GiB instance</span>
+                    <span class="proof-compare"><strong>111 ms</strong> vs 6.81 s for a preallocated VM</span>
+                    <p class="proof-detail">Memory comes from a pool prepared once, so large disposable environments are ready in roughly constant time.</p>
+                    <span class="proof-source">Instance memory setup <i data-lucide="arrow-right"></i></span>
+                </a>
+
+                <a class="proof-card" href="/2026/08/16/multikernel-vs-kvm-lmbench/">
+                    <span class="proof-number">2.5x</span>
+                    <span class="proof-label">Faster context switches than a VM</span>
+                    <span class="proof-compare"><strong>1.37 µs</strong> vs 3.42 µs</span>
+                    <p class="proof-detail">Isolation comes from separate kernels, not a hypervisor, so agent tool calls run on native kernel paths.</p>
+                    <span class="proof-source">lmbench vs KVM <i data-lucide="arrow-right"></i></span>
+                </a>
+
+                <a class="proof-card" href="/2026/09/30/the-kernel-crashed-the-memory-didnt/">
+                    <span class="proof-number">0</span>
+                    <span class="proof-label">Bytes lost across four kernel panics</span>
+                    <span class="proof-compare"><strong>4 of 4</strong> panics verified intact</span>
+                    <p class="proof-detail">An agent that crashes its kernel takes down only its own instance, and its working set on DAXFS is still there when it restarts.</p>
+                    <span class="proof-source">Crash recovery <i data-lucide="arrow-right"></i></span>
+                </a>
+            </div>
+
+            <p class="proof-footnote"><a href="/performance.html">See all benchmark results</a></p>
+        </div>
+    </section>
+
+    <section id="capabilities" class="value-section">
         <div class="section-container">
             <div class="section-header">
                 <h2 class="section-title">Built for AI Workloads</h2>
@@ -74,26 +111,18 @@ i18n: true
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <i data-lucide="cpu"></i>
-                    </div>
-                    <h3 class="feature-title">Full GPU Access</h3>
-                    <p class="feature-description">No virtualization layer between the agent and GPU hardware. Direct access to CUDA, ROCm, and other GPU frameworks at native performance.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">
                         <i data-lucide="shield-check"></i>
                     </div>
                     <h3 class="feature-title">Kernel-Level Isolation</h3>
-                    <p class="feature-description">Each agent is sandboxed in its own kernel. A compromised agent cannot access other agents' memory, devices, or kernel state.</p>
+                    <p class="feature-description">Each agent is sandboxed in its own kernel on its own cores and memory. A compromised agent cannot reach other agents' memory, devices, or kernel state.</p>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <i data-lucide="camera"></i>
+                        <i data-lucide="zap"></i>
                     </div>
-                    <h3 class="feature-title">Fast Checkpoint/Restore</h3>
-                    <p class="feature-description">Lightweight kernel state enables rapid snapshots. Save, restore, and clone agent environments in milliseconds.</p>
+                    <h3 class="feature-title">Fast Instance Creation</h3>
+                    <p class="feature-description">Instances draw memory from a prepared physical pool: 32 GiB assigned in 111 ms, with no page population on the launch path.</p>
                 </div>
 
                 <div class="feature-card">
@@ -109,7 +138,15 @@ i18n: true
                         <i data-lucide="database"></i>
                     </div>
                     <h3 class="feature-title">Shared Model Weights</h3>
-                    <p class="feature-description">DAXFS enables zero-copy sharing of model weights across agent enclaves. One copy in memory serves all agents.</p>
+                    <p class="feature-description">DAXFS enables zero-copy sharing of model weights across agent instances. One copy in memory serves all agents.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="life-buoy"></i>
+                    </div>
+                    <h3 class="feature-title">Crash-Contained Agents</h3>
+                    <p class="feature-description">A kernel panic stays inside one agent's instance. Memory on DAXFS survives it intact, so recovery is a kernel boot, not a cold start.</p>
                 </div>
 
                 <div class="feature-card">
@@ -118,6 +155,29 @@ i18n: true
                     </div>
                     <h3 class="feature-title">Docker Compatible</h3>
                     <p class="feature-description">Deploy agents using your existing Docker images and workflows. No new packaging format, no new APIs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="roadmap" class="how-it-works">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">In Development</h2>
+                <p class="section-subtitle">Two capabilities AI platform teams ask for most. Design partners get early access and shape both.</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="capability-card">
+                    <span class="roadmap-tag">In development</span>
+                    <h3 class="capability-title">GPU Passthrough</h3>
+                    <p class="capability-description">Assign a GPU to an agent's kernel and drive it with its native driver, with no virtualization layer between the agent and the hardware.</p>
+                </div>
+
+                <div class="capability-card">
+                    <span class="roadmap-tag">In development</span>
+                    <h3 class="capability-title">Snapshot and Clone</h3>
+                    <p class="capability-description">Save an agent's environment, restore it, or clone it into many identical sandboxes from a known-good state.</p>
                 </div>
             </div>
         </div>
@@ -136,7 +196,7 @@ i18n: true
                         <i data-lucide="github"></i>
                     </div>
                     <h3 class="capability-title">Open Source</h3>
-                    <p class="capability-description">Download and build from source. Deploy AI agent sandboxes on any Linux machine with full GPU access. Community support via GitHub issues.</p>
+                    <p class="capability-description">Download and build from source. Deploy AI agent sandboxes on any multikernel-enabled Linux machine. Community support via GitHub issues.</p>
                     <div class="value-cta" style="margin-top: var(--space-4);">
                         <a href="https://github.com/multikernel" target="_blank" class="btn-link">
                             View on GitHub
@@ -154,7 +214,7 @@ i18n: true
                     <div class="capability-features">
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>Pre-configured sandbox images with GPU drivers pre-installed</span>
+                            <span>Early access to GPU passthrough and snapshot support</span>
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>

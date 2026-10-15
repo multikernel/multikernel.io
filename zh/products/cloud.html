@@ -30,6 +30,43 @@ description: "在您自主掌控的基础设施上整合 Linux 工作负载：�
         </div>
     </section>
 
+    <section id="measured" class="proof-section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">对比 KVM 与共享内核的实测结果</h2>
+                <p class="section-subtitle">同一台服务器、同一个内核构建，每次只改变一个变量。</p>
+            </div>
+
+            <div class="proof-grid">
+                <a class="proof-card" href="/2026/08/16/multikernel-vs-kvm-lmbench/">
+                    <span class="proof-number">2.5x</span>
+                    <span class="proof-label">上下文切换比 KVM 快</span>
+                    <span class="proof-compare"><strong>1.37 µs</strong> 对比 3.42 µs</span>
+                    <p class="proof-detail">对比对象是启用全部硬件加速的虚拟机。整合后的工作负载依然走原生内核路径，而不是每次唤醒都付出一次 VM exit。</p>
+                    <span class="proof-source">lmbench 对比 KVM <i data-lucide="arrow-right"></i></span>
+                </a>
+
+                <a class="proof-card" href="/2026/09/06/multikernel-vs-kvm-iperf/">
+                    <span class="proof-number">10x</span>
+                    <span class="proof-label">线速接收所需 CPU 更少</span>
+                    <span class="proof-compare"><strong>21%</strong> 对比 215% 单核</span>
+                    <p class="proof-detail">虚拟机花在 vhost-net 转发数据包上的核心，在这里可以留给工作负载。</p>
+                    <span class="proof-source">iperf 对比 KVM <i data-lucide="arrow-right"></i></span>
+                </a>
+
+                <a class="proof-card" href="/2026/08/17/multikernel-will-it-scale/">
+                    <span class="proof-number">2.6x</span>
+                    <span class="proof-label">同样的核心，吞吐更高</span>
+                    <span class="proof-compare"><strong>780K</strong> 对比 300K 次 unlink/s</span>
+                    <p class="proof-detail">把 24 个核心分给两个内核，消除了单内核无法避免的锁争用。</p>
+                    <span class="proof-source">will-it-scale <i data-lucide="arrow-right"></i></span>
+                </a>
+            </div>
+
+            <p class="proof-footnote"><a href="/zh/performance.html">查看全部基准测试结果</a></p>
+        </div>
+    </section>
+
     <section id="what" class="value-section">
         <div class="section-container">
             <div class="section-header">
@@ -66,8 +103,8 @@ description: "在您自主掌控的基础设施上整合 Linux 工作负载：�
                     <div class="capability-icon">
                         <i data-lucide="settings"></i>
                     </div>
-                    <h3 class="capability-title">生产级工具链</h3>
-                    <p class="capability-description">监控、告警，并与现有基础设施集成。兼容 Kubernetes、Terraform 以及标准 Linux 管理工作流。</p>
+                    <h3 class="capability-title">易于自动化</h3>
+                    <p class="capability-description">Kerf 是可脚本化的命令行工具，并提供 Python API，内核实例可以直接融入您现有的资源编排与配置管理流程。</p>
                 </div>
             </div>
         </div>
@@ -85,7 +122,7 @@ description: "在您自主掌控的基础设施上整合 Linux 工作负载：�
                         <i data-lucide="shield-check"></i>
                     </div>
                     <h3 class="feature-title">零嘈杂邻居</h3>
-                    <p class="feature-description">每个工作负载都运行在自己的内核中，独占专用核心。没有中断干扰，没有 CPU 争用，也没有共享内核开销占用应用的运算周期。</p>
+                    <p class="feature-description">每个工作负载都运行在自己的内核中，独占专用核心。没有中断干扰，没有共享的内存回收，也没有共享的内核锁。在大量占用内存的批处理作业旁，p99 延迟保持在 232 ms，而共享内核下达到 35.6 秒。</p>
                 </div>
 
                 <div class="feature-card">

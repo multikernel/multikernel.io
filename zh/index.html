@@ -226,7 +226,7 @@ description: "Multikernel 分离内核架构把您自有的服务器和已租用
                         <i data-lucide="brain"></i>
                     </div>
                     <h3 class="feature-title">AI 基础设施团队</h3>
-                    <p class="feature-description">以内核级隔离和直接 GPU 访问为不可信智能体与生成代码提供沙箱，速度堪比容器。</p>
+                    <p class="feature-description">让不可信智能体与生成代码运行在各自的内核中，无需嵌套虚拟化。大内存实例约 110 ms 即可就绪。</p>
                 </div>
 
                 <div class="feature-card">
@@ -234,7 +234,7 @@ description: "Multikernel 分离内核架构把您自有的服务器和已租用
                         <i data-lucide="heart-pulse"></i>
                     </div>
                     <h3 class="feature-title">SRE 与集群运维团队</h3>
-                    <p class="feature-description">在整个集群范围内应用内核安全补丁：零停机、亚秒级故障转移、即时回滚。不再需要维护窗口。</p>
+                    <p class="feature-description">在整个集群范围内应用内核安全补丁：零停机、即时回滚。一个内核的崩溃只局限在该内核内。不再需要维护窗口。</p>
                 </div>
             </div>
         </div>
@@ -288,11 +288,11 @@ description: "Multikernel 分离内核架构把您自有的服务器和已租用
                     </div>
                     <h3 class="capability-title">Multikernel Sandbox</h3>
                     <p style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--accent-700); margin-bottom: var(--space-3); letter-spacing: 0.04em;">AI 智能体沙箱运行时</p>
-                    <p class="capability-description">面向 AI 智能体的内核级沙箱。每个智能体运行在独立的内核中，拥有完整的 GPU 访问权限与强隔离，无需嵌套虚拟化。</p>
+                    <p class="capability-description">面向 AI 智能体的内核级沙箱。每个智能体运行在专用核心上的独立内核中，具备强隔离，无需嵌套虚拟化。</p>
                     <div class="capability-features">
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>每个智能体拥有完整 GPU 访问权限</span>
+                            <span>32 GiB 实例 111 ms 就绪</span>
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>
@@ -300,7 +300,7 @@ description: "Multikernel 分离内核架构把您自有的服务器和已租用
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>快速检查点/恢复</span>
+                            <span>零拷贝共享模型权重</span>
                         </div>
                     </div>
                     <div class="value-cta" style="margin-top: var(--space-4);">
@@ -325,7 +325,7 @@ description: "Multikernel 分离内核架构把您自有的服务器和已租用
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>亚秒级故障转移</span>
+                            <span>应用内核崩溃后内存完好</span>
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>

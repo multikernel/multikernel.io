@@ -3,7 +3,7 @@ layout: default
 lang: zh
 permalink: /zh/products/sandbox.html
 title: "Multikernel Sandbox - AI 智能体沙箱"
-description: "面向 AI 智能体的内核级沙箱：完整 GPU 访问、强隔离，以及无虚拟化开销的快速检查点/恢复。"
+description: "面向 AI 智能体的内核级沙箱：每个智能体拥有运行在专用核心上的独立 Linux 内核，强隔离且没有虚拟化开销。"
 ---
 
 <main>
@@ -15,7 +15,7 @@ description: "面向 AI 智能体的内核级沙箱：完整 GPU 访问、强隔
             </div>
 
             <h1>面向 AI 智能体的内核级沙箱</h1>
-            <p class="subtitle">让每个 AI 智能体拥有自己的 Linux 内核，具备完整 GPU 访问权限和强隔离。智能体与硬件之间没有虚拟化层，无需嵌套虚拟化，既可运行在裸金属上，也可运行在您现有的虚拟机内。</p>
+            <p class="subtitle">让每个 AI 智能体拥有自己的 Linux 内核，独享专用核心与内存。强隔离，底层没有虚拟机管理程序，无需嵌套虚拟化，既可运行在裸金属上，也可运行在您现有的虚拟机内。</p>
 
             <div class="button-group">
                 <a href="/zh/getting-started.html" class="btn btn-primary">
@@ -34,7 +34,7 @@ description: "面向 AI 智能体的内核级沙箱：完整 GPU 访问、强隔
         <div class="section-container">
             <div class="section-header">
                 <h2 class="section-title">问题所在</h2>
-                <p class="section-subtitle">AI 智能体需要沙箱隔离、GPU 访问和快速的生命周期管理。而今天的方案却总是逼您做出取舍。</p>
+                <p class="section-subtitle">AI 智能体需要强隔离、原生性能和快速的生命周期管理。而今天的方案却总是逼您做出取舍。</p>
             </div>
 
             <div class="cards-grid">
@@ -59,13 +59,50 @@ description: "面向 AI 智能体的内核级沙箱：完整 GPU 访问、强隔
                         <i data-lucide="brain"></i>
                     </div>
                     <h3 class="capability-title">Multikernel Sandbox</h3>
-                    <p class="capability-description">每个智能体都拥有自己的内核，具备直接的 GPU 访问权限。无需虚拟化即可实现内核级沙箱，在任何云虚拟机内都能获得原生性能。</p>
+                    <p class="capability-description">每个智能体都拥有运行在专用核心上的独立内核。无需虚拟化即可实现内核级沙箱，可运行在裸金属上，也可运行在您现有的云虚拟机内。</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="capabilities" class="how-it-works">
+    <section id="measured" class="proof-section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">实测为证</h2>
+                <p class="section-subtitle">同一台服务器、同一个内核构建，每次只改变一个变量。</p>
+            </div>
+
+            <div class="proof-grid">
+                <a class="proof-card" href="/2026/10/14/before-the-kernel-boots-memory-setup/">
+                    <span class="proof-number">111 ms</span>
+                    <span class="proof-label">创建 32 GiB 实例</span>
+                    <span class="proof-compare"><strong>111 ms</strong> 对比预分配虚拟机的 6.81 s</span>
+                    <p class="proof-detail">内存来自预先准备好的内存池，大型一次性运行环境的创建时间几乎恒定。</p>
+                    <span class="proof-source">实例内存准备 <i data-lucide="arrow-right"></i></span>
+                </a>
+
+                <a class="proof-card" href="/2026/08/16/multikernel-vs-kvm-lmbench/">
+                    <span class="proof-number">2.5x</span>
+                    <span class="proof-label">上下文切换比虚拟机快</span>
+                    <span class="proof-compare"><strong>1.37 µs</strong> 对比 3.42 µs</span>
+                    <p class="proof-detail">隔离来自独立的内核而非虚拟机管理程序，智能体的工具调用走的是原生内核路径。</p>
+                    <span class="proof-source">lmbench 对比 KVM <i data-lucide="arrow-right"></i></span>
+                </a>
+
+                <a class="proof-card" href="/2026/09/30/the-kernel-crashed-the-memory-didnt/">
+                    <span class="proof-number">0</span>
+                    <span class="proof-label">四次内核崩溃，零字节丢失</span>
+                    <span class="proof-compare"><strong>4 / 4</strong> 次崩溃均验证完好</span>
+                    <p class="proof-detail">某个智能体让自己的内核崩溃，只会影响它自己的实例；它在 DAXFS 上的工作集在重启后依然完好。</p>
+                    <span class="proof-source">崩溃恢复 <i data-lucide="arrow-right"></i></span>
+                </a>
+            </div>
+
+            <p class="proof-footnote"><a href="/zh/performance.html">查看全部基准测试结果</a></p>
+        </div>
+    </section>
+
+    <section id="capabilities" class="value-section">
         <div class="section-container">
             <div class="section-header">
                 <h2 class="section-title">为 AI 工作负载而生</h2>
@@ -74,26 +111,18 @@ description: "面向 AI 智能体的内核级沙箱：完整 GPU 访问、强隔
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <i data-lucide="cpu"></i>
-                    </div>
-                    <h3 class="feature-title">完整 GPU 访问</h3>
-                    <p class="feature-description">智能体与 GPU 硬件之间没有虚拟化层。可直接访问 CUDA、ROCm 等 GPU 框架，性能与原生一致。</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">
                         <i data-lucide="shield-check"></i>
                     </div>
                     <h3 class="feature-title">内核级隔离</h3>
-                    <p class="feature-description">每个智能体都在自己的内核沙箱中运行。即便某个智能体被攻破，也无法访问其他智能体的内存、设备或内核状态。</p>
+                    <p class="feature-description">每个智能体都在自己的内核中运行，拥有独立的核心与内存。即便某个智能体被攻破，也无法访问其他智能体的内存、设备或内核状态。</p>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <i data-lucide="camera"></i>
+                        <i data-lucide="zap"></i>
                     </div>
-                    <h3 class="feature-title">快速检查点/恢复</h3>
-                    <p class="feature-description">轻量级的内核状态使快照能够快速完成。以毫秒级速度保存、恢复并克隆智能体运行环境。</p>
+                    <h3 class="feature-title">快速创建实例</h3>
+                    <p class="feature-description">实例从预先准备好的物理内存池中获取内存：32 GiB 只需 111 ms，启动路径上无需填充页面。</p>
                 </div>
 
                 <div class="feature-card">
@@ -109,7 +138,15 @@ description: "面向 AI 智能体的内核级沙箱：完整 GPU 访问、强隔
                         <i data-lucide="database"></i>
                     </div>
                     <h3 class="feature-title">共享模型权重</h3>
-                    <p class="feature-description">DAXFS 支持在各智能体沙箱之间零拷贝共享模型权重。内存中仅需一份副本即可服务所有智能体。</p>
+                    <p class="feature-description">DAXFS 支持在各智能体实例之间零拷贝共享模型权重。内存中仅需一份副本即可服务所有智能体。</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="life-buoy"></i>
+                    </div>
+                    <h3 class="feature-title">崩溃不扩散</h3>
+                    <p class="feature-description">内核崩溃只局限于单个智能体的实例。DAXFS 上的内存完好保留，恢复只需一次内核启动，而非从零冷启动。</p>
                 </div>
 
                 <div class="feature-card">
@@ -118,6 +155,29 @@ description: "面向 AI 智能体的内核级沙箱：完整 GPU 访问、强隔
                     </div>
                     <h3 class="feature-title">兼容 Docker</h3>
                     <p class="feature-description">使用您现有的 Docker 镜像和工作流部署智能体。无需新的打包格式，无需新的 API。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="roadmap" class="how-it-works">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">开发中的功能</h2>
+                <p class="section-subtitle">这是 AI 平台团队最常提出的两项需求。设计合作伙伴可抢先试用，并参与塑造这两项功能。</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="capability-card">
+                    <span class="roadmap-tag">开发中</span>
+                    <h3 class="capability-title">GPU 直通</h3>
+                    <p class="capability-description">把 GPU 分配给智能体的内核，由原生驱动直接驱动，智能体与硬件之间没有虚拟化层。</p>
+                </div>
+
+                <div class="capability-card">
+                    <span class="roadmap-tag">开发中</span>
+                    <h3 class="capability-title">快照与克隆</h3>
+                    <p class="capability-description">保存、恢复智能体的运行环境，或从已知良好的状态克隆出大量相同的沙箱。</p>
                 </div>
             </div>
         </div>
@@ -136,7 +196,7 @@ description: "面向 AI 智能体的内核级沙箱：完整 GPU 访问、强隔
                         <i data-lucide="github"></i>
                     </div>
                     <h3 class="capability-title">开源版</h3>
-                    <p class="capability-description">下载并从源码构建。在任何 Linux 机器上部署具备完整 GPU 访问权限的 AI 智能体沙箱。通过 GitHub issues 获得社区支持。</p>
+                    <p class="capability-description">下载并从源码构建。在任何启用 multikernel 的 Linux 机器上部署 AI 智能体沙箱。通过 GitHub issues 获得社区支持。</p>
                     <div class="value-cta" style="margin-top: var(--space-4);">
                         <a href="https://github.com/multikernel" target="_blank" class="btn-link">
                             前往 GitHub 查看
@@ -154,7 +214,7 @@ description: "面向 AI 智能体的内核级沙箱：完整 GPU 访问、强隔
                     <div class="capability-features">
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>预配置沙箱镜像，预装 GPU 驱动</span>
+                            <span>抢先试用 GPU 直通与快照功能</span>
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>
