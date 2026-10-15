@@ -352,8 +352,8 @@ kerf create web-server --cpus=4-7 --memory=2GB
 # Load a kernel that boots straight into a Docker image (via DAXFS)
 kerf load web-server --kernel=/boot/vmlinuz --image=nginx:latest
 
-# Boot the instance
-kerf exec web-server</code></pre>
+# Boot the instance and attach to its console (Ctrl+] then . to detach)
+kerf start web-server --console</code></pre>
                 <p>子内核会在分配到的 CPU 和内存上启动，直接运行在硬件之上。它拥有自己的调度器、自己的网络协议栈，以及对分配给它的设备的独立视图。</p>
                 <p>使用 <code>--image</code> 时，kerf 会从 Docker 镜像构建 <a href="https://github.com/multikernel/daxfs" target="_blank" rel="noopener noreferrer">DAXFS</a> 镜像，子内核直接将其挂载为根文件系统。DAXFS 是树外模块，kerf 不会自动加载它。仅当你需要从 Docker 镜像启动或共享主机目录时，才需要先手动加载：</p>
                 <pre><code>git clone https://github.com/multikernel/daxfs.git
