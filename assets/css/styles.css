@@ -1134,7 +1134,8 @@ a.hero-stat:hover {
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
 }
 
-.feature-description a {
+.feature-description a,
+.section-subtitle a {
     color: var(--accent-700);
     font-weight: 600;
     text-decoration: none;

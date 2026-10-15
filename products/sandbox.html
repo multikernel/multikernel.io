@@ -160,7 +160,61 @@ i18n: true
         </div>
     </section>
 
-    <section id="roadmap" class="how-it-works">
+    <section id="layers" class="how-it-works">
+        <div class="section-container">
+            <div class="value-content">
+                <div class="value-text">
+                    <div class="section-badge">
+                        <i data-lucide="layers"></i>
+                        <span>Defense in Depth</span>
+                    </div>
+                    <h2 class="section-title">Sandlock on Top, Multikernel Underneath</h2>
+                    <p class="section-subtitle">Multikernel draws the boundary between agents: each one gets its own kernel, cores, and memory. <a href="https://sandlock.io/" target="_blank" rel="noopener noreferrer">Sandlock</a> draws the boundary inside an agent: every tool call, shell command, or generated script runs in its own lightweight process sandbox, confined by Landlock and seccomp, with network egress denied by default.</p>
+                    <p class="section-subtitle" style="margin-top: var(--space-4);">A compromised tool has to escape Sandlock to reach the rest of its agent, then escape the agent's kernel to reach anyone else. Sandlock starts in about 5 ms and needs no root, containers, or hypervisor, so the inner layer adds almost nothing to each call.</p>
+
+                    <div class="value-cta">
+                        <a href="https://sandlock.io/" target="_blank" rel="noopener noreferrer" class="btn-link">
+                            Learn more about Sandlock
+                            <i data-lucide="arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="value-visual">
+                    <div class="architecture-preview">
+                        <div class="preview-title">Example: One Agent, Two Layers</div>
+                        <div class="architecture-layers">
+                            <div class="layer multikernel-layer">
+                                <div class="layer-label">Sandlock &middot; per tool call</div>
+                                <div class="layer-features">
+                                    <span>shell</span>
+                                    <span>python</span>
+                                    <span>file tools</span>
+                                </div>
+                            </div>
+                            <div class="layer multikernel-layer">
+                                <div class="layer-label">Multikernel &middot; per agent</div>
+                                <div class="layer-features">
+                                    <span>own kernel</span>
+                                    <span>dedicated cores</span>
+                                    <span>own memory</span>
+                                </div>
+                            </div>
+                            <div class="layer hardware-layer">
+                                <div class="layer-label">Hardware</div>
+                                <div class="layer-features">
+                                    <span>bare metal or cloud VM</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="preview-benefit">Two boundaries, no hypervisor</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="roadmap" class="value-section">
         <div class="section-container">
             <div class="section-header">
                 <h2 class="section-title">In Development</h2>
@@ -183,7 +237,7 @@ i18n: true
         </div>
     </section>
 
-    <section id="get-it" class="value-section">
+    <section id="get-it" class="how-it-works">
         <div class="section-container">
             <div class="section-header">
                 <h2 class="section-title">How to Get It</h2>

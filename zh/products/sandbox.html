@@ -160,7 +160,61 @@ description: "面向 AI 智能体的内核级沙箱：每个智能体拥有运�
         </div>
     </section>
 
-    <section id="roadmap" class="how-it-works">
+    <section id="layers" class="how-it-works">
+        <div class="section-container">
+            <div class="value-content">
+                <div class="value-text">
+                    <div class="section-badge">
+                        <i data-lucide="layers"></i>
+                        <span>纵深防御</span>
+                    </div>
+                    <h2 class="section-title">Sandlock 在上 · Multikernel 在下</h2>
+                    <p class="section-subtitle">Multikernel 在智能体之间划定边界：每个智能体拥有自己的内核、核心与内存。<a href="https://sandlock.io/" target="_blank" rel="noopener noreferrer">Sandlock</a> 在智能体内部划定边界：每一次工具调用、每一条 shell 命令、每一段生成的脚本，都运行在各自轻量的进程沙箱中，由 Landlock 与 seccomp 约束，网络出站默认拒绝。</p>
+                    <p class="section-subtitle" style="margin-top: var(--space-4);">被攻破的工具必须先逃出 Sandlock 才能触及所在智能体的其他部分，再逃出该智能体的内核才能触及其他任何人。Sandlock 启动开销约 5 ms，无需 root、容器或虚拟机管理程序，内层防护几乎不给每次调用增加负担。</p>
+
+                    <div class="value-cta">
+                        <a href="https://sandlock.io/" target="_blank" rel="noopener noreferrer" class="btn-link">
+                            了解 Sandlock（英文）
+                            <i data-lucide="arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="value-visual">
+                    <div class="architecture-preview">
+                        <div class="preview-title">示例：一个智能体，两层隔离</div>
+                        <div class="architecture-layers">
+                            <div class="layer multikernel-layer">
+                                <div class="layer-label">Sandlock &middot; 每次工具调用</div>
+                                <div class="layer-features">
+                                    <span>shell</span>
+                                    <span>python</span>
+                                    <span>文件工具</span>
+                                </div>
+                            </div>
+                            <div class="layer multikernel-layer">
+                                <div class="layer-label">Multikernel &middot; 每个智能体</div>
+                                <div class="layer-features">
+                                    <span>独立内核</span>
+                                    <span>专用核心</span>
+                                    <span>独立内存</span>
+                                </div>
+                            </div>
+                            <div class="layer hardware-layer">
+                                <div class="layer-label">硬件</div>
+                                <div class="layer-features">
+                                    <span>裸金属或云虚拟机</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="preview-benefit">两道边界，无需虚拟机管理程序</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="roadmap" class="value-section">
         <div class="section-container">
             <div class="section-header">
                 <h2 class="section-title">开发中的功能</h2>
@@ -183,7 +237,7 @@ description: "面向 AI 智能体的内核级沙箱：每个智能体拥有运�
         </div>
     </section>
 
-    <section id="get-it" class="value-section">
+    <section id="get-it" class="how-it-works">
         <div class="section-container">
             <div class="section-header">
                 <h2 class="section-title">如何获取</h2>
