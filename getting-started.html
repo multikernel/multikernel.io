@@ -234,8 +234,8 @@ i18n: true
                     </div>
                     <div class="gs-overview-card">
                         <div class="step-num">2</div>
-                        <h3>Load Lazy CMA</h3>
-                        <p>Allocate memory for spawned kernels at runtime, without boot parameters</p>
+                        <h3>Install Kerf</h3>
+                        <p>Set up the tool that manages resource pools and instances</p>
                     </div>
                     <div class="gs-overview-card">
                         <div class="step-num">3</div>
@@ -326,34 +326,24 @@ make menuconfig  # Enable CONFIG_MULTIKERNEL=y and CONFIG_MKTTY=y
 make -j$(nproc)
 sudo make modules_install
 sudo make install</code></pre>
+                <p><code>CONFIG_MULTIKERNEL</code> depends on <code>CONFIG_MEMORY_HOTPLUG</code>, <code>CONFIG_MEMORY_HOTREMOVE</code>, and <code>CONFIG_CONTIG_ALLOC</code>; enable them first if your starting config lacks them. The kernel uses them to carve out memory for spawned kernels at runtime, so no extra module, boot parameter, or reboot is needed.</p>
                 <p>The result is a standard Linux kernel with multikernel extensions. It boots and operates as the regular host kernel, and can additionally spawn and manage new kernel instances.</p>
             </div>
 
-            <!-- Step 2: Configure -->
+            <!-- Step 2: Install kerf -->
             <div class="content-card">
-                <h2><i data-lucide="settings"></i><span class="step-badge">2</span> Load the Lazy CMA Module</h2>
-                <p>Spawned kernel instances require contiguous physical memory. <a href="https://github.com/multikernel/lazy_cma" target="_blank" rel="noopener noreferrer">Lazy CMA</a>, an out-of-tree kernel module, allocates this memory at runtime, so no boot parameters, reboots, or upfront capacity planning are required.</p>
-                <pre><code>git clone https://github.com/multikernel/lazy_cma.git
-cd lazy_cma
-make
-sudo insmod lazy_cma.ko</code></pre>
-                <p>Loading the module creates <code>/dev/lazy_cma</code>. Kerf allocates memory pools through this interface automatically, and no further configuration is needed. Pools can be resized at runtime, are NUMA-aware, and are registered in <code>/proc/iomem</code>.</p>
-            </div>
-
-            <!-- Step 3: Install kerf -->
-            <div class="content-card">
-                <h2><i data-lucide="terminal"></i><span class="step-badge">3</span> Install the Kerf Management Tool</h2>
+                <h2><i data-lucide="terminal"></i><span class="step-badge">2</span> Install the Kerf Management Tool</h2>
                 <p>Kerf is the command-line tool for creating, configuring, and managing multikernel instances. It handles resource allocation, kernel loading, and the full instance lifecycle.</p>
                 <pre><code>git clone https://github.com/multikernel/kerf.git
 cd kerf
 pip install -e .</code></pre>
             </div>
 
-            <!-- Step 4: Launch -->
+            <!-- Step 3: Launch -->
             <div class="content-card">
-                <h2><i data-lucide="rocket"></i><span class="step-badge">4</span> Launch Your First Instance</h2>
+                <h2><i data-lucide="rocket"></i><span class="step-badge">3</span> Launch Your First Instance</h2>
                 <p>Initialize a resource pool, create an instance, and launch it:</p>
-                <pre><code># Initialize: CPUs 4-31 and an 8 GB memory pool (allocated via lazy_cma)
+                <pre><code># Initialize: CPUs 4-31 and an 8 GB memory pool, carved out at runtime
 kerf init --cpus=4-31 --memory=8GB
 
 # Create an instance with 4 CPUs and 2 GB of memory
@@ -379,9 +369,8 @@ sudo insmod daxfs.ko</code></pre>
                 <p>The multikernel stack is composed of several open-source projects:</p>
                 <ul>
                     <li><strong><a href="https://github.com/multikernel/linux" target="_blank" rel="noopener noreferrer">Multikernel Linux</a></strong> - Kernel patches that enable spawning and managing additional kernel instances through the kexec subsystem</li>
-                    <li><strong><a href="https://github.com/multikernel/kerf" target="_blank" rel="noopener noreferrer">Kerf</a></strong> - Orchestration tool that manages kernel instances, resources, and lifecycle; it drives Lazy CMA and DAXFS directly, so no separate tooling is required</li>
+                    <li><strong><a href="https://github.com/multikernel/kerf" target="_blank" rel="noopener noreferrer">Kerf</a></strong> - Orchestration tool that manages kernel instances, resource pools, and lifecycle</li>
                     <li><strong><a href="https://github.com/multikernel/daxfs" target="_blank" rel="noopener noreferrer">DAXFS</a></strong> - Out-of-tree kernel module that provides a shared filesystem across kernel instances via direct memory access, enabling a shared container root filesystem and zero-copy data sharing</li>
-                    <li><strong><a href="https://github.com/multikernel/lazy_cma" target="_blank" rel="noopener noreferrer">Lazy CMA</a></strong> - Out-of-tree kernel module that allocates contiguous memory at runtime; memory pools for spawned kernels are resizable, NUMA-aware, and require no boot-time reservation</li>
                 </ul>
             </div>
 
