@@ -350,7 +350,7 @@ kerf init --cpus=4-31 --memory=8GB
 kerf create web-server --cpus=4-7 --memory=2GB
 
 # Load a kernel that boots straight into a Docker image (via DAXFS)
-kerf load web-server --kernel=/boot/vmlinuz --image=nginx:latest
+kerf load web-server --kernel=/boot/vmlinuz --image=nginx:latest --console=mktty0
 
 # Boot the instance and attach to its console (Ctrl+] then . to detach)
 kerf start web-server --console</code></pre>
