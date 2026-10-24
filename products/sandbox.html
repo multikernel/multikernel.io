@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Multikernel Sandbox - AI Agent Sandboxing"
-description: "Kernel-level sandboxing for AI agents. Each agent gets its own Linux kernel on dedicated cores, with strong isolation and no virtualization overhead."
+description: "Kernel-level sandboxing for AI agents. Each agent gets its own Linux kernel on dedicated cores with direct GPU access, strong isolation, and no hypervisor."
 permalink: /products/sandbox.html
 i18n: true
 ---
@@ -15,7 +15,7 @@ i18n: true
             </div>
 
             <h1>Kernel-Level Sandboxing for AI Agents</h1>
-            <p class="subtitle">Give each AI agent its own Linux kernel on dedicated cores and memory. Strong isolation with no hypervisor underneath and no nested virtualization required. Works on bare metal or inside VMs you already run.</p>
+            <p class="subtitle">Give each AI agent its own Linux kernel on dedicated cores and memory, with direct access to its GPU. Strong isolation with no hypervisor underneath, no KVM, and no nested virtualization required. Works on bare metal or inside VMs you already run.</p>
 
             <div class="button-group">
                 <a href="/getting-started.html" class="btn btn-primary">
@@ -50,8 +50,8 @@ i18n: true
                     <div class="capability-icon">
                         <i data-lucide="server"></i>
                     </div>
-                    <h3 class="capability-title">Virtual Machines</h3>
-                    <p class="capability-description">Strong isolation but heavyweight. GPU passthrough requires SR-IOV or vGPU. Nested virtualization in cloud VMs adds significant performance overhead.</p>
+                    <h3 class="capability-title">VMs and MicroVMs</h3>
+                    <p class="capability-description">Strong isolation, but microVMs like Firecracker have no GPU passthrough, and full VMs need VFIO with all guest memory pinned and preallocated. Sharing a GPU takes SR-IOV or vGPU. Inside a cloud VM, all of it requires nested virtualization.</p>
                 </div>
 
                 <div class="capability-card primary">
@@ -59,7 +59,7 @@ i18n: true
                         <i data-lucide="brain"></i>
                     </div>
                     <h3 class="capability-title">Multikernel Sandbox</h3>
-                    <p class="capability-description">Each agent gets its own kernel on dedicated cores. Kernel-level sandboxing without virtualization, on bare metal or inside the cloud VMs you already run.</p>
+                    <p class="capability-description">Each agent gets its own kernel on dedicated cores, driving its GPU with the native driver. Kernel-level sandboxing without a hypervisor, on bare metal or inside the cloud VMs you already run.</p>
                 </div>
             </div>
         </div>
@@ -119,18 +119,10 @@ i18n: true
 
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <i data-lucide="zap"></i>
+                        <i data-lucide="cpu"></i>
                     </div>
-                    <h3 class="feature-title">Fast Instance Creation</h3>
-                    <p class="feature-description">Instances draw memory from a prepared physical pool: 32 GiB assigned in 111 ms, with no page population on the launch path.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i data-lucide="cloud"></i>
-                    </div>
-                    <h3 class="feature-title">No Nested Virtualization</h3>
-                    <p class="feature-description">Runs on bare metal or inside VMs you already rent. No special instance types. No hypervisor overhead.</p>
+                    <h3 class="feature-title">Direct GPU Access</h3>
+                    <p class="feature-description">Assign a whole GPU to an agent's instance. Its kernel runs the vendor driver against real hardware: no VFIO, no VMM, no vGPU license, even inside a cloud GPU instance.</p>
                 </div>
 
                 <div class="feature-card">
@@ -138,7 +130,31 @@ i18n: true
                         <i data-lucide="database"></i>
                     </div>
                     <h3 class="feature-title">Shared Model Weights</h3>
-                    <p class="feature-description">DAXFS enables zero-copy sharing of model weights across agent instances. One copy in memory serves all agents.</p>
+                    <p class="feature-description">Load model weights once into DAXFS and every agent instance maps the same physical copy, with zero copies and no per-agent load time. Firecracker has no shared filesystem, so each microVM holds its own copy.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="cloud"></i>
+                    </div>
+                    <h3 class="feature-title">No KVM Required</h3>
+                    <p class="feature-description">Runs on bare metal or inside VMs you already rent. No /dev/kvm, no nested virtualization, no special instance types.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="gauge"></i>
+                    </div>
+                    <h3 class="feature-title">Dedicated Cores</h3>
+                    <p class="feature-description">Each agent's cores run only its own kernel. No vCPU time-slicing, no steal time, no noisy neighbors between agents.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="zap"></i>
+                    </div>
+                    <h3 class="feature-title">Fast Instance Creation</h3>
+                    <p class="feature-description">Instances draw memory from a prepared physical pool: 32 GiB assigned in 111 ms, with no page population on the launch path.</p>
                 </div>
 
                 <div class="feature-card">

@@ -3,7 +3,7 @@ layout: default
 lang: zh
 permalink: /zh/products/sandbox.html
 title: "Multikernel Sandbox - AI 智能体沙箱"
-description: "面向 AI 智能体的内核级沙箱：每个智能体拥有运行在专用核心上的独立 Linux 内核，强隔离且没有虚拟化开销。"
+description: "面向 AI 智能体的内核级沙箱：每个智能体拥有运行在专用核心上的独立 Linux 内核，可直接访问 GPU，强隔离且无需虚拟机管理程序。"
 ---
 
 <main>
@@ -15,7 +15,7 @@ description: "面向 AI 智能体的内核级沙箱：每个智能体拥有运�
             </div>
 
             <h1>面向 AI 智能体的内核级沙箱</h1>
-            <p class="subtitle">让每个 AI 智能体拥有自己的 Linux 内核，独享专用核心与内存。强隔离，底层没有虚拟机管理程序，无需嵌套虚拟化，既可运行在裸金属上，也可运行在您现有的虚拟机内。</p>
+            <p class="subtitle">让每个 AI 智能体拥有自己的 Linux 内核，独享专用核心与内存，并直接访问自己的 GPU。强隔离，底层没有虚拟机管理程序，无需 KVM，也无需嵌套虚拟化，既可运行在裸金属上，也可运行在您现有的虚拟机内。</p>
 
             <div class="button-group">
                 <a href="/zh/getting-started.html" class="btn btn-primary">
@@ -50,8 +50,8 @@ description: "面向 AI 智能体的内核级沙箱：每个智能体拥有运�
                     <div class="capability-icon">
                         <i data-lucide="server"></i>
                     </div>
-                    <h3 class="capability-title">虚拟机</h3>
-                    <p class="capability-description">隔离性强，但十分笨重。GPU 透传需要依赖 SR-IOV 或 vGPU。在云虚拟机中进行嵌套虚拟化会带来显著的性能开销。</p>
+                    <h3 class="capability-title">虚拟机与微虚拟机</h3>
+                    <p class="capability-description">隔离性强，但 Firecracker 等微虚拟机不支持 GPU 透传，完整虚拟机则需要 VFIO，并且必须锁定、预分配全部客户机内存。多个虚拟机共享一块 GPU 还需要 SR-IOV 或 vGPU。在云虚拟机内，这一切都依赖嵌套虚拟化。</p>
                 </div>
 
                 <div class="capability-card primary">
@@ -59,7 +59,7 @@ description: "面向 AI 智能体的内核级沙箱：每个智能体拥有运�
                         <i data-lucide="brain"></i>
                     </div>
                     <h3 class="capability-title">Multikernel Sandbox</h3>
-                    <p class="capability-description">每个智能体都拥有运行在专用核心上的独立内核。无需虚拟化即可实现内核级沙箱，可运行在裸金属上，也可运行在您现有的云虚拟机内。</p>
+                    <p class="capability-description">每个智能体都拥有运行在专用核心上的独立内核，以原生驱动直接使用 GPU。无需虚拟机管理程序即可实现内核级沙箱，可运行在裸金属上，也可运行在您现有的云虚拟机内。</p>
                 </div>
             </div>
         </div>
@@ -119,18 +119,10 @@ description: "面向 AI 智能体的内核级沙箱：每个智能体拥有运�
 
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <i data-lucide="zap"></i>
+                        <i data-lucide="cpu"></i>
                     </div>
-                    <h3 class="feature-title">快速创建实例</h3>
-                    <p class="feature-description">实例从预先准备好的物理内存池中获取内存：32 GiB 只需 111 ms，启动路径上无需填充页面。</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i data-lucide="cloud"></i>
-                    </div>
-                    <h3 class="feature-title">无需嵌套虚拟化</h3>
-                    <p class="feature-description">可运行在裸金属或您已租用的虚拟机上。无需特殊实例类型，没有虚拟机管理程序开销。</p>
+                    <h3 class="feature-title">直接访问 GPU</h3>
+                    <p class="feature-description">将整块 GPU 分配给智能体实例，由其内核运行厂商驱动、直接驱动真实硬件：无需 VFIO，无需 VMM，无需 vGPU 许可，在云端 GPU 实例内同样适用。</p>
                 </div>
 
                 <div class="feature-card">
@@ -138,7 +130,31 @@ description: "面向 AI 智能体的内核级沙箱：每个智能体拥有运�
                         <i data-lucide="database"></i>
                     </div>
                     <h3 class="feature-title">共享模型权重</h3>
-                    <p class="feature-description">DAXFS 支持在各智能体实例之间零拷贝共享模型权重。内存中仅需一份副本即可服务所有智能体。</p>
+                    <p class="feature-description">模型权重只需加载到 DAXFS 一次，所有智能体实例便映射同一份物理副本，零拷贝，也无需每个智能体各自加载。Firecracker 没有共享文件系统，每个微虚拟机都要保存一份自己的副本。</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="cloud"></i>
+                    </div>
+                    <h3 class="feature-title">无需 KVM</h3>
+                    <p class="feature-description">可运行在裸金属或您已租用的虚拟机上。不依赖 /dev/kvm，无需嵌套虚拟化，无需特殊实例类型。</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="gauge"></i>
+                    </div>
+                    <h3 class="feature-title">专用核心</h3>
+                    <p class="feature-description">每个智能体的核心只运行它自己的内核。没有 vCPU 分时复用，没有 CPU 时间被窃取，智能体之间互不干扰。</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="zap"></i>
+                    </div>
+                    <h3 class="feature-title">快速创建实例</h3>
+                    <p class="feature-description">实例从预先准备好的物理内存池中获取内存：32 GiB 只需 111 ms，启动路径上无需填充页面。</p>
                 </div>
 
                 <div class="feature-card">
