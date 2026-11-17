@@ -254,14 +254,17 @@ description: "安装 Multikernel Linux 内核和 kerf 工具，建立资源池�
                 <p>主机必须运行开启了 <code>CONFIG_MULTIKERNEL</code> 和 <code>CONFIG_MKTTY</code> 的内核。你可以通过软件包安装，也可以从源码构建。</p>
 
                 <h3>方式 A：deb 或 rpm 软件包（x86_64）</h3>
-                <p>从<a href="https://github.com/multikernel/linux/releases" target="_blank" rel="noopener noreferrer">发布页面</a>下载适用于你的发行版的内核软件包，安装后重启进入新内核。软件包中的内核已开启上述两个选项。</p>
+                <p>从<a href="https://github.com/multikernel/linux/releases" target="_blank" rel="noopener noreferrer">发布页面</a>下载适用于你的发行版的内核软件包，安装后重启进入新内核。下面的命令会自动填入最新的软件包版本。软件包中的内核已开启上述两个选项。</p>
                 <pre><code># Debian / Ubuntu
-sudo apt install ./linux-image-&lt;version&gt;_amd64.deb
+wget <span data-gh-repo="multikernel/linux" data-gh-asset="^linux-image-(?!.*-dbg).*_amd64\.deb$" data-gh-field="url">https://github.com/multikernel/linux/releases/download/&lt;tag&gt;/linux-image-&lt;version&gt;_amd64.deb</span>
+sudo apt install ./<span data-gh-repo="multikernel/linux" data-gh-asset="^linux-image-(?!.*-dbg).*_amd64\.deb$" data-gh-field="name">linux-image-&lt;version&gt;_amd64.deb</span>
 
 # Fedora / RHEL
-sudo dnf install ./kernel-&lt;version&gt;.x86_64.rpm
+wget <span data-gh-repo="multikernel/linux" data-gh-asset="^kernel-\d.*\.x86_64\.rpm$" data-gh-field="url">https://github.com/multikernel/linux/releases/download/&lt;tag&gt;/kernel-&lt;version&gt;.x86_64.rpm</span>
+sudo dnf install ./<span data-gh-repo="multikernel/linux" data-gh-asset="^kernel-\d.*\.x86_64\.rpm$" data-gh-field="name">kernel-&lt;version&gt;.x86_64.rpm</span>
 
 sudo reboot</code></pre>
+                <p hidden>最新的软件包版本：<a data-gh-repo="multikernel/linux" data-gh-asset="^linux-image-(?!.*-dbg).*_amd64\.deb$" data-gh-field="release" target="_blank" rel="noopener noreferrer"></a></p>
                 <p>如果要在第 3 步构建 DAXFS 等树外模块，请同时安装同一版本的 <code>linux-headers</code>（deb）或 <code>kernel-devel</code>（rpm）。</p>
 
                 <h3>方式 B：从源码构建</h3>
@@ -295,12 +298,15 @@ grep -E 'CONFIG_(MULTIKERNEL|MKTTY)=' /boot/config-$(uname -r)</code></pre>
                 <p>Kerf 是管理资源池和实例完整生命周期的命令行工具：创建实例、向实例加载内核、启动实例以及销毁实例。</p>
 
                 <h3>方式 A：deb 或 rpm 软件包（x86_64）</h3>
-                <p>从 <a href="https://github.com/multikernel/kerf/releases" target="_blank" rel="noopener noreferrer">kerf 发布页面</a>下载软件包并安装：</p>
+                <p>从 <a href="https://github.com/multikernel/kerf/releases" target="_blank" rel="noopener noreferrer">kerf 发布页面</a>下载软件包并安装。下面的命令会自动填入最新版本。</p>
                 <pre><code># Debian / Ubuntu
-sudo apt install ./kerf_&lt;version&gt;_amd64.deb
+wget <span data-gh-repo="multikernel/kerf" data-gh-asset="^kerf_.*_amd64\.deb$" data-gh-field="url">https://github.com/multikernel/kerf/releases/download/&lt;tag&gt;/kerf_&lt;version&gt;_amd64.deb</span>
+sudo apt install ./<span data-gh-repo="multikernel/kerf" data-gh-asset="^kerf_.*_amd64\.deb$" data-gh-field="name">kerf_&lt;version&gt;_amd64.deb</span>
 
 # Fedora / RHEL
-sudo dnf install ./kerf-&lt;version&gt;.x86_64.rpm</code></pre>
+wget <span data-gh-repo="multikernel/kerf" data-gh-asset="^kerf-.*\.x86_64\.rpm$" data-gh-field="url">https://github.com/multikernel/kerf/releases/download/&lt;tag&gt;/kerf-&lt;version&gt;.x86_64.rpm</span>
+sudo dnf install ./<span data-gh-repo="multikernel/kerf" data-gh-asset="^kerf-.*\.x86_64\.rpm$" data-gh-field="name">kerf-&lt;version&gt;.x86_64.rpm</span></code></pre>
+                <p hidden>最新的软件包版本：<a data-gh-repo="multikernel/kerf" data-gh-asset="^kerf_.*_amd64\.deb$" data-gh-field="release" target="_blank" rel="noopener noreferrer"></a></p>
 
                 <h3>方式 B：PyPI</h3>
                 <p>发行包名为 <code>kerf-multikernel</code>，安装后的命令是 <code>kerf</code>。</p>
@@ -485,3 +491,5 @@ sudo kerf init --cpus=none --memory=none</code></pre>
         </div>
     </section>
 </main>
+
+<script defer src="/assets/js/release-assets.js"></script>

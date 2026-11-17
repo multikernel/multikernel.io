@@ -254,14 +254,17 @@ i18n: true
                 <p>The host must boot a kernel built with <code>CONFIG_MULTIKERNEL</code> and <code>CONFIG_MKTTY</code>. Install it from a package or build it from source.</p>
 
                 <h3>Option A: deb or rpm package (x86_64)</h3>
-                <p>Download the kernel package for your distribution from the <a href="https://github.com/multikernel/linux/releases" target="_blank" rel="noopener noreferrer">releases page</a>, install it, and reboot into the new kernel. The packaged kernel has both options enabled.</p>
+                <p>Download the kernel package for your distribution from the <a href="https://github.com/multikernel/linux/releases" target="_blank" rel="noopener noreferrer">releases page</a>, install it, and reboot into the new kernel. The commands below fill in the latest packaged release automatically. The packaged kernel has both options enabled.</p>
                 <pre><code># Debian / Ubuntu
-sudo apt install ./linux-image-&lt;version&gt;_amd64.deb
+wget <span data-gh-repo="multikernel/linux" data-gh-asset="^linux-image-(?!.*-dbg).*_amd64\.deb$" data-gh-field="url">https://github.com/multikernel/linux/releases/download/&lt;tag&gt;/linux-image-&lt;version&gt;_amd64.deb</span>
+sudo apt install ./<span data-gh-repo="multikernel/linux" data-gh-asset="^linux-image-(?!.*-dbg).*_amd64\.deb$" data-gh-field="name">linux-image-&lt;version&gt;_amd64.deb</span>
 
 # Fedora / RHEL
-sudo dnf install ./kernel-&lt;version&gt;.x86_64.rpm
+wget <span data-gh-repo="multikernel/linux" data-gh-asset="^kernel-\d.*\.x86_64\.rpm$" data-gh-field="url">https://github.com/multikernel/linux/releases/download/&lt;tag&gt;/kernel-&lt;version&gt;.x86_64.rpm</span>
+sudo dnf install ./<span data-gh-repo="multikernel/linux" data-gh-asset="^kernel-\d.*\.x86_64\.rpm$" data-gh-field="name">kernel-&lt;version&gt;.x86_64.rpm</span>
 
 sudo reboot</code></pre>
+                <p hidden>Latest release with packages: <a data-gh-repo="multikernel/linux" data-gh-asset="^linux-image-(?!.*-dbg).*_amd64\.deb$" data-gh-field="release" target="_blank" rel="noopener noreferrer"></a></p>
                 <p>To build out-of-tree modules such as DAXFS in step 3, also install <code>linux-headers</code> (deb) or <code>kernel-devel</code> (rpm) from the same release.</p>
 
                 <h3>Option B: build from source</h3>
@@ -295,12 +298,15 @@ grep -E 'CONFIG_(MULTIKERNEL|MKTTY)=' /boot/config-$(uname -r)</code></pre>
                 <p>Kerf is the command-line tool that manages the resource pool and the full instance lifecycle: creating instances, loading kernels into them, booting them, and tearing them down.</p>
 
                 <h3>Option A: deb or rpm package (x86_64)</h3>
-                <p>Download the package from the <a href="https://github.com/multikernel/kerf/releases" target="_blank" rel="noopener noreferrer">kerf releases page</a> and install it:</p>
+                <p>Download the package from the <a href="https://github.com/multikernel/kerf/releases" target="_blank" rel="noopener noreferrer">kerf releases page</a> and install it. The commands below fill in the latest release automatically.</p>
                 <pre><code># Debian / Ubuntu
-sudo apt install ./kerf_&lt;version&gt;_amd64.deb
+wget <span data-gh-repo="multikernel/kerf" data-gh-asset="^kerf_.*_amd64\.deb$" data-gh-field="url">https://github.com/multikernel/kerf/releases/download/&lt;tag&gt;/kerf_&lt;version&gt;_amd64.deb</span>
+sudo apt install ./<span data-gh-repo="multikernel/kerf" data-gh-asset="^kerf_.*_amd64\.deb$" data-gh-field="name">kerf_&lt;version&gt;_amd64.deb</span>
 
 # Fedora / RHEL
-sudo dnf install ./kerf-&lt;version&gt;.x86_64.rpm</code></pre>
+wget <span data-gh-repo="multikernel/kerf" data-gh-asset="^kerf-.*\.x86_64\.rpm$" data-gh-field="url">https://github.com/multikernel/kerf/releases/download/&lt;tag&gt;/kerf-&lt;version&gt;.x86_64.rpm</span>
+sudo dnf install ./<span data-gh-repo="multikernel/kerf" data-gh-asset="^kerf-.*\.x86_64\.rpm$" data-gh-field="name">kerf-&lt;version&gt;.x86_64.rpm</span></code></pre>
+                <p hidden>Latest release with packages: <a data-gh-repo="multikernel/kerf" data-gh-asset="^kerf_.*_amd64\.deb$" data-gh-field="release" target="_blank" rel="noopener noreferrer"></a></p>
 
                 <h3>Option B: PyPI</h3>
                 <p>The distribution is named <code>kerf-multikernel</code>; the installed command is <code>kerf</code>.</p>
@@ -485,3 +491,5 @@ sudo kerf init --cpus=none --memory=none</code></pre>
         </div>
     </section>
 </main>
+
+<script defer src="/assets/js/release-assets.js"></script>
