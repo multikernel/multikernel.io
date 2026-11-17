@@ -3,50 +3,19 @@ layout: default
 lang: zh
 permalink: /zh/getting-started.html
 title: "快速上手"
-description: "快速上手 Multikernel Linux：学习如何构建、配置并启动你的第一个 multikernel 实例。"
+description: "安装 Multikernel Linux 内核和 kerf 工具，建立资源池，启动并管理你的第一个内核实例。"
 ---
 
 <style>
-/* Overview step cards */
-.gs-overview-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-4);
-    margin-bottom: var(--space-6);
+/* Table of contents */
+.gs-toc {
+    margin: var(--space-4) 0 0 0;
+    padding-left: var(--space-6);
+    columns: 2;
+    column-gap: var(--space-8);
 }
-.gs-overview-card {
-    text-align: center;
-    padding: var(--space-5);
-    background: var(--gray-50);
-    border-radius: var(--radius-md);
-    border: 1px solid var(--gray-200);
-    border-top: 2px solid var(--accent-500);
-}
-.gs-overview-card .step-num {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background: var(--gray-900);
-    color: var(--accent-400);
-    font-family: var(--font-mono);
-    font-weight: 700;
-    font-size: var(--text-xs);
-    margin-bottom: var(--space-3);
-}
-.gs-overview-card h3 {
-    font-size: var(--text-sm);
-    font-weight: 700;
-    color: var(--gray-900);
-    margin-bottom: var(--space-1);
-}
-.gs-overview-card p {
-    font-size: var(--text-xs);
-    color: var(--gray-500);
-    line-height: var(--leading-relaxed);
-    margin: 0;
+.gs-toc li {
+    break-inside: avoid;
 }
 
 /* Step badge */
@@ -63,6 +32,9 @@ description: "快速上手 Multikernel Linux：学习如何构建、配置并启
     font-weight: 700;
     font-size: var(--text-xs);
     flex-shrink: 0;
+}
+.content-card h2[id] {
+    scroll-margin-top: 96px;
 }
 
 /* Code blocks */
@@ -82,7 +54,8 @@ description: "快速上手 Multikernel Linux：学习如何构建、配置并启
     color: var(--gray-300);
 }
 .content-card p code,
-.content-card li code {
+.content-card li code,
+.content-card td code {
     background: var(--gray-50);
     padding: 2px 6px;
     border-radius: var(--radius-sm);
@@ -92,39 +65,19 @@ description: "快速上手 Multikernel Linux：学习如何构建、配置并启
     font-size: 0.88em;
 }
 
-/* Diagram */
-.gs-diagram {
-    background: var(--gray-900);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: var(--radius-md);
-    padding: var(--space-5);
-    margin: var(--space-5) 0;
-    overflow-x: auto;
-}
-.gs-diagram pre {
-    background: none;
-    border: none;
-    padding: 0;
-    margin: 0;
-    text-align: center;
-    font-size: var(--text-sm);
-    line-height: 1.5;
-    color: var(--gray-400);
-}
-
-/* Comparison table */
-.gs-comparison {
+/* Reference tables */
+.gs-table {
     overflow-x: auto;
     margin: var(--space-5) 0;
     border-radius: var(--radius-md);
     border: 1px solid var(--gray-200);
 }
-.gs-comparison table {
+.gs-table table {
     width: 100%;
     border-collapse: collapse;
     font-size: var(--text-sm);
 }
-.gs-comparison thead th {
+.gs-table thead th {
     background: var(--gray-900);
     color: rgba(255,255,255,0.8);
     font-family: var(--font-mono);
@@ -135,30 +88,36 @@ description: "快速上手 Multikernel Linux：学习如何构建、配置并启
     text-transform: uppercase;
     letter-spacing: 0.06em;
 }
-.gs-comparison thead th:last-child {
-    background: var(--accent-700);
-    color: white;
-}
-.gs-comparison tbody td {
+.gs-table tbody td {
     padding: var(--space-3) var(--space-4);
     border-bottom: 1px solid var(--gray-200);
     color: var(--gray-600);
+    vertical-align: top;
+    line-height: var(--leading-relaxed);
 }
-.gs-comparison tbody td:first-child {
+.gs-table tbody td:first-child {
     font-weight: 600;
     color: var(--gray-900);
     background: var(--gray-50);
+    white-space: nowrap;
 }
-.gs-comparison tbody td:last-child {
-    color: var(--gray-900);
-    font-weight: 600;
-    background: rgba(226, 162, 59, 0.05);
-}
-.gs-comparison tbody tr:last-child td {
+.gs-table tbody tr:last-child td {
     border-bottom: none;
 }
-.gs-comparison tbody tr:hover {
-    background: var(--gray-25);
+
+/* Notes */
+.gs-note {
+    background: var(--gray-50);
+    border-left: 3px solid var(--accent-500);
+    border-radius: var(--radius-md);
+    padding: var(--space-4) var(--space-5);
+    margin: var(--space-4) 0;
+}
+.content-card .gs-note p {
+    margin: 0;
+}
+.gs-note strong {
+    color: var(--gray-900);
 }
 
 /* CTA card */
@@ -197,8 +156,8 @@ description: "快速上手 Multikernel Linux：学习如何构建、配置并启
 }
 
 @media (max-width: 768px) {
-    .gs-overview-grid {
-        grid-template-columns: 1fr;
+    .gs-toc {
+        columns: 1;
     }
 }
 </style>
@@ -207,7 +166,7 @@ description: "快速上手 Multikernel Linux：学习如何构建、配置并启
     <section class="hero">
         <div class="hero-container">
             <h1>快速上手 Multikernel</h1>
-            <p class="subtitle">将你的 Linux 内核分离为多个独立实例，分别用于应用程序和设备处理。无需虚拟机管理程序，没有虚拟化开销，完整硬件访问权限。</p>
+            <p class="subtitle">安装 multikernel 内核和 kerf 工具，划出 CPU 和内存，并在主内核旁启动你的第一个内核实例。</p>
             <div class="button-group">
                 <a href="https://github.com/multikernel/linux" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
                     <i data-lucide="github"></i>
@@ -226,170 +185,287 @@ description: "快速上手 Multikernel Linux：学习如何构建、配置并启
 
             <!-- Overview -->
             <div class="content-card">
-                <div class="gs-overview-grid">
-                    <div class="gs-overview-card">
-                        <div class="step-num">1</div>
-                        <h3>构建内核</h3>
-                        <p>克隆并编译支持 multikernel 的 Linux 内核</p>
-                    </div>
-                    <div class="gs-overview-card">
-                        <div class="step-num">2</div>
-                        <h3>安装 Kerf</h3>
-                        <p>安装用于管理资源池和实例的工具</p>
-                    </div>
-                    <div class="gs-overview-card">
-                        <div class="step-num">3</div>
-                        <h3>启动实例</h3>
-                        <p>使用 kerf 创建、配置并运行内核实例</p>
-                    </div>
-                </div>
+                <h2 id="overview"><i data-lucide="layers"></i>概述</h2>
+                <p>Multikernel Linux 在同一台机器上并行运行多个相互独立的 Linux 内核。每个内核拥有自己的 CPU、内存和分配给它的设备，直接运行在硬件之上，无需虚拟机管理程序。本指南将带你从一台普通的 Linux 主机开始，最终运行起一个直接启动进容器镜像的内核实例。</p>
+                <p>本指南使用以下术语：</p>
+                <ul>
+                    <li><strong>主内核</strong>：机器启动时运行的、支持 multikernel 的内核。它与常规 Linux 内核的行为一致，并且还能生成其他内核。</li>
+                    <li><strong>资源池</strong>：主内核为其他内核预留的 CPU、内存和设备。</li>
+                    <li><strong>实例</strong>：从资源池中划出的一份具名资源，以及加载到其中的内核。</li>
+                    <li><strong>子内核</strong>：在实例中运行的内核，拥有自己的调度器、网络协议栈和设备视图。</li>
+                </ul>
+                <p>本页内容：</p>
+                <ol class="gs-toc">
+                    <li><a href="#requirements">确认环境要求</a></li>
+                    <li><a href="#install-kernel">安装 multikernel 内核</a></li>
+                    <li><a href="#install-kerf">安装 kerf</a></li>
+                    <li><a href="#daxfs">加载 DAXFS 模块</a></li>
+                    <li><a href="#pool">初始化资源池</a></li>
+                    <li><a href="#launch">创建并启动实例</a></li>
+                    <li><a href="#manage">管理实例</a></li>
+                    <li><a href="#cleanup">清理</a></li>
+                </ol>
             </div>
 
-            <!-- What is Multikernel -->
+            <!-- Requirements -->
             <div class="content-card">
-                <h2><i data-lucide="layers"></i>什么是 Multikernel Linux？</h2>
-                <p>Multikernel 将 Linux 内核分离为多个独立实例，在同一台物理机器上同时运行。你的应用程序获得属于自己的内核，拥有专用 CPU、内存，且不受任何中断干扰。设备驱动与 I/O 处理运行在独立核心上的另一个内核中。无需虚拟机管理程序，原生性能。</p>
-
-                <div class="gs-diagram"><pre>
-┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐
-│   Web Server    │  │    Database     │  │   ML Training   │
-├─────────────────┤  ├─────────────────┤  ├─────────────────┤
-│  Linux Kernel   │  │  Linux Kernel   │  │  Linux Kernel   │
-│  (Web-tuned)    │  │  (I/O-optimized)│  │  (GPU-optimized)│
-├─────────────────┤  ├─────────────────┤  ├─────────────────┤
-│   CPU + NIC     │  │   CPU + NVMe    │  │   CPU + GPU     │
-└─────────────────┘  └─────────────────┘  └─────────────────┘
-                </pre></div>
-
-                <p>每个工作负载都运行在拥有定制配置的独立内核中，与其他实例完全隔离。某个实例中的驱动崩溃或内核漏洞利用无法影响其他实例。可以在运行时使用标准 Linux 热插拔机制在各内核之间重新平衡资源。</p>
-
-                <div class="gs-comparison">
+                <h2 id="requirements"><i data-lucide="clipboard-check"></i>开始之前</h2>
+                <p>x86_64 提供预构建的软件包。其他架构需要从源码构建内核和 kerf。</p>
+                <div class="gs-table">
                     <table>
                         <thead>
                             <tr>
-                                <th></th>
-                                <th>容器</th>
-                                <th>虚拟机</th>
-                                <th>Multikernel</th>
+                                <th>架构</th>
+                                <th>内核</th>
+                                <th>Kerf</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>隔离性</td>
-                                <td>共享内核</td>
-                                <td>完全隔离（虚拟机管理程序）</td>
-                                <td>独立内核</td>
+                                <td>x86_64</td>
+                                <td>deb 或 rpm 软件包，或源码</td>
+                                <td>deb 或 rpm 软件包、PyPI，或源码</td>
                             </tr>
                             <tr>
-                                <td>性能</td>
-                                <td>接近原生</td>
-                                <td>5%-20% 开销</td>
-                                <td>原生</td>
+                                <td>arm64</td>
+                                <td>源码</td>
+                                <td>PyPI 或源码</td>
                             </tr>
                             <tr>
-                                <td>内核定制</td>
-                                <td>否</td>
-                                <td>可以</td>
-                                <td>可以</td>
-                            </tr>
-                            <tr>
-                                <td>动态资源</td>
-                                <td>可以</td>
-                                <td>有限</td>
-                                <td>可以（热插拔）</td>
-                            </tr>
-                            <tr>
-                                <td>零停机更新</td>
-                                <td>仅应用</td>
-                                <td>需借助编排系统</td>
-                                <td>内核 + 应用</td>
-                            </tr>
-                            <tr>
-                                <td>攻击面</td>
-                                <td>完整内核</td>
-                                <td>已缩减</td>
-                                <td>单个实例极小</td>
+                                <td>RISC-V</td>
+                                <td>源码，另需设备树文件</td>
+                                <td>PyPI 或源码</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+                <p>你还需要：</p>
+                <ul>
+                    <li>root 权限。会改变内核状态的 <code>kerf</code> 命令需要通过 <code>sudo</code> 运行。</li>
+                    <li>主机可以让出的 CPU 和内存。放入资源池的资源在释放之前不再归主机使用。</li>
+                    <li>正在运行的 Docker 守护进程，如果你像本指南一样从容器镜像启动实例。</li>
+                    <li>从源码构建时：常规的 Linux 内核构建工具链、Python 3.8 或更高版本及 <code>pip</code>，以及 kerf 所需的 <code>musl-gcc</code>。</li>
+                </ul>
             </div>
 
-            <!-- Step 1: Build -->
+            <!-- Step 1: Kernel -->
             <div class="content-card">
-                <h2><i data-lucide="hammer"></i><span class="step-badge">1</span> 构建 Multikernel 内核</h2>
-                <p>克隆支持 multikernel 的 Linux 内核，并开启 <code>CONFIG_MULTIKERNEL</code> 和 <code>CONFIG_MKTTY</code> 进行构建。</p>
+                <h2 id="install-kernel"><i data-lucide="hammer"></i><span class="step-badge">1</span> 安装 Multikernel 内核</h2>
+                <p>主机必须运行开启了 <code>CONFIG_MULTIKERNEL</code> 和 <code>CONFIG_MKTTY</code> 的内核。你可以通过软件包安装，也可以从源码构建。</p>
+
+                <h3>方式 A：deb 或 rpm 软件包（x86_64）</h3>
+                <p>从<a href="https://github.com/multikernel/linux/releases" target="_blank" rel="noopener noreferrer">发布页面</a>下载适用于你的发行版的内核软件包，安装后重启进入新内核。软件包中的内核已开启上述两个选项。</p>
+                <pre><code># Debian / Ubuntu
+sudo apt install ./linux-image-&lt;version&gt;_amd64.deb
+
+# Fedora / RHEL
+sudo dnf install ./kernel-&lt;version&gt;.x86_64.rpm
+
+sudo reboot</code></pre>
+                <p>如果要在第 3 步构建 DAXFS 等树外模块，请同时安装同一版本的 <code>linux-headers</code>（deb）或 <code>kernel-devel</code>（rpm）。</p>
+
+                <h3>方式 B：从源码构建</h3>
                 <pre><code>git clone https://github.com/multikernel/linux.git
 cd linux
 cp /boot/config-$(uname -r) .config  # 以当前运行内核的配置为起点
-make menuconfig  # Enable CONFIG_MULTIKERNEL=y and CONFIG_MKTTY=y
+make menuconfig                      # 开启 CONFIG_MULTIKERNEL=y 和 CONFIG_MKTTY=y
 make -j$(nproc)
 sudo make modules_install
-sudo make install</code></pre>
-                <p><code>CONFIG_MULTIKERNEL</code> 依赖 <code>CONFIG_MEMORY_HOTPLUG</code>、<code>CONFIG_MEMORY_HOTREMOVE</code> 和 <code>CONFIG_CONTIG_ALLOC</code>；如果起始配置中没有开启，请先开启它们。内核借助这些功能在运行时为子内核划出内存，因此无需额外模块、启动参数或重启。</p>
-                <p>这样会生成一个带有 multikernel 扩展的标准 Linux 内核。它会作为你的常规内核运行，并且还能额外生成新的内核实例。</p>
+sudo make install
+sudo reboot</code></pre>
+                <p><code>CONFIG_MULTIKERNEL</code> 依赖 <code>CONFIG_MEMORY_HOTPLUG</code>、<code>CONFIG_MEMORY_HOTREMOVE</code> 和 <code>CONFIG_CONTIG_ALLOC</code>。如果起始配置中没有开启，请先开启它们。内核借助这些功能在运行时为子内核划出内存，因此无需额外的模块或启动参数。</p>
+                <p>另外请开启 <code>CONFIG_MULTIKERNEL_VSOCKETS</code>，即内核之间的 vsock 传输。<a href="https://github.com/multikernel/kmorph" target="_blank" rel="noopener noreferrer">kmorph</a> 依赖它，第 6 步中的 <code>kerf exec</code> 也通过同一传输运行。</p>
+
+                <h3>RISC-V 上的额外步骤</h3>
+                <p>RISC-V 开发板通过设备树启动，因此还需要构建并安装设备树文件。请在 <code>make -j$(nproc)</code> 之后、重启之前运行以下命令：</p>
+                <pre><code>make dtbs
+sudo make dtbs_install INSTALL_DTBS_PATH=/boot/dtbs/$(make -s kernelrelease)</code></pre>
+                <p>请将 <code>INSTALL_DTBS_PATH</code> 设置为引导加载程序读取设备树的目录。</p>
+
+                <h3>验证</h3>
+                <p>重启后，确认当前运行的内核支持 multikernel：</p>
+                <pre><code>uname -r
+grep -E 'CONFIG_(MULTIKERNEL|MKTTY)=' /boot/config-$(uname -r)</code></pre>
+                <p>两个选项都应显示为 <code>=y</code>。</p>
             </div>
 
             <!-- Step 2: Install kerf -->
             <div class="content-card">
-                <h2><i data-lucide="terminal"></i><span class="step-badge">2</span> 安装 Kerf 管理工具</h2>
-                <p>Kerf 是用于创建、配置和管理 multikernel 实例的命令行工具，负责资源分配、内核加载以及实例生命周期管理。</p>
+                <h2 id="install-kerf"><i data-lucide="terminal"></i><span class="step-badge">2</span> 安装 Kerf</h2>
+                <p>Kerf 是管理资源池和实例完整生命周期的命令行工具：创建实例、向实例加载内核、启动实例以及销毁实例。</p>
+
+                <h3>方式 A：deb 或 rpm 软件包（x86_64）</h3>
+                <p>从 <a href="https://github.com/multikernel/kerf/releases" target="_blank" rel="noopener noreferrer">kerf 发布页面</a>下载软件包并安装：</p>
+                <pre><code># Debian / Ubuntu
+sudo apt install ./kerf_&lt;version&gt;_amd64.deb
+
+# Fedora / RHEL
+sudo dnf install ./kerf-&lt;version&gt;.x86_64.rpm</code></pre>
+
+                <h3>方式 B：PyPI</h3>
+                <p>发行包名为 <code>kerf-multikernel</code>，安装后的命令是 <code>kerf</code>。</p>
+                <pre><code>pip install kerf-multikernel</code></pre>
+
+                <h3>方式 C：从源码安装</h3>
+                <p>适合需要跟踪开发版本的场景。构建过程会编译静态链接的 <code>kerf-init</code>，需要 <code>musl-gcc</code>（Debian 和 Ubuntu 上为 <code>musl-tools</code> 软件包）。</p>
                 <pre><code>git clone https://github.com/multikernel/kerf.git
 cd kerf
-pip install -e .</code></pre>
+sudo pip install .</code></pre>
+
+                <h3>验证</h3>
+                <pre><code>kerf --help</code></pre>
+                <div class="gs-note">
+                    <p><strong>注意：</strong>后续步骤通过 <code>sudo</code> 运行 <code>kerf</code>，因此该命令必须位于 root 的 <code>PATH</code> 中。以普通用户身份执行 <code>pip install</code> 会将其安装到 <code>~/.local/bin</code>，而 <code>sudo</code> 默认不会搜索该目录。</p>
+                </div>
             </div>
 
-            <!-- Step 3: Launch -->
+            <!-- Step 3: DAXFS -->
             <div class="content-card">
-                <h2><i data-lucide="rocket"></i><span class="step-badge">3</span> 启动你的第一个实例</h2>
-                <p>初始化资源池，创建实例，然后将其启动：</p>
-                <pre><code># Initialize: CPUs 4-31 and an 8 GB memory pool, carved out at runtime
-kerf init --cpus=4-31 --memory=8GB
-
-# Create an instance with 4 CPUs and 2 GB of memory
-kerf create web-server --cpus=4-7 --memory=2GB
-
-# Load a kernel that boots straight into a Docker image (via DAXFS)
-kerf load web-server --kernel=/boot/vmlinuz --image=nginx:latest --console=mktty0
-
-# Boot the instance and attach to its console (Ctrl+] then . to detach)
-kerf start web-server --console</code></pre>
-                <p>子内核会在分配到的 CPU 和内存上启动，直接运行在硬件之上。它拥有自己的调度器、自己的网络协议栈，以及对分配给它的设备的独立视图。</p>
-                <p>使用 <code>--image</code> 时，kerf 会从 Docker 镜像构建 <a href="https://github.com/multikernel/daxfs" target="_blank" rel="noopener noreferrer">DAXFS</a> 镜像，子内核直接将其挂载为根文件系统。DAXFS 是树外模块，kerf 不会自动加载它。仅当你需要从 Docker 镜像启动或共享主机目录时，才需要先手动加载：</p>
+                <h2 id="daxfs"><i data-lucide="hard-drive"></i><span class="step-badge">3</span> 加载 DAXFS 模块</h2>
+                <p><a href="https://github.com/multikernel/daxfs" target="_blank" rel="noopener noreferrer">DAXFS</a> 是一个通过直接内存访问在多个内核之间共享的文件系统。Kerf 用它把容器镜像交给子内核作为根文件系统。DAXFS 是树外内核模块，kerf 不会自动加载它。</p>
                 <pre><code>git clone https://github.com/multikernel/daxfs.git
 cd daxfs
 make
 sudo insmod daxfs.ko</code></pre>
-                <p>子内核同样需要 DAXFS 支持：将其编译进内核，或通过 <code>--initrd</code> 传入包含 <code>daxfs.ko</code> 的 initramfs。仅用 <code>--initrd</code> 启动传统 initrd 时完全不需要 DAXFS。</p>
+                <p>子内核同样需要 DAXFS 支持：将其编译进子内核，或在第 5 步通过 <code>--initrd</code> 传入会加载 <code>daxfs.ko</code> 的 initramfs。</p>
+                <div class="gs-note">
+                    <p><strong>注意：</strong>只有从容器镜像启动或共享主机目录时才需要 DAXFS。仅通过 <code>--initrd</code> 以传统方式从 initramfs 启动的实例不需要它，可以跳过这一步。</p>
+                </div>
             </div>
 
-            <!-- Key Components -->
+            <!-- Step 4: Pool -->
             <div class="content-card">
-                <h2><i data-lucide="box"></i>关键组件</h2>
-                <p>multikernel 技术栈由多个开源项目组成：</p>
+                <h2 id="pool"><i data-lucide="database"></i><span class="step-badge">4</span> 初始化资源池</h2>
+                <p>资源池存放可分配给实例的 CPU 和内存。内核直接从运行中的主机划出资源池，因此无需重启。</p>
+                <pre><code># 将 CPU 4-31 和 8 GB 内存放入资源池
+sudo kerf init --cpus=4-31 --memory=8GB</code></pre>
+                <p>请根据你的机器调整这些数值，并注意：</p>
                 <ul>
-                    <li><strong><a href="https://github.com/multikernel/linux" target="_blank" rel="noopener noreferrer">Multikernel Linux</a></strong> - 内核补丁，支持使用 kexec 子系统生成并管理额外的内核实例</li>
-                    <li><strong><a href="https://github.com/multikernel/kerf" target="_blank" rel="noopener noreferrer">Kerf</a></strong> - 用于管理内核实例、资源池和生命周期的编排工具</li>
-                    <li><strong><a href="https://github.com/multikernel/daxfs" target="_blank" rel="noopener noreferrer">DAXFS</a></strong> - 树外内核模块，使用直接内存访问在多个内核实例之间共享的文件系统，支持共享容器根文件系统和零拷贝数据共享</li>
+                    <li><strong>CPU ID 是物理 ID</strong>，而不是大多数工具显示的逻辑 CPU 编号：在 x86 上是 APIC ID，在 arm64 上是 MPIDR。在 x86 上可以用 <code>grep -E '^(processor|apicid)' /proc/cpuinfo</code> 查看。</li>
+                    <li><strong>内存</strong>只写大小时，会从所请求 CPU 所在的 NUMA 节点分配。如需明确指定节点，请写成 <code>--memory=8GB@0,8GB@1</code>。</li>
+                    <li><strong>设备</strong>也可以放入资源池，通过设备名或 PCI 地址指定，例如 <code>--devices=nvme0n1,enp9s0</code>。</li>
                 </ul>
+                <p>加上 <code>--dry-run</code> 可以预览结果而不做任何更改。用不同的数值再次运行 <code>kerf init</code> 可以调整已生效的资源池。</p>
             </div>
 
-            <!-- How it works -->
+            <!-- Step 5: Launch -->
             <div class="content-card">
-                <h2><i data-lucide="cog"></i>底层工作原理</h2>
+                <h2 id="launch"><i data-lucide="rocket"></i><span class="step-badge">5</span> 创建并启动实例</h2>
+                <p>启动一个实例需要三条命令：从资源池分配资源、加载内核、启动。</p>
+                <pre><code># 从资源池分配 4 个 CPU 和 2 GB 内存
+sudo kerf create web-server --cpus=4-7 --memory=2GB
+
+# 加载内核，使其直接启动进 Docker 镜像
+sudo kerf load web-server --kernel=/boot/vmlinuz-$(uname -r) --image=nginx:latest
+
+# 启动实例并连接到它的控制台
+sudo kerf start web-server --console</code></pre>
+                <p>使用 <code>--image</code> 时，kerf 会从 Docker 镜像构建 DAXFS 镜像，子内核直接将其挂载为根文件系统。示例中加载的是主机正在运行的同一个 multikernel 内核；任何开启了 <code>CONFIG_MULTIKERNEL</code> 的内核都可以使用。</p>
+                <p>子内核在分配到的 CPU 和内存上启动，直接运行在硬件之上。它的控制台默认为 <code>mktty0</code>，<code>--console</code> 连接的就是这个控制台。要在不停止实例的情况下断开控制台，请先按 <code>Ctrl+]</code>，再按 <code>.</code>。</p>
+                <p>如需以传统方式启动，请将 <code>--image</code> 换成 <code>--initrd</code>，并通过 <code>--cmdline</code> 传入内核参数。运行 <code>kerf load --help</code> 可以查看全部选项，包括实例的网络设置。</p>
+            </div>
+
+            <!-- Step 6: Manage -->
+            <div class="content-card">
+                <h2 id="manage"><i data-lucide="settings"></i><span class="step-badge">6</span> 管理实例</h2>
+                <p>实例运行之后，你可以在主机上查看它、在其中执行命令，以及调整它的资源。</p>
+                <pre><code># 列出所有实例，或查看某个实例的详情
+sudo kerf show
+sudo kerf show web-server
+
+# 在实例中执行命令，用法与 docker exec 相同
+sudo kerf exec web-server ls /
+sudo kerf exec -it web-server sh
+
+# 调整运行中实例的资源
+sudo kerf update web-server --memory=4GB</code></pre>
+                <p>内存以内核的内存粒度为单位调整，kerf 会拒绝不是该粒度整数倍的大小。加上 <code>--dry-run</code> 可以只验证更改而不实际应用。</p>
+                <div class="gs-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>命令</th>
+                                <th>用途</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>kerf init</code></td>
+                                <td>创建、调整或释放资源池</td>
+                            </tr>
+                            <tr>
+                                <td><code>kerf create</code></td>
+                                <td>从资源池分配一个实例</td>
+                            </tr>
+                            <tr>
+                                <td><code>kerf load</code></td>
+                                <td>向实例加载内核，以及可选的 initrd 或容器镜像</td>
+                            </tr>
+                            <tr>
+                                <td><code>kerf start</code></td>
+                                <td>启动实例</td>
+                            </tr>
+                            <tr>
+                                <td><code>kerf exec</code></td>
+                                <td>在运行中的实例内执行命令</td>
+                            </tr>
+                            <tr>
+                                <td><code>kerf show</code></td>
+                                <td>显示实例及其资源</td>
+                            </tr>
+                            <tr>
+                                <td><code>kerf update</code></td>
+                                <td>更改实例的 CPU、内存或设备</td>
+                            </tr>
+                            <tr>
+                                <td><code>kerf dump</code></td>
+                                <td>将资源池或实例保存为设备树，可通过 <code>kerf init --input</code> 和 <code>kerf create --input</code> 重放</td>
+                            </tr>
+                            <tr>
+                                <td><code>kerf kill</code></td>
+                                <td>关闭运行中的实例</td>
+                            </tr>
+                            <tr>
+                                <td><code>kerf unload</code></td>
+                                <td>卸载实例中的内核镜像</td>
+                            </tr>
+                            <tr>
+                                <td><code>kerf delete</code></td>
+                                <td>删除实例，并将其资源归还资源池</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p>每条命令的选项都可以通过 <code>kerf &lt;command&gt; --help</code> 查看。</p>
+            </div>
+
+            <!-- Cleanup -->
+            <div class="content-card">
+                <h2 id="cleanup"><i data-lucide="trash-2"></i>清理</h2>
+                <p>关闭并删除实例，然后将资源池中的 CPU 和内存归还主机：</p>
+                <pre><code>sudo kerf kill web-server
+sudo kerf unload web-server
+sudo kerf delete web-server
+
+# 将资源池中的全部资源归还主机
+sudo kerf init --cpus=none --memory=none</code></pre>
+                <p>如果实例无法正常关闭，可以使用 <code>kerf kill --force</code> 强制停止。</p>
+            </div>
+
+            <!-- Next steps -->
+            <div class="content-card">
+                <h2 id="next-steps"><i data-lucide="compass"></i>下一步</h2>
                 <ul>
-                    <li><strong>通过 kexec 生成内核</strong> - 新内核使用 Linux 现有的 kexec 机制启动，该机制经过扩展，可与主内核并行运行，而非将其替换</li>
-                    <li><strong>资源分区</strong> - CPU、内存和设备通过标准热插拔接口在各内核之间分配</li>
-                    <li><strong>硬件队列共享</strong> - 现代网卡和 SSD 拥有多个硬件队列；每个内核独占访问特定队列，实现真正的硬件级隔离</li>
-                    <li><strong>内核间网络</strong> - 每个子内核都获得一个标准 Linux 网络设备，底层由共享内存中的描述符环支撑；数据帧留在共享内存中，跨内核传递的只有描述符，应用程序无需修改即可使用普通套接字</li>
-                    <li><strong>Docker 集成</strong> - 子内核可以使用 DAXFS 共享容器根文件系统，直接启动进 Docker 镜像，无需操作系统初始化层</li>
+                    <li><a href="/zh/how-it-works.html">工作原理</a>：内核如何通过 kexec 生成、资源如何分区，以及内核之间如何通信。</li>
+                    <li><a href="/zh/technology.html">技术</a>：深入了解架构，包括分离内核架构。</li>
+                    <li><a href="https://github.com/multikernel/linux" target="_blank" rel="noopener noreferrer">Multikernel Linux</a>、<a href="https://github.com/multikernel/kerf" target="_blank" rel="noopener noreferrer">Kerf</a> 和 <a href="https://github.com/multikernel/daxfs" target="_blank" rel="noopener noreferrer">DAXFS</a>：源代码、发布说明和 issue 跟踪。</li>
                 </ul>
             </div>
 
             <!-- CTA -->
             <div class="content-card gs-cta">
-                <h2><i data-lucide="check-circle"></i>准备好试试了吗？</h2>
-                <p>全部 multikernel 组件均为开源。欢迎查看代码、提交 issue，或联系我们进行技术评估。</p>
+                <h2><i data-lucide="check-circle"></i>需要帮助？</h2>
+                <p>全部 multikernel 组件均为开源。欢迎在 GitHub 上提交 issue，或联系我们进行技术评估。</p>
                 <div class="button-group">
                     <a href="https://github.com/multikernel" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
                         <i data-lucide="github"></i>

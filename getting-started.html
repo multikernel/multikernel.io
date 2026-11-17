@@ -1,52 +1,21 @@
 ---
 layout: default
 title: "Getting Started"
-description: "Get up and running with Multikernel Linux. Learn how to build, configure, and launch your first multikernel instance."
+description: "Install the Multikernel Linux kernel and the kerf tool, set up a resource pool, and boot and manage your first kernel instance."
 permalink: /getting-started.html
 i18n: true
 ---
 
 <style>
-/* Overview step cards */
-.gs-overview-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-4);
-    margin-bottom: var(--space-6);
+/* Table of contents */
+.gs-toc {
+    margin: var(--space-4) 0 0 0;
+    padding-left: var(--space-6);
+    columns: 2;
+    column-gap: var(--space-8);
 }
-.gs-overview-card {
-    text-align: center;
-    padding: var(--space-5);
-    background: var(--gray-50);
-    border-radius: var(--radius-md);
-    border: 1px solid var(--gray-200);
-    border-top: 2px solid var(--accent-500);
-}
-.gs-overview-card .step-num {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background: var(--gray-900);
-    color: var(--accent-400);
-    font-family: var(--font-mono);
-    font-weight: 700;
-    font-size: var(--text-xs);
-    margin-bottom: var(--space-3);
-}
-.gs-overview-card h3 {
-    font-size: var(--text-sm);
-    font-weight: 700;
-    color: var(--gray-900);
-    margin-bottom: var(--space-1);
-}
-.gs-overview-card p {
-    font-size: var(--text-xs);
-    color: var(--gray-500);
-    line-height: var(--leading-relaxed);
-    margin: 0;
+.gs-toc li {
+    break-inside: avoid;
 }
 
 /* Step badge */
@@ -63,6 +32,9 @@ i18n: true
     font-weight: 700;
     font-size: var(--text-xs);
     flex-shrink: 0;
+}
+.content-card h2[id] {
+    scroll-margin-top: 96px;
 }
 
 /* Code blocks */
@@ -82,7 +54,8 @@ i18n: true
     color: var(--gray-300);
 }
 .content-card p code,
-.content-card li code {
+.content-card li code,
+.content-card td code {
     background: var(--gray-50);
     padding: 2px 6px;
     border-radius: var(--radius-sm);
@@ -92,39 +65,19 @@ i18n: true
     font-size: 0.88em;
 }
 
-/* Diagram */
-.gs-diagram {
-    background: var(--gray-900);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: var(--radius-md);
-    padding: var(--space-5);
-    margin: var(--space-5) 0;
-    overflow-x: auto;
-}
-.gs-diagram pre {
-    background: none;
-    border: none;
-    padding: 0;
-    margin: 0;
-    text-align: center;
-    font-size: var(--text-sm);
-    line-height: 1.5;
-    color: var(--gray-400);
-}
-
-/* Comparison table */
-.gs-comparison {
+/* Reference tables */
+.gs-table {
     overflow-x: auto;
     margin: var(--space-5) 0;
     border-radius: var(--radius-md);
     border: 1px solid var(--gray-200);
 }
-.gs-comparison table {
+.gs-table table {
     width: 100%;
     border-collapse: collapse;
     font-size: var(--text-sm);
 }
-.gs-comparison thead th {
+.gs-table thead th {
     background: var(--gray-900);
     color: rgba(255,255,255,0.8);
     font-family: var(--font-mono);
@@ -135,30 +88,36 @@ i18n: true
     text-transform: uppercase;
     letter-spacing: 0.06em;
 }
-.gs-comparison thead th:last-child {
-    background: var(--accent-700);
-    color: white;
-}
-.gs-comparison tbody td {
+.gs-table tbody td {
     padding: var(--space-3) var(--space-4);
     border-bottom: 1px solid var(--gray-200);
     color: var(--gray-600);
+    vertical-align: top;
+    line-height: var(--leading-relaxed);
 }
-.gs-comparison tbody td:first-child {
+.gs-table tbody td:first-child {
     font-weight: 600;
     color: var(--gray-900);
     background: var(--gray-50);
+    white-space: nowrap;
 }
-.gs-comparison tbody td:last-child {
-    color: var(--gray-900);
-    font-weight: 600;
-    background: rgba(226, 162, 59, 0.05);
-}
-.gs-comparison tbody tr:last-child td {
+.gs-table tbody tr:last-child td {
     border-bottom: none;
 }
-.gs-comparison tbody tr:hover {
-    background: var(--gray-25);
+
+/* Notes */
+.gs-note {
+    background: var(--gray-50);
+    border-left: 3px solid var(--accent-500);
+    border-radius: var(--radius-md);
+    padding: var(--space-4) var(--space-5);
+    margin: var(--space-4) 0;
+}
+.content-card .gs-note p {
+    margin: 0;
+}
+.gs-note strong {
+    color: var(--gray-900);
 }
 
 /* CTA card */
@@ -197,8 +156,8 @@ i18n: true
 }
 
 @media (max-width: 768px) {
-    .gs-overview-grid {
-        grid-template-columns: 1fr;
+    .gs-toc {
+        columns: 1;
     }
 }
 </style>
@@ -207,7 +166,7 @@ i18n: true
     <section class="hero">
         <div class="hero-container">
             <h1>Getting Started with Multikernel</h1>
-            <p class="subtitle">Partition a single machine into independent Linux kernel instances, each with dedicated CPUs, memory, and devices. No hypervisor, no virtualization overhead, direct hardware access.</p>
+            <p class="subtitle">Install the multikernel kernel and the kerf tool, set aside CPUs and memory, and boot your first kernel instance alongside the host.</p>
             <div class="button-group">
                 <a href="https://github.com/multikernel/linux" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
                     <i data-lucide="github"></i>
@@ -226,170 +185,287 @@ i18n: true
 
             <!-- Overview -->
             <div class="content-card">
-                <div class="gs-overview-grid">
-                    <div class="gs-overview-card">
-                        <div class="step-num">1</div>
-                        <h3>Build the Kernel</h3>
-                        <p>Clone and compile the multikernel-enabled Linux kernel</p>
-                    </div>
-                    <div class="gs-overview-card">
-                        <div class="step-num">2</div>
-                        <h3>Install Kerf</h3>
-                        <p>Set up the tool that manages resource pools and instances</p>
-                    </div>
-                    <div class="gs-overview-card">
-                        <div class="step-num">3</div>
-                        <h3>Launch Instances</h3>
-                        <p>Use kerf to create, configure, and run kernel instances</p>
-                    </div>
-                </div>
+                <h2 id="overview"><i data-lucide="layers"></i>Overview</h2>
+                <p>Multikernel Linux runs several independent Linux kernels side by side on one machine. Each kernel owns its own CPUs, memory, and assigned devices, and runs directly on the hardware without a hypervisor. This guide takes you from a stock Linux host to a running kernel instance that boots straight into a container image.</p>
+                <p>The guide uses the following terms:</p>
+                <ul>
+                    <li><strong>Host kernel</strong>: the multikernel-enabled kernel the machine boots. It behaves like a regular Linux kernel and can additionally spawn other kernels.</li>
+                    <li><strong>Resource pool</strong>: the CPUs, memory, and devices the host sets aside for other kernels.</li>
+                    <li><strong>Instance</strong>: a named allocation from the pool, together with the kernel loaded into it.</li>
+                    <li><strong>Spawned kernel</strong>: the kernel running inside an instance, with its own scheduler, network stack, and view of its devices.</li>
+                </ul>
+                <p>On this page:</p>
+                <ol class="gs-toc">
+                    <li><a href="#requirements">Check the requirements</a></li>
+                    <li><a href="#install-kernel">Install the multikernel kernel</a></li>
+                    <li><a href="#install-kerf">Install kerf</a></li>
+                    <li><a href="#daxfs">Load the DAXFS module</a></li>
+                    <li><a href="#pool">Initialize the resource pool</a></li>
+                    <li><a href="#launch">Create and boot an instance</a></li>
+                    <li><a href="#manage">Manage the instance</a></li>
+                    <li><a href="#cleanup">Clean up</a></li>
+                </ol>
             </div>
 
-            <!-- What is Multikernel -->
+            <!-- Requirements -->
             <div class="content-card">
-                <h2><i data-lucide="layers"></i>What is Multikernel Linux?</h2>
-                <p>Multikernel Linux runs multiple independent kernel instances simultaneously on the same physical machine. Each application receives its own kernel with dedicated CPUs and memory, free from interrupt interference, while device drivers and I/O processing run in a separate kernel on separate cores. Because no hypervisor is involved, every instance runs at native performance.</p>
-
-                <div class="gs-diagram"><pre>
-┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐
-│   Web Server    │  │    Database     │  │   ML Training   │
-├─────────────────┤  ├─────────────────┤  ├─────────────────┤
-│  Linux Kernel   │  │  Linux Kernel   │  │  Linux Kernel   │
-│  (Web-tuned)    │  │  (I/O-optimized)│  │  (GPU-optimized)│
-├─────────────────┤  ├─────────────────┤  ├─────────────────┤
-│   CPU + NIC     │  │   CPU + NVMe    │  │   CPU + GPU     │
-└─────────────────┘  └─────────────────┘  └─────────────────┘
-                </pre></div>
-
-                <p>Each workload runs inside its own kernel with a configuration tailored to that workload, fully isolated from other instances. A driver crash or kernel exploit in one instance cannot affect the others, and resources can be rebalanced between kernels at runtime through standard Linux hotplug interfaces.</p>
-
-                <div class="gs-comparison">
+                <h2 id="requirements"><i data-lucide="clipboard-check"></i>Before You Begin</h2>
+                <p>Prebuilt packages are available for x86_64. On other architectures, build the kernel and kerf from source.</p>
+                <div class="gs-table">
                     <table>
                         <thead>
                             <tr>
-                                <th></th>
-                                <th>Containers</th>
-                                <th>VMs</th>
-                                <th>Multikernel</th>
+                                <th>Architecture</th>
+                                <th>Kernel</th>
+                                <th>Kerf</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Isolation</td>
-                                <td>Shared kernel</td>
-                                <td>Full (hypervisor)</td>
-                                <td>Separate kernels</td>
+                                <td>x86_64</td>
+                                <td>deb or rpm package, or source</td>
+                                <td>deb or rpm package, PyPI, or source</td>
                             </tr>
                             <tr>
-                                <td>Performance</td>
-                                <td>Near-native</td>
-                                <td>5-20% overhead</td>
-                                <td>Native</td>
+                                <td>arm64</td>
+                                <td>Source</td>
+                                <td>PyPI or source</td>
                             </tr>
                             <tr>
-                                <td>Kernel customization</td>
-                                <td>No</td>
-                                <td>Yes</td>
-                                <td>Yes</td>
-                            </tr>
-                            <tr>
-                                <td>Dynamic resources</td>
-                                <td>Yes</td>
-                                <td>Limited</td>
-                                <td>Yes (hotplug)</td>
-                            </tr>
-                            <tr>
-                                <td>Zero-downtime updates</td>
-                                <td>App only</td>
-                                <td>With orchestration</td>
-                                <td>Kernel + app</td>
-                            </tr>
-                            <tr>
-                                <td>Attack surface</td>
-                                <td>Full kernel</td>
-                                <td>Reduced</td>
-                                <td>Minimal per instance</td>
+                                <td>RISC-V</td>
+                                <td>Source, plus device tree blobs</td>
+                                <td>PyPI or source</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+                <p>You also need:</p>
+                <ul>
+                    <li>Root access. The <code>kerf</code> commands that change kernel state run under <code>sudo</code>.</li>
+                    <li>CPUs and memory the host can give up. Everything placed in the resource pool is removed from the host until you release it.</li>
+                    <li>A running Docker daemon, if you boot an instance from a container image as this guide does.</li>
+                    <li>For source builds: the usual Linux kernel build toolchain, Python 3.8 or later with <code>pip</code>, and <code>musl-gcc</code> for kerf.</li>
+                </ul>
             </div>
 
-            <!-- Step 1: Build -->
+            <!-- Step 1: Kernel -->
             <div class="content-card">
-                <h2><i data-lucide="hammer"></i><span class="step-badge">1</span> Build the Multikernel Kernel</h2>
-                <p>Clone the Linux kernel source with multikernel support and build it with <code>CONFIG_MULTIKERNEL</code> and <code>CONFIG_MKTTY</code> enabled.</p>
+                <h2 id="install-kernel"><i data-lucide="hammer"></i><span class="step-badge">1</span> Install the Multikernel Kernel</h2>
+                <p>The host must boot a kernel built with <code>CONFIG_MULTIKERNEL</code> and <code>CONFIG_MKTTY</code>. Install it from a package or build it from source.</p>
+
+                <h3>Option A: deb or rpm package (x86_64)</h3>
+                <p>Download the kernel package for your distribution from the <a href="https://github.com/multikernel/linux/releases" target="_blank" rel="noopener noreferrer">releases page</a>, install it, and reboot into the new kernel. The packaged kernel has both options enabled.</p>
+                <pre><code># Debian / Ubuntu
+sudo apt install ./linux-image-&lt;version&gt;_amd64.deb
+
+# Fedora / RHEL
+sudo dnf install ./kernel-&lt;version&gt;.x86_64.rpm
+
+sudo reboot</code></pre>
+                <p>To build out-of-tree modules such as DAXFS in step 3, also install <code>linux-headers</code> (deb) or <code>kernel-devel</code> (rpm) from the same release.</p>
+
+                <h3>Option B: build from source</h3>
                 <pre><code>git clone https://github.com/multikernel/linux.git
 cd linux
 cp /boot/config-$(uname -r) .config  # Start from the running kernel's config
-make menuconfig  # Enable CONFIG_MULTIKERNEL=y and CONFIG_MKTTY=y
+make menuconfig                      # Enable CONFIG_MULTIKERNEL=y and CONFIG_MKTTY=y
 make -j$(nproc)
 sudo make modules_install
-sudo make install</code></pre>
-                <p><code>CONFIG_MULTIKERNEL</code> depends on <code>CONFIG_MEMORY_HOTPLUG</code>, <code>CONFIG_MEMORY_HOTREMOVE</code>, and <code>CONFIG_CONTIG_ALLOC</code>; enable them first if your starting config lacks them. The kernel uses them to carve out memory for spawned kernels at runtime, so no extra module, boot parameter, or reboot is needed.</p>
-                <p>The result is a standard Linux kernel with multikernel extensions. It boots and operates as the regular host kernel, and can additionally spawn and manage new kernel instances.</p>
+sudo make install
+sudo reboot</code></pre>
+                <p><code>CONFIG_MULTIKERNEL</code> depends on <code>CONFIG_MEMORY_HOTPLUG</code>, <code>CONFIG_MEMORY_HOTREMOVE</code>, and <code>CONFIG_CONTIG_ALLOC</code>. Enable them first if your starting config lacks them. The kernel uses them to carve out memory for spawned kernels at runtime, so no extra module or boot parameter is needed.</p>
+                <p>Also enable <code>CONFIG_MULTIKERNEL_VSOCKETS</code>, the vsock transport between kernels. <a href="https://github.com/multikernel/kmorph" target="_blank" rel="noopener noreferrer">kmorph</a> requires it, and <code>kerf exec</code> in step 6 runs over the same transport.</p>
+
+                <h3>Additional steps on RISC-V</h3>
+                <p>RISC-V boards boot from a device tree, so build and install the device tree blobs as well. Run these commands after <code>make -j$(nproc)</code> and before rebooting:</p>
+                <pre><code>make dtbs
+sudo make dtbs_install INSTALL_DTBS_PATH=/boot/dtbs/$(make -s kernelrelease)</code></pre>
+                <p>Set <code>INSTALL_DTBS_PATH</code> to the directory your bootloader loads device trees from.</p>
+
+                <h3>Verify</h3>
+                <p>After the reboot, confirm that the running kernel has multikernel support:</p>
+                <pre><code>uname -r
+grep -E 'CONFIG_(MULTIKERNEL|MKTTY)=' /boot/config-$(uname -r)</code></pre>
+                <p>Both options should be reported as <code>=y</code>.</p>
             </div>
 
             <!-- Step 2: Install kerf -->
             <div class="content-card">
-                <h2><i data-lucide="terminal"></i><span class="step-badge">2</span> Install the Kerf Management Tool</h2>
-                <p>Kerf is the command-line tool for creating, configuring, and managing multikernel instances. It handles resource allocation, kernel loading, and the full instance lifecycle.</p>
+                <h2 id="install-kerf"><i data-lucide="terminal"></i><span class="step-badge">2</span> Install Kerf</h2>
+                <p>Kerf is the command-line tool that manages the resource pool and the full instance lifecycle: creating instances, loading kernels into them, booting them, and tearing them down.</p>
+
+                <h3>Option A: deb or rpm package (x86_64)</h3>
+                <p>Download the package from the <a href="https://github.com/multikernel/kerf/releases" target="_blank" rel="noopener noreferrer">kerf releases page</a> and install it:</p>
+                <pre><code># Debian / Ubuntu
+sudo apt install ./kerf_&lt;version&gt;_amd64.deb
+
+# Fedora / RHEL
+sudo dnf install ./kerf-&lt;version&gt;.x86_64.rpm</code></pre>
+
+                <h3>Option B: PyPI</h3>
+                <p>The distribution is named <code>kerf-multikernel</code>; the installed command is <code>kerf</code>.</p>
+                <pre><code>pip install kerf-multikernel</code></pre>
+
+                <h3>Option C: build from source</h3>
+                <p>Use this to track the development tree. The build compiles a static <code>kerf-init</code> binary and needs <code>musl-gcc</code> (the <code>musl-tools</code> package on Debian and Ubuntu).</p>
                 <pre><code>git clone https://github.com/multikernel/kerf.git
 cd kerf
-pip install -e .</code></pre>
+sudo pip install .</code></pre>
+
+                <h3>Verify</h3>
+                <pre><code>kerf --help</code></pre>
+                <div class="gs-note">
+                    <p><strong>Note:</strong> the remaining steps run <code>kerf</code> under <code>sudo</code>, so the command must be on root's <code>PATH</code>. A per-user <code>pip install</code> places it in <code>~/.local/bin</code>, which <code>sudo</code> does not search by default.</p>
+                </div>
             </div>
 
-            <!-- Step 3: Launch -->
+            <!-- Step 3: DAXFS -->
             <div class="content-card">
-                <h2><i data-lucide="rocket"></i><span class="step-badge">3</span> Launch Your First Instance</h2>
-                <p>Initialize a resource pool, create an instance, and launch it:</p>
-                <pre><code># Initialize: CPUs 4-31 and an 8 GB memory pool, carved out at runtime
-kerf init --cpus=4-31 --memory=8GB
-
-# Create an instance with 4 CPUs and 2 GB of memory
-kerf create web-server --cpus=4-7 --memory=2GB
-
-# Load a kernel that boots straight into a Docker image (via DAXFS)
-kerf load web-server --kernel=/boot/vmlinuz --image=nginx:latest --console=mktty0
-
-# Boot the instance and attach to its console (Ctrl+] then . to detach)
-kerf start web-server --console</code></pre>
-                <p>The spawned kernel boots on the assigned CPUs and memory, running directly on the hardware. It has its own scheduler, its own network stack, and its own view of the devices assigned to it.</p>
-                <p>With <code>--image</code>, kerf builds a <a href="https://github.com/multikernel/daxfs" target="_blank" rel="noopener noreferrer">DAXFS</a> image from the Docker image, and the spawned kernel mounts it directly as its root filesystem. DAXFS is an out-of-tree kernel module that kerf does not load automatically. Load it before running <code>kerf load</code>, but only when booting from a Docker image or sharing a host directory:</p>
+                <h2 id="daxfs"><i data-lucide="hard-drive"></i><span class="step-badge">3</span> Load the DAXFS Module</h2>
+                <p><a href="https://github.com/multikernel/daxfs" target="_blank" rel="noopener noreferrer">DAXFS</a> is a filesystem shared between kernels through direct memory access. Kerf uses it to hand a container image to a spawned kernel as its root filesystem. It is an out-of-tree kernel module, and kerf does not load it automatically.</p>
                 <pre><code>git clone https://github.com/multikernel/daxfs.git
 cd daxfs
 make
 sudo insmod daxfs.ko</code></pre>
-                <p>The spawned kernel also requires DAXFS support: either build it into the kernel, or pass <code>--initrd</code> with an initramfs that loads <code>daxfs.ko</code>. A conventional boot using <code>--initrd</code> alone does not require DAXFS.</p>
+                <p>The spawned kernel needs DAXFS support too: either build it into that kernel, or pass <code>--initrd</code> in step 5 with an initramfs that loads <code>daxfs.ko</code>.</p>
+                <div class="gs-note">
+                    <p><strong>Note:</strong> DAXFS is required only to boot from a container image or to share a host directory. An instance that boots conventionally from an initramfs with <code>--initrd</code> alone does not need it, and you can skip this step.</p>
+                </div>
             </div>
 
-            <!-- Key Components -->
+            <!-- Step 4: Pool -->
             <div class="content-card">
-                <h2><i data-lucide="box"></i>Key Components</h2>
-                <p>The multikernel stack is composed of several open-source projects:</p>
+                <h2 id="pool"><i data-lucide="database"></i><span class="step-badge">4</span> Initialize the Resource Pool</h2>
+                <p>The resource pool holds the CPUs and memory that instances are allocated from. The kernel carves the pool out of the running host, so no reboot is required.</p>
+                <pre><code># Pool CPUs 4-31 and 8 GB of memory
+sudo kerf init --cpus=4-31 --memory=8GB</code></pre>
+                <p>Adjust the values to your machine, and keep in mind:</p>
                 <ul>
-                    <li><strong><a href="https://github.com/multikernel/linux" target="_blank" rel="noopener noreferrer">Multikernel Linux</a></strong> - Kernel patches that enable spawning and managing additional kernel instances through the kexec subsystem</li>
-                    <li><strong><a href="https://github.com/multikernel/kerf" target="_blank" rel="noopener noreferrer">Kerf</a></strong> - Orchestration tool that manages kernel instances, resource pools, and lifecycle</li>
-                    <li><strong><a href="https://github.com/multikernel/daxfs" target="_blank" rel="noopener noreferrer">DAXFS</a></strong> - Out-of-tree kernel module that provides a shared filesystem across kernel instances via direct memory access, enabling a shared container root filesystem and zero-copy data sharing</li>
+                    <li><strong>CPU IDs are physical IDs</strong>, not the logical CPU numbers shown by most tools: the APIC ID on x86 and the MPIDR on arm64. On x86, list them with <code>grep -E '^(processor|apicid)' /proc/cpuinfo</code>.</li>
+                    <li><strong>Memory</strong> given as a plain size is taken from the NUMA node of the requested CPUs. To choose nodes explicitly, write <code>--memory=8GB@0,8GB@1</code>.</li>
+                    <li><strong>Devices</strong> can be pooled as well, by name or PCI address, for example <code>--devices=nvme0n1,enp9s0</code>.</li>
                 </ul>
+                <p>To preview the result without changing anything, add <code>--dry-run</code>. Running <code>kerf init</code> again with different values reshapes the live pool.</p>
             </div>
 
-            <!-- How it works -->
+            <!-- Step 5: Launch -->
             <div class="content-card">
-                <h2><i data-lucide="cog"></i>How It Works Under the Hood</h2>
+                <h2 id="launch"><i data-lucide="rocket"></i><span class="step-badge">5</span> Create and Boot an Instance</h2>
+                <p>Launching an instance takes three commands: allocate resources from the pool, load a kernel, and boot it.</p>
+                <pre><code># Allocate 4 CPUs and 2 GB of memory from the pool
+sudo kerf create web-server --cpus=4-7 --memory=2GB
+
+# Load a kernel that boots straight into a Docker image
+sudo kerf load web-server --kernel=/boot/vmlinuz-$(uname -r) --image=nginx:latest
+
+# Boot the instance and attach to its console
+sudo kerf start web-server --console</code></pre>
+                <p>With <code>--image</code>, kerf builds a DAXFS image from the Docker image, and the spawned kernel mounts it directly as its root filesystem. The example loads the same multikernel kernel the host is running; any kernel with <code>CONFIG_MULTIKERNEL</code> works.</p>
+                <p>The spawned kernel boots on its assigned CPUs and memory and runs directly on the hardware. Its console is <code>mktty0</code> by default, which <code>--console</code> attaches to. To detach from the console without stopping the instance, press <code>Ctrl+]</code> and then <code>.</code>.</p>
+                <p>To boot conventionally instead, replace <code>--image</code> with <code>--initrd</code> and pass kernel parameters with <code>--cmdline</code>. Run <code>kerf load --help</code> for the full list of options, including network settings for the instance.</p>
+            </div>
+
+            <!-- Step 6: Manage -->
+            <div class="content-card">
+                <h2 id="manage"><i data-lucide="settings"></i><span class="step-badge">6</span> Manage the Instance</h2>
+                <p>Once the instance is running, inspect it, run commands inside it, and resize it from the host.</p>
+                <pre><code># List all instances, or show one in detail
+sudo kerf show
+sudo kerf show web-server
+
+# Run a command inside the instance, as with docker exec
+sudo kerf exec web-server ls /
+sudo kerf exec -it web-server sh
+
+# Resize the running instance
+sudo kerf update web-server --memory=4GB</code></pre>
+                <p>Memory is resized in units of the kernel's memory granule, and kerf refuses a size that is not a multiple of it. Add <code>--dry-run</code> to validate a change without applying it.</p>
+                <div class="gs-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Command</th>
+                                <th>Purpose</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>kerf init</code></td>
+                                <td>Create, reshape, or release the resource pool</td>
+                            </tr>
+                            <tr>
+                                <td><code>kerf create</code></td>
+                                <td>Allocate an instance from the pool</td>
+                            </tr>
+                            <tr>
+                                <td><code>kerf load</code></td>
+                                <td>Load a kernel, and optionally an initrd or container image, into an instance</td>
+                            </tr>
+                            <tr>
+                                <td><code>kerf start</code></td>
+                                <td>Boot an instance</td>
+                            </tr>
+                            <tr>
+                                <td><code>kerf exec</code></td>
+                                <td>Run a command inside a running instance</td>
+                            </tr>
+                            <tr>
+                                <td><code>kerf show</code></td>
+                                <td>Show instances and their resources</td>
+                            </tr>
+                            <tr>
+                                <td><code>kerf update</code></td>
+                                <td>Change the CPUs, memory, or devices of an instance</td>
+                            </tr>
+                            <tr>
+                                <td><code>kerf dump</code></td>
+                                <td>Save the pool or an instance as a device tree that <code>kerf init --input</code> and <code>kerf create --input</code> can replay</td>
+                            </tr>
+                            <tr>
+                                <td><code>kerf kill</code></td>
+                                <td>Shut down a running instance</td>
+                            </tr>
+                            <tr>
+                                <td><code>kerf unload</code></td>
+                                <td>Unload the kernel image from an instance</td>
+                            </tr>
+                            <tr>
+                                <td><code>kerf delete</code></td>
+                                <td>Delete an instance and return its resources to the pool</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p>Every command documents its options under <code>kerf &lt;command&gt; --help</code>.</p>
+            </div>
+
+            <!-- Cleanup -->
+            <div class="content-card">
+                <h2 id="cleanup"><i data-lucide="trash-2"></i>Clean Up</h2>
+                <p>Shut the instance down, remove it, and hand the pooled CPUs and memory back to the host:</p>
+                <pre><code>sudo kerf kill web-server
+sudo kerf unload web-server
+sudo kerf delete web-server
+
+# Return all pooled resources to the host
+sudo kerf init --cpus=none --memory=none</code></pre>
+                <p>If an instance does not shut down gracefully, <code>kerf kill --force</code> halts it.</p>
+            </div>
+
+            <!-- Next steps -->
+            <div class="content-card">
+                <h2 id="next-steps"><i data-lucide="compass"></i>Next Steps</h2>
                 <ul>
-                    <li><strong>Kernel spawning via kexec</strong> - New kernels are launched through Linux's existing kexec mechanism, extended to run alongside the primary kernel rather than replacing it</li>
-                    <li><strong>Resource partitioning</strong> - CPUs, memory, and devices are divided between kernels through standard hotplug interfaces</li>
-                    <li><strong>Hardware queue sharing</strong> - Modern NICs and SSDs expose multiple hardware queues; each kernel receives exclusive access to specific queues, providing isolation at the hardware level</li>
-                    <li><strong>Inter-kernel networking</strong> - Each spawned kernel receives a standard Linux network device backed by descriptor rings in shared memory; frames stay in place and only descriptors cross kernel boundaries, so applications use unmodified sockets</li>
-                    <li><strong>Docker integration</strong> - Spawned kernels can boot directly into Docker images, using DAXFS to share the container root filesystem without an OS init layer</li>
+                    <li><a href="/how-it-works.html">How It Works</a>: how kernels are spawned through kexec, how resources are partitioned, and how kernels communicate.</li>
+                    <li><a href="/technology.html">Technology</a>: the architecture in depth, including the split-kernel configuration.</li>
+                    <li><a href="https://github.com/multikernel/linux" target="_blank" rel="noopener noreferrer">Multikernel Linux</a>, <a href="https://github.com/multikernel/kerf" target="_blank" rel="noopener noreferrer">Kerf</a>, and <a href="https://github.com/multikernel/daxfs" target="_blank" rel="noopener noreferrer">DAXFS</a>: source code, release notes, and issue trackers.</li>
                 </ul>
             </div>
 
             <!-- CTA -->
             <div class="content-card gs-cta">
-                <h2><i data-lucide="check-circle"></i>Ready to Try It?</h2>
-                <p>All multikernel components are open source. Explore the code, file issues, or contact us to arrange a technical evaluation.</p>
+                <h2><i data-lucide="check-circle"></i>Need Help?</h2>
+                <p>All multikernel components are open source. File an issue on GitHub, or contact us to arrange a technical evaluation.</p>
                 <div class="button-group">
                     <a href="https://github.com/multikernel" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
                         <i data-lucide="github"></i>
