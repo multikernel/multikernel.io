@@ -258,7 +258,20 @@
     box-shadow: 0 0 16px rgba(201, 161, 62, 0.2);
 }
 
-/* Split-Kernel Diagram */
+#products {
+    padding: var(--space-20) 0;
+    background: white;
+}
+
+.product-audience {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--accent-700);
+    letter-spacing: 0.04em;
+    margin-bottom: var(--space-3);
+}
+
+/* Kernel Diagram */
 .split-diagram {
     display: flex;
     align-items: center;

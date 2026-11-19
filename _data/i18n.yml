@@ -23,7 +23,7 @@ en:
     performance: Performance
     performance_sub: Benchmarks vs KVM and a single kernel
     arm: ARM Platform
-    arm_sub: Split-kernel on high-core-count servers
+    arm_sub: Multikernel on high-core-count servers
     riscv: RISC-V Platform
     riscv_sub: One kernel per cluster on heterogeneous SoCs
     faq: FAQ
@@ -75,7 +75,7 @@ zh:
     performance: 性能
     performance_sub: 对比 KVM 与单内核的基准测试
     arm: ARM 平台
-    arm_sub: 高核数服务器上的分离内核
+    arm_sub: 高核数服务器上的 Multikernel
     riscv: RISC-V 平台
     riscv_sub: 异构 SoC 上每个核心簇一个内核
     faq: 常见问题

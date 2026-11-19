@@ -595,6 +595,18 @@ a.hero-stat:hover {
     color: white;
 }
 
+/* The default secondary button is drawn for the dark hero */
+.section-container .btn-secondary {
+    color: var(--gray-800);
+    border-color: var(--gray-300);
+}
+
+.section-container .btn-secondary:hover {
+    background: var(--gray-100);
+    border-color: var(--gray-400);
+    color: var(--gray-900);
+}
+
 .hero-trust {
     margin-top: var(--space-16);
     text-align: center;

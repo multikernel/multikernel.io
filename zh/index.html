@@ -2,26 +2,25 @@
 layout: default
 lang: zh
 permalink: /zh/
-title: "面向 Linux 的分离内核架构"
-description: "Multikernel 分离内核架构把您自有的服务器和已租用的虚拟机变成一朵私有云：裸金属性能、内核级隔离，无需虚拟机管理程序，没有虚拟化开销。"
+title: "面向 Linux 的 Multikernel 架构"
+description: "Multikernel 把您自有的服务器和已租用的虚拟机变成一朵私有云：每个工作负载都运行在自己的 Linux 内核中，裸金属性能、内核级隔离，无需虚拟机管理程序。"
 ---
 
 <main>
-    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-container">
             <div class="hero-badge">
                 <i data-lucide="cpu"></i>
-                <span>分离内核架构</span>
+                <span>Multikernel 架构</span>
             </div>
 
             <h1>您的云 · 您的硬件 · 零虚拟化开销</h1>
-            <p class="subtitle">在您自有的服务器上构建私有云，或者自带云（BYOC），在已租用的虚拟机上找回裸金属性能。每个工作负载都运行在自己的 Linux 内核中，独享专用核心：内核级隔离、原生性能，无需虚拟机管理程序，也没有共享内核带来的攻击面。</p>
+            <p class="subtitle">Multikernel 让每个工作负载都运行在自己的 Linux 内核中，独享专用核心，既可部署在您自有的服务器上，也可部署在您已租用的虚拟机上。您将获得裸金属性能与内核级隔离，中间没有虚拟机管理程序。</p>
 
             <div class="button-group">
-                <a href="https://github.com/multikernel" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-                    <i data-lucide="github"></i>
-                    前往 GitHub 查看
+                <a href="/zh/getting-started.html" class="btn btn-primary">
+                    <i data-lucide="rocket"></i>
+                    快速上手
                 </a>
                 <a href="https://calendar.app.google/nc1upkqQoUeoukdD9" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
                     <i data-lucide="calendar"></i>
@@ -46,210 +45,14 @@ description: "Multikernel 分离内核架构把您自有的服务器和已租用
                     <span class="hero-stat-detail">232 ms 对比 35.6 s</span>
                 </a>
             </div>
-
-            <div class="hero-trust">
-                <p class="trust-text">基于上游 Linux 构建，100% 开源</p>
-                <div class="trust-features">
-                    <div class="trust-feature">
-                        <i data-lucide="server"></i>
-                        <span>您的硬件，或您的云</span>
-                    </div>
-                    <div class="trust-feature">
-                        <i data-lucide="box"></i>
-                        <span>兼容 Docker</span>
-                    </div>
-                    <div class="trust-feature">
-                        <i data-lucide="refresh-cw"></i>
-                        <span>零停机更新</span>
-                    </div>
-                    <div class="trust-feature">
-                        <i data-lucide="github"></i>
-                        <span>开源</span>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
-    <!-- Why Split-Kernel -->
-    <section id="value-proposition" class="value-section">
-        <div class="section-container">
-            <div class="value-content">
-                <div class="value-text">
-                    <div class="section-badge">
-                        <i data-lucide="layers"></i>
-                        <span>为何选择分离内核架构</span>
-                    </div>
-                    <h2 class="section-title">隔离能力内建于架构之中</h2>
-                    <p class="section-subtitle">在传统 Linux 内核中，应用程序代码与设备处理会争用相同的 CPU 核心。分离内核架构将全部设备处理卸载到专用核心上的专用内核，从而消除了这种争用。应用程序感受不到任何设备中断——这并非调优的结果，而是因为设备中断在物理上根本无法到达它们。</p>
-
-                    <div class="value-cta">
-                        <a href="/zh/technology.html" class="btn-link">
-                            了解更多架构详情
-                            <i data-lucide="arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="value-visual">
-                    <div class="split-diagram">
-                        <div class="diagram-side diagram-traditional">
-                            <div class="diagram-label">传统架构</div>
-                            <div class="diagram-box diagram-box-shared">
-                                <span class="diagram-tag">单一内核</span>
-                                <div class="diagram-items">
-                                    <span class="diagram-item item-app">应用</span>
-                                    <span class="diagram-item item-driver">驱动</span>
-                                    <span class="diagram-item item-driver">中断</span>
-                                </div>
-                                <div class="diagram-caption">全部争用相同的核心</div>
-                            </div>
-                        </div>
-                        <div class="diagram-arrow">
-                            <i data-lucide="arrow-right"></i>
-                        </div>
-                        <div class="diagram-side diagram-multikernel">
-                            <div class="diagram-label">分离内核架构</div>
-                            <div class="diagram-box diagram-box-app">
-                                <span class="diagram-tag">应用内核</span>
-                                <div class="diagram-items">
-                                    <span class="diagram-item item-app">应用</span>
-                                    <span class="diagram-item item-app">应用</span>
-                                    <span class="diagram-item item-app">应用</span>
-                                </div>
-                                <div class="diagram-caption">零设备中断</div>
-                            </div>
-                            <div class="diagram-box diagram-box-device">
-                                <span class="diagram-tag">设备内核</span>
-                                <div class="diagram-items">
-                                    <span class="diagram-item item-driver">驱动</span>
-                                    <span class="diagram-item item-driver">中断</span>
-                                    <span class="diagram-item item-driver">I/O</span>
-                                </div>
-                                <div class="diagram-caption">专用核心</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Measured Results -->
-    <section id="performance" class="proof-section">
-        <div class="section-container">
-            <div class="section-header">
-                <div class="section-badge">
-                    <i data-lucide="gauge"></i>
-                    <span>基准测试</span>
-                </div>
-                <h2 class="section-title">同一台机器上的实测数据</h2>
-                <p class="section-subtitle">同一台服务器、同一个内核构建，每次只改变一个变量：Multikernel 实例对比启用全部硬件加速的 KVM 虚拟机，或两个内核对比一个内核。每个数字都链接到完整的测试环境、注意事项和复现步骤。</p>
-            </div>
-
-            <div class="proof-grid">
-                <a class="proof-card" href="/2026/08/16/multikernel-vs-kvm-lmbench/">
-                    <span class="proof-number">2.5x</span>
-                    <span class="proof-label">上下文切换比 KVM 快</span>
-                    <span class="proof-compare"><strong>1.37 µs</strong> 对比 3.42 µs</span>
-                    <p class="proof-detail">对比对象是启用 EPT、APICv 并绑定 vCPU 的虚拟机。KVM 只能靠让空闲核心空转来追平差距，每台虚拟机最多多耗 19 W。Multikernel 在真实的 C-state 中休眠，同样保持高速。</p>
-                    <span class="proof-source">lmbench 对比 KVM <i data-lucide="arrow-right"></i></span>
-                </a>
-
-                <a class="proof-card" href="/2026/09/06/multikernel-vs-kvm-iperf/">
-                    <span class="proof-number">10x</span>
-                    <span class="proof-label">线速接收所需 CPU 更少</span>
-                    <span class="proof-compare"><strong>21%</strong> 对比 215% 单核</span>
-                    <p class="proof-detail">双方都跑满了线速。虚拟机发送耗费 2 倍 CPU，接收耗费 10 倍，经过 vhost-net 增加的往返延迟也是 Multikernel 的 4 倍（0.40 ms 对比 0.10 ms）。</p>
-                    <span class="proof-source">iperf 对比 KVM <i data-lucide="arrow-right"></i></span>
-                </a>
-
-                <a class="proof-card" href="/2026/08/17/multikernel-will-it-scale/">
-                    <span class="proof-number">2.6x</span>
-                    <span class="proof-label">同样 24 个核心，吞吐更高</span>
-                    <span class="proof-compare"><strong>780K</strong> 对比 300K 次 unlink/s</span>
-                    <p class="proof-detail">在完全相同的硬件上用两个内核代替一个：共享文件的 stat() 提升 2.1 倍，跨插槽的 unlink 提升 4.1 倍。不共享的锁就不会争用。对照基准的变化不超过 1%。</p>
-                    <span class="proof-source">will-it-scale <i data-lucide="arrow-right"></i></span>
-                </a>
-
-                <a class="proof-card" href="/2026/08/25/memory-pressure-tail-latency/">
-                    <span class="proof-number">153x</span>
-                    <span class="proof-label">嘈杂邻居旁的 p99 更低</span>
-                    <span class="proof-compare"><strong>232 ms</strong> 对比 35.6 s</span>
-                    <p class="proof-detail">延迟敏感任务与一个大量占用内存的批处理作业同机运行。在单内核上，cgroup 只能把批处理作业压到 10 轮来保护前者。使用两个内核，双方都能全速运行。</p>
-                    <span class="proof-source">尾延迟 <i data-lucide="arrow-right"></i></span>
-                </a>
-
-                <a class="proof-card" href="/2026/10/14/before-the-kernel-boots-memory-setup/">
-                    <span class="proof-number">61x</span>
-                    <span class="proof-label">大内存实例创建更快</span>
-                    <span class="proof-compare"><strong>111 ms</strong> 对比 6.81 s，32 GiB 预分配</span>
-                    <p class="proof-detail">使用预分配内存的 QEMU 在 vCPU 运行前要花数秒填充页面，为设备直通锁定内存的开销与此相当。Multikernel 直接分配它已拥有的物理内存区间，从 1 GiB 到 32 GiB 都约为 110 ms。</p>
-                    <span class="proof-source">实例内存准备 <i data-lucide="arrow-right"></i></span>
-                </a>
-
-                <a class="proof-card" href="/2026/09/30/the-kernel-crashed-the-memory-didnt/">
-                    <span class="proof-number">0</span>
-                    <span class="proof-label">四次内核崩溃，零字节丢失</span>
-                    <span class="proof-compare"><strong>4 / 4</strong> 次崩溃均验证完好</span>
-                    <p class="proof-detail">一个应用内核在写入过程中连续崩溃四次。每次在同一块 DAXFS 内存上启动的新内核都发现每个字节原样保留，连写了一半的页面也不例外。无需重放日志，也无需重新加载。</p>
-                    <span class="proof-source">崩溃恢复 <i data-lucide="arrow-right"></i></span>
-                </a>
-            </div>
-
-            <p class="proof-footnote"><a href="/zh/performance.html">查看全部基准测试结果</a></p>
-        </div>
-    </section>
-
-    <!-- Who It's For -->
-    <section id="use-cases" class="how-it-works">
-        <div class="section-container">
-            <div class="section-header">
-                <div class="section-badge">
-                    <i data-lucide="users"></i>
-                    <span>为谁而建</span>
-                </div>
-                <h2 class="section-title">为自主运营基础设施的团队而建</h2>
-            </div>
-
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i data-lucide="layers"></i>
-                    </div>
-                    <h3 class="feature-title">平台与基础设施团队</h3>
-                    <p class="feature-description">在每台机器上整合更多 Linux 工作负载，没有虚拟机管理程序损耗，没有嘈杂邻居——也不必再续费虚拟化授权。</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i data-lucide="brain"></i>
-                    </div>
-                    <h3 class="feature-title">AI 基础设施团队</h3>
-                    <p class="feature-description">让不可信智能体与生成代码运行在各自的内核中，无需嵌套虚拟化。大内存实例约 110 ms 即可就绪。</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i data-lucide="heart-pulse"></i>
-                    </div>
-                    <h3 class="feature-title">SRE 与集群运维团队</h3>
-                    <p class="feature-description">在整个集群范围内应用内核安全补丁：零停机、即时回滚。一个内核的崩溃只局限在该内核内。不再需要维护窗口。</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Products -->
     <section id="products">
         <div class="section-container">
             <div class="section-header">
-                <div class="section-badge">
-                    <i data-lucide="package"></i>
-                    <span>产品</span>
-                </div>
-                <h2 class="section-title">基于分离内核架构构建</h2>
-                <p class="section-subtitle">三款基于分离内核架构构建的开源软件产品。从 GitHub 下载，部署到您自己的基础设施中。</p>
+                <h2 class="section-title">三款产品 · 同一套架构</h2>
+                <p class="section-subtitle">基于上游 Linux 构建的开源软件，部署在您自己的基础设施上。</p>
             </div>
 
             <div class="cards-grid">
@@ -258,20 +61,20 @@ description: "Multikernel 分离内核架构把您自有的服务器和已租用
                         <i data-lucide="layers"></i>
                     </div>
                     <h3 class="capability-title">Multikernel Private Cloud</h3>
-                    <p style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--accent-700); margin-bottom: var(--space-3); letter-spacing: 0.04em;">私有云操作系统</p>
-                    <p class="capability-description">无需虚拟机管理程序的私有云。在您数据中心的裸金属上整合 Linux 工作负载，或者自带云（BYOC），直接用您已租用的虚拟机——每个负载都拥有自己的内核、专用核心和原生硬件访问权限。</p>
+                    <p class="product-audience">面向平台与基础设施团队</p>
+                    <p class="capability-description">无需虚拟机管理程序的私有云。在您数据中心的裸金属上，或在您已租用的虚拟机上整合 Linux 工作负载，每个工作负载都拥有自己的内核、专用核心和原生硬件访问。</p>
                     <div class="capability-features">
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>在自有硬件或租用虚拟机上获得原生性能</span>
+                            <span>在自有硬件或租用的虚拟机上获得原生性能</span>
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>零嘈杂邻居干扰</span>
+                            <span>没有嘈杂邻居</span>
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>无虚拟机管理程序开销</span>
+                            <span>无需再续费虚拟化授权</span>
                         </div>
                     </div>
                     <div class="value-cta" style="margin-top: var(--space-4);">
@@ -287,8 +90,8 @@ description: "Multikernel 分离内核架构把您自有的服务器和已租用
                         <i data-lucide="brain"></i>
                     </div>
                     <h3 class="capability-title">Multikernel Sandbox</h3>
-                    <p style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--accent-700); margin-bottom: var(--space-3); letter-spacing: 0.04em;">AI 智能体沙箱运行时</p>
-                    <p class="capability-description">面向 AI 智能体的内核级沙箱。每个智能体运行在专用核心上的独立内核中，具备强隔离，无需嵌套虚拟化。</p>
+                    <p class="product-audience">面向 AI 基础设施团队</p>
+                    <p class="capability-description">面向 AI 智能体与生成代码的内核级沙箱。每个智能体运行在专用核心上的独立内核中，无需嵌套虚拟化。</p>
                     <div class="capability-features">
                         <div class="feature-item">
                             <i data-lucide="check"></i>
@@ -316,20 +119,20 @@ description: "Multikernel 分离内核架构把您自有的服务器和已租用
                         <i data-lucide="heart-pulse"></i>
                     </div>
                     <h3 class="capability-title">Multikernel LiveUpdate</h3>
-                    <p style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--accent-700); margin-bottom: var(--space-3); letter-spacing: 0.04em;">零停机内核热升级工具</p>
-                    <p class="capability-description">零停机内核热升级，支持即时回滚。无需重启或中断正在运行的工作负载，即可应用安全补丁和内核更新。</p>
+                    <p class="product-audience">面向 SRE 与集群运维团队</p>
+                    <p class="capability-description">零停机内核热升级，支持即时回滚。无需重启或中断正在运行的工作负载，即可在整个集群范围内应用安全补丁。</p>
                     <div class="capability-features">
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>零停机内核热升级</span>
-                        </div>
-                        <div class="feature-item">
-                            <i data-lucide="check"></i>
-                            <span>应用内核崩溃后内存完好</span>
+                            <span>不再需要维护窗口</span>
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>
                             <span>即时回滚</span>
+                        </div>
+                        <div class="feature-item">
+                            <i data-lucide="check"></i>
+                            <span>应用内核崩溃后内存完好</span>
                         </div>
                     </div>
                     <div class="value-cta" style="margin-top: var(--space-4);">
@@ -343,21 +146,128 @@ description: "Multikernel 分离内核架构把您自有的服务器和已租用
         </div>
     </section>
 
-    <!-- Closing CTA -->
-    <section id="get-started" class="value-section">
+    <section id="architecture" class="value-section">
+        <div class="section-container">
+            <div class="value-content">
+                <div class="value-text">
+                    <div class="section-badge">
+                        <i data-lucide="layers"></i>
+                        <span>架构</span>
+                    </div>
+                    <h2 class="section-title">一台机器 · 多个内核</h2>
+                    <p class="section-subtitle">传统服务器让所有工作负载共用一个内核。它们争用相同的核心、缓存与锁，一次内核崩溃就会让全部工作负载一起宕机。</p>
+                    <p class="section-subtitle" style="margin-top: var(--space-4);">Multikernel 在同一台机器上并排启动多个 Linux 内核。每个内核独占自己的核心与内存，直接运行在硬件之上，因此隔离来自架构本身，而不是调优或虚拟机管理程序。</p>
+
+                    <div class="value-cta">
+                        <a href="/zh/how-it-works.html" class="btn-link">
+                            了解工作原理
+                            <i data-lucide="arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="value-visual">
+                    <div class="split-diagram">
+                        <div class="diagram-side">
+                            <div class="diagram-label">传统架构</div>
+                            <div class="diagram-box diagram-box-shared">
+                                <span class="diagram-tag">单一共享内核</span>
+                                <div class="diagram-items">
+                                    <span class="diagram-item item-driver">应用</span>
+                                    <span class="diagram-item item-driver">应用</span>
+                                    <span class="diagram-item item-driver">应用</span>
+                                </div>
+                                <div class="diagram-caption">共用核心、内存与锁</div>
+                            </div>
+                        </div>
+                        <div class="diagram-arrow">
+                            <i data-lucide="arrow-right"></i>
+                        </div>
+                        <div class="diagram-side">
+                            <div class="diagram-label">Multikernel</div>
+                            <div class="diagram-box diagram-box-app">
+                                <span class="diagram-tag">内核 A</span>
+                                <div class="diagram-items">
+                                    <span class="diagram-item item-app">应用</span>
+                                    <span class="diagram-item item-driver">核心</span>
+                                    <span class="diagram-item item-driver">内存</span>
+                                </div>
+                            </div>
+                            <div class="diagram-box diagram-box-app">
+                                <span class="diagram-tag">内核 B</span>
+                                <div class="diagram-items">
+                                    <span class="diagram-item item-app">应用</span>
+                                    <span class="diagram-item item-driver">核心</span>
+                                    <span class="diagram-item item-driver">内存</span>
+                                </div>
+                            </div>
+                            <div class="diagram-box diagram-box-app">
+                                <span class="diagram-tag">内核 C</span>
+                                <div class="diagram-items">
+                                    <span class="diagram-item item-app">应用</span>
+                                    <span class="diagram-item item-driver">核心</span>
+                                    <span class="diagram-item item-driver">内存</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="performance" class="proof-section">
         <div class="section-container">
             <div class="section-header">
-                <h2 class="section-title">让基础设施运行在内核之上，而非虚拟机管理程序之上</h2>
-                <p class="section-subtitle">Multikernel 完全开源，可运行在您现有的硬件上。从文档开始上手，或直接与开发团队交流。</p>
+                <h2 class="section-title">同一台机器上的实测数据</h2>
+                <p class="section-subtitle">同一台服务器、同一个内核构建，每次只改变一个变量。每个数字都链接到完整的测试环境、注意事项和复现步骤。</p>
             </div>
-            <div class="button-group">
-                <a href="/zh/getting-started.html" class="btn btn-primary">
-                    <i data-lucide="rocket"></i>
-                    快速上手
+
+            <div class="proof-grid">
+                <a class="proof-card" href="/2026/08/17/multikernel-will-it-scale/">
+                    <span class="proof-number">2.6x</span>
+                    <span class="proof-label">同样 24 个核心，吞吐更高</span>
+                    <span class="proof-compare"><strong>780K</strong> 对比 300K 次 unlink/s</span>
+                    <p class="proof-detail">在完全相同的硬件上用两个内核代替一个：共享文件的 stat() 提升 2.1 倍，跨插槽的 unlink 提升 4.1 倍。不共享的锁就不会争用。对照基准的变化不超过 1%。</p>
+                    <span class="proof-source">will-it-scale <i data-lucide="arrow-right"></i></span>
                 </a>
-                <a href="https://calendar.app.google/nc1upkqQoUeoukdD9" target="_blank" rel="noopener noreferrer" class="btn-link">
-                    预约演示
-                    <i data-lucide="arrow-right"></i>
+
+                <a class="proof-card" href="/2026/10/14/before-the-kernel-boots-memory-setup/">
+                    <span class="proof-number">61x</span>
+                    <span class="proof-label">大内存实例创建更快</span>
+                    <span class="proof-compare"><strong>111 ms</strong> 对比 6.81 s，32 GiB 预分配</span>
+                    <p class="proof-detail">使用预分配内存的 QEMU 在 vCPU 运行前要花数秒填充页面，为设备直通锁定内存的开销与此相当。Multikernel 直接分配它已拥有的物理内存区间，从 1 GiB 到 32 GiB 都约为 110 ms。</p>
+                    <span class="proof-source">实例内存准备 <i data-lucide="arrow-right"></i></span>
+                </a>
+
+                <a class="proof-card" href="/2026/09/30/the-kernel-crashed-the-memory-didnt/">
+                    <span class="proof-number">0</span>
+                    <span class="proof-label">四次内核崩溃，零字节丢失</span>
+                    <span class="proof-compare"><strong>4 / 4</strong> 次崩溃均验证完好</span>
+                    <p class="proof-detail">一个应用内核在写入过程中连续崩溃四次。每次在同一块 DAXFS 内存上启动的新内核都发现每个字节原样保留，连写了一半的页面也不例外。无需重放日志，也无需重新加载。</p>
+                    <span class="proof-source">崩溃恢复 <i data-lucide="arrow-right"></i></span>
+                </a>
+            </div>
+
+            <p class="proof-footnote"><a href="/zh/performance.html">查看全部基准测试结果</a></p>
+        </div>
+    </section>
+
+    <section id="get-started" class="value-section">
+        <div class="section-container">
+            <div class="section-header" style="margin-bottom: var(--space-8);">
+                <h2 class="section-title">让基础设施运行在内核之上，而非虚拟机管理程序之上</h2>
+                <p class="section-subtitle">Multikernel 完全开源，可运行在您现有的硬件上。企业订阅按节点统一计价。</p>
+            </div>
+
+            <div class="button-group">
+                <a href="/zh/pricing.html" class="btn btn-primary">
+                    <i data-lucide="tag"></i>
+                    查看价格
+                </a>
+                <a href="https://github.com/multikernel" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                    <i data-lucide="github"></i>
+                    前往 GitHub 查看
                 </a>
             </div>
         </div>

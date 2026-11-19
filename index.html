@@ -1,26 +1,25 @@
 ---
 layout: default
-title: "Multikernel Technologies - Split-Kernel Architecture for Linux"
-description: "Multikernel turns servers you own and VMs you rent into a private cloud: bare-metal performance, kernel-level isolation, no hypervisor, no virtualization tax."
+title: "Multikernel Technologies - Multikernel Architecture for Linux"
+description: "Multikernel turns servers you own and VMs you rent into a private cloud: every workload in its own Linux kernel, with bare-metal performance, kernel-level isolation, and no hypervisor."
 i18n: true
 ---
 
 <main>
-    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-container">
             <div class="hero-badge">
                 <i data-lucide="cpu"></i>
-                <span>Split-Kernel Architecture</span>
+                <span>Multikernel Architecture</span>
             </div>
 
             <h1>Your Cloud. Your Hardware. No Virtualization Tax.</h1>
-            <p class="subtitle">Build a private cloud on servers you own, or bring your own cloud (BYOC) and reclaim the VMs you already rent. Every workload runs in its own Linux kernel with dedicated cores: bare-metal performance, kernel-level isolation, no hypervisor, no shared kernel attack surface.</p>
+            <p class="subtitle">Multikernel runs every workload in its own Linux kernel on dedicated cores, on servers you own or VMs you already rent. You get bare-metal performance and kernel-level isolation, with no hypervisor in between.</p>
 
             <div class="button-group">
-                <a href="https://github.com/multikernel" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-                    <i data-lucide="github"></i>
-                    View on GitHub
+                <a href="/getting-started.html" class="btn btn-primary">
+                    <i data-lucide="rocket"></i>
+                    Get Started
                 </a>
                 <a href="https://calendar.app.google/nc1upkqQoUeoukdD9" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
                     <i data-lucide="calendar"></i>
@@ -45,210 +44,14 @@ i18n: true
                     <span class="hero-stat-detail">232 ms vs 35.6 s</span>
                 </a>
             </div>
-
-            <div class="hero-trust">
-                <p class="trust-text">Built on upstream Linux, 100% open source</p>
-                <div class="trust-features">
-                    <div class="trust-feature">
-                        <i data-lucide="server"></i>
-                        <span>Your Hardware or Your Cloud</span>
-                    </div>
-                    <div class="trust-feature">
-                        <i data-lucide="box"></i>
-                        <span>Docker Compatible</span>
-                    </div>
-                    <div class="trust-feature">
-                        <i data-lucide="refresh-cw"></i>
-                        <span>Zero-Downtime Updates</span>
-                    </div>
-                    <div class="trust-feature">
-                        <i data-lucide="github"></i>
-                        <span>Open Source</span>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
-    <!-- Why Split-Kernel -->
-    <section id="value-proposition" class="value-section">
-        <div class="section-container">
-            <div class="value-content">
-                <div class="value-text">
-                    <div class="section-badge">
-                        <i data-lucide="layers"></i>
-                        <span>Why Split-Kernel</span>
-                    </div>
-                    <h2 class="section-title">Isolation Built into the Architecture</h2>
-                    <p class="section-subtitle">In a traditional Linux kernel, application code and device processing compete for the same CPU cores. The split-kernel architecture removes this contention by offloading all device processing to a dedicated kernel on dedicated cores. Applications see zero device interrupts, not because of tuning, but because device interrupts physically cannot reach them.</p>
-
-                    <div class="value-cta">
-                        <a href="/technology.html" class="btn-link">
-                            Learn more about the architecture
-                            <i data-lucide="arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="value-visual">
-                    <div class="split-diagram">
-                        <div class="diagram-side diagram-traditional">
-                            <div class="diagram-label">Traditional</div>
-                            <div class="diagram-box diagram-box-shared">
-                                <span class="diagram-tag">Single Kernel</span>
-                                <div class="diagram-items">
-                                    <span class="diagram-item item-app">App</span>
-                                    <span class="diagram-item item-driver">Drivers</span>
-                                    <span class="diagram-item item-driver">IRQs</span>
-                                </div>
-                                <div class="diagram-caption">All compete for the same cores</div>
-                            </div>
-                        </div>
-                        <div class="diagram-arrow">
-                            <i data-lucide="arrow-right"></i>
-                        </div>
-                        <div class="diagram-side diagram-multikernel">
-                            <div class="diagram-label">Split-Kernel</div>
-                            <div class="diagram-box diagram-box-app">
-                                <span class="diagram-tag">App-Kernel</span>
-                                <div class="diagram-items">
-                                    <span class="diagram-item item-app">App</span>
-                                    <span class="diagram-item item-app">App</span>
-                                    <span class="diagram-item item-app">App</span>
-                                </div>
-                                <div class="diagram-caption">Zero device interrupts</div>
-                            </div>
-                            <div class="diagram-box diagram-box-device">
-                                <span class="diagram-tag">Device-Kernel</span>
-                                <div class="diagram-items">
-                                    <span class="diagram-item item-driver">Drivers</span>
-                                    <span class="diagram-item item-driver">IRQs</span>
-                                    <span class="diagram-item item-driver">I/O</span>
-                                </div>
-                                <div class="diagram-caption">Dedicated cores</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Measured Results -->
-    <section id="performance" class="proof-section">
-        <div class="section-container">
-            <div class="section-header">
-                <div class="section-badge">
-                    <i data-lucide="gauge"></i>
-                    <span>Benchmarks</span>
-                </div>
-                <h2 class="section-title">Measured on the Same Machine</h2>
-                <p class="section-subtitle">Same server, same kernel build, one variable at a time: a multikernel instance against a fully accelerated KVM guest, or two kernels against one. Every number links to its setup, caveats, and reproduction steps.</p>
-            </div>
-
-            <div class="proof-grid">
-                <a class="proof-card" href="/2026/08/16/multikernel-vs-kvm-lmbench/">
-                    <span class="proof-number">2.5x</span>
-                    <span class="proof-label">Faster context switches than KVM</span>
-                    <span class="proof-compare"><strong>1.37 µs</strong> vs 3.42 µs</span>
-                    <p class="proof-detail">Against a guest with EPT, APICv, and pinned vCPUs. KVM closes the gap only by spinning its idle cores, at up to 19 W per guest. Multikernel stays fast while sleeping in real C-states.</p>
-                    <span class="proof-source">lmbench vs KVM <i data-lucide="arrow-right"></i></span>
-                </a>
-
-                <a class="proof-card" href="/2026/09/06/multikernel-vs-kvm-iperf/">
-                    <span class="proof-number">10x</span>
-                    <span class="proof-label">Less CPU to receive at line rate</span>
-                    <span class="proof-compare"><strong>21%</strong> vs 215% of a core</span>
-                    <p class="proof-detail">Both sides hit line rate. The VM paid 2x the CPU to send, 10x to receive, and added four times as much round-trip latency (0.40 ms vs 0.10 ms) through vhost-net.</p>
-                    <span class="proof-source">iperf vs KVM <i data-lucide="arrow-right"></i></span>
-                </a>
-
-                <a class="proof-card" href="/2026/08/17/multikernel-will-it-scale/">
-                    <span class="proof-number">2.6x</span>
-                    <span class="proof-label">More throughput from the same 24 cores</span>
-                    <span class="proof-compare"><strong>780K</strong> vs 300K unlinks/s</span>
-                    <p class="proof-detail">Two kernels instead of one, on identical hardware: 2.1x on stat() of a shared file, 4.1x on unlink across sockets. Locks that are not shared are not contended. Control benchmarks moved by at most 1%.</p>
-                    <span class="proof-source">will-it-scale <i data-lucide="arrow-right"></i></span>
-                </a>
-
-                <a class="proof-card" href="/2026/08/25/memory-pressure-tail-latency/">
-                    <span class="proof-number">153x</span>
-                    <span class="proof-label">Lower p99 beside a noisy neighbor</span>
-                    <span class="proof-compare"><strong>232 ms</strong> vs 35.6 s</span>
-                    <p class="proof-detail">A latency-sensitive task next to a memory-hungry batch job. On one kernel, cgroups protect the victim only by starving the batch job to 10 passes. With two kernels, both run at full speed.</p>
-                    <span class="proof-source">Tail latency <i data-lucide="arrow-right"></i></span>
-                </a>
-
-                <a class="proof-card" href="/2026/10/14/before-the-kernel-boots-memory-setup/">
-                    <span class="proof-number">61x</span>
-                    <span class="proof-label">Faster large-memory instance setup</span>
-                    <span class="proof-compare"><strong>111 ms</strong> vs 6.81 s, 32 GiB preallocated</span>
-                    <p class="proof-detail">QEMU with preallocated RAM spends seconds populating pages before a vCPU runs, and pinning memory for a passthrough device costs the same. Multikernel assigns physical ranges it already owns, in about 110 ms from 1 GiB to 32 GiB.</p>
-                    <span class="proof-source">Instance memory setup <i data-lucide="arrow-right"></i></span>
-                </a>
-
-                <a class="proof-card" href="/2026/09/30/the-kernel-crashed-the-memory-didnt/">
-                    <span class="proof-number">0</span>
-                    <span class="proof-label">Bytes lost across four kernel panics</span>
-                    <span class="proof-compare"><strong>4 of 4</strong> panics verified intact</span>
-                    <p class="proof-detail">An app-kernel panicked mid-write four times. Each time, a fresh kernel booted on the same DAXFS memory and found every byte in place, down to a half-written page. No log replay, no reload.</p>
-                    <span class="proof-source">Crash recovery <i data-lucide="arrow-right"></i></span>
-                </a>
-            </div>
-
-            <p class="proof-footnote"><a href="/performance.html">See all benchmark results</a></p>
-        </div>
-    </section>
-
-    <!-- Who It's For -->
-    <section id="use-cases" class="how-it-works">
-        <div class="section-container">
-            <div class="section-header">
-                <div class="section-badge">
-                    <i data-lucide="users"></i>
-                    <span>Who It's For</span>
-                </div>
-                <h2 class="section-title">Built for Teams That Run Their Own Infrastructure</h2>
-            </div>
-
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i data-lucide="layers"></i>
-                    </div>
-                    <h3 class="feature-title">Platform &amp; Infrastructure Teams</h3>
-                    <p class="feature-description">Consolidate more Linux workloads per machine without a hypervisor tax, without noisy neighbors, and without renewing virtualization licenses.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i data-lucide="brain"></i>
-                    </div>
-                    <h3 class="feature-title">AI Infrastructure Teams</h3>
-                    <p class="feature-description">Sandbox untrusted agents and generated code in their own kernels, without nested virtualization. Large-memory instances are ready in about 110 ms.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i data-lucide="heart-pulse"></i>
-                    </div>
-                    <h3 class="feature-title">SRE &amp; Fleet Operations</h3>
-                    <p class="feature-description">Apply kernel security patches across the fleet with zero downtime and instant rollback. A crash in one kernel stays in that kernel. No maintenance windows required.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Products -->
     <section id="products">
         <div class="section-container">
             <div class="section-header">
-                <div class="section-badge">
-                    <i data-lucide="package"></i>
-                    <span>Products</span>
-                </div>
-                <h2 class="section-title">Built on Split-Kernel Architecture</h2>
-                <p class="section-subtitle">Three open-source software products built on split-kernel architecture. Download from GitHub, deploy on your infrastructure.</p>
+                <h2 class="section-title">Three Products, One Architecture</h2>
+                <p class="section-subtitle">Open-source software built on upstream Linux, deployed on your own infrastructure.</p>
             </div>
 
             <div class="cards-grid">
@@ -257,8 +60,8 @@ i18n: true
                         <i data-lucide="layers"></i>
                     </div>
                     <h3 class="capability-title">Multikernel Private Cloud</h3>
-                    <p style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--accent-700); margin-bottom: var(--space-3); letter-spacing: 0.04em;">Private cloud operating system</p>
-                    <p class="capability-description">Private cloud without the hypervisor. Consolidate Linux workloads on bare metal in your data center, or bring your own cloud: the VMs you already rent. Each gets its own kernel, dedicated cores, and native hardware access.</p>
+                    <p class="product-audience">For platform and infrastructure teams</p>
+                    <p class="capability-description">A private cloud without the hypervisor. Consolidate Linux workloads on bare metal in your data center or on the VMs you already rent, each with its own kernel, dedicated cores, and native hardware access.</p>
                     <div class="capability-features">
                         <div class="feature-item">
                             <i data-lucide="check"></i>
@@ -266,11 +69,11 @@ i18n: true
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>Zero noisy-neighbor interference</span>
+                            <span>No noisy neighbors</span>
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>No hypervisor overhead</span>
+                            <span>No virtualization licenses to renew</span>
                         </div>
                     </div>
                     <div class="value-cta" style="margin-top: var(--space-4);">
@@ -286,8 +89,8 @@ i18n: true
                         <i data-lucide="brain"></i>
                     </div>
                     <h3 class="capability-title">Multikernel Sandbox</h3>
-                    <p style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--accent-700); margin-bottom: var(--space-3); letter-spacing: 0.04em;">AI agent sandboxing runtime</p>
-                    <p class="capability-description">Kernel-level sandboxing for AI agents. Each agent runs in its own kernel on dedicated cores, with strong isolation. No nested virtualization required.</p>
+                    <p class="product-audience">For AI infrastructure teams</p>
+                    <p class="capability-description">Kernel-level sandboxing for AI agents and generated code. Each agent runs in its own kernel on dedicated cores, with no nested virtualization required.</p>
                     <div class="capability-features">
                         <div class="feature-item">
                             <i data-lucide="check"></i>
@@ -315,20 +118,20 @@ i18n: true
                         <i data-lucide="heart-pulse"></i>
                     </div>
                     <h3 class="capability-title">Multikernel LiveUpdate</h3>
-                    <p style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--accent-700); margin-bottom: var(--space-3); letter-spacing: 0.04em;">Zero-downtime kernel upgrade tool</p>
-                    <p class="capability-description">Zero-downtime kernel upgrades with instant rollback. Apply security patches and kernel updates without rebooting or interrupting running workloads.</p>
+                    <p class="product-audience">For SRE and fleet operations</p>
+                    <p class="capability-description">Zero-downtime kernel upgrades with instant rollback. Apply security patches across the fleet without rebooting or interrupting running workloads.</p>
                     <div class="capability-features">
                         <div class="feature-item">
                             <i data-lucide="check"></i>
-                            <span>Zero-downtime kernel upgrades</span>
-                        </div>
-                        <div class="feature-item">
-                            <i data-lucide="check"></i>
-                            <span>Memory survives app-kernel crashes</span>
+                            <span>No maintenance windows</span>
                         </div>
                         <div class="feature-item">
                             <i data-lucide="check"></i>
                             <span>Instant rollback</span>
+                        </div>
+                        <div class="feature-item">
+                            <i data-lucide="check"></i>
+                            <span>Memory survives app-kernel crashes</span>
                         </div>
                     </div>
                     <div class="value-cta" style="margin-top: var(--space-4);">
@@ -342,21 +145,128 @@ i18n: true
         </div>
     </section>
 
-    <!-- Closing CTA -->
-    <section id="get-started" class="value-section">
+    <section id="architecture" class="value-section">
+        <div class="section-container">
+            <div class="value-content">
+                <div class="value-text">
+                    <div class="section-badge">
+                        <i data-lucide="layers"></i>
+                        <span>The Architecture</span>
+                    </div>
+                    <h2 class="section-title">One Machine, Many Kernels</h2>
+                    <p class="section-subtitle">A traditional server runs every workload on one shared kernel. They compete for the same cores, caches, and locks, and a single kernel crash takes all of them down.</p>
+                    <p class="section-subtitle" style="margin-top: var(--space-4);">Multikernel boots several Linux kernels side by side on the same machine. Each kernel owns its cores and memory and runs directly on the hardware, so isolation comes from the architecture itself, not from tuning or a hypervisor.</p>
+
+                    <div class="value-cta">
+                        <a href="/how-it-works.html" class="btn-link">
+                            See how it works
+                            <i data-lucide="arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="value-visual">
+                    <div class="split-diagram">
+                        <div class="diagram-side">
+                            <div class="diagram-label">Traditional</div>
+                            <div class="diagram-box diagram-box-shared">
+                                <span class="diagram-tag">One Shared Kernel</span>
+                                <div class="diagram-items">
+                                    <span class="diagram-item item-driver">App</span>
+                                    <span class="diagram-item item-driver">App</span>
+                                    <span class="diagram-item item-driver">App</span>
+                                </div>
+                                <div class="diagram-caption">Shared cores, memory, and locks</div>
+                            </div>
+                        </div>
+                        <div class="diagram-arrow">
+                            <i data-lucide="arrow-right"></i>
+                        </div>
+                        <div class="diagram-side">
+                            <div class="diagram-label">Multikernel</div>
+                            <div class="diagram-box diagram-box-app">
+                                <span class="diagram-tag">Kernel A</span>
+                                <div class="diagram-items">
+                                    <span class="diagram-item item-app">App</span>
+                                    <span class="diagram-item item-driver">Cores</span>
+                                    <span class="diagram-item item-driver">Memory</span>
+                                </div>
+                            </div>
+                            <div class="diagram-box diagram-box-app">
+                                <span class="diagram-tag">Kernel B</span>
+                                <div class="diagram-items">
+                                    <span class="diagram-item item-app">App</span>
+                                    <span class="diagram-item item-driver">Cores</span>
+                                    <span class="diagram-item item-driver">Memory</span>
+                                </div>
+                            </div>
+                            <div class="diagram-box diagram-box-app">
+                                <span class="diagram-tag">Kernel C</span>
+                                <div class="diagram-items">
+                                    <span class="diagram-item item-app">App</span>
+                                    <span class="diagram-item item-driver">Cores</span>
+                                    <span class="diagram-item item-driver">Memory</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="performance" class="proof-section">
         <div class="section-container">
             <div class="section-header">
-                <h2 class="section-title">Run Your Infrastructure on Kernels, Not Hypervisors</h2>
-                <p class="section-subtitle">Multikernel is open source and runs on the hardware you already have. Start with the docs, or talk to the team that builds it.</p>
+                <h2 class="section-title">Measured on the Same Machine</h2>
+                <p class="section-subtitle">Same server, same kernel build, one variable at a time. Every number links to its setup, caveats, and reproduction steps.</p>
             </div>
-            <div class="button-group">
-                <a href="/getting-started.html" class="btn btn-primary">
-                    <i data-lucide="rocket"></i>
-                    Get Started
+
+            <div class="proof-grid">
+                <a class="proof-card" href="/2026/08/17/multikernel-will-it-scale/">
+                    <span class="proof-number">2.6x</span>
+                    <span class="proof-label">More throughput from the same 24 cores</span>
+                    <span class="proof-compare"><strong>780K</strong> vs 300K unlinks/s</span>
+                    <p class="proof-detail">Two kernels instead of one, on identical hardware: 2.1x on stat() of a shared file, 4.1x on unlink across sockets. Locks that are not shared are not contended. Control benchmarks moved by at most 1%.</p>
+                    <span class="proof-source">will-it-scale <i data-lucide="arrow-right"></i></span>
                 </a>
-                <a href="https://calendar.app.google/nc1upkqQoUeoukdD9" target="_blank" rel="noopener noreferrer" class="btn-link">
-                    Schedule a Demo
-                    <i data-lucide="arrow-right"></i>
+
+                <a class="proof-card" href="/2026/10/14/before-the-kernel-boots-memory-setup/">
+                    <span class="proof-number">61x</span>
+                    <span class="proof-label">Faster large-memory instance setup</span>
+                    <span class="proof-compare"><strong>111 ms</strong> vs 6.81 s, 32 GiB preallocated</span>
+                    <p class="proof-detail">QEMU with preallocated RAM spends seconds populating pages before a vCPU runs, and pinning memory for a passthrough device costs the same. Multikernel assigns physical ranges it already owns, in about 110 ms from 1 GiB to 32 GiB.</p>
+                    <span class="proof-source">Instance memory setup <i data-lucide="arrow-right"></i></span>
+                </a>
+
+                <a class="proof-card" href="/2026/09/30/the-kernel-crashed-the-memory-didnt/">
+                    <span class="proof-number">0</span>
+                    <span class="proof-label">Bytes lost across four kernel panics</span>
+                    <span class="proof-compare"><strong>4 of 4</strong> panics verified intact</span>
+                    <p class="proof-detail">An app-kernel panicked mid-write four times. Each time, a fresh kernel booted on the same DAXFS memory and found every byte in place, down to a half-written page. No log replay, no reload.</p>
+                    <span class="proof-source">Crash recovery <i data-lucide="arrow-right"></i></span>
+                </a>
+            </div>
+
+            <p class="proof-footnote"><a href="/performance.html">See all benchmark results</a></p>
+        </div>
+    </section>
+
+    <section id="get-started" class="value-section">
+        <div class="section-container">
+            <div class="section-header" style="margin-bottom: var(--space-8);">
+                <h2 class="section-title">Run Your Infrastructure on Kernels, Not Hypervisors</h2>
+                <p class="section-subtitle">Multikernel is open source and runs on the hardware you already have. The enterprise subscription is one price per node.</p>
+            </div>
+
+            <div class="button-group">
+                <a href="/pricing.html" class="btn btn-primary">
+                    <i data-lucide="tag"></i>
+                    See Pricing
+                </a>
+                <a href="https://github.com/multikernel" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                    <i data-lucide="github"></i>
+                    View on GitHub
                 </a>
             </div>
         </div>
