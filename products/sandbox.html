@@ -154,7 +154,7 @@ i18n: true
                         <i data-lucide="zap"></i>
                     </div>
                     <h3 class="feature-title">Fast Instance Creation</h3>
-                    <p class="feature-description">Instances draw memory from a prepared physical pool: 32 GiB assigned in 111 ms, with no page population on the launch path.</p>
+                    <p class="feature-description">The kernel for a new sandbox has a cold start time of about 50 ms. Instances draw memory from a prepared physical pool: 32 GiB assigned in 111 ms, with no page population on the launch path.</p>
                 </div>
 
                 <div class="feature-card">
@@ -187,6 +187,7 @@ i18n: true
                     <h2 class="section-title">Sandlock on Top, Multikernel Underneath</h2>
                     <p class="section-subtitle">Multikernel draws the boundary between agents: each one gets its own kernel, cores, and memory. <a href="https://sandlock.io/" target="_blank" rel="noopener noreferrer">Sandlock</a> draws the boundary inside an agent: every tool call, shell command, or generated script runs in its own lightweight process sandbox, confined by Landlock and seccomp, with network egress denied by default.</p>
                     <p class="section-subtitle" style="margin-top: var(--space-4);">A compromised tool has to escape Sandlock to reach the rest of its agent, then escape the agent's kernel to reach anyone else. Sandlock starts in about 5 ms and needs no root, containers, or hypervisor, so the inner layer adds almost nothing to each call.</p>
+                    <p class="section-subtitle" style="margin-top: var(--space-4);">A kernel boundary is only as strong as the kernel behind it. <a href="/products/liveupdate.html">Multikernel LiveUpdate</a> applies kernel updates without downtime, so every sandbox runs on the latest kernel with fixes for known kernel exploits already in place, and no agent waits for a maintenance window to be patched.</p>
 
                     <div class="value-cta">
                         <a href="https://sandlock.io/" target="_blank" rel="noopener noreferrer" class="btn-link">

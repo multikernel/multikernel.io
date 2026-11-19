@@ -154,7 +154,7 @@ description: "面向 AI 智能体的内核级沙箱：每个智能体拥有运�
                         <i data-lucide="zap"></i>
                     </div>
                     <h3 class="feature-title">快速创建实例</h3>
-                    <p class="feature-description">实例从预先准备好的物理内存池中获取内存：32 GiB 只需 111 ms，启动路径上无需填充页面。</p>
+                    <p class="feature-description">新沙箱的内核冷启动时间约为 50 ms。实例从预先准备好的物理内存池中获取内存：32 GiB 只需 111 ms，启动路径上无需填充页面。</p>
                 </div>
 
                 <div class="feature-card">
@@ -187,6 +187,7 @@ description: "面向 AI 智能体的内核级沙箱：每个智能体拥有运�
                     <h2 class="section-title">Sandlock 在上 · Multikernel 在下</h2>
                     <p class="section-subtitle">Multikernel 在智能体之间划定边界：每个智能体拥有自己的内核、核心与内存。<a href="https://sandlock.io/" target="_blank" rel="noopener noreferrer">Sandlock</a> 在智能体内部划定边界：每一次工具调用、每一条 shell 命令、每一段生成的脚本，都运行在各自轻量的进程沙箱中，由 Landlock 与 seccomp 约束，网络出站默认拒绝。</p>
                     <p class="section-subtitle" style="margin-top: var(--space-4);">被攻破的工具必须先逃出 Sandlock 才能触及所在智能体的其他部分，再逃出该智能体的内核才能触及其他任何人。Sandlock 启动开销约 5 ms，无需 root、容器或虚拟机管理程序，内层防护几乎不给每次调用增加负担。</p>
+                    <p class="section-subtitle" style="margin-top: var(--space-4);">内核边界的强度取决于它背后的内核。<a href="/zh/products/liveupdate.html">Multikernel LiveUpdate</a> 可在零停机的情况下完成内核更新，让每个沙箱始终运行在最新的内核之上，已知内核漏洞利用的修复均已就位，任何智能体都无需等待维护窗口才能打上补丁。</p>
 
                     <div class="value-cta">
                         <a href="https://sandlock.io/" target="_blank" rel="noopener noreferrer" class="btn-link">
