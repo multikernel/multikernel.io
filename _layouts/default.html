@@ -30,6 +30,9 @@
     {% elsif rel_url contains '/how-it-works' %}
         <link rel="stylesheet" href="/assets/css/technology.css">
         <link rel="stylesheet" href="/assets/css/platforms.css">
+    {% elsif rel_url == '/pricing.html' %}
+        <link rel="stylesheet" href="/assets/css/technology.css">
+        <link rel="stylesheet" href="/assets/css/pricing.css">
     {% elsif rel_url == '/partners.html' %}
         <link rel="stylesheet" href="/assets/css/technology.css">
         <link rel="stylesheet" href="/assets/css/platforms.css">
@@ -512,6 +515,7 @@
                     </div>
                 </div>
 
+                <a href="{{ lang_prefix }}/pricing.html" class="site-nav-link {% if rel_url == '/pricing.html' %}active{% endif %}">{{ t.nav.pricing }}</a>
                 <a href="/blog/" class="site-nav-link {% if rel_url contains '/blog' or page.layout == 'post' %}active{% endif %}">{{ t.nav.blog }}</a>
                 <a href="{{ lang_prefix }}/partners.html" class="site-nav-link {% if rel_url == '/partners.html' %}active{% endif %}">{{ t.nav.partners }}</a>
                 <a href="{{ lang_prefix }}/about.html" class="site-nav-link {% if rel_url == '/about.html' %}active{% endif %}">{{ t.nav.about }}</a>
@@ -559,6 +563,7 @@
             <a href="{{ lang_prefix }}/performance.html" class="site-mobile-link {% if rel_url == '/performance.html' %}active{% endif %}">{{ t.nav.performance }}</a>
             <a href="{{ lang_prefix }}/faq.html" class="site-mobile-link {% if rel_url == '/faq.html' %}active{% endif %}">{{ t.nav.faq }}</a>
             <a href="{{ lang_prefix }}/getting-started.html" class="site-mobile-link {% if rel_url == '/getting-started.html' %}active{% endif %}">{{ t.nav.getting_started }}</a>
+            <a href="{{ lang_prefix }}/pricing.html" class="site-mobile-link {% if rel_url == '/pricing.html' %}active{% endif %}">{{ t.nav.pricing }}</a>
             <a href="/blog/" class="site-mobile-link {% if rel_url contains '/blog' or page.layout == 'post' %}active{% endif %}">{{ t.nav.blog }}</a>
             <a href="{{ lang_prefix }}/partners.html" class="site-mobile-link {% if rel_url == '/partners.html' %}active{% endif %}">{{ t.nav.partners }}</a>
             <a href="{{ lang_prefix }}/about.html" class="site-mobile-link {% if rel_url == '/about.html' %}active{% endif %}">{{ t.nav.about }}</a>
@@ -617,6 +622,7 @@
                             <li><a href="{{ lang_prefix }}/products/cloud.html">{{ t.nav.cloud }}</a></li>
                             <li><a href="{{ lang_prefix }}/products/sandbox.html">{{ t.nav.sandbox }}</a></li>
                             <li><a href="{{ lang_prefix }}/products/liveupdate.html">{{ t.nav.liveupdate }}</a></li>
+                            <li><a href="{{ lang_prefix }}/pricing.html">{{ t.nav.pricing }}</a></li>
                             <li><a href="{{ lang_prefix }}/technology.html">{{ t.footer.tech_overview }}</a></li>
                         </ul>
                     </div>
