@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Split-Kernel Architecture"
+title: "Multikernel Architecture"
 description: "Multikernel offloads drivers and interrupts to a dedicated kernel, giving applications stronger isolation, native performance, and independent lifecycles."
 permalink: /technology.html
 i18n: true
@@ -15,8 +15,8 @@ i18n: true
                 <span>Technology Overview</span>
             </div>
 
-            <h1>Split-Kernel Architecture</h1>
-            <p class="subtitle">The Multikernel system offloads all device drivers and interrupt processing to a dedicated device-kernel. Applications run in isolated app-kernels with dedicated resources and native hardware performance.</p>
+            <h1>Multikernel Architecture</h1>
+            <p class="subtitle">Multikernel runs several Linux kernels side by side on one machine. In the split-kernel configuration our products are built on, a dedicated device-kernel takes all device drivers and interrupt processing, and applications run in isolated app-kernels with dedicated resources and native hardware performance.</p>
 
             <div class="button-group">
                 <a href="/getting-started.html" class="btn btn-primary">
@@ -42,7 +42,7 @@ i18n: true
                     </div>
                     <h2 class="section-title">Why Split-Kernel</h2>
                     <p class="section-subtitle">A traditional Linux kernel runs application code, device drivers, and interrupt handlers on the same cores. Under load, interrupt processing steals CPU cycles from applications. Kernel workarounds like isolcpus, irqaffinity, NAPI threaded mode, and RPS/RFS reduce the problem but cannot eliminate it. Within a single kernel, bottom-half work can always reach application cores.</p>
-                    <p class="section-subtitle">The split-kernel architecture removes this contention at the design level. Device processing is offloaded to a dedicated kernel on dedicated cores. Applications run in their own kernels where device interrupts are structurally absent. Because Multikernel runs directly on hardware with no hypervisor, it works on bare metal or inside VMs you already run, providing kernel-level isolation without the performance penalty of nested virtualization.</p>
+                    <p class="section-subtitle">The split-kernel configuration removes this contention at the design level. Device processing is offloaded to a dedicated kernel on dedicated cores. Applications run in their own kernels where device interrupts are structurally absent. It is the design AWS Nitro proved with custom offload cards, delivered in software on standard servers. Because Multikernel runs directly on hardware with no hypervisor, it works on bare metal or inside VMs you already run, providing kernel-level isolation without the performance penalty of nested virtualization.</p>
                 </div>
 
                 <div class="value-visual">
@@ -155,8 +155,8 @@ i18n: true
     <section id="comparison" class="value-section">
         <div class="section-container">
             <div class="section-header">
-                <h2 class="section-title">Split-Kernel vs. Existing Approaches</h2>
-                <p class="section-subtitle">The split-kernel architecture combines the isolation of separate kernels with native hardware performance, without the overhead of virtualization or the limitations of kernel tuning.</p>
+                <h2 class="section-title">Multikernel vs. Existing Approaches</h2>
+                <p class="section-subtitle">The multikernel architecture combines the isolation of separate kernels with native hardware performance, without the overhead of virtualization or the limitations of kernel tuning.</p>
             </div>
 
             <div class="comparison-diagrams">
@@ -319,7 +319,7 @@ i18n: true
                     <span>Applications</span>
                 </div>
                 <h2 class="section-title">Use Cases</h2>
-                <p class="section-subtitle">The split-kernel architecture enables workloads that require strong isolation, predictable performance, or independent kernel lifecycle management.</p>
+                <p class="section-subtitle">The multikernel architecture enables workloads that require strong isolation, predictable performance, or independent kernel lifecycle management.</p>
             </div>
 
             <div class="features-grid">

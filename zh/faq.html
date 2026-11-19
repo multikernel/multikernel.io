@@ -3,7 +3,7 @@ layout: default
 lang: zh
 permalink: /zh/faq.html
 title: "常见问题"
-description: "关于 Multikernel 分离内核架构、产品与部署的常见问题解答。"
+description: "关于多内核架构、产品与部署的常见问题解答。"
 ---
 
 <main>
@@ -38,7 +38,7 @@ description: "关于 Multikernel 分离内核架构、产品与部署的常见�
                 <div class="faq-question">
                     <i data-lucide="cpu"></i> 哪些类型的工作负载受益最大？
                 </div>
-                <p class="faq-answer">高性能计算、AI/ML 训练与推理、延迟敏感型服务，以及对安全性或隔离性有严格要求的工作负载，从 multikernel 架构中获益最多。</p>
+                <p class="faq-answer">高性能计算、AI/ML 训练与推理、延迟敏感型服务，以及对安全性或隔离性有严格要求的工作负载，从多内核架构中获益最多。</p>
             </div>
 
             <div class="faq-item">
@@ -60,9 +60,9 @@ description: "关于 Multikernel 分离内核架构、产品与部署的常见�
 
             <div class="faq-item">
                 <div class="faq-question">
-                    <i data-lucide="hard-drive"></i> 分离内核架构如何处理硬件资源？
+                    <i data-lucide="hard-drive"></i> 分离内核配置如何处理硬件资源？
                 </div>
-                <p class="faq-answer">在我们的分离内核架构中，设备内核负责管理硬件与设备处理，而应用内核则在专用 CPU 核心上运行工作负载，不存在内核上下文切换。I/O 队列等硬件资源由设备内核独占分配给每个应用内核，从而同时提供强隔离与接近裸金属的性能。拥有 256 个以上核心的现代服务器使这种专用分配在大规模场景下切实可行。</p>
+                <p class="faq-answer">在我们产品所采用的分离内核配置中，设备内核负责管理硬件与设备处理，而应用内核则在专用 CPU 核心上运行工作负载，不存在内核上下文切换。I/O 队列等硬件资源由设备内核独占分配给每个应用内核，从而同时提供强隔离与接近裸金属的性能。拥有 256 个以上核心的现代服务器使这种专用分配在大规模场景下切实可行。</p>
             </div>
 
             <div class="faq-item">
@@ -79,7 +79,7 @@ description: "关于 Multikernel 分离内核架构、产品与部署的常见�
                 <div class="faq-question">
                     <i data-lucide="cpu"></i> 与 AWS Nitro 有什么关系？
                 </div>
-                <p class="faq-answer">AWS 已经验证了这套架构。Nitro 将设备处理从主 CPU 移到专用卸载卡上，把网络协议栈留在客户机内，并将卸载卡与实例之间的数据通路精简为描述符环加 DMA。Multikernel 用软件实现了同样的设计：设备内核扮演卸载卡的角色，持有物理设备并调度流量；每个应用内核保留自己的网络协议栈，跨内核传递的只有共享内存环中的描述符。区别在于，Nitro 是只能在 AWS 租用的定制硬件，而 Multikernel 运行在您已有的服务器和标准网卡上。</p>
+                <p class="faq-answer">AWS 已经验证了这套架构。Nitro 将设备处理从主 CPU 移到专用卸载卡上，把网络协议栈留在客户机内，并将卸载卡与实例之间的数据通路精简为描述符环加 DMA。Multikernel 的分离内核配置用软件实现了同样的设计：设备内核扮演卸载卡的角色，持有物理设备并调度流量；每个应用内核保留自己的网络协议栈，跨内核传递的只有共享内存环中的描述符。区别在于，Nitro 是只能在 AWS 租用的定制硬件，而 Multikernel 运行在您已有的服务器和标准网卡上。</p>
             </div>
 
             <div class="faq-item">

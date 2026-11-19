@@ -34,7 +34,7 @@ i18n: true
         <div class="section-container">
             <div class="section-header">
                 <h2 class="section-title">Sub-Node Fault Domains</h2>
-                <p class="section-subtitle">In a monolithic controller OS, a single driver fault panics the entire node, triggering controller failover, peer degradation, and a DRAM cache re-mirror. The split-kernel architecture reduces the fault domain to one layer of the I/O stack: kernel boundaries follow the data path, and each layer fails and recovers independently.</p>
+                <p class="section-subtitle">In a monolithic controller OS, a single driver fault panics the entire node, triggering controller failover, peer degradation, and a DRAM cache re-mirror. The multikernel architecture reduces the fault domain to one layer of the I/O stack: kernel boundaries follow the data path, and each layer fails and recovers independently.</p>
             </div>
 
             <div class="partition-figure">

@@ -59,9 +59,9 @@ i18n: true
 
             <div class="faq-item">
                 <div class="faq-question">
-                    <i data-lucide="hard-drive"></i> How does the split-kernel architecture handle hardware resources?
+                    <i data-lucide="hard-drive"></i> How does the split-kernel configuration handle hardware resources?
                 </div>
-                <p class="faq-answer">In our split-kernel architecture, the device-kernel manages hardware and device processing, while application kernels run workloads with dedicated CPU cores and no kernel context switching. Hardware resources like I/O queues are allocated exclusively to each application kernel by the device-kernel, providing both strong isolation and near bare-metal performance. Modern servers with 256+ cores make this dedicated allocation practical at scale.</p>
+                <p class="faq-answer">In the split-kernel configuration our products use, the device-kernel manages hardware and device processing, while application kernels run workloads with dedicated CPU cores and no kernel context switching. Hardware resources like I/O queues are allocated exclusively to each application kernel by the device-kernel, providing both strong isolation and near bare-metal performance. Modern servers with 256+ cores make this dedicated allocation practical at scale.</p>
             </div>
 
             <div class="faq-item">
@@ -78,7 +78,7 @@ i18n: true
                 <div class="faq-question">
                     <i data-lucide="cpu"></i> How does this relate to AWS Nitro?
                 </div>
-                <p class="faq-answer">AWS proved the architecture. Nitro moved device processing off the main CPUs into dedicated offload cards, kept the network stack in the guest, and reduced the data path between card and instance to descriptor rings and DMA. Multikernel delivers the same design in software: the device-kernel plays the role of the offload card, owning physical devices and steering traffic, while each app-kernel keeps its own network stack and exchanges only descriptors over shared-memory rings. The difference is that Nitro is custom hardware you can only rent from AWS. Multikernel runs on the servers and standard NICs you already own.</p>
+                <p class="faq-answer">AWS proved the architecture. Nitro moved device processing off the main CPUs into dedicated offload cards, kept the network stack in the guest, and reduced the data path between card and instance to descriptor rings and DMA. Multikernel's split-kernel configuration delivers the same design in software: the device-kernel plays the role of the offload card, owning physical devices and steering traffic, while each app-kernel keeps its own network stack and exchanges only descriptors over shared-memory rings. The difference is that Nitro is custom hardware you can only rent from AWS. Multikernel runs on the servers and standard NICs you already own.</p>
             </div>
 
             <div class="faq-item">

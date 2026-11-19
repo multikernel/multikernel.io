@@ -34,7 +34,7 @@ description: "面向存储与整机厂商：把一台控制器拆分为多个独
         <div class="section-container">
             <div class="section-header">
                 <h2 class="section-title">小于节点的故障域</h2>
-                <p class="section-subtitle">在单体控制器操作系统中，一个驱动故障会导致整个节点崩溃，随之而来的是控制器故障转移、对端降级与 DRAM 缓存重新镜像。分离内核架构把故障域缩小到 I/O 栈中的单独一层：内核边界沿数据通路划分，每一层独立失效、独立恢复。</p>
+                <p class="section-subtitle">在单体控制器操作系统中，一个驱动故障会导致整个节点崩溃，随之而来的是控制器故障转移、对端降级与 DRAM 缓存重新镜像。多内核架构把故障域缩小到 I/O 栈中的单独一层：内核边界沿数据通路划分，每一层独立失效、独立恢复。</p>
             </div>
 
             <div class="partition-figure">

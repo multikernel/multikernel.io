@@ -2,7 +2,7 @@
 layout: default
 lang: zh
 permalink: /zh/technology.html
-title: "技术 - 分离内核架构"
+title: "技术 - 多内核架构"
 description: "Multikernel 系统将设备驱动与中断处理卸载到专用内核，实现更强的隔离、原生性能以及独立的内核生命周期管理。"
 ---
 
@@ -15,8 +15,8 @@ description: "Multikernel 系统将设备驱动与中断处理卸载到专用内
                 <span>技术概览</span>
             </div>
 
-            <h1>分离内核架构</h1>
-            <p class="subtitle">Multikernel 系统将全部设备驱动与中断处理卸载到专用的设备内核。应用程序运行在隔离的应用内核中，拥有专用资源和原生硬件性能。</p>
+            <h1>多内核架构</h1>
+            <p class="subtitle">Multikernel 在同一台机器上并排运行多个 Linux 内核。在我们产品所采用的分离内核配置中，专用的设备内核接管全部设备驱动与中断处理，应用程序运行在隔离的应用内核中，拥有专用资源和原生硬件性能。</p>
 
             <div class="button-group">
                 <a href="/zh/getting-started.html" class="btn btn-primary">
@@ -40,9 +40,9 @@ description: "Multikernel 系统将设备驱动与中断处理卸载到专用内
                         <i data-lucide="layers"></i>
                         <span>背景</span>
                     </div>
-                    <h2 class="section-title">为何需要分离内核架构</h2>
+                    <h2 class="section-title">为何采用分离内核配置</h2>
                     <p class="section-subtitle">传统 Linux 内核在同一批核心上运行应用程序代码、设备驱动和中断处理程序。负载升高时，中断处理会抢占本应属于应用程序的 CPU 周期。isolcpus、irqaffinity、NAPI 线程模式以及 RPS/RFS 等内核层面的变通手段能够缓解这一问题，但无法根除它。只要处于同一个内核之内，下半部（bottom-half）工作总有办法触达应用程序所在的核心。</p>
-                    <p class="section-subtitle">分离内核架构从设计层面消除了这种争用。设备处理卸载到专用核心上的专用内核。应用程序运行在各自的内核中，设备中断在结构上根本不存在。由于 Multikernel 直接运行在硬件之上，不依赖虚拟机管理程序，因此它既可以运行在裸金属上，也可以运行在您现有的虚拟机内部，在不产生嵌套虚拟化性能损耗的前提下提供内核级隔离。</p>
+                    <p class="section-subtitle">分离内核配置从设计层面消除了这种争用。设备处理卸载到专用核心上的专用内核。应用程序运行在各自的内核中，设备中断在结构上根本不存在。AWS Nitro 用定制卸载卡验证了这一设计，而我们在标准服务器上用软件实现了它。由于 Multikernel 直接运行在硬件之上，不依赖虚拟机管理程序，因此它既可以运行在裸金属上，也可以运行在您现有的虚拟机内部，在不产生嵌套虚拟化性能损耗的前提下提供内核级隔离。</p>
                 </div>
 
                 <div class="value-visual">
@@ -154,8 +154,8 @@ description: "Multikernel 系统将设备驱动与中断处理卸载到专用内
     <section id="comparison" class="value-section">
         <div class="section-container">
             <div class="section-header">
-                <h2 class="section-title">分离内核架构与现有方案对比</h2>
-                <p class="section-subtitle">分离内核架构兼具独立内核的隔离性与原生硬件性能，既没有虚拟化的开销，也不受内核调优的局限。</p>
+                <h2 class="section-title">Multikernel 与现有方案对比</h2>
+                <p class="section-subtitle">多内核架构兼具独立内核的隔离性与原生硬件性能，既没有虚拟化的开销，也不受内核调优的局限。</p>
             </div>
 
             <div class="comparison-diagrams">
@@ -318,7 +318,7 @@ description: "Multikernel 系统将设备驱动与中断处理卸载到专用内
                     <span>应用场景</span>
                 </div>
                 <h2 class="section-title">应用场景</h2>
-                <p class="section-subtitle">分离内核架构适用于需要强隔离、可预测性能或独立内核生命周期管理的工作负载。</p>
+                <p class="section-subtitle">多内核架构适用于需要强隔离、可预测性能或独立内核生命周期管理的工作负载。</p>
             </div>
 
             <div class="features-grid">
