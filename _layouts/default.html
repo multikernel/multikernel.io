@@ -510,6 +510,7 @@
 
                 <a href="{{ lang_prefix }}/getting-started.html" class="site-nav-link {% if rel_url == '/getting-started.html' %}active{% endif %}">{{ t.nav.getting_started }}</a>
                 <a href="/blog/" class="site-nav-link {% if rel_url contains '/blog' or page.layout == 'post' %}active{% endif %}">{{ t.nav.blog }}</a>
+                <a href="{{ lang_prefix }}/partners.html" class="site-nav-link {% if rel_url == '/partners.html' %}active{% endif %}">{{ t.nav.partners }}</a>
                 <a href="{{ lang_prefix }}/about.html" class="site-nav-link {% if rel_url == '/about.html' %}active{% endif %}">{{ t.nav.about }}</a>
 
                 <div class="site-nav-divider"></div>
@@ -556,6 +557,7 @@
             <a href="{{ lang_prefix }}/faq.html" class="site-mobile-link {% if rel_url == '/faq.html' %}active{% endif %}">{{ t.nav.faq }}</a>
             <a href="{{ lang_prefix }}/getting-started.html" class="site-mobile-link {% if rel_url == '/getting-started.html' %}active{% endif %}">{{ t.nav.getting_started }}</a>
             <a href="/blog/" class="site-mobile-link {% if rel_url contains '/blog' or page.layout == 'post' %}active{% endif %}">{{ t.nav.blog }}</a>
+            <a href="{{ lang_prefix }}/partners.html" class="site-mobile-link {% if rel_url == '/partners.html' %}active{% endif %}">{{ t.nav.partners }}</a>
             <a href="{{ lang_prefix }}/about.html" class="site-mobile-link {% if rel_url == '/about.html' %}active{% endif %}">{{ t.nav.about }}</a>
             {% if lang == 'zh' %}
             <a href="{{ rel_url }}" class="site-mobile-link" data-lang-choice="en">English</a>
@@ -599,7 +601,7 @@
                         <h4>{{ t.footer.company }}</h4>
                         <ul>
                             <li><a href="{{ lang_prefix }}/about.html">{{ t.footer.about_us }}</a></li>
-                            <li><a href="{{ lang_prefix }}/partners.html">{% if lang == 'zh' %}合作伙伴{% else %}Partners{% endif %}</a></li>
+                            <li><a href="{{ lang_prefix }}/partners.html">{{ t.nav.partners }}</a></li>
                             <li><a href="{{ lang_prefix }}/technology.html">{{ t.footer.technology }}</a></li>
                             <li><a href="/blog/">{{ t.footer.blog }}</a></li>
                             <li><a href="{{ lang_prefix }}/contact.html">{{ t.footer.contact }}</a></li>
