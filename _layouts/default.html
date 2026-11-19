@@ -30,6 +30,9 @@
     {% elsif rel_url contains '/how-it-works' %}
         <link rel="stylesheet" href="/assets/css/technology.css">
         <link rel="stylesheet" href="/assets/css/platforms.css">
+    {% elsif rel_url == '/partners.html' %}
+        <link rel="stylesheet" href="/assets/css/technology.css">
+        <link rel="stylesheet" href="/assets/css/platforms.css">
     {% elsif rel_url contains '/products/' %}
         <link rel="stylesheet" href="/assets/css/technology.css">
     {% elsif rel_url contains '/platforms/' or rel_url contains '/solutions/' %}
@@ -596,6 +599,7 @@
                         <h4>{{ t.footer.company }}</h4>
                         <ul>
                             <li><a href="{{ lang_prefix }}/about.html">{{ t.footer.about_us }}</a></li>
+                            <li><a href="{{ lang_prefix }}/partners.html">{% if lang == 'zh' %}合作伙伴{% else %}Partners{% endif %}</a></li>
                             <li><a href="{{ lang_prefix }}/technology.html">{{ t.footer.technology }}</a></li>
                             <li><a href="/blog/">{{ t.footer.blog }}</a></li>
                             <li><a href="{{ lang_prefix }}/contact.html">{{ t.footer.contact }}</a></li>
