@@ -484,7 +484,7 @@
                 </div>
 
                 <div class="site-nav-dropdown">
-                    <button class="site-nav-dropdown-trigger {% if rel_url == '/technology.html' or rel_url == '/how-it-works.html' or rel_url == '/performance.html' or rel_url == '/faq.html' %}active{% endif %}">
+                    <button class="site-nav-dropdown-trigger {% if rel_url == '/technology.html' or rel_url == '/how-it-works.html' or rel_url == '/performance.html' or rel_url == '/getting-started.html' or rel_url == '/faq.html' %}active{% endif %}">
                         {{ t.nav.technology }}
                         <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 4.5L6 7.5L9 4.5"/></svg>
                     </button>
@@ -501,6 +501,10 @@
                             {{ t.nav.performance }}
                             <small>{{ t.nav.performance_sub }}</small>
                         </a>
+                        <a href="{{ lang_prefix }}/getting-started.html" class="site-nav-dropdown-item {% if rel_url == '/getting-started.html' %}active{% endif %}">
+                            {{ t.nav.getting_started }}
+                            <small>{{ t.nav.getting_started_sub }}</small>
+                        </a>
                         <a href="{{ lang_prefix }}/faq.html" class="site-nav-dropdown-item {% if rel_url == '/faq.html' %}active{% endif %}">
                             {{ t.nav.faq }}
                             <small>{{ t.nav.faq_sub }}</small>
@@ -508,7 +512,6 @@
                     </div>
                 </div>
 
-                <a href="{{ lang_prefix }}/getting-started.html" class="site-nav-link {% if rel_url == '/getting-started.html' %}active{% endif %}">{{ t.nav.getting_started }}</a>
                 <a href="/blog/" class="site-nav-link {% if rel_url contains '/blog' or page.layout == 'post' %}active{% endif %}">{{ t.nav.blog }}</a>
                 <a href="{{ lang_prefix }}/partners.html" class="site-nav-link {% if rel_url == '/partners.html' %}active{% endif %}">{{ t.nav.partners }}</a>
                 <a href="{{ lang_prefix }}/about.html" class="site-nav-link {% if rel_url == '/about.html' %}active{% endif %}">{{ t.nav.about }}</a>

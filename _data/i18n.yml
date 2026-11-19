@@ -29,6 +29,7 @@ en:
     faq: FAQ
     faq_sub: Common questions answered
     getting_started: Getting Started
+    getting_started_sub: Install and boot your first kernel instance
     blog: Blog
     partners: Partners
     about: About
@@ -79,6 +80,7 @@ zh:
     faq: 常见问题
     faq_sub: 常见问题解答
     getting_started: 快速上手
+    getting_started_sub: 安装并启动第一个内核实例
     blog: 博客
     partners: 合作伙伴
     about: 关于我们
