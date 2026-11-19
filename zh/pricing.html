@@ -81,7 +81,7 @@ description: "Multikernel Private Cloud 与 LiveUpdate 均为开源软件。企�
                     </div>
 
                     <div class="pricing-addon">
-                        <strong>加购 LiveUpdate：</strong>零停机内核热升级，标准版每节点每年 <strong>+$180</strong>，高级版每节点每年 <strong>+$270</strong>。
+                        <strong>加购 LiveUpdate：</strong>零停机内核热升级，标准版每节点每年 <strong>+$180</strong>，高级版每节点每年 <strong>+$270</strong>。合计标准版 <strong>$870</strong>，高级版 <strong>$1,420</strong>。
                     </div>
 
                     <div class="value-cta">
@@ -201,7 +201,10 @@ description: "Multikernel Private Cloud 与 LiveUpdate 均为开源软件。企�
                 </div>
             </div>
 
-            <p class="pricing-footnote">价格以美元计，按年预付，不含税。自 2026 年 10 月起生效，可能调整。</p>
+            <p class="pricing-eval">最多 10 个非生产节点，60 天免费评估并附带支持。<a href="#evaluate">了解评估方式</a></p>
+
+            <p class="pricing-footnote">100 个节点起可享批量折扣，多年期预付可锁定价格。Private Cloud 与 LiveUpdate 独立版的节点数合并计算。 超过 2,000 个节点的部署按整体协议定价。整机厂商按出货控制器数量授权，详见 <a href="/zh/solutions/oem.html#licensing">Multikernel OEM 方案</a>。</p>
+            <p class="pricing-footnote" style="margin-top: var(--space-3);">价格以美元计，按年预付，不含税。自 2026 年 10 月起生效，可能调整。</p>
         </div>
     </section>
 
@@ -289,22 +292,47 @@ description: "Multikernel Private Cloud 与 LiveUpdate 均为开源软件。企�
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <section id="volume" class="how-it-works">
-        <div class="section-container">
-            <div class="section-header" style="margin-bottom: 0;">
-                <h2 class="section-title">批量与多年期订阅</h2>
-                <p class="section-subtitle">100 个节点起可享批量折扣，多年期预付可锁定价格。Private Cloud 与 LiveUpdate 独立版的节点数合并计算。</p>
+            <div class="sla-block">
+                <h3 class="sla-title">首次响应时间目标</h3>
+                <div class="sla-scroll">
+                    <table class="sla-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">严重级别</th>
+                                <th scope="col">标准版</th>
+                                <th scope="col">高级版</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">严重级别 1<span>生产环境宕机或数据面临风险，且没有变通方案</span></th>
+                            <td>4 个工作小时</td>
+                            <td>1 小时，7×24</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">严重级别 2<span>生产环境严重受损，且没有可接受的变通方案</span></th>
+                            <td>1 个工作日</td>
+                            <td>4 小时，7×24</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">严重级别 3<span>部分功能受损，存在变通方案</span></th>
+                            <td>2 个工作日</td>
+                            <td>1 个工作日</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">严重级别 4<span>咨询或一般请求</span></th>
+                            <td>3 个工作日</td>
+                            <td>2 个工作日</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="pricing-footnote">以上为工程师首次响应的时间目标。工作时间为周一至周五。</p>
             </div>
-
-
-            <p class="pricing-footnote">超过 2,000 个节点的部署按整体协议定价。整机厂商按出货控制器数量授权，详见 <a href="/zh/solutions/oem.html#licensing">Multikernel OEM 方案</a>。</p>
         </div>
     </section>
 
-    <section id="evaluate" class="value-section">
+    <section id="evaluate" class="how-it-works">
         <div class="section-container">
             <div class="section-header" style="margin-bottom: var(--space-8);">
                 <h2 class="section-title">60 天免费评估，附带支持</h2>
@@ -324,3 +352,127 @@ description: "Multikernel Private Cloud 与 LiveUpdate 均为开源软件。企�
         </div>
     </section>
 </main>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Product",
+      "name": "Multikernel Private Cloud",
+      "description": "Multikernel Private Cloud 企业订阅。Multikernel Private Cloud 是开源的私有云操作系统，按节点按年计价，一个节点指一台物理服务器或一台虚拟机。",
+      "url": "{{ site.url }}/zh/products/cloud.html",
+      "brand": {
+        "@type": "Organization",
+        "name": "Multikernel Technologies",
+        "url": "{{ site.url }}/"
+      },
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "标准版",
+          "price": "690",
+          "priceCurrency": "USD",
+          "url": "{{ site.url }}/zh/pricing.html",
+          "description": "工作时间支持，覆盖所有严重级别",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "690",
+            "priceCurrency": "USD",
+            "unitText": "每节点每年",
+            "billingDuration": "P1Y"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "高级版",
+          "price": "1150",
+          "priceCurrency": "USD",
+          "url": "{{ site.url }}/zh/pricing.html",
+          "description": "严重级别 1 和 2 提供 7×24 支持，配备专属工程师",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "1150",
+            "priceCurrency": "USD",
+            "unitText": "每节点每年",
+            "billingDuration": "P1Y"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "标准版（含 LiveUpdate）",
+          "price": "870",
+          "priceCurrency": "USD",
+          "url": "{{ site.url }}/zh/pricing.html",
+          "description": "工作时间支持，覆盖所有严重级别",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "870",
+            "priceCurrency": "USD",
+            "unitText": "每节点每年",
+            "billingDuration": "P1Y"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "高级版（含 LiveUpdate）",
+          "price": "1420",
+          "priceCurrency": "USD",
+          "url": "{{ site.url }}/zh/pricing.html",
+          "description": "严重级别 1 和 2 提供 7×24 支持，配备专属工程师",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "1420",
+            "priceCurrency": "USD",
+            "unitText": "每节点每年",
+            "billingDuration": "P1Y"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Product",
+      "name": "Multikernel LiveUpdate 独立版",
+      "description": "Multikernel LiveUpdate 企业订阅，为您现有的内核栈提供零停机内核热升级，按节点按年计价。",
+      "url": "{{ site.url }}/zh/products/liveupdate.html",
+      "brand": {
+        "@type": "Organization",
+        "name": "Multikernel Technologies",
+        "url": "{{ site.url }}/"
+      },
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "标准版",
+          "price": "350",
+          "priceCurrency": "USD",
+          "url": "{{ site.url }}/zh/pricing.html",
+          "description": "工作时间支持，覆盖所有严重级别",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "350",
+            "priceCurrency": "USD",
+            "unitText": "每节点每年",
+            "billingDuration": "P1Y"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "高级版",
+          "price": "590",
+          "priceCurrency": "USD",
+          "url": "{{ site.url }}/zh/pricing.html",
+          "description": "严重级别 1 和 2 提供 7×24 支持",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "590",
+            "priceCurrency": "USD",
+            "unitText": "每节点每年",
+            "billingDuration": "P1Y"
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>

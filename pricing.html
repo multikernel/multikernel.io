@@ -81,7 +81,7 @@ i18n: true
                     </div>
 
                     <div class="pricing-addon">
-                        <strong>LiveUpdate add-on:</strong> zero-downtime kernel upgrades for <strong>+$180</strong> on Standard or <strong>+$270</strong> on Premium, per node, per year.
+                        <strong>LiveUpdate add-on:</strong> zero-downtime kernel upgrades for <strong>+$180</strong> on Standard or <strong>+$270</strong> on Premium, per node, per year. That makes <strong>$870</strong> on Standard and <strong>$1,420</strong> on Premium in total.
                     </div>
 
                     <div class="value-cta">
@@ -201,7 +201,10 @@ i18n: true
                 </div>
             </div>
 
-            <p class="pricing-footnote">Prices in US dollars, billed annually in advance, excluding taxes. Effective October 2026 and subject to change.</p>
+            <p class="pricing-eval">Evaluate free for 60 days on up to 10 non-production nodes, with support. <a href="#evaluate">How the evaluation works</a></p>
+
+            <p class="pricing-footnote">Volume discounts start at 100 nodes, and a multi-year prepaid term locks the price. Node counts combine across Private Cloud and LiveUpdate Standalone. Fleets above 2,000 nodes are priced under a site agreement. Appliance vendors license per shipped controller: see <a href="/solutions/oem.html#licensing">Multikernel for OEMs</a>.</p>
+            <p class="pricing-footnote" style="margin-top: var(--space-3);">Prices in US dollars, billed annually in advance, excluding taxes. Effective October 2026 and subject to change.</p>
         </div>
     </section>
 
@@ -289,22 +292,47 @@ i18n: true
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <section id="volume" class="how-it-works">
-        <div class="section-container">
-            <div class="section-header" style="margin-bottom: 0;">
-                <h2 class="section-title">Volume and Multi-Year Terms</h2>
-                <p class="section-subtitle">Volume discounts start at 100 nodes, and a multi-year prepaid term locks the price. Node counts combine across Private Cloud and LiveUpdate Standalone.</p>
+            <div class="sla-block">
+                <h3 class="sla-title">Initial Response Targets</h3>
+                <div class="sla-scroll">
+                    <table class="sla-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Severity</th>
+                                <th scope="col">Standard</th>
+                                <th scope="col">Premium</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">Severity 1<span>Production is down or data is at risk, with no workaround</span></th>
+                            <td>4 business hours</td>
+                            <td>1 hour, 24/7</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Severity 2<span>Production is seriously degraded, with no acceptable workaround</span></th>
+                            <td>1 business day</td>
+                            <td>4 hours, 24/7</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Severity 3<span>Partial loss of function, and a workaround exists</span></th>
+                            <td>2 business days</td>
+                            <td>1 business day</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Severity 4<span>A question or a request</span></th>
+                            <td>3 business days</td>
+                            <td>2 business days</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="pricing-footnote">Targets are for the first response from an engineer. Business hours are Monday to Friday.</p>
             </div>
-
-
-            <p class="pricing-footnote">Fleets above 2,000 nodes are priced under a site agreement. Appliance vendors license per shipped controller: see <a href="/solutions/oem.html#licensing">Multikernel for OEMs</a>.</p>
         </div>
     </section>
 
-    <section id="evaluate" class="value-section">
+    <section id="evaluate" class="how-it-works">
         <div class="section-container">
             <div class="section-header" style="margin-bottom: var(--space-8);">
                 <h2 class="section-title">Evaluate Free for 60 Days, with Support</h2>
@@ -324,3 +352,127 @@ i18n: true
         </div>
     </section>
 </main>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Product",
+      "name": "Multikernel Private Cloud",
+      "description": "Enterprise subscription for Multikernel Private Cloud, an open-source private cloud operating system. Priced per node per year, where a node is one physical server or one VM.",
+      "url": "{{ site.url }}/products/cloud.html",
+      "brand": {
+        "@type": "Organization",
+        "name": "Multikernel Technologies",
+        "url": "{{ site.url }}/"
+      },
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Standard",
+          "price": "690",
+          "priceCurrency": "USD",
+          "url": "{{ site.url }}/pricing.html",
+          "description": "Business-hours support, all severities",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "690",
+            "priceCurrency": "USD",
+            "unitText": "node per year",
+            "billingDuration": "P1Y"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Premium",
+          "price": "1150",
+          "priceCurrency": "USD",
+          "url": "{{ site.url }}/pricing.html",
+          "description": "24/7 support for Severity 1 and 2, named engineer",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "1150",
+            "priceCurrency": "USD",
+            "unitText": "node per year",
+            "billingDuration": "P1Y"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Standard with LiveUpdate add-on",
+          "price": "870",
+          "priceCurrency": "USD",
+          "url": "{{ site.url }}/pricing.html",
+          "description": "Business-hours support, all severities",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "870",
+            "priceCurrency": "USD",
+            "unitText": "node per year",
+            "billingDuration": "P1Y"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Premium with LiveUpdate add-on",
+          "price": "1420",
+          "priceCurrency": "USD",
+          "url": "{{ site.url }}/pricing.html",
+          "description": "24/7 support for Severity 1 and 2, named engineer",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "1420",
+            "priceCurrency": "USD",
+            "unitText": "node per year",
+            "billingDuration": "P1Y"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Product",
+      "name": "Multikernel LiveUpdate Standalone",
+      "description": "Enterprise subscription for Multikernel LiveUpdate, zero-downtime kernel upgrades for the kernel stack you already run. Priced per node per year.",
+      "url": "{{ site.url }}/products/liveupdate.html",
+      "brand": {
+        "@type": "Organization",
+        "name": "Multikernel Technologies",
+        "url": "{{ site.url }}/"
+      },
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Standard",
+          "price": "350",
+          "priceCurrency": "USD",
+          "url": "{{ site.url }}/pricing.html",
+          "description": "Business-hours support, all severities",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "350",
+            "priceCurrency": "USD",
+            "unitText": "node per year",
+            "billingDuration": "P1Y"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Premium",
+          "price": "590",
+          "priceCurrency": "USD",
+          "url": "{{ site.url }}/pricing.html",
+          "description": "24/7 support for Severity 1 and 2",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "590",
+            "priceCurrency": "USD",
+            "unitText": "node per year",
+            "billingDuration": "P1Y"
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
