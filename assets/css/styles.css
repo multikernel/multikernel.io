@@ -81,6 +81,11 @@
     --text-6xl: 3.75rem;
     --text-7xl: 4.5rem;
 
+    /* Running copy sits above the UI scale, which reads small at paragraph length */
+    --body-sm: 1rem;
+    --body-base: 1.0625rem;
+    --body-lg: 1.1875rem;
+
     /* Line Heights */
     --leading-none: 1;
     --leading-tight: 1.15;
@@ -167,7 +172,7 @@ html {
 
 body {
     font-family: var(--font-sans);
-    font-size: var(--text-base);
+    font-size: var(--body-base);
     line-height: var(--leading-normal);
     color: var(--gray-800);
     background: var(--gray-25);
@@ -482,7 +487,7 @@ body {
 }
 
 .subtitle {
-    font-size: var(--text-lg);
+    font-size: var(--body-lg);
     line-height: var(--leading-relaxed);
     color: rgba(255, 255, 255, 0.62);
     max-width: 680px;
@@ -538,7 +543,7 @@ a.hero-stat:hover {
 }
 
 .hero-stat-detail {
-    font-size: var(--text-sm);
+    font-size: var(--body-sm);
     color: rgba(255, 255, 255, 0.5);
 }
 
@@ -633,7 +638,7 @@ a.hero-stat:hover {
     display: flex;
     align-items: center;
     gap: var(--space-2);
-    font-size: var(--text-sm);
+    font-size: var(--body-sm);
     color: rgba(255, 255, 255, 0.45);
 }
 
@@ -713,7 +718,7 @@ a.hero-stat:hover {
 }
 
 .section-subtitle {
-    font-size: var(--text-lg);
+    font-size: var(--body-lg);
     line-height: var(--leading-relaxed);
     color: var(--gray-500);
     max-width: 640px;
@@ -942,7 +947,7 @@ a.hero-stat:hover {
 }
 
 .capability-description {
-    font-size: var(--text-sm);
+    font-size: var(--body-sm);
     line-height: var(--leading-relaxed);
     color: var(--gray-600);
     margin-bottom: var(--space-5);
@@ -980,7 +985,7 @@ a.hero-stat:hover {
 
 .feature-item span {
     color: var(--gray-600);
-    font-size: var(--text-sm);
+    font-size: var(--body-sm);
     font-weight: 500;
 }
 
@@ -1029,7 +1034,7 @@ a.hero-stat:hover {
 }
 
 .feature-description {
-    font-size: var(--text-sm);
+    font-size: var(--body-sm);
     line-height: var(--leading-relaxed);
     color: var(--gray-600);
 }
@@ -1086,7 +1091,7 @@ a.hero-stat:hover {
 
 .proof-compare {
     font-family: var(--font-mono);
-    font-size: var(--text-sm);
+    font-size: var(--body-sm);
     color: var(--gray-500);
     margin-bottom: var(--space-3);
 }
@@ -1097,7 +1102,7 @@ a.hero-stat:hover {
 }
 
 .proof-detail {
-    font-size: var(--text-sm);
+    font-size: var(--body-sm);
     line-height: var(--leading-relaxed);
     color: var(--gray-600);
     margin-bottom: var(--space-5);
@@ -1122,7 +1127,7 @@ a.hero-stat:hover {
 }
 
 .proof-footnote {
-    font-size: var(--text-sm);
+    font-size: var(--body-sm);
     line-height: var(--leading-relaxed);
     color: var(--gray-500);
     text-align: center;
@@ -1172,7 +1177,7 @@ a.hero-stat:hover {
 }
 
 .bench-body > p {
-    font-size: var(--text-base);
+    font-size: var(--body-base);
     line-height: var(--leading-relaxed);
     color: var(--gray-600);
     margin-bottom: var(--space-4);
@@ -1183,7 +1188,7 @@ a.hero-stat:hover {
 }
 
 .bench-caveat {
-    font-size: var(--text-sm);
+    font-size: var(--body-sm);
     line-height: var(--leading-relaxed);
     color: var(--gray-600);
     background: var(--gray-25);
@@ -1237,7 +1242,7 @@ a.hero-stat:hover {
 .card-description {
     color: var(--gray-600);
     line-height: var(--leading-relaxed);
-    font-size: var(--text-sm);
+    font-size: var(--body-sm);
     margin-bottom: var(--space-5);
 }
 

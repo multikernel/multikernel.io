@@ -38,7 +38,7 @@
 }
 
 .faq-answer {
-    font-size: var(--text-sm);
+    font-size: var(--body-sm);
     line-height: var(--leading-relaxed);
     color: var(--gray-600);
     margin: 0;

@@ -73,7 +73,7 @@
 }
 
 .product-subtitle {
-    font-size: var(--text-sm);
+    font-size: var(--body-sm);
     color: var(--gray-500);
     font-weight: 500;
     margin-bottom: var(--space-5);
@@ -86,7 +86,7 @@
 .product-description p {
     color: var(--gray-600);
     line-height: var(--leading-relaxed);
-    font-size: var(--text-sm);
+    font-size: var(--body-sm);
 }
 
 .product-features {
@@ -124,7 +124,7 @@
 
 .feature-item span {
     color: var(--gray-600);
-    font-size: var(--text-sm);
+    font-size: var(--body-sm);
     font-weight: 500;
 }
 
@@ -158,7 +158,7 @@
 }
 
 .price-detail {
-    font-size: var(--text-sm);
+    font-size: var(--body-sm);
     color: var(--gray-500);
     font-weight: 500;
 }
@@ -239,7 +239,7 @@
 .cta-content p {
     color: var(--gray-500);
     line-height: var(--leading-relaxed);
-    font-size: var(--text-sm);
+    font-size: var(--body-sm);
     margin: 0;
 }
 

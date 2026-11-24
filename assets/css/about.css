@@ -14,7 +14,7 @@
 
 /* Mission & Vision detail text */
 .mv-detail {
-    font-size: var(--text-base);
+    font-size: var(--body-base);
     line-height: var(--leading-relaxed);
     color: var(--gray-500);
     text-align: center;
@@ -60,7 +60,7 @@
 }
 
 .values-item p {
-    font-size: var(--text-sm);
+    font-size: var(--body-sm);
     line-height: var(--leading-relaxed);
     color: var(--gray-500);
     margin: 0;
@@ -102,7 +102,7 @@
 }
 
 .founder-bio {
-    font-size: var(--text-sm);
+    font-size: var(--body-sm);
     line-height: var(--leading-relaxed);
     color: var(--gray-600);
     margin-bottom: var(--space-5);

@@ -89,7 +89,7 @@
 }
 
 .blog-post-excerpt p {
-    font-size: var(--text-sm);
+    font-size: var(--body-sm);
     line-height: var(--leading-relaxed);
     color: var(--gray-600);
     margin-bottom: var(--space-5);
@@ -128,7 +128,7 @@
 }
 
 .no-posts p {
-    font-size: var(--text-base);
+    font-size: var(--body-base);
     color: var(--gray-500);
     margin: 0;
 }

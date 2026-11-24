@@ -59,7 +59,7 @@
 }
 
 .tech-description {
-    font-size: var(--text-sm);
+    font-size: var(--body-sm);
     line-height: var(--leading-relaxed);
     color: var(--gray-600);
     margin-bottom: var(--space-5);
@@ -84,14 +84,14 @@
 .spec-label {
     font-weight: 600;
     color: var(--gray-700);
-    font-size: var(--text-sm);
+    font-size: var(--body-sm);
 }
 
 .spec-value {
     font-family: var(--font-mono);
     font-weight: 600;
     color: var(--gray-900);
-    font-size: var(--text-sm);
+    font-size: var(--body-sm);
 }
 
 /* Comparison Table */
@@ -133,7 +133,7 @@
 .comparison-table td {
     padding: var(--space-3) var(--space-5);
     border-bottom: 1px solid var(--gray-200);
-    font-size: var(--text-sm);
+    font-size: var(--body-sm);
     line-height: var(--leading-relaxed);
     color: var(--gray-600);
 }
@@ -170,7 +170,7 @@
 
 /* Approach Summary */
 .approach-summary {
-    font-size: var(--text-lg);
+    font-size: var(--body-lg);
     line-height: var(--leading-relaxed);
     color: var(--gray-600);
     text-align: center;
@@ -363,7 +363,7 @@
 .highlight-content p {
     color: var(--gray-500);
     line-height: var(--leading-relaxed);
-    font-size: var(--text-sm);
+    font-size: var(--body-sm);
 }
 
 /* Features Grid */
@@ -418,7 +418,7 @@
 .feature-description {
     color: var(--gray-500);
     line-height: var(--leading-relaxed);
-    font-size: var(--text-sm);
+    font-size: var(--body-sm);
 }
 
 /* Responsive */

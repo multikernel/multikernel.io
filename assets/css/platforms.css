@@ -90,7 +90,7 @@
 }
 
 .partition-caption {
-    font-size: var(--text-sm);
+    font-size: var(--body-sm);
     color: var(--gray-300);
     text-align: center;
     margin-top: var(--space-8);
@@ -133,7 +133,7 @@
 }
 
 .step-description {
-    font-size: var(--text-sm);
+    font-size: var(--body-sm);
     color: var(--gray-600);
     line-height: var(--leading-relaxed);
 }

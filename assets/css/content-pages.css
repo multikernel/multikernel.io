@@ -51,7 +51,7 @@
 }
 
 .content-card p {
-    font-size: var(--text-sm);
+    font-size: var(--body-sm);
     line-height: var(--leading-relaxed);
     color: var(--gray-600);
     margin-bottom: var(--space-4);
@@ -66,7 +66,7 @@
     margin-bottom: var(--space-2);
     color: var(--gray-600);
     line-height: var(--leading-relaxed);
-    font-size: var(--text-sm);
+    font-size: var(--body-sm);
 }
 
 .content-card i {
