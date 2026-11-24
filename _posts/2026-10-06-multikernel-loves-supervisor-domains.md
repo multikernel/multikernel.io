@@ -55,7 +55,7 @@ Supervisor Domains and virtualization are independent, and they compose. The spe
 
 In a multikernel system, every kernel shares one physical address space with every other kernel. Each kernel's view of that space is limited by the resources it was booted with, but the limit lives in software. Three situations show where software is not enough.
 
-**A compromised kernel.** An attacker who gains kernel privileges in one kernel can create a mapping for any physical address and read or write another kernel's memory, including its page tables and credentials. The [multikernel trust model](/faq.html) already states this: the kernel is the trust boundary, and a compromised kernel could affect its neighbors. Kernel signing, lockdown, and memory encryption reduce the risk. Only hardware enforcement removes it.
+**A compromised kernel.** An attacker who gains kernel privileges in one kernel can create a mapping for any physical address and read or write another kernel's memory, including its page tables and credentials. The [multikernel trust model](/faq.html) already states this: the kernel is the trust boundary, and a compromised kernel could affect its neighbors. Kernel signing and lockdown reduce the risk. Only hardware enforcement removes it.
 
 **Device DMA.** A misprogrammed device or a buggy driver can write anywhere in physical memory, and no kernel sees it happen. An IOMMU confines DMA today on platforms that have one, but it is configured by the kernel that owns the device, so it protects other kernels only as long as that kernel is correct.
 

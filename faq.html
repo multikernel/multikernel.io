@@ -130,14 +130,14 @@ i18n: true
                 <div class="faq-question">
                     <i data-lucide="shield"></i> How does multikernel enhance security?
                 </div>
-                <p class="faq-answer">Our architecture provides kernel-level isolation between workloads by giving each one its own kernel, minimizes attack surfaces through tailored kernels, and supports confidential computing for sensitive data processing. By running applications directly in initramfs without a full OS, we further reduce the attack surface compared to traditional environments.</p>
+                <p class="faq-answer">Our architecture provides kernel-level isolation between workloads by giving each one its own kernel, and minimizes attack surfaces through tailored kernels. By running applications directly in initramfs without a full OS, we further reduce the attack surface compared to traditional environments.</p>
             </div>
 
             <div class="faq-item">
                 <div class="faq-question">
                     <i data-lucide="lock"></i> What is the trust model?
                 </div>
-                <p class="faq-answer">The kernel itself is the trust boundary. While a compromised kernel could potentially affect other kernels on the same node, this risk is mitigated through kernel signing via kexec, kernel lockdown, and memory encryption using confidential computing technologies.</p>
+                <p class="faq-answer">The kernel itself is the trust boundary. While a compromised kernel could potentially affect other kernels on the same node, this risk is mitigated through kernel signing via kexec and kernel lockdown.</p>
             </div>
 
             <!-- RISC-V -->
