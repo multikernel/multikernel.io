@@ -1311,7 +1311,7 @@ a.hero-stat:hover {
 
 .footer-brand-info h3 {
     font-family: var(--font-mono);
-    font-size: var(--text-sm);
+    font-size: var(--body-sm);
     font-weight: 600;
     color: white;
     margin-bottom: 0;
@@ -1319,13 +1319,13 @@ a.hero-stat:hover {
 
 .footer-brand-info p {
     color: var(--gray-500);
-    font-size: var(--text-xs);
+    font-size: var(--text-sm);
 }
 
 .footer-description {
     line-height: var(--leading-relaxed);
     margin-bottom: var(--space-6);
-    font-size: var(--text-sm);
+    font-size: var(--body-sm);
 }
 
 .footer-contact-info {
@@ -1339,7 +1339,7 @@ a.hero-stat:hover {
     align-items: flex-start;
     gap: var(--space-3);
     color: var(--gray-400);
-    font-size: var(--text-sm);
+    font-size: var(--body-sm);
 }
 
 .contact-item i {
@@ -1361,7 +1361,7 @@ a.hero-stat:hover {
 
 .footer-column h4 {
     font-family: var(--font-mono);
-    font-size: var(--text-xs);
+    font-size: var(--text-sm);
     font-weight: 600;
     color: var(--gray-400);
     margin-bottom: var(--space-4);
@@ -1379,7 +1379,7 @@ a.hero-stat:hover {
 .footer-column a {
     color: var(--gray-500);
     text-decoration: none;
-    font-size: var(--text-sm);
+    font-size: var(--body-sm);
     transition: color 0.15s ease;
 }
 
@@ -1399,7 +1399,7 @@ a.hero-stat:hover {
 
 .footer-bottom p {
     font-family: var(--font-mono);
-    font-size: var(--text-xs);
+    font-size: var(--text-sm);
     color: var(--gray-600);
 }
 
